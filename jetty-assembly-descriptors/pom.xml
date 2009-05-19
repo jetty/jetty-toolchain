@@ -7,4 +7,10 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jetty-assembly-descriptors</artifactId>
   <name>Jetty Toolchain :: Assembly Descriptors</name>
+  <version>1.1-SNAPSHOT</version>
+  <scm>
+    <connection>scm:svn:http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-assembly-descriptors</connection>
+    <developerConnection>scm:svn:svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-assembly-descriptors</developerConnection>
+    <url>http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-assembly-descriptors</url>
+  </scm>
 </project>
