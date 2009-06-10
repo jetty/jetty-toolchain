@@ -8,11 +8,11 @@
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-distribution-remote-resources</artifactId>
   <name>Jetty Toolchain :: Distribution Remote Resources</name>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <scm>
-    <connection>scm:svn:http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-distribution-remote-resources-1.0</connection>
-    <developerConnection>scm:svn:svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-distribution-remote-resources-1.0</developerConnection>
-    <url>http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-distribution-remote-resources-1.0</url>
+    <connection>scm:svn:http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-distribution-remote-resources</connection>
+    <developerConnection>scm:svn:svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-distribution-remote-resources</developerConnection>
+    <url>http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-distribution-remote-resources</url>
   </scm>
   <build> 
     <plugins>
