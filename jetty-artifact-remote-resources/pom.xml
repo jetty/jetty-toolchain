@@ -7,11 +7,11 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jetty-artifact-remote-resources</artifactId>
   <name>Jetty Toolchain :: Artifact Remote Resources</name>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <scm>
-    <connection>scm:svn:http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-artifact-remote-resources-1.0</connection>
-    <developerConnection>scm:svn:svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-artifact-remote-resources-1.0</developerConnection>
-    <url>http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-artifact-remote-resources-1.0</url>
+    <connection>scm:svn:http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-artifact-remote-resources</connection>
+    <developerConnection>scm:svn:svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-artifact-remote-resources</developerConnection>
+    <url>http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/trunk/jetty-artifact-remote-resources</url>
   </scm>
   <build> 
     <plugins>
