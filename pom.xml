@@ -6,7 +6,7 @@
     <version>1.1</version>
   </parent>
   <artifactId>jetty-test-policy</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>Jetty Toolchain :: Test Policy</name>
   <description>test resource</description> 
       <build>
@@ -39,4 +39,10 @@
           </plugin>
         </plugins>
       </build>
+
+  <scm>
+    <connection>scm:svn:http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-test-policy-1.0</connection>
+    <developerConnection>scm:svn:svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-test-policy-1.0</developerConnection>
+    <url>http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-test-policy-1.0</url>
+  </scm>
 </project>
