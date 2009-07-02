@@ -6,6 +6,7 @@
     <version>1.1</version>
   </parent>
   <artifactId>jetty-test-policy</artifactId>
+  <version>1.0-SNAPSHOT</version>
   <name>Jetty Toolchain :: Test Policy</name>
   <description>test resource</description> 
       <build>
