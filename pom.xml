@@ -8,7 +8,7 @@
   </parent>
   <artifactId>jetty-enforcer-rules</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <name>Jetty Toolchain :: Enforcer Rules</name>
   <properties>
     <api.version>1.0-beta-1</api.version>
@@ -54,11 +54,5 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <scm>
-    <connection>scm:svn:http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-enforcer-rules-1.0</connection>
-    <developerConnection>scm:svn:svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-enforcer-rules-1.0</developerConnection>
-    <url>http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-enforcer-rules-1.0</url>
-  </scm>
 </project>
 
