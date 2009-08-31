@@ -1,39 +1,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.eclipse.jetty.tests</groupId>
+  <parent>
+    <artifactId>webapp-examples</artifactId>
+    <groupId>org.eclipse.jetty.toolchain.examples</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
   <artifactId>dummy-javaversions-webapp</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Jetty :: Webapp Verifier :: Example Dummy Java Versions Webapp</name>
+  <name>Jetty :: Toolchain :: Example Dummy Java Versions Webapp</name>
   <dependencies>
     <dependency>
-      <groupId>org.eclipse.jetty.tests</groupId>
+      <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java11-lib</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty.tests</groupId>
+      <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java12-lib</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty.tests</groupId>
+      <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java13-lib</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty.tests</groupId>
+      <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java14-lib</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty.tests</groupId>
+      <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java15-lib</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty.tests</groupId>
+      <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java16-lib</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
