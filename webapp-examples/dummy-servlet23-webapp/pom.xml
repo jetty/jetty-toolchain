@@ -9,5 +9,5 @@
   <artifactId>dummy-servlet23-webapp</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Jetty :: Toolchain :: Example Dummy Servlet 2.3 Webapp</name>
+  <name>Jetty Toolchain :: Example Dummy Servlet 2.3 Webapp</name>
 </project>

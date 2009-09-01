@@ -9,7 +9,7 @@
   <artifactId>dummy-nativeaccess-webapp</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Jetty :: Toolchain :: Example Dummy Native Access Webapp</name>
+  <name>Jetty Toolchain :: Example Dummy Native Access Webapp</name>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

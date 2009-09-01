@@ -8,7 +8,7 @@
   <groupId>org.eclipse.jetty.toolchain.examples</groupId>
   <artifactId>webapp-examples</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Jetty :: Toolchain :: Examples Parent</name>
+  <name>Jetty Toolchain :: Examples Parent</name>
   <packaging>pom</packaging>
   <modules>
     <module>dummy-jruby-lib</module>

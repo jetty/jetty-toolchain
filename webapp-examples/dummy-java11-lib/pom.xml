@@ -8,7 +8,7 @@
   </parent>
   <artifactId>dummy-java11-lib</artifactId>
   <packaging>jar</packaging>
-  <name>Jetty :: Toolchain :: Dummy Java1.1 Lib</name>
+  <name>Jetty Toolchain :: Dummy Java1.1 Lib</name>
   <build>
     <plugins>
       <plugin>

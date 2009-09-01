@@ -9,7 +9,7 @@
   <artifactId>dummy-scm-lib</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Jetty :: Toolchain :: Dummy SCM Lib</name>
+  <name>Jetty Toolchain :: Dummy SCM Lib</name>
   <build>
     <plugins>
       <plugin>

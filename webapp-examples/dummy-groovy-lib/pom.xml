@@ -8,5 +8,5 @@
   </parent>
   <artifactId>dummy-groovy-lib</artifactId>
   <packaging>jar</packaging>
-  <name>Jetty :: Toolchain :: Dummy Groovy Lib</name>
+  <name>Jetty Toolchain :: Dummy Groovy Lib</name>
 </project>

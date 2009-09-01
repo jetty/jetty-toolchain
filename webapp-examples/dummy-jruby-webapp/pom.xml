@@ -9,7 +9,7 @@
   <artifactId>dummy-jruby-webapp</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>Jetty :: Toolchain :: Example Dummy JRuby Webapp</name>
+  <name>Jetty Toolchain :: Example Dummy JRuby Webapp</name>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
