@@ -3,11 +3,11 @@
   <parent>
     <artifactId>examples-parent</artifactId>
     <groupId>org.eclipse.jetty.toolchain.examples</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
   <artifactId>dummy-java15-lib</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <name>Jetty Toolchain :: Dummy Java1.5 Lib</name>
   <build>
     <plugins>

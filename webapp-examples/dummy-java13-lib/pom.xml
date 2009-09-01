@@ -3,7 +3,7 @@
   <parent>
     <artifactId>examples-parent</artifactId>
     <groupId>org.eclipse.jetty.toolchain.examples</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
   <artifactId>dummy-java13-lib</artifactId>
   <packaging>jar</packaging>

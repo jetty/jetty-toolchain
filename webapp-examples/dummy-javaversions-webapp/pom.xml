@@ -3,42 +3,42 @@
   <parent>
     <artifactId>examples-parent</artifactId>
     <groupId>org.eclipse.jetty.toolchain.examples</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
   <artifactId>dummy-javaversions-webapp</artifactId>
   <packaging>war</packaging>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <name>Jetty Toolchain :: Example Dummy Java Versions Webapp</name>
   <dependencies>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java11-lib</artifactId>
-      <version>1.0</version>
+      <version>1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java12-lib</artifactId>
-      <version>1.0</version>
+      <version>1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java13-lib</artifactId>
-      <version>1.0</version>
+      <version>1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java14-lib</artifactId>
-      <version>1.0</version>
+      <version>1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java15-lib</artifactId>
-      <version>1.0</version>
+      <version>1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain.examples</groupId>
       <artifactId>dummy-java16-lib</artifactId>
-      <version>1.0</version>
+      <version>1.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>

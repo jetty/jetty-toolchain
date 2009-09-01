@@ -3,11 +3,11 @@
   <parent>
     <artifactId>examples-parent</artifactId>
     <groupId>org.eclipse.jetty.toolchain.examples</groupId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
   </parent>
   <artifactId>dummy-jruby-webapp</artifactId>
   <packaging>war</packaging>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <name>Jetty Toolchain :: Example Dummy JRuby Webapp</name>
   <dependencies>
     <dependency>
@@ -19,7 +19,7 @@
     <dependency>
     	<groupId>org.eclipse.jetty.toolchain.examples</groupId>
     	<artifactId>dummy-jruby-lib</artifactId>
-    	<version>1.0</version>
+    	<version>1.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
