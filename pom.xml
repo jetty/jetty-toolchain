@@ -5,7 +5,6 @@
   <name>Jetty Toolchain :: Build Crutch</name>
   <version>NO_RELEASE</version>
   <packaging>pom</packaging>
-
   <modules>
     <module>jetty-toolchain</module>
     <module>jetty-artifact-remote-resources</module>
