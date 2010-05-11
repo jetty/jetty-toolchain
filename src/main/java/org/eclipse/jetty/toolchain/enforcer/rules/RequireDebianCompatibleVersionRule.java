@@ -28,6 +28,12 @@ public class RequireDebianCompatibleVersionRule implements EnforcerRule
     {
         try
         {
+            String packaging = (String)helper.evaluate("${project.packaging}");
+            if ("pom".equals(packaging))
+            {
+                // Skip pom packaging (not a deployed artifact)
+                return;
+            }
             String version = (String)helper.evaluate("${project.version}");
             ensureValidDebianVersion(version);
         }
