@@ -60,17 +60,43 @@ public class RequireOsgiCompatibleVersionRule implements EnforcerRule
 
         for (int i = 0; i < 3; i++)
         {
-            if (!isNumber(parts[i]))
+            if (!StringUtils.isNumeric(parts[i]))
             {
                 throw new EnforcerRuleException("The version \"" + version + "\" does not conform to the OSGi version requirements.  " + "Part #" + (i + 1)
-                        + " \"" + parts[i] + "\" of an OSGi version must be a number (#.#.#.*).");
+                        + " \"" + parts[i] + "\" of an OSGi version must be a non-negative number (#.#.#.*).");
+            }
+            if (Integer.parseInt(parts[i]) < 0)
+            {
+                throw new EnforcerRuleException("The version \"" + version + "\" does not conform to the OSGi version requirements.  " + "Part #" + (i + 1)
+                        + " \"" + parts[i] + "\" of an OSGi version must be a non-negative number (#.#.#.*).");
             }
         }
-    }
 
-    private boolean isNumber(String str)
-    {
-        return StringUtils.isNumeric(str);
+        if (parts.length == 4)
+        {
+            for (char c : parts[3].toCharArray())
+            {
+                if ((c >= '0') && (c <= '9'))
+                {
+                    continue; // numbers are acceptable
+                }
+                if ((c >= 'A') && (c <= 'Z'))
+                {
+                    continue; // upper case letters are acceptable
+                }
+                if ((c >= 'a') && (c <= 'z'))
+                {
+                    continue; // lower case letters are acceptable
+                }
+                if ((c == '-') || (c == '_'))
+                {
+                    continue; // underscore and dash are also acceptable
+                }
+                // All other characters are invalid for the qualifier
+                throw new EnforcerRuleException("The OSGi qualifier of \"" + version + "\" does not conform to the OSGi version requirements.  " + 
+                        "Only Letters (upper and lower), numbers, dash '-', and underscore '_' are allowed.");
+            }
+        }
     }
 
     public String getCacheId()

@@ -96,6 +96,13 @@ public class RequireOsgiCompatibleVersionRuleTest
         RequireOsgiCompatibleVersionRule rule = new RequireOsgiCompatibleVersionRule();
         rule.ensureValidOsgiVersion("1.0.alpha-2");
     }
+    
+    @Test(expected = EnforcerRuleException.class)
+    public void testInvalidQualifierOsgiVersion() throws EnforcerRuleException
+    {
+        RequireOsgiCompatibleVersionRule rule = new RequireOsgiCompatibleVersionRule();
+        rule.ensureValidOsgiVersion("1.0.2.2009:05:12");
+    }
 
     @Test
     public void testGoodSnapshotOsgiVersion() throws EnforcerRuleException
