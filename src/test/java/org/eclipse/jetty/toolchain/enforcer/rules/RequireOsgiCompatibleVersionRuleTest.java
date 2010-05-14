@@ -55,8 +55,8 @@ public class RequireOsgiCompatibleVersionRuleTest
         rule.ensureValidOsgiVersion("1.2");
     }
 
-    @Test(expected = EnforcerRuleException.class)
-    public void testBadSnapshotOsgiVersion() throws EnforcerRuleException
+    @Test
+    public void testIgnoredSnapshotOsgiVersion() throws EnforcerRuleException
     {
         RequireOsgiCompatibleVersionRule rule = new RequireOsgiCompatibleVersionRule();
         rule.ensureValidOsgiVersion("7.0.2-SNAPSHOT");

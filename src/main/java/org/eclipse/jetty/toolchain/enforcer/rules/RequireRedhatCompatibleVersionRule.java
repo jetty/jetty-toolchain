@@ -71,9 +71,10 @@ public class RequireRedhatCompatibleVersionRule implements EnforcerRule
                 // Architecture IDs (without overlap from above)
                 "sun", "xtensa", "rs6000", "sgi" };
 
+        String lversion = version.toLowerCase();
         for (String id : reserved)
         {
-            if (version.contains(id))
+            if (lversion.contains(id))
             {
                 throw new EnforcerRuleException("The version \"" + version + "\" does not conform to the Redhat (linux packaging) version requirements.  "
                         + "It can't use the RPM reserved word \"" + id + "\".");

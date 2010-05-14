@@ -68,9 +68,10 @@ public class RequireDebianCompatibleVersionRule implements EnforcerRule
         String reserved[] =
         { "all", "i386", "i486", "i586", "i686", "pentium", "athlon", "ia64", "x86_64", "amd64", "ia32", "alpha", "sparc", "m68k", "ppc", "hppa", "arm" };
 
+        String lversion = version.toLowerCase();
         for (String id : reserved)
         {
-            if (version.contains(id))
+            if (lversion.contains(id))
             {
                 throw new EnforcerRuleException("The version \"" + version + "\" does not conform to the Debian (linux packaging) version requirements.  "
                         + "It can't use the DEB reserved word \"" + id + "\".");
