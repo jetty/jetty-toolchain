@@ -45,6 +45,12 @@ public class RequireOsgiCompatibleVersionRule implements EnforcerRule
 
     public void ensureValidOsgiVersion(String version) throws EnforcerRuleException
     {
+        if (version.endsWith("SNAPSHOT"))
+        {
+            // Skip check on SNAPSHOT versions.
+            return;
+        }
+        
         String parts[] = version.split("\\.");
         if (parts.length > 4)
         {
