@@ -7,11 +7,5 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jetty-build-tool-configs</artifactId>
   <name>Jetty Toolchain :: Build Tool Configs</name>
-  <version>0.1</version>
-
-  <scm>
-    <connection>scm:svn:http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-build-tool-configs-0.1</connection>
-    <developerConnection>scm:svn:svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-build-tool-configs-0.1</developerConnection>
-    <url>http://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty-toolchain/tags/jetty-build-tool-configs-0.1</url>
-  </scm>
+  <version>0.2-SNAPSHOT</version>
 </project>
