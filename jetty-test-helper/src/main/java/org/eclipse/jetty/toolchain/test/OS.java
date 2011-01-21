@@ -11,7 +11,7 @@ public final class OS
     public static final boolean IS_WINDOWS = isOSName("Windows");
     public static final boolean IS_OSX = isOSName("Mac OS X");
     public static final boolean IS_LINUX = isOSName("Linux") || isOSName("LINUX");
-    public static final boolean IS_UNIX = isOSName("Unix") || isOSName("AIX") || IS_OSX;
+    public static final boolean IS_UNIX = isOSName("Unix") || isOSName("AIX") || IS_LINUX || IS_OSX;
     public static final String LN = System.getProperty("line.separator");
 
     /**
