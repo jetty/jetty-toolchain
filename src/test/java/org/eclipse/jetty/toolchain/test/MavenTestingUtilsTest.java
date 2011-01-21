@@ -1,6 +1,79 @@
 package org.eclipse.jetty.toolchain.test;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 public class MavenTestingUtilsTest
 {
+    @Test
+    public void testGetTargetDir()
+    {
+        File dir = MavenTestingUtils.getTargetDir();
+        Assert.assertEquals("target",dir.getName());
+    }
 
+    @Test
+    public void testGetTargetFileBasic() throws IOException
+    {
+        File dir = MavenTestingUtils.getTargetDir();
+
+        // File in .../target/pizza.log
+        File expected = new File(dir,"pizza.log");
+        FS.touch(expected);
+
+        File actual = MavenTestingUtils.getTargetFile("pizza.log");
+        assertSamePath(expected,actual);
+    }
+
+    @Test
+    public void testGetTargetFileDeep() throws IOException
+    {
+        File dir = MavenTestingUtils.getTargetDir();
+        File pizzadir = new File(dir,"pizza");
+        FS.ensureDirExists(pizzadir);
+
+        // File in .../target/pizza/pizza.receipt
+        File expected = new File(pizzadir,"pizza.receipt");
+        FS.touch(expected);
+
+        // Should automatically adjust deep path
+        File actual = MavenTestingUtils.getTargetFile("pizza/pizza.receipt");
+        assertSamePath(expected,actual);
+    }
+
+    @Test
+    public void testGetTestResourceFileSimple()
+    {
+        File dir = MavenTestingUtils.getTestResourcesDir();
+        File expected = new File(dir,"dessert.txt");
+        File actual = MavenTestingUtils.getTestResourceFile("dessert.txt");
+        assertSamePath(expected,actual);
+    }
+
+    @Test
+    public void testGetTestResourceFileDeep()
+    {
+        File dir = MavenTestingUtils.getTestResourcesDir();
+        File breakfast = new File(dir,"breakfast");
+        File expected = new File(breakfast,"eggs.txt");
+        File actual = MavenTestingUtils.getTestResourceFile("breakfast/eggs.txt");
+        assertSamePath(expected,actual);
+    }
+
+    @Test
+    public void testGetTestResourceDir()
+    {
+        File dir = MavenTestingUtils.getTestResourcesDir();
+        File expected = new File(dir,"breakfast");
+        File actual = MavenTestingUtils.getTestResourceDir("breakfast");
+        assertSamePath(expected,actual);
+    }
+
+    private void assertSamePath(File expected, File actual)
+    {
+        Assert.assertEquals(expected.getAbsolutePath(),actual.getAbsolutePath());
+    }
 }

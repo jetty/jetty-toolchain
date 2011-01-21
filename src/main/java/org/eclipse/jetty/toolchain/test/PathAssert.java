@@ -20,7 +20,7 @@ import java.io.File;
 import org.junit.Assert;
 
 /**
- * Assertions of various FileSytem paths
+ * Assertions of various FileSytem Paths
  */
 public class PathAssert
 {
@@ -63,5 +63,18 @@ public class PathAssert
     public static void assertExists(String msg, File path)
     {
         Assert.assertTrue(msg + " path should exist: " + path.getAbsolutePath(),path.exists());
+    }
+
+    /**
+     * Assert that the path does not exist.
+     * 
+     * @param msg
+     *            message about the test (used in case of assertion failure)
+     * @param path
+     *            the path that should not exist
+     */
+    public static void assertNotExists(String msg, File path)
+    {
+        Assert.assertFalse(msg + " path should not exist: " + path.getAbsolutePath(),path.exists());
     }
 }
