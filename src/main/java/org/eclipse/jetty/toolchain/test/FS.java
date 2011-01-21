@@ -10,7 +10,8 @@ public class FS
     /**
      * Delete a directory and all contents under it.
      * <p>
-     * Note: safety mechanism only allows delete directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows delete directory within the {@link MavenTestingUtils#getTargetTestingDir()}
+     * directory.
      * 
      * @param dir
      *            the directory to delete.
@@ -42,7 +43,8 @@ public class FS
     /**
      * Delete the contents of a directory and all contents under it, leaving the directory itself still in existance.
      * <p>
-     * Note: safety mechanism only allows clean directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows clean directory within the {@link MavenTestingUtils#getTargetTestingDir()}
+     * directory.
      * 
      * @param dir
      *            the directory to delete.
@@ -58,7 +60,6 @@ public class FS
      * 
      * @param dir
      *            the dir to check.
-     * @throws IOException
      */
     public static void ensureEmpty(File dir)
     {
@@ -77,7 +78,6 @@ public class FS
      * 
      * @param testingdir
      *            the dir to check.
-     * @throws IOException
      */
     public static void ensureEmpty(TestingDir testingdir)
     {
@@ -88,7 +88,7 @@ public class FS
      * Ensure the provided directory does not exist, delete it if present
      * 
      * @param dir
-     * @throws IOException
+     *            the dir to check
      */
     public static void ensureDeleted(File dir)
     {
@@ -118,7 +118,8 @@ public class FS
      * Used as part of the validation on what directories are safe to delete from.
      * 
      * @param dir
-     * @return
+     *            the dir to check
+     * @return true if provided directory is a testing directory
      */
     protected static boolean isTestingDir(File dir)
     {
