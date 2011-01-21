@@ -30,7 +30,7 @@ public final class OS
         {
             if ((c == '/') || (c == '\\'))
             {
-                ret.append(File.pathSeparatorChar);
+                ret.append(File.separatorChar);
             }
             else
             {
