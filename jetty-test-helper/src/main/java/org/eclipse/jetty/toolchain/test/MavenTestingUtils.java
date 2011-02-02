@@ -134,7 +134,7 @@ public class MavenTestingUtils
 
     public static URI getTargetURI(String path) throws MalformedURLException
     {
-        return getBaseURI().resolve("target").resolve(path);
+        return getBaseURI().resolve("target/").resolve(path);
     }
 
     public static URL getTargetURL(String path) throws MalformedURLException

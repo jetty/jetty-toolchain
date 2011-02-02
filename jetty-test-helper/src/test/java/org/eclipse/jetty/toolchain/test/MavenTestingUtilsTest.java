@@ -2,6 +2,7 @@ package org.eclipse.jetty.toolchain.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -63,6 +64,22 @@ public class MavenTestingUtilsTest
         assertSamePath(expected,actual);
     }
 
+    @Test
+    public void testGetTargetURL() throws Exception
+    {
+        File dir = MavenTestingUtils.getTargetDir();
+
+        // File in .../target/pizza.log
+        File expected = new File(dir,"url.log");
+        FS.touch(expected);
+        
+        File actual = MavenTestingUtils.getTargetFile("url.log");
+        
+        URL url = MavenTestingUtils.getTargetURL("url.log");
+        
+        Assert.assertEquals( actual.toURI().toURL().toExternalForm(), url.toExternalForm());        
+    }
+    
     @Test
     public void testGetTestResourceDir()
     {
