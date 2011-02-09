@@ -8,7 +8,12 @@ import org.junit.internal.AssumptionViolatedException;
  */
 public class Stress
 {
-    protected static boolean isStressEnabled()
+    /**
+     * Returns flag indicating if <code>-DSTRESS</code> or <code>-DSTRESS=true</code> is enabled.
+     * 
+     * @return true if enabled
+     */
+    public static boolean isEnabled()
     {
         String stress = System.getProperty("STRESS");
         if (stress == null)
@@ -32,7 +37,7 @@ public class Stress
      */
     public static void assume()
     {
-        if (!isStressEnabled())
+        if (!isEnabled())
         {
             throw new AssumptionViolatedException("Stress testing not enabled");
         }
