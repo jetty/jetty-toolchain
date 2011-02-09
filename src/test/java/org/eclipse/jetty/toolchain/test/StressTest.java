@@ -1,5 +1,6 @@
 package org.eclipse.jetty.toolchain.test;
 
+import static org.hamcrest.Matchers.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class StressTest
         System.setProperty("STRESS","");
         Stress.assume(); // Should pass
         result = "enabled-" + name.getMethodName();
+        Assert.assertThat("Stress.enabled()", Stress.isEnabled(), is(true));
     }
 
     @Test
@@ -40,6 +42,7 @@ public class StressTest
         System.setProperty("STRESS","true");
         Stress.assume(); // Should pass
         result = "enabled-" + name.getMethodName();
+        Assert.assertThat("Stress.enabled()", Stress.isEnabled(), is(true));
     }
     
     @Test
@@ -47,6 +50,7 @@ public class StressTest
     {
         expected = null;
         System.clearProperty("STRESS");
+        Assert.assertThat("Stress.enabled()", Stress.isEnabled(), is(false));
         Stress.assume(); // Should not pass
         result = "disabled-failure-" + name.getMethodName();
     }
@@ -56,6 +60,7 @@ public class StressTest
     {
         expected = null;
         System.setProperty("STRESS","false");
+        Assert.assertThat("Stress.enabled()", Stress.isEnabled(), is(false));
         Stress.assume(); // Should not pass
         result = "disabled-failure-" + name.getMethodName();
     }
