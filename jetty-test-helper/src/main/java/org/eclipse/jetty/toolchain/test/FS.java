@@ -8,6 +8,34 @@ import org.junit.Assert;
 public class FS
 {
     /**
+     * Delete a file or a directory.
+     * <p>
+     * Note: safety mechanism only allows delete within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * 
+     * @param path
+     *            the file or directory to delete.
+     */
+    public static void delete(File path)
+    {
+        if(!path.exists()) {
+            return; // nothing to delete. we're done.
+        }
+        
+        if (path.isFile())
+        {
+            deleteFile(path);
+        }
+        else if (path.isDirectory())
+        {
+            deleteDirectory(path);
+        }
+        else
+        {
+            Assert.fail("Not able to delete path, not a file or directory? : " + path.getAbsolutePath());
+        }
+    }
+
+    /**
      * Delete a directory and all contents under it.
      * <p>
      * Note: safety mechanism only allows delete directory within the {@link MavenTestingUtils#getTargetTestingDir()}
@@ -19,6 +47,23 @@ public class FS
     public static void deleteDirectory(File dir)
     {
         recursiveDelete(dir);
+    }
+
+    /**
+     * Delete a file.
+     * <p>
+     * Note: safety mechanism only allows delete file within the {@link MavenTestingUtils#getTargetTestingDir()}
+     * directory.
+     * 
+     * @param path
+     *            the path to delete.
+     */
+    public static void deleteFile(File path)
+    {
+        Assert.assertTrue("Path must be a file: " + path.getAbsolutePath(),path.isFile());
+        Assert.assertTrue("Can only delete content within the /target/tests/ directory: " + path.getAbsolutePath(),FS.isTestingDir(path.getParentFile()));
+
+        Assert.assertTrue("Failed to delete file: " + path.getAbsolutePath(),path.delete());
     }
 
     private static void recursiveDelete(File dir)
@@ -109,6 +154,10 @@ public class FS
         if (!dir.exists())
         {
             Assert.assertTrue("Creating dir: " + dir,dir.mkdirs());
+        }
+        else
+        {
+            Assert.assertTrue("Path exists, but should be a Dir : " + dir.getAbsolutePath(),dir.isDirectory());
         }
     }
 
