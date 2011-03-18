@@ -14,8 +14,11 @@
 package org.eclipse.jetty.toolchain.test;
 
 import java.io.Closeable;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringWriter;
 import java.io.Writer;
 
 /**
@@ -39,6 +42,31 @@ public class IO
             if (len == -1)
                 break;
             out.write(buffer,0,len);
+        }
+    }
+
+    /**
+     * Read the contents of a file into a String and return it.
+     * 
+     * @param file
+     *            the file to read.
+     * @return the contents of the file.
+     * @throws IOException
+     *             if unable to read the file.
+     */
+    public static String readToString(File file) throws IOException
+    {
+        FileReader reader = null;
+        try
+        {
+            reader = new FileReader(file);
+            StringWriter writer = new StringWriter();
+            copy(reader,writer);
+            return writer.toString();
+        }
+        finally
+        {
+            close(reader);
         }
     }
 
