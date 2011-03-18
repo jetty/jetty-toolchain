@@ -9,7 +9,14 @@ import java.net.URI;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
-
+/**
+ * A super simple http request mechanism for simple testing purposes.
+ * <p>
+ * It is not meant to be robust or even configurable.
+ * <p>
+ * Do not use this for large responses, as the entire response body is always assumed to fit in a single {@link String}
+ * object.
+ */
 public class SimpleRequest
 {
     private URI baseUri;
@@ -83,9 +90,10 @@ public class SimpleRequest
     }
 
     /**
-     * Attempt to obtain the body text if available.
-     * Do not throw an exception if body is unable to be fetched.
-     * @param connection the connection to fetch the body content from.
+     * Attempt to obtain the body text if available. Do not throw an exception if body is unable to be fetched.
+     * 
+     * @param connection
+     *            the connection to fetch the body content from.
      * @return the body content, if present.
      */
     private String getPotentialBody(HttpURLConnection connection)
