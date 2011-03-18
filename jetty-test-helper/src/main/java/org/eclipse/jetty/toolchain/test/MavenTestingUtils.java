@@ -16,9 +16,7 @@
 package org.eclipse.jetty.toolchain.test;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -386,42 +384,13 @@ public class MavenTestingUtils
      * @return the contents of the file.
      * @throws IOException
      *             if unable to read the file.
+     * @deprecated use the call from {@link IO#readToString(File)} instead.
      */
+    @Deprecated
     public static String readToString(File file) throws IOException
     {
-        FileReader reader = null;
-        try
-        {
-            reader = new FileReader(file);
-            StringWriter writer = new StringWriter();
-
-            int bufSize = 8096;
-            char buf[] = new char[bufSize];
-            int len = bufSize;
-
-            while (true)
-            {
-                len = reader.read(buf,0,bufSize);
-                if (len == -1)
-                    break;
-                writer.write(buf,0,len);
-            }
-
-            return writer.toString();
-        }
-        finally
-        {
-            if (reader != null)
-            {
-                try
-                {
-                    reader.close();
-                }
-                catch (IOException ignore)
-                {
-                    /* ignore */
-                }
-            }
-        }
+        System.err.printf("DEPRECATED: %s#readToString(File) - use %s#readToString(File) instead to eliminate this warning",
+                MavenTestingUtils.class.getName(), IO.class.getName());
+        return IO.readToString(file);
     }
 }
