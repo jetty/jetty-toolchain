@@ -475,7 +475,7 @@ public class JettyDistro
         }
     }
 
-    public static class ConsoleParser
+    private static class ConsoleParser
     {
         private List<ConsolePattern> patterns = new ArrayList<ConsolePattern>();
         private CountDownLatch latch;
@@ -532,7 +532,7 @@ public class JettyDistro
         }
     }
 
-    public static class ConsolePattern
+    private static class ConsolePattern
     {
         private Pattern pattern;
         private List<String[]> matches;
@@ -623,7 +623,7 @@ public class JettyDistro
     /**
      * Simple streamer for the console output from a Process
      */
-    public static class ConsoleStreamer implements Runnable
+    private static class ConsoleStreamer implements Runnable
     {
         private String mode;
         private BufferedReader reader;
