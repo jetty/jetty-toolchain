@@ -129,7 +129,7 @@ public class IO
         }
     }
 
-    public static class SafeFileFilter implements FileFilter
+    private static class SafeFileFilter implements FileFilter
     {
         public boolean accept(File path)
         {
