@@ -140,7 +140,7 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  * directory.</li>
  * </ol>
  * <p>
- * Next you'll want to use Junit 4.8+ and the <code>&064;BeforeClass</code> and <code>&064;AfterClass</code> annotations to setup the
+ * Next you'll want to use Junit 4.8+ and the <code>&#064;BeforeClass</code> and <code>&#064;AfterClass</code> annotations to setup the
  * <code>JettyDistro</code> class for setting up your testing configuration.
  * <p>
  * Example Test Case using {@link JettyDistro} class
@@ -149,7 +149,7 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  * {
  *     private static JettyDistro jetty;
  * 
- *     @BeforeClass
+ *     &#064;BeforeClass
  *     public static void initJetty() throws Exception
  *     {
  *         jetty = new JettyDistro(MySampleTest.class);
@@ -169,7 +169,7 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  *         jetty.start();
  *     }
  * 
- *     @AfterClass
+ *     &#064;AfterClass
  *     public static void shutdownJetty() throws Exception
  *     {
  *         if (jetty != null)
@@ -178,7 +178,7 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  *         }
  *     }
  * 
- *     @Test
+ *     &#064;Test
  *     public void testRequest() throws Exception
  *     {
  *         SimpleRequest request = new SimpleRequest(jetty.getBaseUri());
@@ -188,7 +188,6 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  *     }
  * }
  * </pre>
- * 
  */
 public class JettyDistro
 {
