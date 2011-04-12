@@ -187,7 +187,7 @@ public class MavenTestingUtils
         return dir;
     }
 
-    public static class TestID
+    private static class TestID
     {
         public String classname;
         public String methodname;
@@ -228,9 +228,10 @@ public class MavenTestingUtils
      * Using junit 3.x naming standards for unit tests and test method names, attempt to discover the unit test name
      * from the execution stack.
      * 
-     * @return the unit test id (suitable for use in the {@link #getTargetTestingDir(String)} approach)
+     * @return the unit test id found via execution stack and junit 3.8 naming conventions.
+     * @see #getTestIDAsPath()
      */
-    public static TestID getTestID()
+    private static TestID getTestID()
     {
         StackTraceElement stacked[] = new Throwable().getStackTrace();
 
