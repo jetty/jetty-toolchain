@@ -3,6 +3,7 @@
     <groupId>org.eclipse.jetty</groupId>
     <artifactId>jetty-parent</artifactId>
     <version>15</version>
+    <relativePath>../../trunk/jetty-parent</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
