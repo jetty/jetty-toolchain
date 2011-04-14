@@ -1,0 +1,9 @@
+.classpath
+.settings
+.project
+settings.xml
+target
+*.log
+*.patch
+*.diff
+*.swp

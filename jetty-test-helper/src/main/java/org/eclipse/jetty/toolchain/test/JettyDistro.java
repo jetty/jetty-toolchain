@@ -24,8 +24,8 @@ import edu.emory.mathcs.backport.java.util.concurrent.CountDownLatch;
 import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
 
 /**
- * Basic process based executor for using the Jetty Distribution along with custom configurations to perform 
- * basic 
+ * Basic process based executor for using the Jetty Distribution along with custom configurations to perform
+ * basic
  * <p>
  * Allows for a test specific directory, that is a copied jetty-distribution, and then modified for the test specific
  * testing required.
@@ -37,15 +37,15 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  * <pre>
  *  &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  *    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"&gt;
- * 
+ *
  *   &lt;!-- Common Destination Directories --&gt;
- * 
+ *
  *   &lt;properties&gt;
  *     &lt;test-wars-dir&gt;${project.build.directory}/test-wars&lt;/test-wars-dir&gt;
  *     &lt;test-libs-dir&gt;${project.build.directory}/test-libs&lt;/test-libs-dir&gt;
- *     &lt;test-distro-dir&gt;${project.build.directory}/jetty-distro&lt;/test-distro-dir&gt;
+ *     &lt;test-distro-dir&gt;${project.build.directory}/test-dist&lt;/test-distro-dir&gt;
  *   &lt;/properties&gt;
- *   
+ *
  *   &lt;build&gt;
  *     &lt;plugins&gt;
  *       &lt;plugin&gt;
@@ -53,9 +53,9 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  *         &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
  *         &lt;version&gt;2.1&lt;/version&gt;
  *         &lt;executions&gt;
- * 
+ *
  *           &lt;!-- Copy LIB and WAR dependencies into place that JettyDistro can use them --&gt;
- * 
+ *
  *           &lt;execution&gt;
  *             &lt;id&gt;test-lib-war-copy&lt;/id&gt;
  *             &lt;phase&gt;process-test-resources&lt;/phase&gt;
@@ -84,11 +84,11 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  *               &lt;stripVersion&gt;true&lt;/stripVersion&gt;
  *             &lt;/configuration&gt;
  *           &lt;/execution&gt;
- * 
+ *
  *           &lt;!-- Extract Jetty DISTRIBUTION into place that JettyDistro can use it --&gt;
- * 
+ *
  *           &lt;execution&gt;
- *             &lt;id&gt;unpack-jetty-distro&lt;/id&gt;
+ *             &lt;id&gt;unpack-test-dist&lt;/id&gt;
  *             &lt;phase&gt;process-test-resources&lt;/phase&gt;
  *             &lt;goals&gt;
  *               &lt;goal&gt;unpack&lt;/goal&gt;
@@ -113,7 +113,7 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  *       &lt;/plugin&gt;
  *     &lt;/plugins&gt;
  *   &lt;/build&gt;
- * 
+ *
  * &lt;/project&gt;
  * </pre>
  * <p>
@@ -122,13 +122,13 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  * <br>
  * Notes:
  * <ol>
- * <li>The {@link JettyDistro} sets up a unique test directory (based on the constructor 
+ * <li>The {@link JettyDistro} sets up a unique test directory (based on the constructor
  * {@link #JettyDistro(Class)} or {@link #JettyDistro(TestingDir)}), by ensuring the directory is empty,
- * then copying the <code>target/jetty-distro</code> directory into this new testing directory prior to the test specific
+ * then copying the <code>target/test-dist</code> directory into this new testing directory prior to the test specific
  * changes to the configuration.<br>
  * Note: this testing directory is a complete jetty distribution, suitable for executing via the command
  * line for additional testing needs.</li>
- * <li>The directory name you choose in <code>src/test/resources</code> will be the name you use 
+ * <li>The directory name you choose in <code>src/test/resources</code> will be the name you use
  * in the {@link #overlayConfig(String)} method to provide replacement configurations for
  * the Jetty Distribution.</li>
  * <li>You'll want to {@link #delete(String)} any files and/or directories from the standard distribution
@@ -145,30 +145,30 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  * <p>
  * Example Test Case using {@link JettyDistro} class
  * <pre>
- * public class MySampleTest 
+ * public class MySampleTest
  * {
  *     private static JettyDistro jetty;
- * 
+ *
  *     &#064;BeforeClass
  *     public static void initJetty() throws Exception
  *     {
  *         jetty = new JettyDistro(MySampleTest.class);
- * 
+ *
  *         jetty.copyTestWar("test-war-java_util_logging.war");
  *         jetty.copyTestWar("test-war-policy.war");
- * 
+ *
  *         jetty.delete("webapps/test.war");
  *         jetty.delete("contexts/test.d");
  *         jetty.delete("contexts/javadoc.xml");
  *         jetty.delete("contexts/test.xml");
- * 
+ *
  *         jetty.overlayConfig("no_security");
- * 
+ *
  *         jetty.setDebug(true);
- * 
+ *
  *         jetty.start();
  *     }
- * 
+ *
  *     &#064;AfterClass
  *     public static void shutdownJetty() throws Exception
  *     {
@@ -177,7 +177,7 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  *             jetty.stop();
  *         }
  *     }
- * 
+ *
  *     &#064;Test
  *     public void testRequest() throws Exception
  *     {
@@ -191,16 +191,22 @@ import edu.emory.mathcs.backport.java.util.concurrent.TimeUnit;
  */
 public class JettyDistro
 {
+    private String artifactName = "jetty-distribution";
+    private long startTime = 60;
+    private TimeUnit timeUnit = TimeUnit.SECONDS;
+
     private File jettyHomeDir;
     private Process pid;
     private URI baseUri;
+
     private String jmxUrl;
+    private String cmdLine;
+
     private boolean _debug = false;
-    private String[] _jvmArgs = null;
 
     /**
      * Setup the JettyHome as belonging in a testing directory associated with a testing clazz.
-     * 
+     *
      * @param clazz
      *            the testing class using this JettyDistro
      * @throws IOException
@@ -208,13 +214,29 @@ public class JettyDistro
      */
     public JettyDistro(Class<?> clazz) throws IOException
     {
+        this(clazz, null);
+    }
+
+    /**
+     * Setup the JettyHome as belonging in a testing directory associated with a testing clazz.
+     *
+     * @param clazz
+     *            the testing class using this JettyDistro
+     * @param artifact
+     *            name of jetty distribution artifact
+     * @throws IOException
+     *             if unable to copy unpacked distribution into place for the provided testing directory
+     */
+    public JettyDistro(Class<?> clazz, String artifact) throws IOException
+    {
+        this.artifactName = artifact;
         this.jettyHomeDir = MavenTestingUtils.getTargetTestingDir(clazz,"jettyHome");
         copyBaseDistro();
     }
 
     /**
      * Setup the JettyHome as belonging to a specific testing method directory
-     * 
+     *
      * @param testdir
      *            the testing directory to use as the JettyHome for this JettyDistro
      * @throws IOException
@@ -227,21 +249,38 @@ public class JettyDistro
     }
 
     /**
-     * 
+     * Setup the JettyHome as belonging to a specific testing method directory
+     *
+     * @param testdir
+     *            the testing directory to use as the JettyHome for this JettyDistro
+     * @param artifact
+     *            name of jetty distribution artifact
+     * @throws IOException
+     *             if unable to copy unpacked distribution into place for the provided testing directory
+     */
+    public JettyDistro(TestingDir testdir, String artifact) throws IOException
+    {
+           this.artifactName = artifact;
+        this.jettyHomeDir = testdir.getDir();
+        copyBaseDistro();
+    }
+
+    /**
+     *
      * @throws IOException
      *             if unable to copy unpacked distribution into place for the provided testing directory
      */
     private void copyBaseDistro() throws IOException
     {
         // The outputDirectory for the maven side dependency:unpack goal.
-        File distroUnpackDir = MavenTestingUtils.getTargetFile("jetty-distro");
-        PathAssert.assertDirExists("jetty-distribution dependency:unpack",distroUnpackDir);
+        File distroUnpackDir = MavenTestingUtils.getTargetFile("test-dist");
+        PathAssert.assertDirExists(artifactName+" dependency:unpack",distroUnpackDir);
 
         // The actual jetty-distribution-${version} directory is under this directory.
         // Lets find it.
         File subdirs[] = distroUnpackDir.listFiles(new FileFilter()
         {
-            Pattern pat = Pattern.compile("jetty-distribution-[0-9]+\\.[0-9A-Z.-]*");
+            Pattern pat = Pattern.compile(artifactName+"-[0-9]+\\.[0-9A-Z.-]*");
 
             public boolean accept(File path)
             {
@@ -259,7 +298,9 @@ public class JettyDistro
         {
             // No jetty-distribution found.
             StringBuilder err = new StringBuilder();
-            err.append("No target/jetty-distro/jetty-distribution-${version} directory found.");
+            err.append("No target/test-dist/");
+            err.append(artifactName);
+            err.append("-${version} directory found.");
             err.append("\n  To fix this, run 'mvn process-test-resources' to create the directory.");
             throw new IOException(err.toString());
         }
@@ -268,12 +309,14 @@ public class JettyDistro
         {
             // Too many jetty-distributions found.
             StringBuilder err = new StringBuilder();
-            err.append("Too many target/jetty-distro/jetty-distribution-${version} directories found.");
+            err.append("Too many target/test-dist/");
+            err.append(artifactName);
+            err.append("-${version} directories found.");
             for (File dir : subdirs)
             {
                 err.append("\n  ").append(dir.getAbsolutePath());
             }
-            err.append("\n  To fix this, run 'mvn clean process-test-resources' to recreate the target/jetty-distro directory.");
+            err.append("\n  To fix this, run 'mvn clean process-test-resources' to recreate the target/test-dist directory.");
             throw new IOException(err.toString());
         }
 
@@ -286,7 +329,7 @@ public class JettyDistro
 
     /**
      * Return the $(jetty.home) directory being used for this JettyDistro
-     * 
+     *
      * @return the jetty.home directory being used
      */
     public File getJettyHomeDir()
@@ -297,7 +340,7 @@ public class JettyDistro
     /**
      * Copy a war file from ${project.basedir}/target/test-wars/${testWarFilename} into the ${jetty.home}/webapps/
      * directory
-     * 
+     *
      * @param testWarFilename
      *            the war file to copy (must exist)
      * @throws IOException
@@ -313,7 +356,7 @@ public class JettyDistro
 
     /**
      * Copy an arbitrary file from <code>src/test/resources/${resourcePath}</code> to the testing directory.
-     * 
+     *
      * @param resourcePath
      *            the relative path for file content within the <code>src/test/resources</code> directory.
      * @param outputPath
@@ -332,7 +375,7 @@ public class JettyDistro
 
     /**
      * Copy an arbitrary file from <code>target/test-libs/${libFilename}</code> to the testing directory.
-     * 
+     *
      * @param libFilename
      *            the <code>target/test-libs/${libFilename}</code> to copy
      * @param outputPath
@@ -351,7 +394,7 @@ public class JettyDistro
 
     /**
      * Delete a File or Directory found in the ${jetty.home} directory.
-     * 
+     *
      * @param path
      *            the path to delete. (can be a file or directory)
      */
@@ -363,7 +406,7 @@ public class JettyDistro
 
     /**
      * Return the baseUri being used for this Jetty Process Instance.
-     * 
+     *
      * @return the base URI for this Jetty Process Instance.
      */
     public URI getBaseUri()
@@ -373,7 +416,7 @@ public class JettyDistro
 
     /**
      * Return the JMX URL being used for this Jetty Process Instance.
-     * 
+     *
      * @return the JMX URL for this Jetty Process Instance.
      */
     public String getJmxUrl()
@@ -384,7 +427,7 @@ public class JettyDistro
     /**
      * Take the directory contents from ${project.basedir}/src/test/resources/${testConfigName}/ and copy it over
      * whatever happens to be at ${jetty.home}
-     * 
+     *
      * @param testConfigName
      *            the src/test/resources/ directory name to use as the source diretory for the configuration we are
      *            interested in.
@@ -399,7 +442,7 @@ public class JettyDistro
 
     /**
      * Start the jetty server
-     * 
+     *
      * @throws IOException
      *             if unable to start the server.
      */
@@ -407,15 +450,8 @@ public class JettyDistro
     {
         List<String> commands = new ArrayList<String>();
         commands.add(getJavaBin());
-        
-        if (_jvmArgs != null)
-        {
-            for ( String arg : _jvmArgs )
-            {
-                commands.add(arg);
-            }
-        }
-        
+
+        // Do a dry run first to get the exact command line for Jetty process
         commands.add("-jar");
         commands.add("start.jar");
         commands.add("jetty.port=0");
@@ -423,22 +459,34 @@ public class JettyDistro
         {
            commands.add("-D.DEBUG=true");
         }
+        commands.add("--dry-run");
 
-        ProcessBuilder pb = new ProcessBuilder(commands);
-        pb.directory(jettyHomeDir);
-        // pb.redirectErrorStream(true);
+        ProcessBuilder pbCmd = new ProcessBuilder(commands);
+        pbCmd.directory(jettyHomeDir);
 
-        StringBuilder msg = new StringBuilder();
-        msg.append("Executing:");
-        for (String command : commands)
+        Process pidCmd = pbCmd.start();
+        try
         {
-            msg.append(" ");
-            msg.append(command);
+            cmdLine = new BufferedReader(new InputStreamReader(pidCmd.getInputStream())).readLine();
         }
-        System.out.println(msg.toString());
+        catch (IOException ex)
+        {
+            /* ignored */
+        }
+        finally
+        {
+            pidCmd.destroy();
+        }
+
+        if (cmdLine == null || !cmdLine.contains("XmlConfiguration"))
+        {
+            Assert.fail("Unable to get Jetty command line");
+        }
+
+        System.out.printf("Executing: %s%n", cmdLine);
         System.out.printf("Working Dir: %s%n",jettyHomeDir.getAbsolutePath());
 
-        this.pid = pb.start();
+        this.pid = Runtime.getRuntime().exec(this.cmdLine, null, jettyHomeDir);
 
         ConsoleParser parser = new ConsoleParser();
         List<String[]> jmxList = parser.newPattern("JMX Remote URL: (.*)", 0);
@@ -449,7 +497,7 @@ public class JettyDistro
 
         try
         {
-            parser.waitForDone(1,TimeUnit.MINUTES);
+            parser.waitForDone(this.startTime,this.timeUnit);
 
             if (jmxList.size() > 0)
             {
@@ -471,7 +519,7 @@ public class JettyDistro
         catch (InterruptedException e)
         {
             pid.destroy();
-            Assert.fail("Unable to find required information within time limit");
+            Assert.fail("Unable to get required information within time limit");
         }
     }
 
@@ -480,18 +528,18 @@ public class JettyDistro
         private List<ConsolePattern> patterns = new ArrayList<ConsolePattern>();
         private CountDownLatch latch;
         private int count;
-        
+
         public List<String[]> newPattern(String exp, int cnt)
         {
             ConsolePattern pat = new ConsolePattern(exp, cnt);
             patterns.add(pat);
             count += cnt;
-            
+
             return pat.getMatches();
         }
-        
+
         public void parse(String line)
-        {           
+        {
             for (ConsolePattern pat : patterns)
             {
                 Matcher mat = pat.getMatcher(line);
@@ -504,7 +552,7 @@ public class JettyDistro
                         match[num-1] = mat.group(num);
                     }
                     pat.getMatches().add(match);
-                        
+
                     if (pat.getCount() > 0)
                     {
                         getLatch().countDown();
@@ -517,7 +565,7 @@ public class JettyDistro
         {
             getLatch().await(timeout, unit);
         }
-        
+
         private CountDownLatch getLatch()
         {
             synchronized(this)
@@ -527,7 +575,7 @@ public class JettyDistro
                     latch = new CountDownLatch(count);
                 }
             }
-            
+
             return latch;
         }
     }
@@ -544,7 +592,7 @@ public class JettyDistro
             matches = new ArrayList<String[]>();
             count = cnt;
         }
-        
+
         public Matcher getMatcher(String line)
         {
             return pattern.matcher(line);
@@ -560,7 +608,7 @@ public class JettyDistro
             return count;
         }
     }
-    
+
 
     private void startPump(String mode, ConsoleParser parser, InputStream inputStream)
     {
@@ -569,10 +617,10 @@ public class JettyDistro
         Thread thread = new Thread(pump,"ConsoleStreamer/" + mode);
         thread.start();
     }
-    
-    /** 
+
+    /**
      * enable debug on the jetty process
-     * 
+     *
      * @param debug
      */
     public void setDebug(boolean debug)
@@ -580,14 +628,6 @@ public class JettyDistro
         _debug = debug;
     }
 
-    /** 
-     * @param args
-     */
-    public void setJVMArgs( String ... args )
-    {
-        this._jvmArgs = args;
-    }
-    
     private String getJavaBin()
     {
         String javaexes[] = new String[]
@@ -665,5 +705,11 @@ public class JettyDistro
             }
             // System.out.printf("ConsoleStreamer/%s finished%n",mode);
         }
+    }
+
+    public void setStartTime(long startTime, TimeUnit timeUnit)
+    {
+        this.startTime = startTime;
+        this.timeUnit = timeUnit;
     }
 }
