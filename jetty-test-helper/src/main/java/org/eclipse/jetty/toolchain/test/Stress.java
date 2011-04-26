@@ -6,7 +6,7 @@ import org.junit.internal.AssumptionViolatedException;
 /**
  * Flag indicating that {@link Test} is really used for Stress Testing.
  */
-public class Stress
+public class Stress 
 {
     /**
      * Returns flag indicating if <code>-DSTRESS</code> or <code>-DSTRESS=true</code> is enabled.
@@ -15,18 +15,7 @@ public class Stress
      */
     public static boolean isEnabled()
     {
-        String stress = System.getProperty("STRESS");
-        if (stress == null)
-        {
-            return false;
-        }
-
-        if (stress.equals(""))
-        {
-            return true;
-        }
-
-        return Boolean.parseBoolean(stress);
+        return PropertyFlag.isEnabled("STRESS");
     }
 
     /**
@@ -37,9 +26,6 @@ public class Stress
      */
     public static void assume()
     {
-        if (!isEnabled())
-        {
-            throw new AssumptionViolatedException("Stress testing not enabled");
-        }
+        PropertyFlag.assume("STRESS");
     }
 }
