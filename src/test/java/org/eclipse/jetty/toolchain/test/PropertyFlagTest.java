@@ -8,7 +8,7 @@ import org.junit.rules.MethodRule;
 import org.junit.rules.TestName;
 import org.junit.rules.Verifier;
 
-public class StressTest
+public class PropertyFlagTest
 {
     private String result = null;
     private String expected = null;
@@ -30,7 +30,7 @@ public class StressTest
     {
         expected = "enabled-" + name.getMethodName();
         System.setProperty("STRESS","");
-        Stress.assume(); // Should pass
+        PropertyFlag.assume("STRESS"); // Should pass
         result = "enabled-" + name.getMethodName();
         Assert.assertThat("Stress.enabled()", Stress.isEnabled(), is(true));
     }
@@ -40,7 +40,7 @@ public class StressTest
     {
         expected = "enabled-" + name.getMethodName();
         System.setProperty("STRESS","true");
-        Stress.assume(); // Should pass
+        PropertyFlag.assume("STRESS"); // Should pass
         result = "enabled-" + name.getMethodName();
         Assert.assertThat("Stress.enabled()", Stress.isEnabled(), is(true));
     }
@@ -51,7 +51,7 @@ public class StressTest
         expected = null;
         System.clearProperty("STRESS");
         Assert.assertThat("Stress.enabled()", Stress.isEnabled(), is(false));
-        Stress.assume(); // Should not pass
+        PropertyFlag.assume("STRESS"); // Should not pass
         result = "disabled-failure-" + name.getMethodName();
     }
 
@@ -61,7 +61,7 @@ public class StressTest
         expected = null;
         System.setProperty("STRESS","false");
         Assert.assertThat("Stress.enabled()", Stress.isEnabled(), is(false));
-        Stress.assume(); // Should not pass
+        PropertyFlag.assume("STRESS"); // Should not pass
         result = "disabled-failure-" + name.getMethodName();
     }
 }
