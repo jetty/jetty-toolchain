@@ -229,8 +229,12 @@ public class JettyDistro
      */
     public JettyDistro(Class<?> clazz, String artifact) throws IOException
     {
-        this.artifactName = artifact;
         this.jettyHomeDir = MavenTestingUtils.getTargetTestingDir(clazz,"jettyHome");
+        if (artifact != null)
+        {
+            this.artifactName = artifact;
+        }
+        
         copyBaseDistro();
     }
 
@@ -260,8 +264,12 @@ public class JettyDistro
      */
     public JettyDistro(TestingDir testdir, String artifact) throws IOException
     {
-           this.artifactName = artifact;
         this.jettyHomeDir = testdir.getDir();
+        if (artifact != null)
+        {
+            this.artifactName = artifact;
+        }
+
         copyBaseDistro();
     }
 
@@ -502,7 +510,7 @@ public class JettyDistro
             if (jmxList.size() > 0)
             {
                 this.jmxUrl = jmxList.get(0)[0];
-                System.out.printf("## Found JMX connector at "+this.jmxUrl);
+                System.out.printf("## Found JMX connector at %s%n", this.jmxUrl);
             }
 
             if (connList.size() > 0)
@@ -512,7 +520,7 @@ public class JettyDistro
                 {
                     this.baseUri = URI.create("http://localhost:"+params[1]+"/");
                 }
-                System.out.printf("## Found Jetty connector at host: "+params[0]+" port: "+params[1]);
+                System.out.printf("## Found Jetty connector at host: %s port: %s%n", params);
             }
 
         }
