@@ -118,19 +118,21 @@ public class IO
             copyFile(from,to);
         }
     }
-
+    
     public static void copyDir(File from, File to) throws IOException
     {
         FS.ensureDirExists(to);
 
-        for (File file : from.listFiles(new SafeFileFilter()))
+        for (File file : from.listFiles(IO.SafeFileFilter.INSTANCE))
         {
             copy(file,new File(to,file.getName()));
         }
     }
 
-    private static class SafeFileFilter implements FileFilter
+    public static class SafeFileFilter implements FileFilter
     {
+        public static SafeFileFilter INSTANCE = new SafeFileFilter();
+        
         public boolean accept(File path)
         {
             String name = path.getName();
