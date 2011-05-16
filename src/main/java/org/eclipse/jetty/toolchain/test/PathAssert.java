@@ -22,8 +22,12 @@ import org.junit.Assert;
 /**
  * Assertions of various FileSytem Paths
  */
-public class PathAssert
+public final class PathAssert
 {
+    private PathAssert() {
+        /* prevent instantiation */
+    }
+    
     /**
      * Assert that the Directory exist.
      * 
