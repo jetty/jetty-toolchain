@@ -28,12 +28,17 @@ import org.junit.Assert;
 /**
  * Common utility methods for working with JUnit tests cases in a maven friendly way.
  */
-public class MavenTestingUtils
+public final class MavenTestingUtils
 {
     private static File basedir;
     private static URI baseURI;
     private static File testResourcesDir;
     private static File targetDir;
+    
+    private MavenTestingUtils()
+    {
+        /* prevent instantiation */
+    }
 
     public static File getBasedir()
     {
@@ -101,8 +106,7 @@ public class MavenTestingUtils
      */
     public static File getTargetTestingDir()
     {
-        File dir = new File(getTargetDir(),"tests");
-        return dir;
+        return new File(getTargetDir(),"tests");
     }
 
     /**
@@ -114,8 +118,7 @@ public class MavenTestingUtils
      */
     public static File getTargetTestingDir(String testname)
     {
-        File dir = new File(getTargetTestingDir(),"test-" + testname);
-        return dir;
+        return new File(getTargetTestingDir(),"test-" + testname);
     }
 
     /**
@@ -180,10 +183,7 @@ public class MavenTestingUtils
 
         File testsDir = new File(getTargetDir(),"tests");
         File dir = new File(testsDir,classname + File.separatorChar + methodname);
-        if (!dir.exists())
-        {
-            dir.mkdirs();
-        }
+        FS.ensureDirExists(dir);
         return dir;
     }
 

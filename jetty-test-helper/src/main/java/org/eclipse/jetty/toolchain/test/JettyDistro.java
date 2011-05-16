@@ -12,12 +12,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.jetty.toolchain.test.FS;
-import org.eclipse.jetty.toolchain.test.IO;
-import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
-import org.eclipse.jetty.toolchain.test.OS;
-import org.eclipse.jetty.toolchain.test.PathAssert;
-import org.eclipse.jetty.toolchain.test.TestingDir;
 import org.junit.Assert;
 
 import edu.emory.mathcs.backport.java.util.concurrent.CountDownLatch;
@@ -199,7 +193,6 @@ public class JettyDistro
     private URI baseUri;
 
     private String jmxUrl;
-    private String cmdLine;
 
     private boolean _debug = false;
 
@@ -515,14 +508,11 @@ public class JettyDistro
         ProcessBuilder pbCmd = new ProcessBuilder(commands);
         pbCmd.directory(jettyHomeDir);
 
+        String cmdLine = null;
         Process pidCmd = pbCmd.start();
         try
         {
-            cmdLine = new BufferedReader(new InputStreamReader(pidCmd.getInputStream())).readLine();
-        }
-        catch (IOException ex)
-        {
-            /* ignored */
+            cmdLine = readOutputLine(pidCmd);
         }
         finally
         {
@@ -537,7 +527,7 @@ public class JettyDistro
         System.out.printf("Executing: %s%n",cmdLine);
         System.out.printf("Working Dir: %s%n",jettyHomeDir.getAbsolutePath());
 
-        this.pid = Runtime.getRuntime().exec(this.cmdLine,null,jettyHomeDir);
+        this.pid = Runtime.getRuntime().exec(cmdLine,null,jettyHomeDir);
 
         ConsoleParser parser = new ConsoleParser();
         List<String[]> jmxList = parser.newPattern("JMX Remote URL: (.*)",0);
@@ -550,13 +540,13 @@ public class JettyDistro
         {
             parser.waitForDone(this.startTime,this.timeUnit);
 
-            if (jmxList.size() > 0)
+            if (!jmxList.isEmpty())
             {
                 this.jmxUrl = jmxList.get(0)[0];
                 System.out.printf("## Found JMX connector at %s%n",this.jmxUrl);
             }
 
-            if (connList.size() > 0)
+            if (!connList.isEmpty())
             {
                 String[] params = connList.get(0);
                 if (params.length == 2)
@@ -571,6 +561,26 @@ public class JettyDistro
         {
             pid.destroy();
             Assert.fail("Unable to get required information within time limit");
+        }
+    }
+
+    private String readOutputLine(Process pidCmd) throws IOException
+    {
+        InputStream in = null;
+        InputStreamReader reader = null;
+        BufferedReader buf = null;
+        try
+        {
+            in = pidCmd.getInputStream();
+            reader = new InputStreamReader(in);
+            buf = new BufferedReader(reader);
+            return buf.readLine();
+        }
+        finally
+        {
+            IO.close(buf);
+            IO.close(reader);
+            IO.close(in);
         }
     }
 

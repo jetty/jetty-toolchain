@@ -13,6 +13,10 @@ public final class OS
     public static final boolean IS_LINUX = isOSName("Linux") || isOSName("LINUX");
     public static final boolean IS_UNIX = isOSName("Unix") || isOSName("AIX") || IS_LINUX || IS_OSX;
     public static final String LN = System.getProperty("line.separator");
+    
+    private OS() {
+        /* prevent instantiation */
+    }
 
     /**
      * Convert path separators to the System path separators.

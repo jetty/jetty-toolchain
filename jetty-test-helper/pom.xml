@@ -13,7 +13,7 @@
   <name>Jetty Toolchain :: Test Helper</name>
   <description>Unit Testing Support for Jetty (common classes for some unit tests)</description>
   <properties>
-    <maven.version>2.0.9</maven.version>
+    <maven.version>3.0</maven.version>
   </properties>
   <build>
     <plugins>
@@ -47,6 +47,37 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.0-beta-3</version>
+        <executions>
+          <execution>
+            <id>attach-descriptor</id>
+            <goals>
+              <goal>attach-descriptor</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <targetJdk>1.5</targetJdk>
+          <rulesets>
+            <ruleset>jetty/pmd_ruleset.xml</ruleset>
+          </rulesets>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.eclipse.jetty.toolchain</groupId>
+            <artifactId>jetty-build-support</artifactId>
+            <version>1.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -66,5 +97,46 @@
       <version>1.2.1</version>
     </dependency>
   </dependencies>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.2</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.6.1</version>
+        <configuration>
+          <maxmemory>512m</maxmemory>
+          <docfilessubdirs>true</docfilessubdirs>
+          <detectLinks>true</detectLinks>
+          <detectJavaApiLink>true</detectJavaApiLink>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <targetJdk>1.5</targetJdk>
+          <rulesets>
+            <ruleset>jetty/pmd_ruleset.xml</ruleset>
+          </rulesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <findbugsXmlOutput>true</findbugsXmlOutput>
+          <xmlOutput>true</xmlOutput>
+          <effort>Max</effort>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
 

@@ -6,8 +6,12 @@ import org.junit.internal.AssumptionViolatedException;
 /**
  * Flag indicating that {@link Test} is part of special group of tests.
  */
-public class PropertyFlag
+public final class PropertyFlag
 {
+    private PropertyFlag() {
+        /* prevent instantiation */
+    }
+    
     /**
      * Returns flag indicating if <code>-D&lt;flag&gt;</code> or <code>-D&lt;flag&gt=true</code> is enabled.
      * 
@@ -22,7 +26,7 @@ public class PropertyFlag
             return false;
         }
 
-        if (stress.equals(""))
+        if ("".equals(stress))
         {
             return true;
         }

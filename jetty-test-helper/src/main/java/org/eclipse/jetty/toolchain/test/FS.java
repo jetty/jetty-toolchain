@@ -5,8 +5,12 @@ import java.io.IOException;
 
 import org.junit.Assert;
 
-public class FS
+public final class FS
 {
+    private FS() {
+        /* prevent instantiation */
+    }
+    
     /**
      * Delete a file or a directory.
      * <p>
@@ -151,13 +155,13 @@ public class FS
      */
     public static void ensureDirExists(File dir)
     {
-        if (!dir.exists())
+        if (dir.exists())
         {
-            Assert.assertTrue("Creating dir: " + dir,dir.mkdirs());
+            Assert.assertTrue("Path exists, but should be a Dir : " + dir.getAbsolutePath(),dir.isDirectory());
         }
         else
         {
-            Assert.assertTrue("Path exists, but should be a Dir : " + dir.getAbsolutePath(),dir.isDirectory());
+            Assert.assertTrue("Creating dir: " + dir,dir.mkdirs());
         }
     }
 
@@ -184,13 +188,13 @@ public class FS
      */
     public static void touch(File file) throws IOException
     {
-        if (!file.exists())
+        if (file.exists())
         {
-            Assert.assertTrue("Creating file: " + file,file.createNewFile());
+            Assert.assertTrue("Updating last modified timestamp",file.setLastModified(System.currentTimeMillis()));
         }
         else
         {
-            Assert.assertTrue("Updating last modified timestamp",file.setLastModified(System.currentTimeMillis()));
+            Assert.assertTrue("Creating file: " + file,file.createNewFile());
         }
     }
 }

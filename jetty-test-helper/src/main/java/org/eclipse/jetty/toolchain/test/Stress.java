@@ -1,13 +1,16 @@
 package org.eclipse.jetty.toolchain.test;
 
 import org.junit.Test;
-import org.junit.internal.AssumptionViolatedException;
 
 /**
  * Flag indicating that {@link Test} is really used for Stress Testing.
  */
-public class Stress 
+public final class Stress 
 {
+    private Stress() {
+        /* prevent instantiation */
+    }
+    
     /**
      * Returns flag indicating if <code>-DSTRESS</code> or <code>-DSTRESS=true</code> is enabled.
      * 

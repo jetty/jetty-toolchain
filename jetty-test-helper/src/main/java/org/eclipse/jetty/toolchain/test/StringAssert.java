@@ -21,8 +21,12 @@ import java.util.List;
 import junit.framework.Assert;
 import junit.framework.AssertionFailedError;
 
-public class StringAssert
+public final class StringAssert
 {
+    private StringAssert() {
+        /* prevent instantiation */
+    }
+    
     /**
      * Asserts that string (<code>haystack</code>) contains specified text (
      * <code>needle</code>).
@@ -43,9 +47,8 @@ public class StringAssert
         if (idx == (-1))
         {
             StringBuffer buf = new StringBuffer();
-            buf.append(msg).append(": ");
-            buf.append("Unable to find \"").append(needle).append("\" in \"");
-            buf.append(haystack).append("\"");
+            buf.append(msg).append(": Unable to find \"").append(needle).append("\" in \"");
+            buf.append(haystack).append('\"');
             System.err.println(buf);
             throw new AssertionFailedError(buf.toString());
         }
@@ -73,9 +76,8 @@ public class StringAssert
         if (idx == (-1))
         {
             StringBuffer buf = new StringBuffer();
-            buf.append(msg).append(": ");
-            buf.append("Unable to find \"").append(needle).append("\" in \"");
-            buf.append(haystack.substring(offset)).append("\"");
+            buf.append(msg).append(": Unable to find \"").append(needle).append("\" in \"");
+            buf.append(haystack.substring(offset)).append('\"');
             System.err.println(buf);
             throw new AssertionFailedError(buf.toString());
         }
@@ -121,9 +123,8 @@ public class StringAssert
         if (idx != (-1))
         {
             StringBuffer buf = new StringBuffer();
-            buf.append(msg).append(": ");
-            buf.append("Should not have found \"").append(needle).append("\" at offset ");
-            buf.append(idx).append(" in \"").append(haystack).append("\"");
+            buf.append(msg).append(": Should not have found \"").append(needle).append("\" at offset ");
+            buf.append(idx).append(" in \"").append(haystack).append('\"');
             System.err.println(buf);
             throw new AssertionFailedError(buf.toString());
         }
@@ -152,9 +153,8 @@ public class StringAssert
         if (idx != (-1))
         {
             StringBuffer buf = new StringBuffer();
-            buf.append(msg).append(": ");
-            buf.append("Should not have found \"").append(needle).append("\" at offset ");
-            buf.append(idx).append(" in \"").append(haystack.substring(offset)).append("\"");
+            buf.append(msg).append(": Should not have found \"").append(needle).append("\" at offset ");
+            buf.append(idx).append(" in \"").append(haystack.substring(offset)).append('\"');
             System.err.println(buf);
             throw new AssertionFailedError(buf.toString());
         }
@@ -182,7 +182,7 @@ public class StringAssert
             buf.append(msg).append(": String \"");
             int len = Math.min(expected.length() + 4,haystack.length());
             buf.append(haystack.substring(0,len));
-            buf.append("\" does not start with expected \"").append(expected).append("\"");
+            buf.append("\" does not start with expected \"").append(expected).append('\"');
             System.err.println(buf);
             throw new AssertionFailedError(buf.toString());
         }

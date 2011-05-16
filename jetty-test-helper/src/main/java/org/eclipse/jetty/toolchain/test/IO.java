@@ -29,9 +29,13 @@ import java.io.Writer;
 /**
  * IO Utilities.
  */
-public class IO
+public final class IO
 {
     public static final int BUFFER_SIZE = 64 * 1024;
+    
+    private IO() {
+        /* prevent instantiation */
+    }
 
     /**
      * Copy Reader to Writer out until EOF or exception.
@@ -131,7 +135,7 @@ public class IO
 
     public static class SafeFileFilter implements FileFilter
     {
-        public static SafeFileFilter INSTANCE = new SafeFileFilter();
+        public static final SafeFileFilter INSTANCE = new SafeFileFilter();
         
         public boolean accept(File path)
         {

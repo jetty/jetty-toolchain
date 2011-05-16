@@ -14,8 +14,12 @@ import java.util.jar.JarOutputStream;
 /**
  * Basic functions for working with JAR files in test cases.
  */
-public class JAR
+public final class JAR
 {
+    private JAR() {
+        /* prevent instantiation */
+    }
+    
     /**
      * Unpack JAR file into destination directory.
      * <p>
@@ -115,7 +119,6 @@ public class JAR
     private static void packDir(File baseDir, File srcDir, JarOutputStream jarout) throws IOException
     {
         URI baseURI = baseDir.toURI();
-        InputStream in = null;
 
         for (File file : srcDir.listFiles(IO.SafeFileFilter.INSTANCE))
         {
@@ -128,7 +131,7 @@ public class JAR
                 String name = baseURI.relativize(file.toURI()).toASCIIString();
                 JarEntry entry = new JarEntry(name);
                 entry.setSize(file.length());
-                in = null;
+                InputStream in = null;
                 try
                 {
                     in = new FileInputStream(file);
