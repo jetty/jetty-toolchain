@@ -173,13 +173,13 @@ public final class MavenTestingUtils
 
         classname = condensePackageString(classname);
 
-        if (OS.IS_WINDOWS)
-        {
-            /* Condense the directory names to make them more friendly for the 
-             * pathname limitations that exist on windows.
-             */
-            methodname = maxStringLength(30,methodname);
-        }
+//        if (OS.IS_WINDOWS)
+//        {
+//            /* Condense the directory names to make them more friendly for the 
+//             * pathname limitations that exist on windows.
+//             */
+//            methodname = maxStringLength(30,methodname);
+//        }
 
         File testsDir = new File(getTargetDir(),"tests");
         File dir = new File(testsDir,classname + File.separatorChar + methodname);
@@ -199,13 +199,13 @@ public final class MavenTestingUtils
 
         id.classname = condensePackageString(id.classname);
 
-        if (OS.IS_WINDOWS)
-        {
-            /* Condense the directory names to make them more friendly for the 
-             * pathname limitations that exist on windows.
-             */
-            id.methodname = maxStringLength(30,id.methodname);
-        }
+//        if (OS.IS_WINDOWS)
+//        {
+//            /* Condense the directory names to make them more friendly for the 
+//             * pathname limitations that exist on windows.
+//             */
+//            id.methodname = maxStringLength(30,id.methodname);
+//        }
 
         return id.classname + File.separatorChar + id.methodname;
     }
@@ -377,21 +377,21 @@ public final class MavenTestingUtils
         return testResourcesDir;
     }
 
-    /**
-     * Read the contents of a file into a String and return it.
-     * 
-     * @param file
-     *            the file to read.
-     * @return the contents of the file.
-     * @throws IOException
-     *             if unable to read the file.
-     * @deprecated use the call from {@link IO#readToString(File)} instead.
-     */
-    @Deprecated
-    public static String readToString(File file) throws IOException
-    {
-        System.err.printf("DEPRECATED: %s#readToString(File) - use %s#readToString(File) instead to eliminate this warning",
-                MavenTestingUtils.class.getName(), IO.class.getName());
-        return IO.readToString(file);
-    }
+//    /**
+//     * Read the contents of a file into a String and return it.
+//     * 
+//     * @param file
+//     *            the file to read.
+//     * @return the contents of the file.
+//     * @throws IOException
+//     *             if unable to read the file.
+//     * @deprecated use the call from {@link IO#readToString(File)} instead.
+//     */
+//    @Deprecated
+//    public static String readToString(File file) throws IOException
+//    {
+//        System.err.printf("DEPRECATED: %s#readToString(File) - use %s#readToString(File) instead to eliminate this warning",
+//                MavenTestingUtils.class.getName(), IO.class.getName());
+//        return IO.readToString(file);
+//    }
 }
