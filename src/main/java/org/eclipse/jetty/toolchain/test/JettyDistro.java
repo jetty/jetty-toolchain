@@ -280,8 +280,6 @@ public class JettyDistro
         // Lets find it.
         File subdirs[] = distroUnpackDir.listFiles(new FileFilter()
         {
-            Pattern pat = Pattern.compile(artifactName + "-[0-9]+\\.[0-9A-Z.-]*");
-
             public boolean accept(File path)
             {
                 if (!path.isDirectory())
@@ -289,8 +287,7 @@ public class JettyDistro
                     return false;
                 }
 
-                Matcher mat = pat.matcher(path.getName());
-                return mat.matches();
+                return path.getName().startsWith(artifactName + "-");
             }
         });
 
