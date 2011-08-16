@@ -1,0 +1,2236 @@
+#COMMIT_ID#:57e9966bd0fb07dc23ea30efae79663894bb7e33
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-27 09:40:46 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-27 09:40:46 -0500
+#SUBJECT#:remove bogus @Override's
+#BODY#:
+####
+#COMMIT_ID#:9b4ab80ea6f71854983e14e8bed8930ab3ce8a80
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-27 09:38:30 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-27 09:38:30 -0500
+#SUBJECT#:[Bug 353210] align bundle version in MANIFEST.MF
+#BODY#:
+####
+#COMMIT_ID#:1a832ef21ebd45d3b21f2b8f85100c1dc2d0b3be
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-27 11:16:03 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-27 11:16:03 +1000
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:f17d271f072ddad5cb8b8803800738e20a71aeb1
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-27 11:15:38 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-27 11:15:38 +1000
+#SUBJECT#:353073 parallel test option
+#BODY#:
+####
+#COMMIT_ID#:042ffc96e869598dda29cff4752318f0b759b640
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-26 15:58:12 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-26 15:58:12 -0500
+#SUBJECT#:Ignore tests that require a mongo server
+#BODY#:
+####
+#COMMIT_ID#:04557d5d39e3864a8f57f76ef2a6ca28b1cbe4d8
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-26 15:16:21 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-26 15:16:21 -0500
+#SUBJECT#:[Bug 351516] rejigger the packaging a bit
+#BODY#:
+####
+#COMMIT_ID#:98b89c5aad42ed26c7081944395edd4f05cd49c3
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-26 15:12:44 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-26 15:12:44 -0500
+#SUBJECT#:fix bogus entries in pom.xml
+#BODY#:
+####
+#COMMIT_ID#:2ead7a83fe013a2b6e5390b7451ea70439a37414
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-26 15:00:29 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-26 15:00:49 -0500
+#SUBJECT#:[Bug 351516] support nosql sessions
+#BODY#:
+####
+#COMMIT_ID#:5859a859191763024afc8d32d290ec82ae1aff83
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-26 17:31:55 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-26 17:31:55 +1000
+#SUBJECT#:353073 WebSocketClient
+#BODY#:
+####
+#COMMIT_ID#:2be177484e801d6e4417a926312f75eba0af194b
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-22 18:12:56 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-22 18:12:56 +1000
+#SUBJECT#:Miscellaneous changes resulting from the optimization for 7.5.x Mostly refining debug and toString() Use shutdown for idle expiry
+#BODY#:
+####
+#COMMIT_ID#:6a1b20abe7bd8d7ce767d41b4c8fafa1d979f3a2
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-22 12:15:48 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-22 12:15:48 +1000
+#SUBJECT#:352421 HttpURI paths beginning with .
+#BODY#:
+####
+#COMMIT_ID#:ee02bb4b17e239b80ada0e91d0ff4315903c7e9a
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-22 11:04:11 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-22 11:04:11 +1000
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:f496c26c71372f62f908c5a7fddfa61fac85f31b
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-22 11:03:48 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-22 11:03:48 +1000
+#SUBJECT#:352421 HttpURI paths beginning with .
+#BODY#:
+####
+#COMMIT_ID#:2790badf6d49be073393373fcf7d753816261f89
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-21 13:11:36 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-21 13:11:36 -0400
+#SUBJECT#:352786 GzipFilter fails to pass parameters to GzipResponseWrapper
+#BODY#:
+####
+#COMMIT_ID#:3e621d312d01d73cfd2f21ccb528471a60a80ff2
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-21 11:15:38 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-21 11:16:40 -0400
+#SUBJECT#:352684 improve stopping
+#BODY#:
+####
+#COMMIT_ID#:9fe3c8f67f8a82f0511c8081c9babd3162164cfb
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-22 00:32:25 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-22 00:32:25 +1000
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:4ba35e330ed2a58045955ed339da8e86d3bc2670
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-22 00:31:48 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-22 00:31:48 +1000
+#SUBJECT#:352684 setters
+#BODY#:
+####
+#COMMIT_ID#:ba30be6408e6203f7a3d76c06b73ad5ac1739475
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-19 16:16:41 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-21 08:51:44 -0500
+#SUBJECT#:[Bug 349005] add javadoc detailing the convenience hack of removing leading /'s
+#BODY#:
+####
+#COMMIT_ID#:42b9baa4db745878c7c3d595c99f35977ac05db3
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-21 23:03:54 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-21 23:03:54 +1000
+#SUBJECT#:352684 setters
+#BODY#:
+####
+#COMMIT_ID#:3302d54babb8765ceeeef396ac245f614a45c1a9
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-21 22:36:19 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-21 22:36:19 +1000
+#SUBJECT#:352684 ensure test harness completes
+#BODY#:
+####
+#COMMIT_ID#:676b1a8ffc1d4e79406943606cdaf1625e8a5342
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-21 22:11:32 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-21 22:11:32 +1000
+#SUBJECT#:352684 ensure test harness completes
+#BODY#:
+####
+#COMMIT_ID#:14bddae71e6444fe4cb89739312c0b2544fda484
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-21 19:44:09 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-21 19:44:09 +1000
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:d18bae4fe83b894519b55b67aaaffa163368d1fa
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-20 19:32:15 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-20 19:32:15 -0400
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:0cc914c4bba6b6c25d729d20f15b4eb9fa6a1eb6
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-20 19:30:44 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-20 19:30:44 -0400
+#SUBJECT#:352684 Implemented spinning thread analyzer
+#BODY#:
+####
+#COMMIT_ID#:281bb12689c01bfb42eb36ea8501a70776275075
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-19 14:27:52 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-19 14:27:52 -0500
+#SUBJECT#:[Bug 347484] / - > ${/} in some paths in grant codebases
+#BODY#:
+####
+#COMMIT_ID#:fde7831a811b2e35f3b0dc4e8234f2b07ea8214b
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-19 11:22:32 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-19 11:22:32 -0500
+#SUBJECT#:[Bug 352133] resolve java 1.5isms with sessions, fix misspelling in mbean and add access to underlying server in session test server
+#BODY#:
+####
+#COMMIT_ID#:3919023be5d403b0e081430bb8f41d20ac1f29d1
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-18 12:54:19 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-18 12:54:19 -0500
+#SUBJECT#:[Bug 352133] resolve some 1.5isms
+#BODY#:
+####
+#COMMIT_ID#:93f3ec1731c8279584566ca02e5bdc2830c38dd6
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-18 16:45:08 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-18 16:45:08 +1000
+#SUBJECT#:test harness cleanups after performance branch merge
+#BODY#:
+####
+#COMMIT_ID#:d091003cfc0f30e089cd38cd2b10e47a69c2371a
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-18 14:30:04 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-18 14:30:04 +1000
+#SUBJECT#:return EOF rather than throw EoFException
+#BODY#:
+####
+#COMMIT_ID#:f4255bdeefffb4271e037967b30544b369d36dfe
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-18 09:16:51 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-18 09:16:51 +1000
+#SUBJECT#:Merge branch 'master' into performance
+#BODY#:
+####
+#COMMIT_ID#:70d7d3c9a553d2dd1a2bca70a1df93f5ceae10be
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-18 09:15:31 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-18 09:15:31 +1000
+#SUBJECT#:reverted version
+#BODY#:
+####
+#COMMIT_ID#:7eec3b65e61ae3ba1e9abb8c55361abb528b9ddd
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-15 15:06:42 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-15 15:06:42 -0500
+#SUBJECT#:remove some logging
+#BODY#:
+####
+#COMMIT_ID#:264b22498ea2fe3b68c6d3524dcddfe9320a6f8a
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-15 14:57:38 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-15 14:57:38 -0500
+#SUBJECT#:Add in a bit more to this test so it checks that actual values make it across the server boundry
+#BODY#:
+####
+#COMMIT_ID#:40e75f60683d26aef2f408412deb0922c2b05a84
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-15 12:25:01 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-15 12:25:01 -0500
+#SUBJECT#:[Bug 352133] fix warning related to 1.5
+#BODY#:
+####
+#COMMIT_ID#:dc3445cea2f4d4960b9687cfda48e63c7a23a78c
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-12 19:31:13 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-15 09:32:55 -0400
+#SUBJECT#:298502 CONNECT uses same HTTP version as original request
+#BODY#:
+####
+#COMMIT_ID#:61b2a5c751ff34de057c2a762b8b37b77adf146f
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-15 15:50:41 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-15 15:50:41 +1000
+#SUBJECT#:298502 Handle 200 Connect responses with no content-length
+#BODY#:
+####
+#COMMIT_ID#:6349100c9d2ae1c50f3330ea6e12c65141cbb3d7
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-15 15:22:51 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-15 15:22:51 +1000
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:82adc6cad4957866b78d18c2e818872c26e7d88f
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-07-15 15:21:23 +1000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-07-15 15:21:23 +1000
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:21f924fa1dc622fc53da7267a114b780b10e8c47
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-07-15 15:21:04 +1000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-07-15 15:21:04 +1000
+#SUBJECT#:352176 - xml parsing on startElement should be more flexible on using qName or localName
+#BODY#:
+####
+#COMMIT_ID#:b62c5cdde676945535158ef914c095ac5c514f90
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-15 15:06:26 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-15 15:06:26 +1000
+#SUBJECT#:298502 added ProxyFakeTunnelTest.java to demonstrate the issue
+#BODY#:
+####
+#COMMIT_ID#:5e94077ba3030dbf95a89175d85757d3b16b9a1b
+#AUTHOR_NAME#:hmalphettes
+#AUTHOR_DATE#:2011-07-15 12:09:49 +0800
+#COMMITTER_NAME#:hmalphettes
+#COMMITTER_DATE#:2011-07-15 12:09:49 +0800
+#SUBJECT#:bug 350785 Support for felix-3.2
+#BODY#:
+####
+#COMMIT_ID#:5df38f9369c7cbb8f179cb971e92b80a0e6b35cc
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-14 21:56:51 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-14 21:58:09 -0400
+#SUBJECT#:351576 Simplified response reader
+#BODY#:
+####
+#COMMIT_ID#:660dd754ea7806d0ecacb3271d035be5f6fb606c
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-14 11:28:41 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-14 11:28:41 -0500
+#SUBJECT#:[Bug 352133] add <Object> as abstractlist type
+#BODY#:
+####
+#COMMIT_ID#:295634a36947592d82a290f88a55d30de7ec896f
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-07-14 15:50:37 +1000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-07-14 15:50:37 +1000
+#SUBJECT#:352046 - Need try/catch around features set in XmlParser
+#BODY#:
+####
+#COMMIT_ID#:a26ddd593375f96a81301092db8a87e380b9539c
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-14 15:38:25 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-14 15:38:25 +1000
+#SUBJECT#:created performance version
+#BODY#:
+####
+#COMMIT_ID#:d8cb8556aaddad9d13f07cf240158f8a778a599c
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-14 11:58:14 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-14 11:58:14 +1000
+#SUBJECT#:return client buffers
+#BODY#:
+####
+#COMMIT_ID#:f52995b4ba549464dbdb2b4cef738de9b43a2fc6
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-14 10:37:41 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-14 10:37:41 +1000
+#SUBJECT#:Merge branch 'master' into performance
+#BODY#:
+####
+#COMMIT_ID#:565f92ac0d10eccfe92c41f6f2b83d9af3e6a0b6
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-14 10:36:57 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-14 10:36:57 +1000
+#SUBJECT#:Merge branch 'master' into performance
+#BODY#:
+####
+#COMMIT_ID#:b64f271c4b2a489f120d2dfb166f1bba12802e9f
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-14 10:36:39 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-14 10:36:39 +1000
+#SUBJECT#:simplified blocking HttpConnection
+#BODY#:
+####
+#COMMIT_ID#:2028c125c1668355c04dafb1f0d4c616eaa9ae09
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-13 16:52:20 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-13 16:52:20 -0500
+#SUBJECT#:test commit
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:8e5039ab3213eba6a7b1b1adf141d5b47139499c
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-13 16:48:22 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-13 16:48:51 -0500
+#SUBJECT#:test commit
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:0816c3cdab51ab5d231a4bc14d2a7cc9e78a4b8e
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-13 13:16:59 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-13 13:16:59 -0500
+#SUBJECT#:noticed this class is a hold over from 1.2 support so switched its single usage over to Collections.singletonList()
+#BODY#:
+####
+#COMMIT_ID#:8ea8f23fb8d1b3e34ed8d0a451001deeff19b0ea
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-07-13 17:09:28 +0200
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-07-13 17:09:28 +0200
+#SUBJECT#:Correctly capitalized word "Maven" (and test if commit works for me).
+#BODY#:
+####
+#COMMIT_ID#:22c54b18bf1eb358499e9b96a2d9a7224c7705f0
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-12 17:55:38 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-12 17:55:38 -0400
+#SUBJECT#:test commit
+#BODY#:
+####
+#COMMIT_ID#:97b41c8bd0241724e85063c4c9a9eca51410f8fa
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-12 16:48:23 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-12 16:48:23 -0500
+#SUBJECT#:test commit mail again
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:b207d3c047d5e985b46343a097477b730875d1b0
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-12 11:15:49 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-12 11:15:49 -0500
+#SUBJECT#:test commit mail
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:fb2040689e9a5c4cf78b217766bd05908f6bdb30
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-12 11:15:22 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-12 11:15:22 -0500
+#SUBJECT#:test commit mail
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:ffe3c19d766ad8750d3a5591d760f608da910ecc
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-12 11:00:54 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-12 11:00:54 -0500
+#SUBJECT#:test push mail
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:a9d25382c3f55e827d3f1144b89094648cdf2028
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-12 10:58:55 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-12 10:58:55 -0500
+#SUBJECT#:testing push mails
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:287d98d322205e4e800517427f62f3892071667b
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-12 20:54:00 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-12 20:54:00 +1000
+#SUBJECT#:release header buffer early
+#BODY#:
+####
+#COMMIT_ID#:c61e490d8e31a3610f6a56e90286ca3393350396
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-12 17:44:03 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-12 17:44:03 +1000
+#SUBJECT#:Merge branch 'master' into performance
+#BODY#:
+####
+#COMMIT_ID#:cc8005fb9110500a9155b60cc2666f34f27fe953
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-12 16:41:07 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-12 16:41:07 +1000
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:d544d3447642cff339d528d066cd9c45220d012d
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-11 17:13:39 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-11 17:13:39 -0500
+#SUBJECT#:Merge branch 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:1216297824153b76992e9afbecca0da83c988db3
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-11 17:40:33 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-11 18:01:24 -0400
+#SUBJECT#:351576 Improved test harness
+#BODY#:
+####
+#COMMIT_ID#:753b0e39c50de026ce843a98bb2fec3d17d9dd5c
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-11 15:44:42 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-11 15:44:42 -0500
+#SUBJECT#:New test for session values
+#BODY#:
+####
+#COMMIT_ID#:da4a6dfdad92ca6c7a5e53eaf96ae4f804e6ca37
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-11 12:26:25 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-11 12:26:25 +1000
+#SUBJECT#:Merge branches 'master' and 'master' of ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.project
+#BODY#:
+####
+#COMMIT_ID#:c3e3eb0fd9530c13efe5ae8e45e5f6b6e99e0dc8
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-08 17:58:26 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-08 17:58:26 -0400
+#SUBJECT#:Added accidentally omitted file
+#BODY#:
+####
+#COMMIT_ID#:8babf3ae17f4b7df730e87ab8f17d88a531c2290
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-08 15:07:12 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-08 17:21:02 -0400
+#SUBJECT#:351576 Do not use deprecated method File.toURL()
+#BODY#:
+####
+#COMMIT_ID#:4e8598eb00831dde238035045783ac0f398476ae
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-08 17:43:53 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-08 17:43:53 +1000
+#SUBJECT#:351516 Refactored sessions to better support nosql session managers
+#BODY#:
+####
+#COMMIT_ID#:03b53be03638bdfefb39ce7abb4b41e42235fd49
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-08 17:36:34 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-08 17:36:34 +1000
+#SUBJECT#:Merge branch 'mongosessions'
+#BODY#:
+####
+#COMMIT_ID#:1093a95566df119444d025a78fcc77a7050d3583
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-08 11:59:24 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-08 11:59:24 +1000
+#SUBJECT#:Merge branch 'master' into performance
+#BODY#:
+####
+#COMMIT_ID#:b6116064cd41a5177cd8165037b71117512bb370
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-08 11:36:07 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-08 11:36:07 +1000
+#SUBJECT#:return buffer while request is handled
+#BODY#:
+####
+#COMMIT_ID#:39674f8a8e176d3e56dfc9d16271afcc7d21f7a2
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-07 18:43:56 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-07 18:43:56 -0500
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:
+####
+#COMMIT_ID#:5aa94f502e5efe68628cff0378f44ff00619c493
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-07 18:43:50 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-07 18:43:50 -0500
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.4.v20110707
+#BODY#:
+####
+#COMMIT_ID#:9eb0f5354d34e39034e9437007dea99ed9cbed01
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-07 18:29:26 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-07 18:29:26 -0500
+#SUBJECT#:update version for release
+#BODY#:
+####
+#COMMIT_ID#:2eaad85a0cbc7903eafa013cd37d0116683d0c7c
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-07 18:02:31 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-07 18:04:28 -0400
+#SUBJECT#:350634 Reverted FileResource constructor changes
+#BODY#:This reverts commit 95ff9d73f0b00a527706ace2698bd3db103b01fa.
+
+####
+#COMMIT_ID#:7908c4e8258cb83ccdb164246d5a3cfcaee59b93
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-07-07 19:56:17 +1000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-07-07 19:56:17 +1000
+#SUBJECT#:JETTY-1153 Default charset/encoding of HTTP POST requests
+#BODY#:
+####
+#COMMIT_ID#:aa25e3efe9bed3b2e4a07e096a383013bf043694
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-07 19:50:28 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-07 19:50:28 +1000
+#SUBJECT#:get a body buffer if needed
+#BODY#:
+####
+#COMMIT_ID#:460c2a6ea8d6fd8afd45e04e437d807ed5e504ad
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-07 16:23:23 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-07 16:23:23 +1000
+#SUBJECT#:copy URI buffer as header buffer is no longer immutable
+#BODY#:
+####
+#COMMIT_ID#:17ce8ec161ee9426785c31941d8b75a820e57a42
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-07 12:56:37 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-07 12:56:37 +1000
+#SUBJECT#:cleaned up sessionIdManager setters
+#BODY#:
+####
+#COMMIT_ID#:fc5e92c43f18a5df97f7829b88beeb3adf938396
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-07 12:35:53 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-07 12:35:53 +1000
+#SUBJECT#:Simplified session management
+#BODY#:
+####
+#COMMIT_ID#:b890ff8fb2401437f1bdc9c03c1072f7fccba473
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-07 12:16:58 +1000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-07 12:16:58 +1000
+#SUBJECT#:applied jetty-7p 7f68abf..b2e4270, 7f68abf..a900c5e, 9a93c9e..9f94539.  decomposed async and blocking handling. Simplified HttpFields and Buffer handling from the HttpParser.
+#BODY#:
+####
+#COMMIT_ID#:a7eabf07579d6dc8851781fdc8d777da98eb3bc0
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-06 16:14:54 -0400
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-06 16:14:54 -0400
+#SUBJECT#:350397 SelectChannelConnector does not shutdown gracefully
+#BODY#:
+####
+#COMMIT_ID#:94cfedf9129065d78ce96e9b1efc4ecdc6b168b8
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-06 14:41:50 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-06 14:41:50 -0500
+#SUBJECT#:Add an icon.jpg file to the project.
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:6ed9d4c3947de319d4f9cd5618e33a045e857013
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-06 13:33:16 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-06 13:33:16 -0500
+#SUBJECT#:update scm.url
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:42c129a78fd3c4e4941e5282e00b8969a287c585
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-06 13:20:44 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-06 13:20:44 -0500
+#SUBJECT#:set new parent version and update scm info
+#BODY#:Signed-off-by: Jesse McConnell <jesse.mcconnell@gmail.com>
+
+####
+#COMMIT_ID#:c88fc8cd258109e31ff92e5137af19bce864135a
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-07-06 07:29:19 +0000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-07-06 07:29:19 +0000
+#SUBJECT#:351199 - HttpServletResponse.encodeURL() wrongly encodes an url without path when cookies are disabled
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3465 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:f7ee9a98ee9dc5488ed1a33cf037370e10874ae2
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-07-04 08:08:52 +0000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-07-04 08:08:52 +0000
+#SUBJECT#:345268 JDBCSessionManager does not work with maxInactiveInterval = -1
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3461 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:dd3361047dcad7535a4711d47df67f82f624946a
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-07-04 02:54:58 +0000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-07-04 02:54:58 +0000
+#SUBJECT#:351039 Forward dispatch should retain locale
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3460 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b5a2e7e4261cf31bc8df58aee4bbf49be424055d
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-02 00:57:56 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-02 00:57:56 +0000
+#SUBJECT#:308851 Converted all jetty-client module tests to JUnit 4
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3459 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:9807ac7f212af3532f4cb55c23ba417f0167612b
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-01 21:06:34 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-01 21:06:34 +0000
+#SUBJECT#:JETTY-1380 Jetty Rewrite example does not work in Hightide
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3458 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c8375b286aad3d02ab46f2a2200b08c31b6d7917
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-07-01 21:06:31 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-07-01 21:06:31 +0000
+#SUBJECT#:308851 Converted all jetty-client tests to JUnit 4
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3457 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:6190961f319baa88bc2b88ddc016da958c78f62d
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-01 11:12:45 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-01 11:12:45 +0000
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3454 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:db9f79eaff991c5f97920d60ca5cd5d175ba1941
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-01 11:12:33 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-01 11:12:33 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.3.v20110701
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3452 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:aed90c1bb60959bd19767e1567b795daac8281c0
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-01 10:58:12 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-01 10:58:12 +0000
+#SUBJECT#:adjust VERSION.txt for new release
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3451 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b4c5512ff4e20a68be6b1b0bc6602a494ba15f0b
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-01 10:57:14 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-01 10:57:14 +0000
+#SUBJECT#:adjust VERSION.txt for new release
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3450 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:8fcac4a34e62127754bccddb6616fbaa680ad951
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-07-01 05:59:20 +0000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-07-01 05:59:20 +0000
+#SUBJECT#:324704 JDBC Session Manager reloading session
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3449 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:baabacfe95b4b23e09e1d3f1f84507df61ba08d3
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-07-01 02:22:56 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-07-01 02:22:56 +0000
+#SUBJECT#:reverted to 7.4.4-SNAPSHOT
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3448 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b9fffcb9a0f6b26f619ae979db9456128a1a5316
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-01 00:54:20 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-01 00:54:20 +0000
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3447 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:ea23a83bb38456096baf805e8bff80e597d60fff
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-01 00:54:07 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-01 00:54:07 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.3.v20110630
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3445 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:d440e5262f10e8bd6399db00e2997592ec00c636
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-01 00:39:19 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-01 00:39:19 +0000
+#SUBJECT#:version.txt for release
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3444 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b1ca45e7099c175d80997300a4b6ffc19888b211
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-30 19:49:20 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-30 19:49:20 +0000
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3441 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:5f5cb8ea539e4aeb003f7c2be62b58847ed85b81
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-30 19:39:23 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-30 19:39:23 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.3.v20110630
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3439 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c17b91fa86083d1a5b1747de33967519048a932f
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-29 19:01:17 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-29 19:01:17 +0000
+#SUBJECT#:JETTY-1385 NPE in jetty client's HTttpExchange.setRequestContentSource(InputStream)
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3438 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:5c9fe5b13e27f54ad62194973eaa4687b373a9bf
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-29 04:38:47 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-29 04:38:47 +0000
+#SUBJECT#:350642 Dont close SCEP during NIOBuffer manipulation
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3437 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c2a6df4c47f7d4a353968ab57f7ab2a922f203f0
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-29 02:51:09 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-29 02:51:09 +0000
+#SUBJECT#:350642 Do not close SCEP during NIOBuffer manipulation
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3436 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:97291cc28af41891583f295f7fe89c0aa07e0bb6
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-29 01:47:02 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-29 01:47:02 +0000
+#SUBJECT#:JETTY-1390 RewriteHandler handles encoded URIs
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3435 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:95ff9d73f0b00a527706ace2698bd3db103b01fa
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-29 00:59:41 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-29 00:59:41 +0000
+#SUBJECT#:350634 Cleanup FileResource construction
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3434 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:0b9f34813257020a45ca06d4ad6fd3ff722a62be
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-29 00:17:13 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-29 00:17:13 +0000
+#SUBJECT#:308851 Convert HttpExchangeTest and related tests to JUnit 4
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3433 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:9235b429bbaba7013e18e5842af948caf22a2a22
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-28 18:00:19 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-28 18:00:19 +0000
+#SUBJECT#:347468 o.e.j.deploy.binding.GlobalWebappConfigBindingTest fails on Windows platform
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3432 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:77394d0c4bbad700817cdc2a4b2ee7ffac252af6
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-06-28 09:28:18 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-06-28 09:28:18 +0000
+#SUBJECT#:Fixes #350533 (Add "Origin" to the list of allowed headers in CrossOriginFilter).
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3431 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b290f203da6dd5ecc6a81daf7ac071c7a1f948d1
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-27 15:13:22 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-27 15:13:22 +0000
+#SUBJECT#:Added TODO comments for disabled tests
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3429 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:28a0c0ff75fde3db7d5612930c2b866b8ca1dbf0
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-25 01:21:01 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-25 01:21:01 +0000
+#SUBJECT#:350287 Disable ScanningAppProviderRuntimeUpdatesTest on Windows
+#BODY#:This reverts commit 2edcef1343eca17e300dc1cd7fedcabf17c2baf6.
+
+git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3427 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:dbd782dfbcf27dabda6d14e3ce67c3e1fd625544
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-24 22:50:15 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-24 22:50:15 +0000
+#SUBJECT#:350287 ScanningAppProviderRuntimeUpdatesTest fails on Windows
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3426 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:47e199af79942041f430c17e0a40c890e0919bd6
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-24 22:50:11 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-24 22:50:11 +0000
+#SUBJECT#:Removed unneeded line from MultipleConnectors example
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3425 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:77b02e0ee07a0867f6b53597ed84358d5c847437
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-24 15:46:30 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-24 15:46:30 +0000
+#SUBJECT#:350283 Excluded AsyncSslHttpExchangeTest.testPerf() from test runs on MacOS X unless stress is enabled
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3423 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:7f68abfa7384252d9f8fe5f43738f9858fbb371d
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-23 21:20:15 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-23 21:20:15 +0000
+#SUBJECT#:Merge branch '332200'
+#BODY#:Conflicts:
+	VERSION.txt
+
+git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3416 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:4f0400e6f379ce7afa321743cedfabfc1cac01a4
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-22 18:11:07 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-22 18:11:07 +0000
+#SUBJECT#:Updated svn:ignore properties
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3415 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:aa278294c3d079f036557003f05709d7302264b9
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-22 07:27:29 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-22 07:27:29 +0000
+#SUBJECT#:348652 jetty.sh starts two unix processes
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3414 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:fb477ee1bd63576e258a311466592679853a5560
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-22 05:57:38 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-22 05:57:38 +0000
+#SUBJECT#:348652 jetty.sh starts two unix processes
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3413 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:31ac6dd388615b6a445278b0114b5608b54aaeda
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-22 05:49:12 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-22 05:49:12 +0000
+#SUBJECT#:348935 Close A tag in directory listing
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3412 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:489aa7a46a6ba6e0e44686c9eb99fd67f4ab2ab8
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-22 05:06:45 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-22 05:06:45 +0000
+#SUBJECT#:349997 MBeanContainer uses weak references
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3411 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:6f0e0f8077ca1878a970505216f55f1565a84454
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-21 20:46:02 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-21 20:46:02 +0000
+#SUBJECT#:proxy server timeout on continuation checks for 0 client and exchange timeout and set continuation as 'infinite'
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3410 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:451580e4eec1c5223e4e106de052aba4b2c6549c
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-21 05:33:52 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-21 05:33:52 +0000
+#SUBJECT#:349897 draft -09 websockets
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3409 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:aa990479f615d3c2389829a2b47d69fe0034785f
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-21 04:09:30 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-21 04:09:30 +0000
+#SUBJECT#:349896 SCEP supports zero maxIdleTime
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3408 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:7e89f9afdeacd0ec21d1f465ad2d85778895e1d1
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-21 04:08:12 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-21 04:08:12 +0000
+#SUBJECT#:sorted the entries in VERSION.txt
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3407 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:8c63ca989b6355fc0a09af8eb9965d177d6e4b9f
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-21 02:26:18 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-21 02:26:18 +0000
+#SUBJECT#:302566 GZIP handler for embedded Jetty servers
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3406 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:418ebe8268ab5d1ba99a051da44867b503e3fa61
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-20 22:40:56 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-20 22:40:56 +0000
+#SUBJECT#:proxy server timeout on continuation checks for 0 client and exchange timeout and set continuation as 'infinite'
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3405 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:ce943340ddacf8ea3d3648b06d85b901049374fb
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-20 21:51:58 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-20 21:51:58 +0000
+#SUBJECT#:change the proxy continuation timeout check from connectTimeout to timeout as that is what is set in the servlet init params
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3404 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:f95e1bddbe607357b4548d66c8172bbca224b892
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-20 20:55:58 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-20 20:55:58 +0000
+#SUBJECT#:302566 GZIP handler implementation and unit test
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3403 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:1f790a5f7844809d525a82af5bf0f20d3ebf60c8
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-20 20:36:23 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-20 20:36:23 +0000
+#SUBJECT#:[Bug 349870] proxy servlet protect continuation against fast failing exchanges
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3402 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:2f7eb54e0fa9a5d5ae75aaa2c9e3c6fd5950f911
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-20 20:36:20 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-20 20:36:20 +0000
+#SUBJECT#:[Bug 349870] proxy servlet protect continuation against fast failing exchanges
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3401 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:bb6038b716d4e08721567db9bef1659a1f00b560
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-20 15:33:51 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-20 15:33:51 +0000
+#SUBJECT#:302566 GZIP filter unit test
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3400 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:53dbccaab8e73e16586487c3fd4f14baaff1fc0f
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-20 15:27:46 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-20 15:27:46 +0000
+#SUBJECT#:[Bug 349738] provide way to set buffer sizes to http client in proxy servlet
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3399 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:9cfb694fa52359fb97a86972aab1edc9bc03396e
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-20 15:27:17 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-20 15:27:17 +0000
+#SUBJECT#:[Bug 349738] provide way to set buffer sizes to http client in proxy servlet
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3398 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:ffcd7804574ac8bef1905bae92afedd809fae555
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-17 14:43:12 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-17 14:43:12 +0000
+#SUBJECT#:[Bug 295832] update javadoc
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3397 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:1b2189a488899db8a417bcf32bf7519b90e18410
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-06-17 04:14:55 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-06-17 04:14:55 +0000
+#SUBJECT#:Better error messages when web-buindles fail to start cleanly.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3393 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:8d18642311e8d0225332277aa6da856cbdbc325d
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-06-17 04:14:08 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-06-17 04:14:08 +0000
+#SUBJECT#:Better error messages when web-buindles fail to start cleanly.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3392 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:82902b49eba1c45d3a2beb68aae12d972bb439d4
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-16 21:28:24 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-16 21:28:24 +0000
+#SUBJECT#:Add timeout and idleTimeout servlet init parameters to the creation of the http client
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3391 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:f886b777e84ea20aaaf4dc226f3c8ae0903c1207
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-06-15 23:55:15 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-06-15 23:55:15 +0000
+#SUBJECT#:349344 Passing empty query string to UrlEncoded#decodeTo(String, MultiMap, String) does not yield an empty map
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3390 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:30c3934931fd961be92145439590ce3545090067
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-15 15:39:33 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-15 15:39:33 +0000
+#SUBJECT#:[Bug 295832] shifted customize exchange and continuation to the the last possible moment for extenders can have full state before each are used.  added continuation setTimeout based on httpclient connect timeout and exchange timeouts so that the contination doesn't interrupt normal usage (streaming of data resetting exchange timeout but not continuation)
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3389 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:a90071355a86aa9438ce715a75432c7a8ac9c3df
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-06-15 09:56:39 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-06-15 09:56:39 +0000
+#SUBJECT#:fix some trivial issues when building the lookup path of a webbundle.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3388 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:d29a7dad4101ab6e3e536c79d9b19b978ad22884
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-14 18:50:32 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-14 18:50:32 +0000
+#SUBJECT#:[Bug 295832] making proxy servlet more extensible, removed customizeClient in favor of protected createHttpClient(servletconfig) and createLogger(servletconfig) methods, default behavior should remain the same
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3387 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:79f9860d23d2efb7e1c8e66e3bb4d8530e8f48e1
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-14 15:44:21 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-14 15:44:21 +0000
+#SUBJECT#:[Bug 295832] making proxy servlet more extensible, added customizeExchange() to the patch provided as well
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3386 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:1e347be15efdcbd5ace3b9282970334e400393e7
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-14 15:44:16 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-14 15:44:16 +0000
+#SUBJECT#:[Bug 295832] making proxy servlet more extensible, added customizeExchange() to the patch provided as well
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3385 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:61d572b03717d3381f3bd8cef0c0d5ec0f459027
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-06-10 18:00:47 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-06-10 18:00:47 +0000
+#SUBJECT#:Fix a trivial mistake on the use of the OSGiWebappConstants.JETTY_WAR_FRAGMENT_FOLDER_PATH
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3384 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:ba34537bc42c51a532eb4d4c2137536dbcb95873
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-06-10 13:16:10 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-06-10 13:16:10 +0000
+#SUBJECT#:update jetty-test-helper to 1.6
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3383 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:e55c21ca5c57a6a703b35627f658e762e56d4d81
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-01 11:32:13 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-01 11:32:13 +0000
+#SUBJECT#:347898 Close channel on JVM exceptions
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3374 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:71ce6291d22a31fadd9bbd9625bbc1c151714941
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-06-01 09:01:20 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-06-01 09:01:20 +0000
+#SUBJECT#:bug 347889
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3372 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c084756951b340fa7d30dffcddf1bc21f5ed68d2
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-06-01 08:59:32 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-06-01 08:59:32 +0000
+#SUBJECT#:clean up the redirection.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3371 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:af2050147cb04e70583c9508250483f2775a7bd1
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-06-01 01:18:58 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-06-01 01:18:58 +0000
+#SUBJECT#:JETTY-1342 recreate selector in change task
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3365 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:4840dbf39f35f01ecfc8b3a7e4e25c09ad43b8c9
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-31 03:39:42 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-31 03:39:42 +0000
+#SUBJECT#:347717 start.jar destroys dependent child of --exec
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3359 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:183417af1cdd2ed9ff05fec70c1b50476c3c9f2a
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-31 02:56:26 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-31 02:56:26 +0000
+#SUBJECT#:fix the regressions introduced by the support for dynamically installing bundles
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3357 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c77624a544c1aff3b821d3bd3ed11bae3c903822
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-31 02:55:46 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-31 02:55:46 +0000
+#SUBJECT#:fix the regressions introduced by the support for dynamically installing bundles
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3356 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c1086a2e525d8d4eee67662a5214735fce70991a
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-30 10:31:51 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-30 10:31:51 +0000
+#SUBJECT#:bug 347617 fix the trivial mistake
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3351 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:831e84d1143700a8cc8bc45d551f9488519c87c2
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-30 10:30:56 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-30 10:30:56 +0000
+#SUBJECT#:Don't use Require-Bundle
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3350 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:d031732aece9e83671ee4f8f834a38fd70bc5af1
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-30 09:58:18 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-30 09:58:18 +0000
+#SUBJECT#:bug 347617 Dynamically install/update/remove OSGi bundles discovered in the contexts folder
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3349 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:8e744c05955c0557420972df34b15c90a3f47d1e
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-30 08:21:25 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-30 08:21:25 +0000
+#SUBJECT#:clean up the exported packages
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3348 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b4a75c76336d220da16953559616fbf380ff2c70
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-30 08:20:21 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-30 08:20:21 +0000
+#SUBJECT#:update to the latest version.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3347 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b2bc821a20ad1ebac0ea1b7998c932a9da62e31f
+#AUTHOR_NAME#:Joakim Erdfelt
+#AUTHOR_DATE#:2011-05-27 16:44:56 +0000
+#COMMITTER_NAME#:Joakim Erdfelt
+#COMMITTER_DATE#:2011-05-27 16:44:56 +0000
+#SUBJECT#:Removing windows from tests that use '/tmp' directory assumption
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3320 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:e5387fb172d1e7bc8662ee887fa05c67d22484f2
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-27 02:23:24 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-27 02:23:24 +0000
+#SUBJECT#:345729 Fixed test failure on Windows XP
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3298 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c9b934ce56e9ca933ca4b22c040216f362a7212b
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-27 02:15:05 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-27 02:15:05 +0000
+#SUBJECT#:345729 Fixed test failure on Windows XP
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3297 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:ec5b98db58dc6414ef1a3ace84388744fadea4ff
+#AUTHOR_NAME#:Joakim Erdfelt
+#AUTHOR_DATE#:2011-05-27 01:10:45 +0000
+#COMMITTER_NAME#:Joakim Erdfelt
+#COMMITTER_DATE#:2011-05-27 01:10:45 +0000
+#SUBJECT#:Moving xml-configured-jetty.properties file creation into jettyHome for testing on windows reasons
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3294 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:2526693ba35b5da875ab2014da492151844d3283
+#AUTHOR_NAME#:Joakim Erdfelt
+#AUTHOR_DATE#:2011-05-26 22:53:59 +0000
+#COMMITTER_NAME#:Joakim Erdfelt
+#COMMITTER_DATE#:2011-05-26 22:53:59 +0000
+#SUBJECT#:Making test more robust for debugging windows build error.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3290 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:54e885d9670548c12cf9ffbd58702b73d373c186
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-26 12:20:58 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-26 12:20:58 +0000
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3289 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:e35f16bae58e0e0be9bf1fa99888886de89f037a
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-26 12:14:37 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-26 12:14:37 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.2.v20110526
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3287 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:64cbf74b095ffaf6cebbf0cbb43538f3101f242b
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-26 11:59:36 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-26 11:59:36 +0000
+#SUBJECT#:reset poms for release
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3286 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:92c1a7bc5d0e19ee0004087a42dd9b328a084c22
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-26 08:51:01 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-26 08:51:01 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.2.v20110526
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3277 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:7898b35e3d45ff4e648e70e0bf5e1acdb0ebe042
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-26 06:48:31 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-26 06:48:31 +0000
+#SUBJECT#:ready for release
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3273 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:4f42ec794e959aac81f86227e752f70a5b357eef
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-26 02:58:32 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-26 02:58:32 +0000
+#SUBJECT#:more getResource debugging
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3272 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:f3a6c8f8ef49e32e1d891f758a15c0f8d9eaf051
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-05-26 02:18:10 +0000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-05-26 02:18:10 +0000
+#SUBJECT#:334443 - Improve the ability to specify extra class paths using the Jetty Maven Plugin
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3271 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:07c619d45707b5a821a4d1f4534a575a2a08cfc0
+#AUTHOR_NAME#:Jan Bartel
+#AUTHOR_DATE#:2011-05-26 02:13:56 +0000
+#COMMITTER_NAME#:Jan Bartel
+#COMMITTER_DATE#:2011-05-26 02:13:56 +0000
+#SUBJECT#:336220 - tmp directory is not set if you reload a webapp with jetty-maven-plugin
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3270 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:09bb70c1617de105ae368f69b6744e192b345cdf
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-26 02:04:08 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-26 02:04:08 +0000
+#SUBJECT#:374174 Consistent mbean names
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3269 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:694db8e81e5fc338fd78fd86ca1561ba4f6c1c3a
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-26 01:06:52 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-26 01:06:52 +0000
+#SUBJECT#:JETTY-1146 Encode jsessionid in sendRedirect
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3267 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:e68c6ce9fb63e187784f0ca2ffbb1776bef887e5
+#AUTHOR_NAME#:Joakim Erdfelt
+#AUTHOR_DATE#:2011-05-25 23:05:31 +0000
+#COMMITTER_NAME#:Joakim Erdfelt
+#COMMITTER_DATE#:2011-05-25 23:05:31 +0000
+#SUBJECT#:Using released version of jetty-test-helper
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3266 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:d77ac8acb49e9caabca757115e26f59f4b98f341
+#AUTHOR_NAME#:Joakim Erdfelt
+#AUTHOR_DATE#:2011-05-25 23:05:29 +0000
+#COMMITTER_NAME#:Joakim Erdfelt
+#COMMITTER_DATE#:2011-05-25 23:05:29 +0000
+#SUBJECT#:Using new jetty-test-helper 1.5-SNAPSHOT
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3265 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:52820832a14508e5b7c8461a64bbdc819d3d4c97
+#AUTHOR_NAME#:Joakim Erdfelt
+#AUTHOR_DATE#:2011-05-25 22:26:37 +0000
+#COMMITTER_NAME#:Joakim Erdfelt
+#COMMITTER_DATE#:2011-05-25 22:26:37 +0000
+#SUBJECT#:Making test more clear on assertion and failure (to help with windows failure)
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3259 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:a00f7945a62913a8a0894e9aa537ed41239bbec5
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-25 16:12:22 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-25 16:12:22 +0000
+#SUBJECT#:346124 Fixed UNC path resource test on Windows
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3257 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:be98ef70a1b30790b4afa2528126ce0f4f531fa0
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-25 14:15:35 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-25 14:15:35 +0000
+#SUBJECT#:Made test more reliable.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3256 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:922fb703443ce7a243f5626f2e8a3f7745bc56fc
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-25 11:47:26 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-25 11:47:26 +0000
+#SUBJECT#:Fixes #347137 (Allow SSL renegotiations by default in HttpClient).
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3255 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:1bb56442a72c4fbe1c70105a8e460e6e7ea3e189
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-25 09:56:04 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-25 09:56:04 +0000
+#SUBJECT#:Improved SslSelectChannelEndPoint to free buffers when not needed, and added more truncation attack tests.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3253 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:3ddabaf64f03286d67c0a4b7e254999a2a74ba8d
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-25 02:34:01 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-25 02:34:01 +0000
+#SUBJECT#:346998 AbstractLifeCycle.isRunning() returns false if state changes from STARTING to STARTED during call
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3251 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b40d6ea5a37e052788eda6ae156fd66a32ed7451
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-24 07:33:28 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-24 07:33:28 +0000
+#SUBJECT#:clean up for 7.4.2 (not important)
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3248 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:eca44d8983c35c28e0e43bb0d51a128256967bd9
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-23 18:04:44 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-23 18:04:44 +0000
+#SUBJECT#:Rolled back temporary log statements.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3240 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:f166c40a6d8b3975f110ec64e14c634b5841f9e7
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-23 16:02:56 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-23 16:02:56 +0000
+#SUBJECT#:Temporary logging for SSL truncation attacks.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3239 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:7df4156ed7885304d9ef1280c0ce432c429e148d
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-23 08:28:20 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-23 08:28:20 +0000
+#SUBJECT#:#34605 flat orbit space
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3238 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b2f5416fcd923457e73a1cad3b94d6e3e7bf24ba
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-23 01:21:52 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-23 01:21:52 +0000
+#SUBJECT#:made HttpClient dumpable
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3236 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:8425cf6b5dc433f05f068d8f14d116bb0465d672
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-21 05:07:20 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-21 05:07:20 +0000
+#SUBJECT#:Not useful for the maven build: add equinoxconsole to the folders packaged in the bundle
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3230 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:30c9de57abfa6a7916559715ccb7808df63cd77c
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-21 04:13:11 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-21 04:13:11 +0000
+#SUBJECT#:bug 34605 Clean-up
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3229 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:cd21c56d4b80fd0d0bf81ba92aa99e704482218d
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-21 03:56:11 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-21 03:56:11 +0000
+#SUBJECT#:bug 34605 Export the package as x-internal for other bundles to be able tp extend those eventually.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3228 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:6574fc33cb450e4a93d8a4b19c9c4faa079df3af
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-20 21:29:21 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-20 21:29:21 +0000
+#SUBJECT#:organize imports
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3227 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:ef3feecb527478a0726c93386c60b449aea211f3
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-20 20:54:25 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-20 20:54:25 +0000
+#SUBJECT#:Bug 346764 added new binding that provides ordered execution of bindings
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3226 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:f7d6bcad50e0e8c994f3482e0199e81d3b04a656
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-20 13:47:21 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-20 13:47:21 +0000
+#SUBJECT#:Fixes #346614 (HttpConnection.handle() spins in case of SSL truncation attacks).
+#BODY#:SslSelectChannelEndPoint has been modified to not override shutdownInput() (so behavior is that of the base class, like it should), and when it detects a remote close, it calls SSLEngine.closeInbound(), which throws in case of a truncation attack. The exception is handled and the endpoint closed.
+
+git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3225 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:fc6ea0610627764546961a5b05fe96276c9836e1
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-20 12:52:13 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-20 12:52:13 +0000
+#SUBJECT#:Fixes #346614 (HttpConnection.handle() spins in case of SSL truncation attacks).
+#BODY#:SslSelectChannelEndPoint has been modified to not override shutdownInput() (so behavior is that of the base class, like it should), and when it detects a remote close, it calls SSLEngine.closeInbound(), which throws in case of a truncation attack. The exception is handled and the endpoint closed.
+
+git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3224 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:e4387873252cdf89ea9922203a1c3d3fd9ea3dc3
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-20 12:46:57 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-20 12:46:57 +0000
+#SUBJECT#:Reviewed and cleaned up code for #345615 (Enable SSL Session caching).
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3223 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:21d9fd77cf5a05663fd0b7cc695712f5fe63962e
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-20 12:43:04 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-20 12:43:04 +0000
+#SUBJECT#:Added svn:ignore for 'target' directory.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3222 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:850170ba5fc9f567c57868f288fac585584c5462
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-20 08:33:57 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-20 08:33:57 +0000
+#SUBJECT#:bug 346605 commit the demo of jetty's continuation and webscoket to 'chat with the equinox console
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3221 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:538038a7f2434a673b35add13dd9408e0703dad0
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-19 23:26:29 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-19 23:26:29 +0000
+#SUBJECT#:wait for second scan
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3220 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:26d59fda32e361099f864f1f954c66d9a9d956e9
+#AUTHOR_NAME#:Joakim Erdfelt
+#AUTHOR_DATE#:2011-05-19 22:26:41 +0000
+#COMMITTER_NAME#:Joakim Erdfelt
+#COMMITTER_DATE#:2011-05-19 22:26:41 +0000
+#SUBJECT#:Javadoc error cleanup.
+#BODY#:+ Removing missing class references
++ Fixing empty @return statements
++ Delinking invalid direction class references
++ Correcting @param <name> typos
+
+git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3219 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c70f2d5c68da3111385e635310984916904cb8f2
+#AUTHOR_NAME#:Joakim Erdfelt
+#AUTHOR_DATE#:2011-05-19 22:10:55 +0000
+#COMMITTER_NAME#:Joakim Erdfelt
+#COMMITTER_DATE#:2011-05-19 22:10:55 +0000
+#SUBJECT#:fixing minor javadoc warning
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3218 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:4ba3046a8b0a8644fdb6bc0eb61e2f995bd9b958
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-19 21:28:41 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-19 21:28:41 +0000
+#SUBJECT#:Sending SSL close alert from both shutdownOutput() and close().
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3217 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c6665c228af28501334bee7fad1b2440a44f2095
+#AUTHOR_NAME#:Simone Bordet
+#AUTHOR_DATE#:2011-05-19 21:27:57 +0000
+#COMMITTER_NAME#:Simone Bordet
+#COMMITTER_DATE#:2011-05-19 21:27:57 +0000
+#SUBJECT#:Removed output shutdown from close().
+#BODY#:Since we now support correctly output shutdown, this is not needed anymore.
+
+git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3216 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:297d4cb49b0a3643f78218a9fca5438bc2956672
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-19 14:32:49 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-19 14:32:49 +0000
+#SUBJECT#:resolve some mvn warnings
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3215 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:281360ab581995887b7cfb1e2e0f638ef68d1398
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-18 23:24:22 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-18 23:24:22 +0000
+#SUBJECT#:346124 ServletContext resources paths not resolved correctly when using UNC shares
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3214 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:fb7b0a3298d6f90dccc3e979730549be55cc320b
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-18 22:18:17 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-18 22:18:17 +0000
+#SUBJECT#:javadoc
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3213 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:eb17ca8cbf4519f7be5d0b14b5890c0a475d7113
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-18 21:59:02 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-18 21:59:02 +0000
+#SUBJECT#:JETTY-1342 Recreate selector if wakeup throws JVM bug
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3212 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:8f257c6fd8a6355ffd3c457bdfc12a27476fd064
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-18 21:43:13 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-18 21:43:13 +0000
+#SUBJECT#:Bug 345729 add license info and comment
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3211 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:310cc72448df5aa3bc9412c3fc350b65a888d10f
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-18 21:35:43 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-18 21:35:43 +0000
+#SUBJECT#:Bug 345729 change name of key classes
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3210 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b1edad57e43f7400b84e05c8ad695e94eb806b72
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-18 21:34:22 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-18 21:34:22 +0000
+#SUBJECT#:Bug 345729 change example around to call as opposed to set
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3209 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:a85e00f3ff200c42352c07f1f3d57420873e756b
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-18 20:01:09 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-18 20:01:09 +0000
+#SUBJECT#:Bug 345729 remove previous solution in lew of more general approach allowing for the application of a jetty-web.xml type file to all contexts in the binding phase
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3208 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:d722830f0b386d7f6af2ecc8453283cac5aa2900
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-18 06:00:42 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-18 06:00:42 +0000
+#SUBJECT#:Compilation error when building against older versions of OSGi.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3203 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:59d60f33b87e397bcbe108d69945a03b48beb8b5
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-18 05:13:17 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-18 05:13:17 +0000
+#SUBJECT#:bug 346027 Add required-bundles and fragment's required bundles to the pacckages where META-INF/web-fragments.xml and META-INF/resources are discovered.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3202 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:0967a439f3c91a9075a6fca51693d7d3999754ae
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-18 05:02:46 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-18 05:02:46 +0000
+#SUBJECT#:Added test-jetty-osgi module back to the build
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3201 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:2585b4cd9485ad9bb074b80b69707e5631f286ac
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-18 03:55:13 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-18 03:55:13 +0000
+#SUBJECT#:bug 346027 support for META-INF/web-fragment.xml and META-INF/resources/ inside fragments of a web-bundle
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3200 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:d6639b77b5c6fc635b8c6b3f4ecadbdd1eee7b62
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-18 03:50:46 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-18 03:50:46 +0000
+#SUBJECT#:bug 346027 tolerate META-INF/web-fragment.xml that are inside a directory instead of a jar.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3199 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:3b7949bc8c1a18cebd77810c3e291f1a0c76dcdd
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-18 02:58:30 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-18 02:58:30 +0000
+#SUBJECT#:346181 o.e.j.server.StressTest stalls on MacOS X
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3198 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:990fea3a0464592d11aa566628ff8696adde526d
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-18 02:16:58 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-18 02:16:58 +0000
+#SUBJECT#:346179 o.e.j.util.ScannerTest fails on MacOS X platform
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3197 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:5b7811ca76f4c940d01f90cedbaf9b3c216936b2
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-18 01:52:37 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-18 01:52:37 +0000
+#SUBJECT#:This directive for the Export-Package does make the osgi test pass again.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3196 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:68a23b060f9caa9431e6a41d304e0ddb4e7de503
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 20:37:51 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 20:37:51 +0000
+#SUBJECT#:reset for normal operations
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3185 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:51f6df98710a5eb6ea503986d18b2bfac2e83124
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 19:57:00 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 19:57:00 +0000
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3184 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:28e63af76b74fed642ff5cc16974c8d7053f92c8
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 19:56:45 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 19:56:45 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-project-7.4.2.vTEST
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3182 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:0793141d2c00c2d78cd5a986ace926c2fb8d9d2b
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 19:39:59 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 19:39:59 +0000
+#SUBJECT#:[maven-release-plugin] rollback the release of jetty-project-7.4.2.vTEST
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3181 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:be9da35ef45bc15475b9ae23ec48ddbe6a18f398
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 19:39:17 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 19:39:17 +0000
+#SUBJECT#:set for test
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3180 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:fb576ea6afca3facbca0f4ada4313724542ee0cb
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 19:37:34 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 19:37:34 +0000
+#SUBJECT#:setting ignores
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3179 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:f4daeaedefbcfdf62484108194668ad20ed5bfd2
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 19:33:05 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 19:33:05 +0000
+#SUBJECT#:busting build to test release
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3178 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:49bc4b51a05e6ba40aa84b452a1728412d0d1d93
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 16:18:28 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 16:18:28 +0000
+#SUBJECT#:fix javadoc errors
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3170 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:40141c5e8481693880109d41e48c4385117a42d9
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 16:08:39 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 16:08:39 +0000
+#SUBJECT#:fix javadoc error
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3169 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:3bea3fec87a347e976d1c158f4c5e3121b57fe42
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-17 15:32:33 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-17 15:32:33 +0000
+#SUBJECT#:more changes to the BND directive to get the proper version exported.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3168 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:b3ff7fd7d9a1342b90bb8a03c0924b6ea4da3dd2
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-17 14:27:29 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-17 14:27:29 +0000
+#SUBJECT#:make sure that the bundle generated imports the version 2.5 of the spec. not 0.0.0
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3167 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:275a0da64dd4f8d7d200bf58d12d5685017ad9d5
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-17 14:26:30 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-17 14:26:30 +0000
+#SUBJECT#:Change the instructions for the maven-bundle-plugin to try to make it work for the new version 2.3.4. The osgi test is not passing yet though.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3166 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:fd46348570f5b04029817ba911deb22531b73377
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 13:56:54 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 13:56:54 +0000
+#SUBJECT#:revert innocuous change that crept in my last commit
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3165 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:898470696cde47ba79b796d54a4933ba311c7589
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-17 13:41:15 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-17 13:41:15 +0000
+#SUBJECT#:updating to parent-17-snapshot and various changes to work with updated maven plugins
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3164 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c53749c23235a74bd8d338172d9b4ab615deb4c7
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-17 06:55:40 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-17 06:55:40 +0000
+#SUBJECT#:338364 Fixed expires header for set cookies
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3162 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:53417972ec90304f40934a22930b2df742780093
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-17 04:31:15 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-17 04:31:15 +0000
+#SUBJECT#:346014 Fixed full HttpGenerator
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3161 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:018a366f6da703fce2bab94921d40d1f85a5937b
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-17 04:18:39 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-17 04:18:39 +0000
+#SUBJECT#:345900 Handle ipv6 with default port
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3160 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:6058e595d504118aa4c30cdded6c2c63e6f301bf
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-17 04:12:47 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-17 04:12:47 +0000
+#SUBJECT#:345873 Update jetty-ssl.xml to new style
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3159 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c004175909cf3dae73ccc4219f25779c2f4691c6
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-16 23:42:26 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-16 23:42:26 +0000
+#SUBJECT#:346014 Fixed full HttpGenerator
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3158 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:e5f549664e6d15a358d2accde0b7da95a4639a32
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-16 22:54:53 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-16 22:54:53 +0000
+#SUBJECT#:345615 SSL Session caching improvements and test
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3157 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:01c43b0ffe65a9f4a0a83ccb3694d413d8fa44a3
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-16 20:48:17 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-16 20:48:17 +0000
+#SUBJECT#:remove bad awt import
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3156 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:4a6f14f2a63018a4544233b4213ba0c24631b7da
+#AUTHOR_NAME#:Hugues Malphettes
+#AUTHOR_DATE#:2011-05-15 14:30:29 +0000
+#COMMITTER_NAME#:Hugues Malphettes
+#COMMITTER_DATE#:2011-05-15 14:30:29 +0000
+#SUBJECT#:ABility to use an equinox hook to load the javax.servlet packages from the bootstrapping webapp.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3147 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:bee5877ad1b3dbda0791e5325b7c7cbc2785486e
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-14 05:04:03 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-14 05:04:03 +0000
+#SUBJECT#:345763 Source file is updated during the build
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3146 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:ab85bcda4fc52a8677e4383c37bf48163004d675
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-14 01:30:26 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-14 01:30:26 +0000
+#SUBJECT#:345615 Enable SSL Session caching
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3145 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:c31facdec29cb9b7a9fa04ca51a72e9b042412db
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-13 20:22:17 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-13 20:22:17 +0000
+#SUBJECT#:Bug 345729 add binding that can allow for global management of server and system classes for webapp contexts, added 2 gettings on webappcontext for getting default server and system class settings.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3144 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:5f01e2428b929e840fabe6c9383661f419492fff
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-13 20:22:12 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-13 20:22:12 +0000
+#SUBJECT#:Bug 345729 add binding that can allow for global management of server and system classes for webapp contexts, added 2 gettings on webappcontext for getting default server and system class settings.
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3143 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:dbcdcc6ce676b3e7b1e9b0b3a3150fbc1401100a
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-13 17:52:09 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-13 17:52:09 +0000
+#SUBJECT#:345656 Disambiguate SslContextFactory#validateCerts property
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3141 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:6a2ecc493e010ff33c4280a1d7aa5dfe7ae78283
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-13 09:21:47 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-13 09:21:47 +0000
+#SUBJECT#:345704 jetty-nested works with forwarded SSL in cloudfoundry
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3140 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:ee7333baf76119f83a3d227283a99a47982fbb21
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-13 07:28:38 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-13 07:28:38 +0000
+#SUBJECT#:strangely after the release?
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3138 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:f8dc394adb9e3fd9d274e3ed1b5c03aa572e5c4c
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-13 04:48:47 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-13 04:48:47 +0000
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3137 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:6e0649ab3f122063522838a2b81802302028cafb
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-13 04:48:21 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-13 04:48:21 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.1.v20110513
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3135 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:559b7c4358dd68a91d6d6ed4e35d9c3f7590c08b
+#AUTHOR_NAME#:Michael Gorovoy
+#AUTHOR_DATE#:2011-05-13 02:58:30 +0000
+#COMMITTER_NAME#:Michael Gorovoy
+#COMMITTER_DATE#:2011-05-13 02:58:30 +0000
+#SUBJECT#:345679 Allow setting an initialized KeyStore as keystore/truststore of SslContextFactory
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3132 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:314a59192dd6b3b0f6c4b491a18aab9971a83c21
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-12 19:57:07 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-12 19:57:07 +0000
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3131 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:fadbd0bdc57cdea8e7753ebbbc0e79e18d82cb46
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-05-12 19:56:53 +0000
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-05-12 19:56:53 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.1.v20110512
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3129 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:5d0f1b88f4e9d2fd566256d0cfa1a343de59ad4e
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-12 09:02:46 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-12 09:02:46 +0000
+#SUBJECT#:[maven-release-plugin] prepare for next development iteration
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3128 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:83b6c19ccac27865597a6a5271c549f3bea50732
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-12 09:02:19 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-12 09:02:19 +0000
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.1
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3126 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####
+#COMMIT_ID#:5223f6f77cf36f59b2fd2c451835151e2ce456a5
+#AUTHOR_NAME#:Greg Wilkins
+#AUTHOR_DATE#:2011-05-12 08:00:29 +0000
+#COMMITTER_NAME#:Greg Wilkins
+#COMMITTER_DATE#:2011-05-12 08:00:29 +0000
+#SUBJECT#:345543 Always close endpoint on SSLException
+#BODY#:git-svn-id: svn+ssh://dev.eclipse.org/svnroot/rt/org.eclipse.jetty/jetty/trunk@3125 7e9141cc-0065-0410-87d8-b60c137991c4
+
+####

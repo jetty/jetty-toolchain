@@ -1,0 +1,8 @@
+#COMMIT_ID#:5aa94f502e5efe68628cff0378f44ff00619c493
+#AUTHOR_NAME#:Jesse McConnell
+#AUTHOR_DATE#:2011-07-07 18:43:50 -0500
+#COMMITTER_NAME#:Jesse McConnell
+#COMMITTER_DATE#:2011-07-07 18:43:50 -0500
+#SUBJECT#:[maven-release-plugin] prepare release jetty-7.4.4.v20110707
+#BODY#:
+####
