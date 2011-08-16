@@ -7,6 +7,8 @@ import java.util.Date;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.MavenProjectHelper;
 import org.apache.maven.settings.Settings;
 import org.eclipse.jetty.toolchain.version.git.GitCommand;
 
@@ -63,9 +65,54 @@ public class GenVersionTextMojo extends AbstractMojo
      * The generated VERSION.txt file.
      * <p>
      * 
-     * @parameter expression="${version.text.output.file}" default-value="${project.build.directory}/VERSION-gen.txt"
+     * @parameter expression="${version.text.output.file}" default-value="${project.build.directory}/VERSION.txt"
      */
     private File versionTextOuputFile;
+
+    /**
+     * The classifier to use for attaching the generated VERSION.txt artifact
+     * 
+     * @parameter expression=${version.text.output.classifier}" default-value="version"
+     */
+    private String classifier = "version";
+
+    /**
+     * The type to use for the attaching the generated VERSION.txt artifact
+     * 
+     * @parameter expression=${version.text.output.type}" default-value="txt"
+     */
+    private String type = "txt";
+
+    /**
+     * Maven ProjectHelper. (internal component)
+     * 
+     * @component
+     * @readonly
+     * @required
+     */
+    private MavenProjectHelper projectHelper;
+
+    /**
+     * Maven Project.
+     * 
+     * @parameter expression="${project}"
+     * @readonly
+     * @required
+     */
+    private MavenProject project;
+
+    private void ensureDirectoryExists(File dir) throws MojoFailureException
+    {
+        if (dir.exists() && dir.isDirectory())
+        {
+            return; // done
+        }
+
+        if (dir.mkdirs() == false)
+        {
+            throw new MojoFailureException("Unable to create directory: " + dir.getAbsolutePath());
+        }
+    }
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
@@ -82,20 +129,21 @@ public class GenVersionTextMojo extends AbstractMojo
             versionText.setSortExisting(sortExisting);
 
             String currentVersion = versionText.toFullVersion(version);
-            getLog().info("Updating version section: " + version);
-            String priorVersion = versionText.getPriorVersion(currentVersion);
-            if (priorVersion == null)
-            {
-                throw new MojoFailureException("Unable to find any version prior to " + version);
-            }
-            getLog().info("Prior version in VERSION.txt is " + priorVersion);
-
             Release rel = versionText.findRelease(currentVersion);
             if (rel == null)
             {
                 // Not found, create a new one
                 rel = new Release(currentVersion);
             }
+
+            getLog().info("Updating version section: " + version);
+            String priorVersion = versionText.getPriorVersion(currentVersion);
+            if (priorVersion == null)
+            {
+                // Assume its the top of the file.
+                priorVersion = versionText.getReleases().get(0).getVersion();
+            }
+            getLog().info("Prior version in VERSION.txt is " + priorVersion);
 
             GitCommand git = new GitCommand();
             git.setWorkDir(basedir);
@@ -120,12 +168,18 @@ public class GenVersionTextMojo extends AbstractMojo
             }
             versionText.replaceOrPrepend(rel);
 
+            ensureDirectoryExists(versionTextOuputFile.getCanonicalFile().getParentFile());
             versionText.write(versionTextOuputFile);
             getLog().info("New VERSION.txt written at " + versionTextOuputFile.getAbsolutePath());
+
+            getLog().info("Classifier = " + classifier);
+            getLog().info("Type = " + type);
+            // projectHelper.attachArtifact(project,versionTextOuputFile,classifier);
+            projectHelper.attachArtifact(project,type,classifier,versionTextOuputFile);
         }
         catch (IOException e)
         {
-            throw new MojoFailureException("Unable to generate replacement VERSION.txt");
+            throw new MojoFailureException("Unable to generate replacement VERSION.txt",e);
         }
     }
 

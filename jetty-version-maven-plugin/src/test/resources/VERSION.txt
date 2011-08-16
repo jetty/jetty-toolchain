@@ -2551,7 +2551,7 @@ Jetty-4.2.25 - 4 Jan 2006
 Jetty-5.1.9 - 7 December 2005
  + Fixed wantClientAuth(false) overriding netClientAuth(true)
 
-Jetty-6.0.0betaX -
+Jetty-6.0.0betaX 
  + See http://jetty.mortbay.org/jetty6 for 6.0 releases
 
 Jetty-5.1.8 - 7 December 2005
@@ -2756,7 +2756,7 @@ Jetty-5.0.RC3 - 28 August 2004
  + JettyPlus addition of pluggable DataSources
  + Always say close for HTTP/1.0 non keep alive.
 
-Jetty-4.2.22 - 23 August
+Jetty-4.2.22 - 23 August 2004
  + fixed jaas logout for jetty-jboss integration
  + fixed deployment of ejb-link elements in web.xml for jboss
  + Added parameters for acceptQueueSize and lowResources level.
@@ -3196,7 +3196,7 @@ Jetty-4.2.0 - 16 November 2002
  + Added upload demo to dump servlet.
  + Many more optimizations.
 
-Jetty-4.1.4 - 16 November
+Jetty-4.1.4 - 16 November 2002
  + Fixed ContextLoader parent delegation bug
  + Fixed remove SocketListener bug.
  + Fixed Invoker servlet for RD.include
