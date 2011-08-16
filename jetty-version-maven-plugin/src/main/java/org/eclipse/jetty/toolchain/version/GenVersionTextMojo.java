@@ -143,7 +143,7 @@ public class GenVersionTextMojo extends AbstractMojo
                 // Assume its the top of the file.
                 priorVersion = versionText.getReleases().get(0).getVersion();
             }
-            getLog().info("Prior version in VERSION.txt is " + priorVersion);
+            getLog().debug("Prior version in VERSION.txt is " + priorVersion);
 
             GitCommand git = new GitCommand();
             git.setWorkDir(basedir);
@@ -151,7 +151,7 @@ public class GenVersionTextMojo extends AbstractMojo
 
             String priorTagId = git.findTagMatching(priorVersion);
             String priorCommitId = git.getTagCommitId(priorTagId);
-            getLog().info("Commit ID from [" + priorTagId + "]: " + priorCommitId);
+            getLog().debug("Commit ID from [" + priorTagId + "]: " + priorCommitId);
 
             String currentTagId = git.findTagMatching(currentVersion);
             String currentCommitId = "HEAD";
@@ -159,7 +159,7 @@ public class GenVersionTextMojo extends AbstractMojo
             {
                 currentCommitId = git.getTagCommitId(currentTagId);
             }
-            getLog().info("Commit ID to [" + currentVersion + "]: " + currentCommitId);
+            getLog().debug("Commit ID to [" + currentVersion + "]: " + currentCommitId);
 
             git.populateIssuesForRange(priorCommitId,currentCommitId,rel);
             if (rel.getReleasedOn() == null)
@@ -170,10 +170,9 @@ public class GenVersionTextMojo extends AbstractMojo
 
             ensureDirectoryExists(versionTextOuputFile.getCanonicalFile().getParentFile());
             versionText.write(versionTextOuputFile);
-            getLog().info("New VERSION.txt written at " + versionTextOuputFile.getAbsolutePath());
-
-            getLog().info("Classifier = " + classifier);
-            getLog().info("Type = " + type);
+            getLog().debug("New VERSION.txt written at " + versionTextOuputFile.getAbsolutePath());
+            getLog().debug("Classifier = " + classifier);
+            getLog().debug("Type = " + type);
             // projectHelper.attachArtifact(project,versionTextOuputFile,classifier);
             projectHelper.attachArtifact(project,type,classifier,versionTextOuputFile);
         }
