@@ -72,4 +72,9 @@
       </plugin>
     </plugins>
   </build>
+  <scm>
+    <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
+    <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
+    <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-version-maven-plugin</url>
+  </scm>
 </project>
