@@ -150,6 +150,11 @@ public class GenVersionTextMojo extends AbstractMojo
             git.setLog(getLog());
 
             String priorTagId = git.findTagMatching(priorVersion);
+            getLog().debug("Tag for prior version [" + priorVersion + "] is " + priorTagId);
+            if (priorTagId == null)
+            {
+                throw new MojoFailureException("Unable to find git tag id for version id [" + priorVersion + "]");
+            }
             String priorCommitId = git.getTagCommitId(priorTagId);
             getLog().debug("Commit ID from [" + priorTagId + "]: " + priorCommitId);
 
