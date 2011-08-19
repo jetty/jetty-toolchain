@@ -225,11 +225,14 @@ public class VersionText
             writer = new FileWriter(versionTextFile);
             out = new PrintWriter(writer);
 
-            for (String line : headers)
+            if (!headers.isEmpty())
             {
-                out.println(line);
+                for (String line : headers)
+                {
+                    out.println(line);
+                }
+                out.println();
             }
-            out.println();
 
             for (Release release : releases)
             {
