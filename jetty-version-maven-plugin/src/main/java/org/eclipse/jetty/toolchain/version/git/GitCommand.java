@@ -1,10 +1,8 @@
 package org.eclipse.jetty.toolchain.version.git;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import org.apache.maven.plugin.logging.Log;
@@ -15,58 +13,10 @@ import org.eclipse.jetty.toolchain.version.issues.Issue;
 
 public class GitCommand
 {
-    private static class OutputHandler extends Thread
-    {
-        private final InputStream in;
-        private final Log log;
-        private final GitOutputParser parser;
-
-        public OutputHandler(Log log, InputStream in, GitOutputParser parser)
-        {
-            this.log = log;
-            this.in = in;
-            this.parser = parser;
-        }
-
-        @Override
-        public void run()
-        {
-            int linenum = 0;
-            parser.parseStart();
-            InputStreamReader reader = null;
-            BufferedReader buf = null;
-            try
-            {
-                reader = new InputStreamReader(in);
-                buf = new BufferedReader(reader);
-                String line;
-                while ((line = buf.readLine()) != null)
-                {
-                    linenum++;
-                    parser.parseLine(linenum,line);
-                }
-            }
-            catch (IOException e)
-            {
-                if (!e.getMessage().equalsIgnoreCase("Stream closed"))
-                {
-                    log.debug(e);
-                }
-            }
-            finally
-            {
-                IOUtil.close(buf);
-                IOUtil.close(reader);
-            }
-            parser.parseEnd();
-            log.debug("Parsed " + linenum + " lines of output");
-        }
-    }
-
     private Log log;
     private File workDir;
 
-    private void execGitCommand(GitOutputParser outputParser, String... commands) throws IOException
+    private int execGitCommand(GitOutputParser outputParser, String... commands) throws IOException
     {
         if (getLog().isDebugEnabled())
         {
@@ -88,17 +38,28 @@ public class GitCommand
             in = process.getInputStream();
             OutputHandler handler = new OutputHandler(getLog(),in,outputParser);
             handler.start();
-            getLog().debug("Exit code: " + process.waitFor());
+            int exitCode = process.waitFor();
+            getLog().debug("Exit code: " + exitCode);
             handler.join();
+            return exitCode;
         }
         catch (InterruptedException e)
         {
             getLog().error("Process didn't complete",e);
+            throw new IOException("Process did not complete",e);
         }
         finally
         {
             IOUtil.close(in);
         }
+    }
+
+    public boolean fetchTags() throws IOException
+    {
+        Git2LogParser logout = new Git2LogParser(this.log,"fetch tags");
+        execGitCommand(logout,"git","fetch","--tags");
+
+        return false;
     }
 
     public String findTagMatching(String version) throws IOException

@@ -148,6 +148,10 @@ public class GenVersionTextMojo extends AbstractMojo
             GitCommand git = new GitCommand();
             git.setWorkDir(basedir);
             git.setLog(getLog());
+            
+            if(!git.fetchTags()) {
+                throw new MojoFailureException("Unable to fetch git tags?");
+            }
 
             String priorTagId = git.findTagMatching(priorVersion);
             getLog().debug("Tag for prior version [" + priorVersion + "] is " + priorTagId);
