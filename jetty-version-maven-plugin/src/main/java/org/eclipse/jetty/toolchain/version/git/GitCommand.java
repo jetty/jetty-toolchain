@@ -58,7 +58,7 @@ public class GitCommand
     {
         Git2LogParser logout = new Git2LogParser(this.log,"fetch tags");
         int exitCode = execGitCommand(logout,"git","fetch","--tags");
-        return (exitCode != 0);
+        return (exitCode == 0);
     }
 
     public String findTagMatching(String version) throws IOException
