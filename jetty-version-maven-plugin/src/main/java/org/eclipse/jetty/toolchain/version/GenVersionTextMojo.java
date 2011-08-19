@@ -148,8 +148,9 @@ public class GenVersionTextMojo extends AbstractMojo
             GitCommand git = new GitCommand();
             git.setWorkDir(basedir);
             git.setLog(getLog());
-            
-            if(!git.fetchTags()) {
+
+            if (!git.fetchTags())
+            {
                 throw new MojoFailureException("Unable to fetch git tags?");
             }
 
@@ -157,7 +158,9 @@ public class GenVersionTextMojo extends AbstractMojo
             getLog().debug("Tag for prior version [" + priorVersion + "] is " + priorTagId);
             if (priorTagId == null)
             {
-                throw new MojoFailureException("Unable to find git tag id for version id [" + priorVersion + "]");
+                getLog().warn("Unable to find git tag id for prior version id [" + priorVersion + "] (defined in VERSION.txt)");
+                getLog().info("Adding empty version section to top for version id [" + currentVersion + "]");
+                return;
             }
             String priorCommitId = git.getTagCommitId(priorTagId);
             getLog().debug("Commit ID from [" + priorTagId + "]: " + priorCommitId);
