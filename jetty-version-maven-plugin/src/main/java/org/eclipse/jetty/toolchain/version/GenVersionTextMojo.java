@@ -11,7 +11,6 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
 import org.apache.maven.settings.Settings;
 import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.IOUtil;
 import org.eclipse.jetty.toolchain.version.git.GitCommand;
 
 /**
@@ -174,7 +173,7 @@ public class GenVersionTextMojo extends AbstractMojo
 
             if (refreshTags)
             {
-                getLog().debug("Fetching git tags from remote ...");
+                getLog().info("Fetching git tags from remote ...");
                 if (!git.fetchTags())
                 {
                     throw new MojoFailureException("Unable to fetch git tags?");
@@ -226,7 +225,7 @@ public class GenVersionTextMojo extends AbstractMojo
 
         if (attachArtifact)
         {
-            // Attach the artifact
+            getLog().info("Attaching generated VERSION.txt");
             getLog().debug("Classifier = " + classifier);
             getLog().debug("Type = " + type);
             projectHelper.attachArtifact(project,type,classifier,versionTextOuputFile);
@@ -234,6 +233,7 @@ public class GenVersionTextMojo extends AbstractMojo
 
         if (copyGenerated)
         {
+            getLog().info("Copying generated VERSION.txt over input VERSION.txt");
             FileUtils.copyFile(versionTextOuputFile,versionTextInputFile);
         }
     }

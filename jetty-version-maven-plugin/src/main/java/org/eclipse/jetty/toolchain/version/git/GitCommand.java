@@ -121,7 +121,7 @@ public class GitCommand
         getLog().debug("Captured " + parser.getGitCommitLogs().size() + " log entries");
 
         List<Issue> issues = parser.getIssues();
-        getLog().info("Found " + issues.size() + " issues");
+        getLog().debug("Found " + issues.size() + " issues in git log");
         rel.setExisting(false);
         rel.addIssues(issues);
     }
