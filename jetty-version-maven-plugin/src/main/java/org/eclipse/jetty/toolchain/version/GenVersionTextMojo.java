@@ -10,6 +10,8 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
 import org.apache.maven.settings.Settings;
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.IOUtil;
 import org.eclipse.jetty.toolchain.version.git.GitCommand;
 
 /**
@@ -54,12 +56,25 @@ public class GenVersionTextMojo extends AbstractMojo
     private boolean sortExisting = false;
 
     /**
-     * Allow the plugin to issue a 'git fetch --tags' to update the local tags
-     * from.
+     * Allow the plugin to issue a 'git fetch --tags' to update the local tags from.
      * 
      * @parameter expression="${version.refresh.tags}" default-value="false"
      */
     private boolean refreshTags = false;
+
+    /**
+     * Allow the plugin to replace the input VERSION.txt file
+     * 
+     * @parameter expression="${version.copy.generated}" default-value="false"
+     */
+    private boolean copyGenerated;
+
+    /**
+     * Allow the plugin to attach the generated VERSION.txt file to the project
+     * 
+     * @parameter expression="${version.attach}" default-value="false"
+     */
+    private boolean attachArtifact;
 
     /**
      * The existing VERSION.txt file.
@@ -108,7 +123,6 @@ public class GenVersionTextMojo extends AbstractMojo
      * @required
      */
     private MavenProject project;
-    
 
     private void ensureDirectoryExists(File dir) throws MojoFailureException
     {
@@ -160,6 +174,7 @@ public class GenVersionTextMojo extends AbstractMojo
 
             if (refreshTags)
             {
+                getLog().debug("Fetching git tags from remote ...");
                 if (!git.fetchTags())
                 {
                     throw new MojoFailureException("Unable to fetch git tags?");
@@ -208,9 +223,19 @@ public class GenVersionTextMojo extends AbstractMojo
         ensureDirectoryExists(versionTextOuputFile.getCanonicalFile().getParentFile());
         versionText.write(versionTextOuputFile);
         getLog().debug("New VERSION.txt written at " + versionTextOuputFile.getAbsolutePath());
-        getLog().debug("Classifier = " + classifier);
-        getLog().debug("Type = " + type);
-        projectHelper.attachArtifact(project,type,classifier,versionTextOuputFile);
+
+        if (attachArtifact)
+        {
+            // Attach the artifact
+            getLog().debug("Classifier = " + classifier);
+            getLog().debug("Type = " + type);
+            projectHelper.attachArtifact(project,type,classifier,versionTextOuputFile);
+        }
+
+        if (copyGenerated)
+        {
+            FileUtils.copyFile(versionTextOuputFile,versionTextInputFile);
+        }
     }
 
     private boolean hasVersionTextFile()
