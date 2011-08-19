@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.eclipse.jetty.toolchain.version.issues.IssueParser;
 public class VersionText
 {
     private boolean sortExisting = false;
+    private List<String> headers = new ArrayList<String>();
     private final LinkedList<Release> releases = new LinkedList<Release>();
 
     public void addRelease(Release rel)
@@ -54,16 +56,19 @@ public class VersionText
         }
 
         Iterator<Release> reliter = releases.iterator();
-        while(reliter.hasNext()) {
+        while (reliter.hasNext())
+        {
             Release rel = reliter.next();
-            if(rel.getVersion().equals(currentVersion)) {
+            if (rel.getVersion().equals(currentVersion))
+            {
                 rel = reliter.next();
-                if(rel != null) {
+                if (rel != null)
+                {
                     return rel.getVersion();
                 }
             }
         }
-        
+
         return null;
     }
 
@@ -108,6 +113,13 @@ public class VersionText
                 if (StringUtils.isBlank(line))
                 {
                     continue; // skip
+                }
+
+                if (line.charAt(0) == '#')
+                {
+                    // It's a comment
+                    headers.add(line);
+                    continue;
                 }
 
                 mat = patJettyVersion.matcher(line);
@@ -212,6 +224,12 @@ public class VersionText
         {
             writer = new FileWriter(versionTextFile);
             out = new PrintWriter(writer);
+
+            for (String line : headers)
+            {
+                out.println(line);
+            }
+            out.println();
 
             for (Release release : releases)
             {

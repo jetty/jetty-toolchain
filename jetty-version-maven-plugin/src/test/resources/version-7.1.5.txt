@@ -1,3 +1,10 @@
+# This header is here to test the Header preservation code.
+# The following release had a quirk that introduced a bug
+# in the read/write loop that caused the "-Dosgi" to be wrapped
+# to the beginning of the line, and on a subsequent read it was
+# interpreted as a being a new issue line due to the "-" being
+# seen as a bullet indicator.
+
 jetty-7.1.5.v20100705
  + Update ecj to 3.6 Helios release drop
  + 288194 Add blacklist/whitelist to ProxyServlet and ProxyHandler
