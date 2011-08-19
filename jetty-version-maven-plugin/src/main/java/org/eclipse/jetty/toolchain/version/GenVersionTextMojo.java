@@ -54,6 +54,14 @@ public class GenVersionTextMojo extends AbstractMojo
     private boolean sortExisting = false;
 
     /**
+     * Allow the plugin to issue a 'git fetch --tags' to update the local tags
+     * from.
+     * 
+     * @parameter expression="${version.refresh.tags}" default-value="false"
+     */
+    private boolean refreshTags = false;
+
+    /**
      * The existing VERSION.txt file.
      * <p>
      * 
@@ -100,6 +108,7 @@ public class GenVersionTextMojo extends AbstractMojo
      * @required
      */
     private MavenProject project;
+    
 
     private void ensureDirectoryExists(File dir) throws MojoFailureException
     {
@@ -149,19 +158,25 @@ public class GenVersionTextMojo extends AbstractMojo
             git.setWorkDir(basedir);
             git.setLog(getLog());
 
-            if (!git.fetchTags())
+            if (refreshTags)
             {
-                throw new MojoFailureException("Unable to fetch git tags?");
+                if (!git.fetchTags())
+                {
+                    throw new MojoFailureException("Unable to fetch git tags?");
+                }
             }
 
             String priorTagId = git.findTagMatching(priorVersion);
-            getLog().debug("Tag for prior version [" + priorVersion + "] is " + priorTagId);
             if (priorTagId == null)
             {
                 getLog().warn("Unable to find git tag id for prior version id [" + priorVersion + "] (defined in VERSION.txt)");
                 getLog().info("Adding empty version section to top for version id [" + currentVersion + "]");
+                versionText.replaceOrPrepend(rel);
+                generateVersion(versionText);
                 return;
             }
+            getLog().debug("Tag for prior version [" + priorVersion + "] is " + priorTagId);
+
             String priorCommitId = git.getTagCommitId(priorTagId);
             getLog().debug("Commit ID from [" + priorTagId + "]: " + priorCommitId);
 
@@ -180,18 +195,22 @@ public class GenVersionTextMojo extends AbstractMojo
             }
             versionText.replaceOrPrepend(rel);
 
-            ensureDirectoryExists(versionTextOuputFile.getCanonicalFile().getParentFile());
-            versionText.write(versionTextOuputFile);
-            getLog().debug("New VERSION.txt written at " + versionTextOuputFile.getAbsolutePath());
-            getLog().debug("Classifier = " + classifier);
-            getLog().debug("Type = " + type);
-            // projectHelper.attachArtifact(project,versionTextOuputFile,classifier);
-            projectHelper.attachArtifact(project,type,classifier,versionTextOuputFile);
+            generateVersion(versionText);
         }
         catch (IOException e)
         {
             throw new MojoFailureException("Unable to generate replacement VERSION.txt",e);
         }
+    }
+
+    private void generateVersion(VersionText versionText) throws MojoFailureException, IOException
+    {
+        ensureDirectoryExists(versionTextOuputFile.getCanonicalFile().getParentFile());
+        versionText.write(versionTextOuputFile);
+        getLog().debug("New VERSION.txt written at " + versionTextOuputFile.getAbsolutePath());
+        getLog().debug("Classifier = " + classifier);
+        getLog().debug("Type = " + type);
+        projectHelper.attachArtifact(project,type,classifier,versionTextOuputFile);
     }
 
     private boolean hasVersionTextFile()
