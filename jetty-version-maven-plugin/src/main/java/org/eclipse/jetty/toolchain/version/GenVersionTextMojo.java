@@ -62,6 +62,13 @@ public class GenVersionTextMojo extends AbstractMojo
     private boolean refreshTags = false;
 
     /**
+     * Allow the plugin to update the release date for an issue (if none is provided)
+     * 
+     * @parameter expression="${version.update.date}" default-value="false"
+     */
+    private boolean updateDate = false;
+
+    /**
      * Allow the plugin to replace the input VERSION.txt file
      * 
      * @parameter expression="${version.copy.generated}" default-value="false"
@@ -203,7 +210,7 @@ public class GenVersionTextMojo extends AbstractMojo
             getLog().debug("Commit ID to [" + currentVersion + "]: " + currentCommitId);
 
             git.populateIssuesForRange(priorCommitId,currentCommitId,rel);
-            if (rel.getReleasedOn() == null)
+            if ((rel.getReleasedOn() == null) && updateDate)
             {
                 rel.setReleasedOn(new Date()); // now
             }
