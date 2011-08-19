@@ -92,7 +92,7 @@ public class VersionText
             buf = new BufferedReader(reader);
 
             Pattern patJettyVersion = Pattern.compile("^([Jj]etty-[1-9]\\.[0-9]{1,}[^ ]*)");
-            Pattern patBullet = Pattern.compile("^( *[\\*\\+-] *)");
+            Pattern patBullet = Pattern.compile(IssueParser.REGEX_ISSUE_BULLET);
             Matcher mat;
 
             releases.clear();

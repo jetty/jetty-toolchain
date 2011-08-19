@@ -9,6 +9,7 @@ import org.codehaus.plexus.util.StringUtils;
 
 public class IssueParser
 {
+    public static final String REGEX_ISSUE_BULLET = "^ [\\*\\+-] ";
     private final List<Pattern> issue_id_patterns;
 
     public IssueParser()
@@ -28,7 +29,7 @@ public class IssueParser
         String raw = rawissue;
 
         // Eliminate known bullet types
-        raw = raw.replaceFirst("^ *[\\*\\+-] *","");
+        raw = raw.replaceFirst(REGEX_ISSUE_BULLET,"");
         if (StringUtils.isBlank(raw))
         {
             return null;

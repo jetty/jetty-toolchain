@@ -38,7 +38,7 @@ public class IssueParserTest
     @Test
     public void testParseKnownBulletSplat()
     {
-        assertKnownIssue("  * Totally rearchitected and rebuilt",null,"Totally rearchitected and rebuilt");
+        assertKnownIssue(" * Totally rearchitected and rebuilt",null,"Totally rearchitected and rebuilt");
     }
 
     @Test

@@ -1,0 +1,22 @@
+jetty-7.1.5.v20100705
+ + Update ecj to 3.6 Helios release drop
+ + 288194 Add blacklist/whitelist to ProxyServlet and ProxyHandler
+ + 296570 EOFException for HttpExchange when HttpClient.stop called.
+ + 311550 The WebAppProvider should allow setTempDirectory
+ + 316449 Websocket disconnect fix
+ + 316584 Exception on startup if temp path has spaces and extractWAR=false
+ + 316597 Removed null check and fixed name in Resource#hrefEncodeURI
+ + 316970 jetty.sh fails to find JETTY_HOME in standard directories
+ + 316973 jetty.sh claims java installation is invalid
+ + 316976 removed quotes of JAVA_OPTIONS in jetty.sh
+ + 317019 Date HTTP header not sent for HTTP/1.0 requests
+ + 317759 Allow roles and constraints to be added after init
+ + 317906 OPTIONS correctly handles TRACE
+ + 318308 Correct quoting of unicode control characters
+ + 318470 unboxing NPE protection in HttpConnection
+ + 318551 Optional uncheck Printwriter
+ + JETTY-1237 Save local/remote address to be available after close
+ + 317007 Unable to run Jetty OSGi when -Dosgi.compatibility.bootdelegation=false
+ + 316909 CNFE: org.xml.sax.SAXException on org.eclipse.jetty.osgi.boot start with jsp fragment
+ + 317231 Ability to configure jetty with a fragment bundle that contains etc/jetty.xml
+ + 319060 Support web-bundles that are not expanded (bundle is zipped)

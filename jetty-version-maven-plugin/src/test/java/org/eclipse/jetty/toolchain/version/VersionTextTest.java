@@ -46,6 +46,43 @@ public class VersionTextTest
         Assert.assertEquals("[2.0Alpha1].issues.size", 9, r20a2.getIssues().size());
     }
 
+    /**
+     * Test bug that crops up with when the combination of parse/write(with wrapping)
+     * results in a line that starts with "-D" that is mistakenly interpreted as the
+     * start of another issue by the parsing step.
+     */
+    @Test
+    public void testReadWriteVersion715Text() throws IOException {
+        File sampleVerText = MavenTestingUtils.getTestResourceFile("version-7.1.5.txt");
+        testdir.ensureEmpty();
+
+        // Read first time
+        VersionText vt = new VersionText();
+        vt.read(sampleVerText);
+        
+        // Write it out
+        File out1 = testdir.getFile("version-7.1.5-a.txt");
+        vt.write(out1);
+        
+        // Read generated
+        vt = new VersionText();
+        vt.read(out1);
+        
+        // Write it out again
+        File out2 = testdir.getFile("version-7.1.5-b.txt");
+        vt.write(out2);
+        
+        // Read it in one last time
+        vt = new VersionText();
+        vt.read(out2);
+
+        Assert.assertEquals("Number of Releases", 1, vt.getReleases().size());
+
+        Release rel = vt.findRelease("jetty-7.1.5.v20100705");
+        Assert.assertNotNull("Should have found release", rel);
+        Assert.assertEquals("[7.1.5].issues.size", 21, rel.getIssues().size());
+    }
+
     @Test
     public void testWriteVersionText() throws IOException {
         File sampleVerText = MavenTestingUtils.getTestResourceFile("VERSION.txt");
