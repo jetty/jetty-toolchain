@@ -23,9 +23,25 @@ appenders depending on need)
               <value>
     <![CDATA[
 //Name[
- starts-with(@Image, 'Log.')
+ starts-with(@Image, 'Log.debug')
  or
- starts-with(@Image, 'org.eclipse.jetty.util.log.Log.')
+ starts-with(@Image, 'Log.ignore')
+ or
+ starts-with(@Image, 'Log.info')
+ or
+ starts-with(@Image, 'Log.isDebugEnabled')
+ or
+ starts-with(@Image, 'Log.warn')
+ or
+ starts-with(@Image, 'org.eclipse.jetty.util.log.Log.debug')
+ or
+ starts-with(@Image, 'org.eclipse.jetty.util.log.Log.ignore')
+ or
+ starts-with(@Image, 'org.eclipse.jetty.util.log.Log.info')
+ or
+ starts-with(@Image, 'org.eclipse.jetty.util.log.Log.isDebugEnabled')
+ or
+ starts-with(@Image, 'org.eclipse.jetty.util.log.Log.warn')
  ]
  ]]>
              </value>
