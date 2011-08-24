@@ -1,7 +1,8 @@
-/.classpath
-/.project
-/.settings
-/target
+.classpath
+.project
+.settings/
+target/
+.pmd
 *.swp
 *.log
 *.patch
