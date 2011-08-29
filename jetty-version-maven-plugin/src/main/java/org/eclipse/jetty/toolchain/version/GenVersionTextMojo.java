@@ -4,12 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.project.MavenProject;
-import org.apache.maven.project.MavenProjectHelper;
-import org.apache.maven.settings.Settings;
 import org.codehaus.plexus.util.FileUtils;
 import org.eclipse.jetty.toolchain.version.git.GitCommand;
 
@@ -20,27 +16,10 @@ import org.eclipse.jetty.toolchain.version.git.GitCommand;
  * @requiresProject true
  * @phase package
  */
-public class GenVersionTextMojo extends AbstractMojo
+public class GenVersionTextMojo extends AbstractVersionMojo
 {
     /**
-     * The project basedir.
-     * 
-     * @parameter expression="${project.basedir}"
-     * @required
-     */
-    private File basedir;
-
-    /**
-     * The current user system settings for use in Maven.
-     * 
-     * @parameter expression="${settings}"
-     * @required
-     * @readonly
-     */
-    protected Settings settings;
-
-    /**
-     * The maven project.
+     * The maven project version.
      * 
      * @parameter expression="${version.section}" default-value="${project.version}"
      * @required
@@ -83,14 +62,6 @@ public class GenVersionTextMojo extends AbstractMojo
     private boolean attachArtifact;
 
     /**
-     * The existing VERSION.txt file.
-     * <p>
-     * 
-     * @parameter expression="${version.text.file}" default-value="${project.basedir}/VERSION.txt"
-     */
-    private File versionTextInputFile;
-
-    /**
      * The generated VERSION.txt file.
      * <p>
      * 
@@ -98,55 +69,10 @@ public class GenVersionTextMojo extends AbstractMojo
      */
     private File versionTextOuputFile;
 
-    /**
-     * The classifier to use for attaching the generated VERSION.txt artifact
-     * 
-     * @parameter expression=${version.text.output.classifier}" default-value="version"
-     */
-    private String classifier = "version";
-
-    /**
-     * The type to use for the attaching the generated VERSION.txt artifact
-     * 
-     * @parameter expression=${version.text.output.type}" default-value="txt"
-     */
-    private String type = "txt";
-
-    /**
-     * Maven ProjectHelper. (internal component)
-     * 
-     * @component
-     * @readonly
-     * @required
-     */
-    private MavenProjectHelper projectHelper;
-
-    /**
-     * Maven Project.
-     * 
-     * @parameter expression="${project}"
-     * @readonly
-     * @required
-     */
-    private MavenProject project;
-
-    private void ensureDirectoryExists(File dir) throws MojoFailureException
-    {
-        if (dir.exists() && dir.isDirectory())
-        {
-            return; // done
-        }
-
-        if (dir.mkdirs() == false)
-        {
-            throw new MojoFailureException("Unable to create directory: " + dir.getAbsolutePath());
-        }
-    }
-
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
-        if (!hasVersionTextFile())
+        if (!hasVersionTextFile("gen-version-text"))
         {
             return; // skip
         }
@@ -243,22 +169,5 @@ public class GenVersionTextMojo extends AbstractMojo
             getLog().info("Copying generated VERSION.txt over input VERSION.txt");
             FileUtils.copyFile(versionTextOuputFile,versionTextInputFile);
         }
-    }
-
-    private boolean hasVersionTextFile()
-    {
-        if (versionTextInputFile == null)
-        {
-            getLog().info("Skipping :version-text-gen - the <versionTextInputFile> was not specified.");
-            return false; // skipping build,
-        }
-
-        if (!versionTextInputFile.exists())
-        {
-            getLog().info("Skipping :version-text-gen - file not found: " + versionTextInputFile.getAbsolutePath());
-            return false; // skipping build,
-        }
-
-        return true;
     }
 }
