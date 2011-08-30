@@ -96,7 +96,7 @@ public class VersionText
             reader = new FileReader(versionTextFile);
             buf = new BufferedReader(reader);
 
-            Pattern patJettyVersion = Pattern.compile("^([Jj]etty-[1-9]\\.[0-9]{1,}[^ ]*)");
+            Pattern patJettyVersion = Pattern.compile("^([Jj]etty(@codehaus)?([- ])([1-9]\\.[0-9]{1,}[^ ]*))");
             Pattern patBullet = Pattern.compile(IssueParser.REGEX_ISSUE_BULLET);
             Matcher mat;
 
@@ -126,7 +126,6 @@ public class VersionText
                 if (mat.find())
                 {
                     // Found a jetty version header!
-                    String ver = mat.group(1);
                     if (release != null)
                     {
                         release.addIssue(issue);
@@ -137,11 +136,16 @@ public class VersionText
                     {
                         releases.add(release);
                     }
-                    if (ver.charAt(0) == 'J')
-                    {
-                        ver = 'j' + ver.substring(1);
+                    
+                    // Build a clean and consistent version string
+                    StringBuilder cleanVersion = new StringBuilder();
+                    cleanVersion.append("jetty");
+                    if(mat.group(2)!=null) {
+                        cleanVersion.append(mat.group(2));
                     }
-                    release = new Release(ver);
+                    cleanVersion.append('-').append(mat.group(4));
+                    
+                    release = new Release(cleanVersion.toString());
                     release.setExisting(true);
 
                     String on = line.substring(mat.end(1));

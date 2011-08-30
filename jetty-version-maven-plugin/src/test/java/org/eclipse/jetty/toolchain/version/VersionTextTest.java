@@ -17,7 +17,7 @@ public class VersionTextTest
     public final TestingDir testdir = new TestingDir();
 
     @Test
-    public void testReadVersionText() throws IOException {
+    public void testReadEclipseVersionText() throws IOException {
         File sampleVerText = MavenTestingUtils.getTestResourceFile("VERSION.txt");
         VersionText vt = new VersionText();
         vt.read(sampleVerText);
@@ -33,6 +33,23 @@ public class VersionTextTest
         Assert.assertEquals("[2.0Alpha1].issues.size", 9, r20a2.getIssues().size());
     }
     
+    @Test
+    public void testReadCodehausVersionText() throws IOException {
+        File sampleVerText = MavenTestingUtils.getTestResourceFile("version-codehaus.txt");
+        VersionText vt = new VersionText();
+        vt.read(sampleVerText);
+
+        Assert.assertEquals("Number of Releases", 24, vt.getReleases().size());
+
+        Release r740 = vt.findRelease("jetty@codehaus-7.4.0.v20110414");
+        Assert.assertNotNull("Should have found release", r740);
+        Assert.assertEquals("[7.4.0.v20110414].issues.size", 2, r740.getIssues().size());
+        
+        Release r720rc0 = vt.findRelease("jetty@codehaus-7.2.0.RC0");
+        Assert.assertNotNull("Should have found release", r720rc0);
+        Assert.assertEquals("[7.2.0.RC0].issues.size", 9, r720rc0.getIssues().size());
+    }
+
     @Test
     public void testReadVersion20Alpha2Text() throws IOException {
         File sampleVerText = MavenTestingUtils.getTestResourceFile("version-2.0Alpha2.txt");
@@ -84,7 +101,7 @@ public class VersionTextTest
     }
 
     @Test
-    public void testWriteVersionText() throws IOException {
+    public void testWriteEclipseVersionText() throws IOException {
         File sampleVerText = MavenTestingUtils.getTestResourceFile("VERSION.txt");
         VersionText vt = new VersionText();
         vt.read(sampleVerText);
@@ -96,6 +113,19 @@ public class VersionTextTest
         PathAssert.assertFileExists("Output version.txt",outver);
     }
     
+    @Test
+    public void testWriteCodehausVersionText() throws IOException {
+        File sampleVerText = MavenTestingUtils.getTestResourceFile("version-codehaus.txt");
+        VersionText vt = new VersionText();
+        vt.read(sampleVerText);
+
+        testdir.ensureEmpty();
+        File outver = testdir.getFile("version-out.txt");
+        vt.write(outver);
+
+        PathAssert.assertFileExists("Output version.txt",outver);
+    }
+
     @Test
     public void testGetPriorVersion_Top() throws IOException {
         assertPriorVersion("jetty-7.5.0-SNAPSHOT", "jetty-7.4.4.v20110707");
