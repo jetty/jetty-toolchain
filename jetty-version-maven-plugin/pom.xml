@@ -8,7 +8,7 @@
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <artifactId>jetty-version-maven-plugin</artifactId>
-  <version>1.0.4-SNAPSHOT</version>
+  <version>1.0.4</version>
   <name>Jetty:: Version Management Maven Plugin</name>
   <description>Build / Release Plugin for working with versions in jetty maven builds</description>
   <packaging>maven-plugin</packaging>
