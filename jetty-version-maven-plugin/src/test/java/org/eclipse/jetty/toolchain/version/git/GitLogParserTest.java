@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
 import org.eclipse.jetty.toolchain.test.TestingDir;
 import org.eclipse.jetty.toolchain.version.Release;
+import org.eclipse.jetty.toolchain.version.VersionPattern;
 import org.eclipse.jetty.toolchain.version.VersionText;
 import org.eclipse.jetty.toolchain.version.issues.Issue;
 import org.junit.Assert;
@@ -46,7 +47,7 @@ public class GitLogParserTest extends AbstractGitTestCase
         rel.setExisting(false);
         rel.addIssues(issues);
 
-        VersionText vt = new VersionText();
+        VersionText vt = new VersionText(VersionPattern.ECLIPSE);
         vt.addRelease(rel);
 
         testdir.ensureEmpty();

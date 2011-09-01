@@ -27,6 +27,22 @@ public class GenVersionTextMojo extends AbstractVersionMojo
     private String version;
 
     /**
+     * The version key to use in the VERSION.txt file.
+     * 
+     * @parameter expression="${version.text.key}" default-value="jetty-VERSION"
+     * @required
+     */
+    private String versionTextKey;
+
+    /**
+     * The version key to use when looking up a git tag ref.
+     * 
+     * @parameter expression="${version.tag.key}" default-value="jetty-VERSION"
+     * @required
+     */
+    private String versionTagKey;
+
+    /**
      * Allow the existing issues to be sorted alphabetically.
      * 
      * @parameter expression="${version.sort.existing}" default-value="false"
@@ -79,26 +95,39 @@ public class GenVersionTextMojo extends AbstractVersionMojo
 
         try
         {
-            VersionText versionText = new VersionText();
+            VersionPattern verPattern = new VersionPattern(versionTextKey);
+
+            VersionText versionText = new VersionText(verPattern);
             versionText.read(versionTextInputFile);
             versionText.setSortExisting(sortExisting);
 
-            String currentVersion = versionText.toFullVersion(version);
-            Release rel = versionText.findRelease(currentVersion);
+            if (!verPattern.isMatch(version))
+            {
+                StringBuilder err = new StringBuilder();
+                err.append("Current version [").append(version);
+                err.append("] is not a valid version identifier.");
+                err.append(" Does not conform to expected pattern [");
+                err.append(versionTagKey).append("]");
+                throw new MojoExecutionException(err.toString());
+            }
+            String currentTextVersion = verPattern.getLastVersion();
+            String currentGitVersion = verPattern.getLastVersion(versionTagKey);
+
+            Release rel = versionText.findRelease(currentGitVersion);
             if (rel == null)
             {
                 // Not found, create a new one
-                rel = new Release(currentVersion);
+                rel = new Release(currentGitVersion);
             }
 
             getLog().info("Updating version section: " + version);
-            String priorVersion = versionText.getPriorVersion(currentVersion);
-            if (priorVersion == null)
+            String priorTextVersion = versionText.getPriorVersion(currentTextVersion);
+            if (priorTextVersion == null)
             {
                 // Assume its the top of the file.
-                priorVersion = versionText.getReleases().get(0).getVersion();
+                priorTextVersion = versionText.getReleases().get(0).getVersion();
             }
-            getLog().debug("Prior version in VERSION.txt is " + priorVersion);
+            getLog().debug("Prior version in VERSION.txt is " + priorTextVersion);
 
             GitCommand git = new GitCommand();
             git.setWorkDir(basedir);
@@ -113,27 +142,40 @@ public class GenVersionTextMojo extends AbstractVersionMojo
                 }
             }
 
-            String priorTagId = git.findTagMatching(priorVersion);
+            // Make sure its an expected version identifier
+            if (!verPattern.isMatch(priorTextVersion))
+            {
+                StringBuilder err = new StringBuilder();
+                err.append("Prior version [").append(priorTextVersion);
+                err.append("] is not a valid version identifier.");
+                err.append(" Does not conform to expected pattern [");
+                err.append(versionTextKey).append("]");
+                throw new MojoExecutionException(err.toString());
+            }
+
+            // Make it conform to git tag version identifiers
+            String priorGitVersion = verPattern.getLastVersion(versionTagKey);
+            String priorTagId = git.findTagMatching(priorGitVersion);
             if (priorTagId == null)
             {
-                getLog().warn("Unable to find git tag id for prior version id [" + priorVersion + "] (defined in VERSION.txt)");
-                getLog().info("Adding empty version section to top for version id [" + currentVersion + "]");
+                getLog().warn("Unable to find git tag id for prior version id [" + priorGitVersion + "] (defined in VERSION.txt as [" + priorTextVersion + "])");
+                getLog().info("Adding empty version section to top for version id [" + currentTextVersion + "]");
                 versionText.replaceOrPrepend(rel);
                 generateVersion(versionText);
                 return;
             }
-            getLog().debug("Tag for prior version [" + priorVersion + "] is " + priorTagId);
+            getLog().debug("Tag for prior version [" + priorTextVersion + "] is " + priorTagId);
 
             String priorCommitId = git.getTagCommitId(priorTagId);
             getLog().debug("Commit ID from [" + priorTagId + "]: " + priorCommitId);
 
-            String currentTagId = git.findTagMatching(currentVersion);
+            String currentTagId = git.findTagMatching(currentGitVersion);
             String currentCommitId = "HEAD";
             if (currentTagId != null)
             {
                 currentCommitId = git.getTagCommitId(currentTagId);
             }
-            getLog().debug("Commit ID to [" + currentVersion + "]: " + currentCommitId);
+            getLog().debug("Commit ID to [" + currentGitVersion + "]: " + currentCommitId);
 
             git.populateIssuesForRange(priorCommitId,currentCommitId,rel);
             if ((rel.getReleasedOn() == null) && updateDate)

@@ -22,8 +22,14 @@ import org.eclipse.jetty.toolchain.version.issues.IssueParser;
 public class VersionText
 {
     private boolean sortExisting = false;
+    private VersionPattern versionPattern;
     private List<String> headers = new ArrayList<String>();
     private final LinkedList<Release> releases = new LinkedList<Release>();
+
+    public VersionText(VersionPattern pat)
+    {
+        this.versionPattern = pat;
+    }
 
     public void addRelease(Release rel)
     {
@@ -77,6 +83,21 @@ public class VersionText
         return releases;
     }
 
+    public List<String> getVersionList()
+    {
+        List<String> versions = new ArrayList<String>();
+        for (Release rel : releases)
+        {
+            versions.add(rel.getVersion());
+        }
+        return versions;
+    }
+
+    public VersionPattern getVersionPattern()
+    {
+        return versionPattern;
+    }
+
     public boolean isSortExisting()
     {
         return sortExisting;
@@ -96,7 +117,6 @@ public class VersionText
             reader = new FileReader(versionTextFile);
             buf = new BufferedReader(reader);
 
-            Pattern patJettyVersion = Pattern.compile("^([Jj]etty(@codehaus)?([- ])([1-9]\\.[0-9]{1,}[^ ]*))");
             Pattern patBullet = Pattern.compile(IssueParser.REGEX_ISSUE_BULLET);
             Matcher mat;
 
@@ -122,8 +142,7 @@ public class VersionText
                     continue;
                 }
 
-                mat = patJettyVersion.matcher(line);
-                if (mat.find())
+                if (versionPattern.isMatch(line))
                 {
                     // Found a jetty version header!
                     if (release != null)
@@ -136,19 +155,13 @@ public class VersionText
                     {
                         releases.add(release);
                     }
-                    
+
                     // Build a clean and consistent version string
-                    StringBuilder cleanVersion = new StringBuilder();
-                    cleanVersion.append("jetty");
-                    if(mat.group(2)!=null) {
-                        cleanVersion.append(mat.group(2));
-                    }
-                    cleanVersion.append('-').append(mat.group(4));
-                    
+                    String cleanVersion = versionPattern.getLastVersion();
                     release = new Release(cleanVersion.toString());
                     release.setExisting(true);
 
-                    String on = line.substring(mat.end(1));
+                    String on = versionPattern.getRemainingText();
                     release.parseReleasedOn(linenum,on);
                     continue;
                 }
@@ -201,23 +214,14 @@ public class VersionText
         }
     }
 
-    public void setSortExisting(boolean allowExistingResort)
-    {
-        this.sortExisting = allowExistingResort;
-    }
-
     public void setReleases(List<Release> releases)
     {
         this.releases.addAll(releases);
     }
 
-    public String toFullVersion(String version)
+    public void setSortExisting(boolean allowExistingResort)
     {
-        if (version.startsWith("jetty-"))
-        {
-            return version;
-        }
-        return "jetty-" + version;
+        this.sortExisting = allowExistingResort;
     }
 
     public void write(File versionTextFile) throws IOException
