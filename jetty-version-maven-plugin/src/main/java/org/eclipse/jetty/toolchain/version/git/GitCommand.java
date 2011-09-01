@@ -63,11 +63,16 @@ public class GitCommand
 
     public String findTagMatching(String version) throws IOException
     {
-        for (String tag : getTags())
+        this.log.debug("findTagMatching(" + version + ")");
+        if (version != null)
         {
-            if (tag.startsWith(version))
+            for (String tag : getTags())
             {
-                return "tags/" + tag;
+                this.log.debug("[tag] \"" + tag + "\"");
+                if (tag.startsWith(version))
+                {
+                    return "tags/" + tag;
+                }
             }
         }
         return null;

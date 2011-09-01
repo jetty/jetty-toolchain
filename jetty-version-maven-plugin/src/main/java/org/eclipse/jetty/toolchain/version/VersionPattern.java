@@ -21,11 +21,19 @@ public class VersionPattern
 
     public String getLastVersion()
     {
+        if (lastVersion == null)
+        {
+            return null;
+        }
         return key.replace("VERSION",lastVersion);
     }
 
     public String getLastVersion(String altkey)
     {
+        if (lastVersion == null)
+        {
+            return null;
+        }
         return altkey.replace("VERSION",lastVersion);
     }
 
@@ -49,5 +57,10 @@ public class VersionPattern
             lastVersion = null;
         }
         return false;
+    }
+
+    public String toVersionId(String version)
+    {
+        return key.replace("VERSION",version);
     }
 }

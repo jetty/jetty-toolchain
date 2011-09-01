@@ -83,7 +83,6 @@ public class VersionTextTest
             int end = Math.min(strs.size(),offset + 5);
 
             System.out.printf("%s: %d entries%n",header,strs.size());
-            int len = strs.size();
             for (int i = start; i < end; i++)
             {
                 System.out.printf("[%d] %s%n",i,strs.get(i));

@@ -10,13 +10,13 @@ import org.codehaus.plexus.util.FileUtils;
 import org.eclipse.jetty.toolchain.version.git.GitCommand;
 
 /**
- * Fetch the active version entries from git logs and prepend the VERSION.txt with the entries found.
+ * Update the active version entry in the VERSION.txt file from information present in the git logs.
  * 
- * @goal gen-version-text
+ * @goal update-version-text
  * @requiresProject true
  * @phase package
  */
-public class GenVersionTextMojo extends AbstractVersionMojo
+public class UpdateVersionTextMojo extends AbstractVersionMojo
 {
     /**
      * The maven project version.
@@ -95,29 +95,27 @@ public class GenVersionTextMojo extends AbstractVersionMojo
 
         try
         {
+            String commitMessage = "Updating VERSION.txt";
+
             VersionPattern verPattern = new VersionPattern(versionTextKey);
 
             VersionText versionText = new VersionText(verPattern);
             versionText.read(versionTextInputFile);
             versionText.setSortExisting(sortExisting);
 
-            if (!verPattern.isMatch(version))
-            {
-                StringBuilder err = new StringBuilder();
-                err.append("Current version [").append(version);
-                err.append("] is not a valid version identifier.");
-                err.append(" Does not conform to expected pattern [");
-                err.append(versionTagKey).append("]");
-                throw new MojoExecutionException(err.toString());
-            }
-            String currentTextVersion = verPattern.getLastVersion();
+            String currentTextVersion = verPattern.toVersionId(version);
             String currentGitVersion = verPattern.getLastVersion(versionTagKey);
 
             Release rel = versionText.findRelease(currentGitVersion);
             if (rel == null)
             {
                 // Not found, create a new one
-                rel = new Release(currentGitVersion);
+                rel = new Release(currentTextVersion);
+                commitMessage = "Creating new version " + currentTextVersion + " in VERSION.txt";
+            }
+            else
+            {
+                commitMessage = "Updating version " + currentTextVersion + " in VERSION.txt";
             }
 
             getLog().info("Updating version section: " + version);
@@ -164,16 +162,19 @@ public class GenVersionTextMojo extends AbstractVersionMojo
                 generateVersion(versionText);
                 return;
             }
-            getLog().debug("Tag for prior version [" + priorTextVersion + "] is " + priorTagId);
+            getLog().debug("Tag for prior version [" + priorGitVersion + "] is " + priorTagId);
 
             String priorCommitId = git.getTagCommitId(priorTagId);
             getLog().debug("Commit ID from [" + priorTagId + "]: " + priorCommitId);
 
-            String currentTagId = git.findTagMatching(currentGitVersion);
             String currentCommitId = "HEAD";
-            if (currentTagId != null)
+            if (refreshTags)
             {
-                currentCommitId = git.getTagCommitId(currentTagId);
+                String currentTagId = git.findTagMatching(currentGitVersion);
+                if (currentTagId != null)
+                {
+                    currentCommitId = git.getTagCommitId(currentTagId);
+                }
             }
             getLog().debug("Commit ID to [" + currentGitVersion + "]: " + currentCommitId);
 
@@ -185,6 +186,8 @@ public class GenVersionTextMojo extends AbstractVersionMojo
             versionText.replaceOrPrepend(rel);
 
             generateVersion(versionText);
+
+            getLog().info("Update complete. Here's your git command. (Copy/Paste)\ngit commit -m \"" + commitMessage + "\" " + versionTextInputFile.getName());
         }
         catch (IOException e)
         {
