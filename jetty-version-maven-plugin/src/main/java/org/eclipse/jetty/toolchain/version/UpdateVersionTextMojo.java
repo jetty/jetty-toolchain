@@ -97,29 +97,37 @@ public class UpdateVersionTextMojo extends AbstractVersionMojo
         {
             String commitMessage = "Updating VERSION.txt";
 
-            VersionPattern verPattern = new VersionPattern(versionTextKey);
+            // Pattern used in VERSION.txt
+            VersionPattern verTextPattern = new VersionPattern(versionTextKey);
+            // Pattern used in Git Tags
+            VersionPattern verTagPattern = new VersionPattern(versionTagKey);
 
-            VersionText versionText = new VersionText(verPattern);
+            VersionText versionText = new VersionText(verTextPattern);
             versionText.read(versionTextInputFile);
             versionText.setSortExisting(sortExisting);
 
-            String currentTextVersion = verPattern.toVersionId(version);
-            String currentGitVersion = verPattern.getLastVersion(versionTagKey);
+            String updateVersionText = verTextPattern.toVersionId(version);
+            String updateVersionGit = verTagPattern.toVersionId(version);
+            getLog().debug("raw version = " + version);
+            getLog().debug("updateVersionText (as it appears in VERSION.txt) = " + updateVersionText);
+            getLog().debug("updateVersionGit (as it appears to git tags) = " + updateVersionGit);
 
-            Release rel = versionText.findRelease(currentGitVersion);
+            Release rel = versionText.findRelease(updateVersionText);
             if (rel == null)
             {
                 // Not found, create a new one
-                rel = new Release(currentTextVersion);
-                commitMessage = "Creating new version " + currentTextVersion + " in VERSION.txt";
+                rel = new Release(updateVersionText);
+                getLog().debug("Not Found, creating new rel = " + rel);
+                commitMessage = "Creating new version " + updateVersionText + " in VERSION.txt";
             }
             else
             {
-                commitMessage = "Updating version " + currentTextVersion + " in VERSION.txt";
+                getLog().debug("Using existing rel = " + rel);
+                commitMessage = "Updating version " + updateVersionText + " in VERSION.txt";
             }
 
             getLog().info("Updating version section: " + version);
-            String priorTextVersion = versionText.getPriorVersion(currentTextVersion);
+            String priorTextVersion = versionText.getPriorVersion(updateVersionText);
             if (priorTextVersion == null)
             {
                 // Assume its the top of the file.
@@ -141,7 +149,7 @@ public class UpdateVersionTextMojo extends AbstractVersionMojo
             }
 
             // Make sure its an expected version identifier
-            if (!verPattern.isMatch(priorTextVersion))
+            if (!verTextPattern.isMatch(priorTextVersion))
             {
                 StringBuilder err = new StringBuilder();
                 err.append("Prior version [").append(priorTextVersion);
@@ -152,12 +160,12 @@ public class UpdateVersionTextMojo extends AbstractVersionMojo
             }
 
             // Make it conform to git tag version identifiers
-            String priorGitVersion = verPattern.getLastVersion(versionTagKey);
+            String priorGitVersion = verTextPattern.getLastVersion(versionTagKey);
             String priorTagId = git.findTagMatching(priorGitVersion);
             if (priorTagId == null)
             {
                 getLog().warn("Unable to find git tag id for prior version id [" + priorGitVersion + "] (defined in VERSION.txt as [" + priorTextVersion + "])");
-                getLog().info("Adding empty version section to top for version id [" + currentTextVersion + "]");
+                getLog().info("Adding empty version section to top for version id [" + updateVersionText + "]");
                 versionText.replaceOrPrepend(rel);
                 generateVersion(versionText);
                 return;
@@ -170,13 +178,13 @@ public class UpdateVersionTextMojo extends AbstractVersionMojo
             String currentCommitId = "HEAD";
             if (refreshTags)
             {
-                String currentTagId = git.findTagMatching(currentGitVersion);
+                String currentTagId = git.findTagMatching(updateVersionText);
                 if (currentTagId != null)
                 {
                     currentCommitId = git.getTagCommitId(currentTagId);
                 }
             }
-            getLog().debug("Commit ID to [" + currentGitVersion + "]: " + currentCommitId);
+            getLog().debug("Commit ID to [" + updateVersionText + "]: " + currentCommitId);
 
             git.populateIssuesForRange(priorCommitId,currentCommitId,rel);
             if ((rel.getReleasedOn() == null) && updateDate)

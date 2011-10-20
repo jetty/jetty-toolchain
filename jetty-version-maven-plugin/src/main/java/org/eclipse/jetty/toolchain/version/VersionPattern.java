@@ -59,8 +59,8 @@ public class VersionPattern
         return false;
     }
 
-    public String toVersionId(String version)
+    public String toVersionId(String rawversion)
     {
-        return key.replace("VERSION",version);
+        return key.replace("VERSION",rawversion);
     }
 }

@@ -138,7 +138,7 @@ public class VersionTextTest
         VersionText vt = new VersionText(VersionPattern.CODEHAUS);
         vt.read(sampleVerText);
 
-        Assert.assertEquals("Number of Releases",24,vt.getReleases().size());
+        Assert.assertEquals("Number of Releases",30,vt.getReleases().size());
 
         Release r740 = vt.findRelease("jetty@codehaus-7.4.0.v20110414");
         Assert.assertNotNull("Should have found release",r740);
