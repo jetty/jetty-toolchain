@@ -1,0 +1,27 @@
+<lifecycles>
+    <lifecycle>
+        <id>orbit</id>
+        <phases>
+            <phase>
+                <id>genereate-sources</id>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </phase>
+            <phase>
+                <id>package</id>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>orbitify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </phase>
+        </phases>
+    </lifecycle>
+</lifecycles>
