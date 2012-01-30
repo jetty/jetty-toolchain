@@ -16,15 +16,13 @@ import java.util.regex.Pattern;
 
 import org.junit.Assert;
 
-
 /**
  * Basic process based executor for using the Jetty Distribution along with custom configurations to perform basic
  * <p>
- * Allows for a test specific directory, that is a copied jetty-distribution, and then modified for the test specific
- * testing required.
+ * Allows for a test specific directory, that is a copied jetty-distribution, and then modified for the test specific testing required.
  * <p>
- * Requires that you setup the maven-dependency-plugin appropriately for the base distribution you want to use, along
- * with any other dependencies (wars, libs, etc..) that you may need from other maven projects.
+ * Requires that you setup the maven-dependency-plugin appropriately for the base distribution you want to use, along with any other dependencies (wars, libs,
+ * etc..) that you may need from other maven projects.
  * <p>
  * Maven Dependency Plugin Setup:
  * 
@@ -111,29 +109,26 @@ import org.junit.Assert;
  * &lt;/project&gt;
  * </pre>
  * <p>
- * If you have a specific configuration you want to setup, you'll want to prepare this configuration in an overlay
- * directory underneath the <code>src/test/resources/</code> directory. <br>
+ * If you have a specific configuration you want to setup, you'll want to prepare this configuration in an overlay directory underneath the
+ * <code>src/test/resources/</code> directory. <br>
  * Notes:
  * <ol>
- * <li>The {@link JettyDistro} sets up a unique test directory (based on the constructor {@link #JettyDistro(Class)} or
- * {@link #JettyDistro(TestingDir)}), by ensuring the directory is empty, then copying the <code>target/test-dist</code>
- * directory into this new testing directory prior to the test specific changes to the configuration.<br>
- * Note: this testing directory is a complete jetty distribution, suitable for executing via the command line for
- * additional testing needs.</li>
- * <li>The directory name you choose in <code>src/test/resources</code> will be the name you use in the
- * {@link #overlayConfig(String)} method to provide replacement configurations for the Jetty Distribution.</li>
- * <li>You'll want to {@link #delete(String)} any files and/or directories from the standard distribution prior to using
- * the {@link #overlayConfig(String)} method.</li>
- * <li>Use the {@link #copyLib(String, String)} method to copy JAR files from the <code>target/test-libs</code>
- * directory (created and managed above using the <code>maven-dependency-plugin</code>) to copy the lib into the test
- * specific.</li>
- * <li>Use the {@link #copyTestWar(String)} method to copy WAR files from the <code>target/test-wars</code> directory
- * (created and managed above using the <code>maven-dependency-plugin</code>) to copy the WAR into the test specific
- * directory.</li>
+ * <li>The {@link JettyDistro} sets up a unique test directory (based on the constructor {@link #JettyDistro(Class)} or {@link #JettyDistro(TestingDir)}), by
+ * ensuring the directory is empty, then copying the <code>target/test-dist</code> directory into this new testing directory prior to the test specific changes
+ * to the configuration.<br>
+ * Note: this testing directory is a complete jetty distribution, suitable for executing via the command line for additional testing needs.</li>
+ * <li>The directory name you choose in <code>src/test/resources</code> will be the name you use in the {@link #overlayConfig(String)} method to provide
+ * replacement configurations for the Jetty Distribution.</li>
+ * <li>You'll want to {@link #delete(String)} any files and/or directories from the standard distribution prior to using the {@link #overlayConfig(String)}
+ * method.</li>
+ * <li>Use the {@link #copyLib(String, String)} method to copy JAR files from the <code>target/test-libs</code> directory (created and managed above using the
+ * <code>maven-dependency-plugin</code>) to copy the lib into the test specific.</li>
+ * <li>Use the {@link #copyTestWar(String)} method to copy WAR files from the <code>target/test-wars</code> directory (created and managed above using the
+ * <code>maven-dependency-plugin</code>) to copy the WAR into the test specific directory.</li>
  * </ol>
  * <p>
- * Next you'll want to use Junit 4.8+ and the <code>&#064;BeforeClass</code> and <code>&#064;AfterClass</code>
- * annotations to setup the <code>JettyDistro</code> class for setting up your testing configuration.
+ * Next you'll want to use Junit 4.8+ and the <code>&#064;BeforeClass</code> and <code>&#064;AfterClass</code> annotations to setup the <code>JettyDistro</code>
+ * class for setting up your testing configuration.
  * <p>
  * Example Test Case using {@link JettyDistro} class
  * 
@@ -335,8 +330,7 @@ public class JettyDistro
     }
 
     /**
-     * Copy a war file from ${project.basedir}/target/test-wars/${testWarFilename} into the ${jetty.home}/webapps/
-     * directory
+     * Copy a war file from ${project.basedir}/target/test-wars/${testWarFilename} into the ${jetty.home}/webapps/ directory
      * 
      * @param testWarFilename
      *            the war file to copy (must exist)
@@ -357,8 +351,7 @@ public class JettyDistro
      * @param resourcePath
      *            the relative path for file content within the <code>src/test/resources</code> directory.
      * @param outputPath
-     *            the testing directory relative output path for the file output (will result in a file with the
-     *            outputPath name being created)
+     *            the testing directory relative output path for the file output (will result in a file with the outputPath name being created)
      * @throws IOException
      *             if unable to copy resource file
      */
@@ -376,8 +369,7 @@ public class JettyDistro
      * @param libFilename
      *            the <code>target/test-libs/${libFilename}</code> to copy
      * @param outputPath
-     *            the destination testing directory relative output path for the lib. (will result in a file with the
-     *            outputPath name being created)
+     *            the destination testing directory relative output path for the lib. (will result in a file with the outputPath name being created)
      * @throws IOException
      *             if unable to copy lib
      */
@@ -402,8 +394,7 @@ public class JettyDistro
     }
 
     /**
-     * Create a <code>${jetty.home}/lib/self/${jarFilename}</code> jar file from the content in the
-     * <code>${project.basedir}/target/classes/</code> directory.
+     * Create a <code>${jetty.home}/lib/self/${jarFilename}</code> jar file from the content in the <code>${project.basedir}/target/classes/</code> directory.
      * 
      * @throws IOException
      *             if unable to copy the directory tree
@@ -464,12 +455,10 @@ public class JettyDistro
     }
 
     /**
-     * Take the directory contents from ${project.basedir}/src/test/resources/${testConfigName}/ and copy it over
-     * whatever happens to be at ${jetty.home}
+     * Take the directory contents from ${project.basedir}/src/test/resources/${testConfigName}/ and copy it over whatever happens to be at ${jetty.home}
      * 
      * @param testConfigName
-     *            the src/test/resources/ directory name to use as the source diretory for the configuration we are
-     *            interested in.
+     *            the src/test/resources/ directory name to use as the source diretory for the configuration we are interested in.
      * @throws IOException
      *             if unable to copy directory.
      */
@@ -489,7 +478,7 @@ public class JettyDistro
     {
         List<String> commands = new ArrayList<String>();
         commands.add(getJavaBin());
-        
+
         commands.add("-Djetty.home=" + jettyHomeDir.getAbsolutePath());
 
         // Do a dry run first to get the exact command line for Jetty process
@@ -521,10 +510,14 @@ public class JettyDistro
             Assert.fail("Unable to get Jetty command line");
         }
 
+        // Need to breakdown commandline into parts, as spaces in command line will cause failures.
+        List<String> execCommands = splitAndUnescapeCommandLine(cmdLine);
+
         System.out.printf("Executing: %s%n",cmdLine);
         System.out.printf("Working Dir: %s%n",jettyHomeDir.getAbsolutePath());
 
-        this.pid = Runtime.getRuntime().exec(cmdLine,null,jettyHomeDir);
+        pbCmd = new ProcessBuilder(execCommands);
+        pid = pbCmd.start();
 
         ConsoleParser parser = new ConsoleParser();
         List<String[]> jmxList = parser.newPattern("JMX Remote URL: (.*)",0);
@@ -559,6 +552,72 @@ public class JettyDistro
             pid.destroy();
             Assert.fail("Unable to get required information within time limit");
         }
+    }
+
+    public static List<String> splitAndUnescapeCommandLine(CharSequence rawCmdLine)
+    {
+        List<String> cmds = new ArrayList<String>();
+
+        int len = rawCmdLine.length();
+        StringBuilder arg = new StringBuilder();
+        boolean escaped = false;
+        boolean inQuote = false;
+        char c;
+        for (int i = 0; i < len; i++)
+        {
+            c = rawCmdLine.charAt(i);
+            if (escaped)
+            {
+                switch (c)
+                {
+                    case 'r':
+                        arg.append('\r');
+                        break;
+                    case 'f':
+                        arg.append('\f');
+                        break;
+                    case 't':
+                        arg.append('\t');
+                        break;
+                    case 'n':
+                        arg.append('\n');
+                        break;
+                    case 'b':
+                        arg.append('\b');
+                        break;
+                    default:
+                        arg.append(c);
+                        break;
+                }
+                escaped = false;
+                continue;
+            }
+
+            if (c == '\\')
+            {
+                escaped = true;
+            }
+            else
+            {
+                if ((c == ' ') && (!inQuote))
+                {
+                    // the delim!
+                    cmds.add(String.valueOf(arg.toString()));
+                    arg.setLength(0);
+                }
+                else if (c == '"')
+                {
+                    inQuote = !inQuote;
+                }
+                else
+                {
+                    arg.append(c);
+                }
+            }
+        }
+        cmds.add(String.valueOf(arg.toString()));
+
+        return cmds;
     }
 
     private String readOutputLine(Process pidCmd) throws IOException
