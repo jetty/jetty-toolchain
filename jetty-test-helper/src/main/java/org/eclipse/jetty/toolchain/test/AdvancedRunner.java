@@ -1,6 +1,5 @@
 package org.eclipse.jetty.toolchain.test;
 
-import org.eclipse.jetty.toolchain.test.annotation.Performance;
 import org.eclipse.jetty.toolchain.test.annotation.Slow;
 import org.eclipse.jetty.toolchain.test.annotation.Stress;
 import org.junit.internal.runners.model.EachTestNotifier;
@@ -30,12 +29,6 @@ import org.junit.runners.model.InitializationError;
  *    }
  *    
  *    &#064;Test
- *    &#064;{@link org.eclipse.jetty.toolchain.test.annotation.Performance Performance}
- *    public void testPerformance() {
- *       ... do something that is only used to test performance of a component ...
- *    }
- *    
- *    &#064;Test
  *    public void testSimple() {
  *       ... do something that happens quickly ...
  *    }
@@ -45,14 +38,13 @@ public class AdvancedRunner extends BlockJUnit4ClassRunner
 {
     private boolean slowTestsEnabled = false;
     private boolean stressTestsEnabled = false;
-    private boolean performanceTestsEnabled = false;
 
     public AdvancedRunner(Class<?> klass) throws InitializationError
     {
         super(klass);
-        this.slowTestsEnabled = isEnabled("test.slow");
+        boolean isFast = (System.getProperty("test.fast") != null);
+        this.slowTestsEnabled = !isFast || isEnabled("test.slow");
         this.stressTestsEnabled = isEnabled("test.stress");
-        this.performanceTestsEnabled = isEnabled("test.performance");
     }
 
     private boolean isEnabled(String key)
@@ -86,12 +78,6 @@ public class AdvancedRunner extends BlockJUnit4ClassRunner
         }
 
         if (!stressTestsEnabled && method.getAnnotation(Stress.class) != null)
-        {
-            eachNotifier.fireTestIgnored();
-            return;
-        }
-
-        if (!performanceTestsEnabled && method.getAnnotation(Performance.class) != null)
         {
             eachNotifier.fireTestIgnored();
             return;

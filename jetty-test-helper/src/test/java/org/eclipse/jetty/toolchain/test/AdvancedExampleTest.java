@@ -1,6 +1,5 @@
 package org.eclipse.jetty.toolchain.test;
 
-import org.eclipse.jetty.toolchain.test.annotation.Performance;
 import org.eclipse.jetty.toolchain.test.annotation.Slow;
 import org.eclipse.jetty.toolchain.test.annotation.Stress;
 import org.junit.Assert;
@@ -19,12 +18,6 @@ public class AdvancedExampleTest
     @Test
     @Stress
     public void testSomethingStressy() {
-        Assert.fail("Shouldn't have run");
-    }
-    
-    @Test
-    @Performance
-    public void testSomethingWithPerformance() {
         Assert.fail("Shouldn't have run");
     }
     
