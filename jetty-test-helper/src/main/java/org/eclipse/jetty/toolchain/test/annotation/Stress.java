@@ -9,5 +9,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Stress
 {
-    /* do nothing */
+    /**
+     * The optional reason why the test is set as Stress.
+     */
+    String value(); 
 }

@@ -11,19 +11,33 @@ public class AdvancedExampleTest
 {
     @Test
     @Slow
-    public void testSomethingSlow() {
-        Assert.fail("Shouldn't have run");
+    public void testSomethingSlow()
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            Assert.assertEquals("m" + i,String.format("m%d",i));
+        }
     }
-    
+
     @Test
-    @Stress
-    public void testSomethingStressy() {
-        Assert.fail("Shouldn't have run");
+    @Stress("Requires at least -DforkMode=never -Xmx4g")
+    public void testSomethingStressy()
+    {
+        int len = 1024000;
+        int numBuffers = 2700;
+        byte buf[][] = new byte[numBuffers][];
+        for(int i=0; i<numBuffers; i++) {
+            buf[i] = new byte[len];
+        }
+        for(int i=0; i<numBuffers; i++) {
+            Assert.assertEquals("buf[" + i + "].length", len, buf[i].length);
+        }
     }
-    
+
     @Test
-    public void testExtra() {
+    public void testNormal()
+    {
         // should have run
-        Assert.assertEquals("123", Integer.toString(123));
+        Assert.assertEquals("123",Integer.toString(123));
     }
 }
