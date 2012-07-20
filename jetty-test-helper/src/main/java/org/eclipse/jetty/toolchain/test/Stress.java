@@ -4,7 +4,10 @@ import org.junit.Test;
 
 /**
  * Flag indicating that {@link Test} is really used for Stress Testing.
+ * <p>
+ * @deprecated use &#064;{@link org.eclipse.jetty.toolchain.test.annotation.Stress Stress} annotation and {@link AdvancedRunner} instead.
  */
+@Deprecated
 public final class Stress 
 {
     private Stress() {
