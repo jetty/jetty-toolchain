@@ -13,6 +13,7 @@ public class AdvancedExampleTest
     @Slow
     public void testSomethingSlow()
     {
+        System.out.println("executed @Slow");
         for (int i = 0; i < 1000; i++)
         {
             Assert.assertEquals("m" + i,String.format("m%d",i));
@@ -23,6 +24,7 @@ public class AdvancedExampleTest
     @Stress("Requires at least -DforkMode=never -Xmx4g")
     public void testSomethingStressy()
     {
+        System.out.println("executed @Stress");
         int len = 1024000;
         int numBuffers = 2700;
         byte buf[][] = new byte[numBuffers][];
@@ -37,6 +39,7 @@ public class AdvancedExampleTest
     @Test
     public void testNormal()
     {
+        System.out.println("executed @Test");
         // should have run
         Assert.assertEquals("123",Integer.toString(123));
     }

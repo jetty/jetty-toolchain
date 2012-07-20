@@ -43,17 +43,17 @@ public class AdvancedRunner extends BlockJUnit4ClassRunner
     {
         super(klass);
         boolean isFast = (System.getProperty("test.fast") != null);
-        this.slowTestsEnabled = !isFast || isEnabled("test.slow");
-        this.stressTestsEnabled = isEnabled("test.stress");
+        this.slowTestsEnabled = isEnabled("test.slow", !isFast);
+        this.stressTestsEnabled = isEnabled("test.stress", false);
     }
 
-    private boolean isEnabled(String key)
+    private boolean isEnabled(String key, boolean def)
     {
         String val = System.getProperty(key);
         if (val == null)
         {
             // not declared
-            return false;
+            return def;
         }
 
         if (val.length() == 0)
