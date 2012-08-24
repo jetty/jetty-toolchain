@@ -7,3 +7,6 @@ target
 *.patch
 *.diff
 *.swp
+*.DS_Store
+*.iml
+*.idea
