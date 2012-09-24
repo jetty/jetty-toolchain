@@ -6,6 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.MethodRule;
 import org.junit.rules.TestName;
+import org.junit.rules.TestRule;
 import org.junit.rules.Verifier;
 
 public class PropertyFlagTest
@@ -17,7 +18,7 @@ public class PropertyFlagTest
     public TestName name = new TestName();
 
     @Rule
-    public MethodRule verifier = new Verifier()
+    public TestRule verifier = new Verifier()
     {
         protected void verify() throws Throwable
         {
