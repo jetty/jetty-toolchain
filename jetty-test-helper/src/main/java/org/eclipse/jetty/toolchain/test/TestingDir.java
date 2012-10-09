@@ -1,12 +1,30 @@
+//
+//  ========================================================================
+//  Copyright (c) 1995-2012 Mort Bay Consulting Pty. Ltd.
+//  ------------------------------------------------------------------------
+//  All rights reserved. This program and the accompanying materials
+//  are made available under the terms of the Eclipse Public License v1.0
+//  and Apache License v2.0 which accompanies this distribution.
+//
+//      The Eclipse Public License is available at
+//      http://www.eclipse.org/legal/epl-v10.html
+//
+//      The Apache License v2.0 is available at
+//      http://www.opensource.org/licenses/apache2.0.php
+//
+//  You may elect to redistribute this code under either of these licenses.
+//  ========================================================================
+//
+
 package org.eclipse.jetty.toolchain.test;
 
 import java.io.File;
 
 import org.junit.Assert;
 import org.junit.Rule;
-import org.junit.rules.MethodRule;
 import org.junit.rules.TemporaryFolder;
-import org.junit.runners.model.FrameworkMethod;
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
@@ -17,18 +35,18 @@ import org.junit.runners.model.Statement;
  * <p>
  * Note: existing facilities within {@link MavenTestingUtils} for keeping the directory name short for the sake of windows users is being used.
  */
-public class TestingDir implements MethodRule
+public class TestingDir implements TestRule
 {
     private File dir;
 
-    public Statement apply(final Statement statement, final FrameworkMethod method, final Object target)
+    public Statement apply(final Statement statement, final Description description)
     {
         return new Statement()
         {
             @Override
             public void evaluate() throws Throwable
             {
-                dir = MavenTestingUtils.getTargetTestingDir(target.getClass(),method.getName());
+                dir = MavenTestingUtils.getTargetTestingDir(description.getTestClass(),description.getMethodName());
                 FS.ensureEmpty(dir);
                 statement.evaluate();
             }

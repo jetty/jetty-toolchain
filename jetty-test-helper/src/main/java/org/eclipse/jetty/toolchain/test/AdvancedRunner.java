@@ -1,9 +1,29 @@
+//
+//  ========================================================================
+//  Copyright (c) 1995-2012 Mort Bay Consulting Pty. Ltd.
+//  ------------------------------------------------------------------------
+//  All rights reserved. This program and the accompanying materials
+//  are made available under the terms of the Eclipse Public License v1.0
+//  and Apache License v2.0 which accompanies this distribution.
+//
+//      The Eclipse Public License is available at
+//      http://www.eclipse.org/legal/epl-v10.html
+//
+//      The Apache License v2.0 is available at
+//      http://www.opensource.org/licenses/apache2.0.php
+//
+//  You may elect to redistribute this code under either of these licenses.
+//  ========================================================================
+//
+
 package org.eclipse.jetty.toolchain.test;
 
 import org.eclipse.jetty.toolchain.test.annotation.Slow;
 import org.eclipse.jetty.toolchain.test.annotation.Stress;
+import org.junit.Ignore;
 import org.junit.internal.runners.model.EachTestNotifier;
 import org.junit.runner.Description;
+import org.junit.runner.notification.RunListener;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -12,7 +32,7 @@ import org.junit.runners.model.InitializationError;
 /**
  * Tiered Junit 4 Test Runner.
  * <p>
- * Supports &#064;LongTest annotation on test methods to only have those tests run during a Long test run.
+ * Supports &#064;Slow annotation on test methods to only have those tests run during a long test run.
  * <p>
  * 
  * <pre>
@@ -42,9 +62,9 @@ public class AdvancedRunner extends BlockJUnit4ClassRunner
     public AdvancedRunner(Class<?> klass) throws InitializationError
     {
         super(klass);
-        boolean isFast = (System.getProperty("test.fast") != null);
-        this.slowTestsEnabled = isEnabled("test.slow", !isFast);
-        this.stressTestsEnabled = isEnabled("test.stress", false);
+        boolean isFast = PropertyFlag.isEnabled("test.fast");
+        this.slowTestsEnabled = isEnabled("test.slow",!isFast);
+        this.stressTestsEnabled = isEnabled("test.stress",false);
     }
 
     private boolean isEnabled(String key, boolean def)
@@ -69,26 +89,36 @@ public class AdvancedRunner extends BlockJUnit4ClassRunner
     @Override
     protected void runChild(FrameworkMethod method, RunNotifier notifier)
     {
-        EachTestNotifier eachNotifier = makeNotifier(method,notifier);
+        Description description = describeChild(method);
+        EachTestNotifier eachNotifier = new EachTestNotifier(notifier,description);
 
         if (!slowTestsEnabled && method.getAnnotation(Slow.class) != null)
         {
+            notify("@Slow (Ignored)",description);
             eachNotifier.fireTestIgnored();
             return;
         }
 
         if (!stressTestsEnabled && method.getAnnotation(Stress.class) != null)
         {
+            Stress stress = method.getAnnotation(Stress.class);
+            notify("@Stress (Ignored - " + stress.value() + ")",description);
             eachNotifier.fireTestIgnored();
             return;
         }
+        
+        if (method.getAnnotation(Ignore.class) != null) {
+            notify("@Ignore",description);
+            notifier.fireTestIgnored(description);
+            return;
+        }
 
+        notify("Running", description);
         super.runChild(method,notifier);
     }
 
-    private EachTestNotifier makeNotifier(FrameworkMethod method, RunNotifier notifier)
+    private void notify(String msg, Description description)
     {
-        Description description = describeChild(method);
-        return new EachTestNotifier(notifier,description);
+        System.err.printf("[AdvancedRunner] %s %s.%s()%n",msg,description.getClassName(),description.getMethodName());
     }
 }

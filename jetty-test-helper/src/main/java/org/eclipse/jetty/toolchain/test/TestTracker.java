@@ -16,21 +16,30 @@
 //  ========================================================================
 //
 
-package org.eclipse.jetty.toolchain.test.annotation;
+package org.eclipse.jetty.toolchain.test;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 
 /**
- * Indicates a test method that takes a non-trivial amount of time to execute.
+ * Add notation for tracking test execution.
  * <p>
- * Practically speaking, this is for test methods that are not (close to) instantaneous.
+ * Note: {@link AdvancedRunner} performs tracking as well, there is no need
+ * for this &#064;Rule if you have AdvancedRunner in use.
+ * <p>
+ * <pre>
+ *   &#064;Rule
+ *   public TestTracker ttracker = new TestTracker();
+ * </pre>
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface Slow
+public class TestTracker extends TestWatcher
 {
-    /* do nothing */
+    @Override
+    protected void starting(Description description)
+    {
+        super.starting(description);
+        System.err.printf("Running %s.%s()%n",
+                description.getClassName(),
+                description.getMethodName());
+    }
 }
