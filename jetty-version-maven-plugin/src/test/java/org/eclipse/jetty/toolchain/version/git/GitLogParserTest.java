@@ -17,6 +17,7 @@ package org.eclipse.jetty.toolchain.version.git;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
@@ -56,7 +57,7 @@ public class GitLogParserTest extends AbstractGitTestCase
         parseSampleFile(parser,sampleFile);
 
         List<Issue> issues = parser.getIssues();
-        Assert.assertEquals("Commit entries with Issue IDs",95,issues.size());
+        Assert.assertEquals("Commit entries with Issue IDs",110,issues.size());
 
         Release rel = new Release("TEST-VERSION");
         rel.setExisting(false);
@@ -92,6 +93,58 @@ public class GitLogParserTest extends AbstractGitTestCase
         }
 
         Assert.assertEquals("Commits by Jesse",79,jesseCount);
+    }
+    
+    @Test
+    public void testParseJetty9GitLog() throws IOException
+    {
+        File sampleFile = MavenTestingUtils.getTestResourceFile("git-jetty9-log.txt");
+        GitLogParser parser = new GitLogParser();
+        parseSampleFile(parser,sampleFile);
+
+        Assert.assertNotNull("parser.gitCommitLogs",parser.getGitCommitLogs());
+        Assert.assertEquals("parser.gitCommitLogs.size",160,parser.getGitCommitLogs().size());
+
+        int joakimCount = 0;
+        for (GitCommit commit : parser.getGitCommitLogs())
+        {
+            if (commit.getAuthorName().contains("Joakim"))
+            {
+                joakimCount++;
+            }
+        }
+
+        Assert.assertEquals("Commits by Joakim",10,joakimCount);
+        
+        // Test for known issues
+        List<String> issueIds = new ArrayList<String>();
+        issueIds.add("391483");
+        issueIds.add("388079");
+        issueIds.add("391588");
+        issueIds.add("JETTY-1515");
+        
+        for(Issue issue: parser.getIssues()) {
+            if(issueIds.contains(issue.getId())) {
+                issueIds.remove(issue.getId());
+            }
+            // System.out.printf("Issue[%s] %s%n", issue.getId(), issue.getText());
+        }
+        
+        if(issueIds.size()>0) {
+            StringBuilder err = new StringBuilder();
+            err.append("Issue parser failed to find issue id");
+            if(issueIds.size()>1) {
+                err.append("s");
+            }
+            err.append(":");
+            for(String id: issueIds) {
+                err.append(" ").append(id);
+            }
+            err.append(".");
+            Assert.assertEquals(err.toString(), 0, issueIds.size());
+        }
+        
+        Assert.assertEquals("Issue count", 42, parser.getIssues().size());
     }
 
     @Test

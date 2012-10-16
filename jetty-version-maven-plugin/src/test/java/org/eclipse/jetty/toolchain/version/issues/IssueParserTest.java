@@ -63,6 +63,30 @@ public class IssueParserTest
     }
 
     @Test
+    public void testParseKnownJetty9a()
+    {
+        assertKnownIssue("391623 Add option to --stop to wait for target jetty to stop", "391623", "Add option to --stop to wait for target jetty to stop");
+    }
+
+    @Test
+    public void testParseKnownJetty9b()
+    {
+        assertKnownIssue("388079: AbstractHttpConnection. Flush the buffer before shutting output down on error condition", "388079", "AbstractHttpConnection. Flush the buffer before shutting output down on error condition");
+    }
+
+    @Test
+    public void testParseKnownJetty9c()
+    {
+        assertKnownIssue("[Bug 388073] null session id from cookie causes NPE fixed", "388073", "null session id from cookie causes NPE fixed");
+    }
+    
+    @Test
+    public void testParseKnownJetty9d()
+    {
+        assertKnownIssue("Bug 391588 - WebSocket Client does not set masking on close frames", "391588", "WebSocket Client does not set masking on close frames");
+    }
+    
+    @Test
     public void testParseKnownEarlyJettyOdd()
     {
         assertKnownIssue("+ Fixed JETTY-68. Complete request after sendRedirect","JETTY-68","Complete request after sendRedirect");

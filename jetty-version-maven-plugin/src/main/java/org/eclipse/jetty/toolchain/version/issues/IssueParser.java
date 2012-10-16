@@ -29,10 +29,13 @@ public class IssueParser
 
     public IssueParser()
     {
+        // Possible delimitors between issue id and text
+        String DELIM = "[-\\[\\]: ]*";
+        
         issue_id_patterns = new ArrayList<Pattern>();
-        issue_id_patterns.add(Pattern.compile("^.[Bb]ug ([0-9]{6,}). ")); // Bugzilla id (from mylyn)
-        issue_id_patterns.add(Pattern.compile("^([0-9]{6,}) ")); // Bugzilla id
-        issue_id_patterns.add(Pattern.compile("^.[Bb]ug (JETTY-[0-9]{2,}). ")); // Jira id (from mylyn)
+        issue_id_patterns.add(Pattern.compile("^[\\[\\s]*[Bb]ug ([0-9]{6,})" + DELIM)); // Bugzilla id (from mylyn)
+        issue_id_patterns.add(Pattern.compile("^([0-9]{6,})" + DELIM)); // Bugzilla id
+        issue_id_patterns.add(Pattern.compile("^[\\[\\s]*[Bb]ug (JETTY-[0-9]{2,})" + DELIM)); // Jira id (from mylyn)
         issue_id_patterns.add(Pattern.compile("(JETTY-[0-9]{2,})[^0-9]")); // Jira id
     }
 
