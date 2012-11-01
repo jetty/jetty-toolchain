@@ -22,14 +22,14 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-public class SourceFetchExtensionTest
+public class JavaSourceFetchExtensionTest
 {
     @Test
     public void testSourceFetch() throws Exception
     {
-        SourceFetchExtension srcFetch = new SourceFetchExtension();
+        JavaSourceFetchExtension srcFetch = new JavaSourceFetchExtension();
         
-        String src = srcFetch.fetch("http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/plain/pom.xml");
+        String src = srcFetch.fetch("http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/plain/jetty-http/src/main/java/org/eclipse/jetty/http/HttpCookie.java", "getName");
         
         Assert.assertNotNull(src);
 

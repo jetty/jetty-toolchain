@@ -18,112 +18,157 @@
 
 package org.eclipse.jetty.xslt.tools;
 
-import japa.parser.JavaParser;
-import japa.parser.ast.CompilationUnit;
-import japa.parser.ast.body.MethodDeclaration;
-import japa.parser.ast.visitor.VoidVisitorAdapter;
-
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.net.URL;
+
 
 public class SourceFetchExtension
 {
+    /* ------------------------------------------------------------------- */
+    public static int bufferSize = 64*1024;
     
     public static String fetch( String location ) throws Exception
     {        
         System.out.println( "fetch() with one parameter ");
 
-        String[] bits  = location.split(",");
-        
-        if ( bits.length == 1 )
-        {
-            URL url = new URL(bits[0]);
-
-            // String source = IO.toString(url.openStream());
-
-            CompilationUnit cu = JavaParser.parse(url.openStream());
-            
-            return cu.toString();
-        }
-        else if ( bits.length == 2 )
-        {
-
-            URL url = new URL(bits[0]);
-
-            // String source = IO.toString(url.openStream());
-
-            CompilationUnit cu = JavaParser.parse(url.openStream());
-
-            // visit and print the methods names
-            MethodVisitor mv = new MethodVisitor(bits[1]);
-
-            mv.visit(cu,null);
-
-            return mv.source;
-        }
-        else
-        {
-            return "SourceFetchExtension broke!";
-        }
-    }
-    
-    public static String fetch( String location, String method ) throws Exception
-    {        
-                
-        if ( method == null || "".equals(method) )
-        {
-            System.out.println("fetching " + location.trim());
-            
             URL url = new URL(location);
 
-            // String source = IO.toString(url.openStream());
-
-            CompilationUnit cu = JavaParser.parse(url.openStream());
-            
-            return cu.toString();
-        }
-        else
-        {
-            System.out.println("fetching " + location.trim() + " / " + method.trim() );
-
-            URL url = new URL(location);
-
-            // String source = IO.toString(url.openStream());
-
-            CompilationUnit cu = JavaParser.parse(url.openStream());
-
-            // visit and print the methods names
-            MethodVisitor mv = new MethodVisitor(method);
-
-            mv.visit(cu,null);
-
-            return mv.source;
-        }
-       
+            return toString(url.openStream());
     }
     
-    /**
-     * Simple visitor implementation for visiting MethodDeclaration nodes. 
+    /* ------------------------------------------------------------ */
+    /** Read input stream to string.
      */
-    private static class MethodVisitor extends VoidVisitorAdapter {
-
-        String methodName;
-        String source;
+    public static String toString(InputStream in)
+        throws IOException
+    {
+        return toString(in,null);
+    }
+    
+    /* ------------------------------------------------------------ */
+    /** Read input stream to string.
+     */
+    public static String toString(InputStream in,String encoding)
+        throws IOException
+    {
+        StringWriter writer=new StringWriter();
+        InputStreamReader reader = encoding==null?new InputStreamReader(in):new InputStreamReader(in,encoding);
         
-        MethodVisitor( String methodName )
+        copy(reader,writer);
+        return writer.toString();
+    }
+    
+    
+    /* ------------------------------------------------------------------- */
+    /** Copy Stream in to Stream out until EOF or exception.
+     */
+    public static void copy(InputStream in, OutputStream out)
+         throws IOException
+    {
+        copy(in,out,-1);
+    }
+    
+    /* ------------------------------------------------------------------- */
+    /** Copy Reader to Writer out until EOF or exception.
+     */
+    public static void copy(Reader in, Writer out)
+         throws IOException
+    {
+        copy(in,out,-1);
+    }
+    
+    /* ------------------------------------------------------------------- */
+    /** Copy Stream in to Stream for byteCount bytes or until EOF or exception.
+     */
+    public static void copy(InputStream in,
+                            OutputStream out,
+                            long byteCount)
+         throws IOException
+    {     
+        byte buffer[] = new byte[bufferSize];
+        int len=bufferSize;
+        
+        if (byteCount>=0)
         {
-            this.methodName = methodName;
-        }
-        
-        @Override
-        public void visit(MethodDeclaration n, Object arg) {
-            
-            if ( methodName.equals( n.getName() ) )
+            while (byteCount>0)
             {
-                source = n.toString();
-               // System.out.println(n.getName());
-               // System.out.println( n.getBody() );
+                int max = byteCount<bufferSize?(int)byteCount:bufferSize;
+                len=in.read(buffer,0,max);
+                
+                if (len==-1)
+                    break;
+                
+                byteCount -= len;
+                out.write(buffer,0,len);
+            }
+        }
+        else
+        {
+            while (true)
+            {
+                len=in.read(buffer,0,bufferSize);
+                if (len<0 )
+                    break;
+                out.write(buffer,0,len);
+            }
+        }
+    }  
+
+    /* ------------------------------------------------------------------- */
+    /** Copy Reader to Writer for byteCount bytes or until EOF or exception.
+     */
+    public static void copy(Reader in,
+                            Writer out,
+                            long byteCount)
+         throws IOException
+    {  
+        char buffer[] = new char[bufferSize];
+        int len=bufferSize;
+        
+        if (byteCount>=0)
+        {
+            while (byteCount>0)
+            {
+                if (byteCount<bufferSize)
+                    len=in.read(buffer,0,(int)byteCount);
+                else
+                    len=in.read(buffer,0,bufferSize);                   
+                
+                if (len==-1)
+                    break;
+                
+                byteCount -= len;
+                out.write(buffer,0,len);
+            }
+        }
+        else if (out instanceof PrintWriter)
+        {
+            PrintWriter pout=(PrintWriter)out;
+            while (!pout.checkError())
+            {
+                len=in.read(buffer,0,bufferSize);
+                if (len==-1)
+                    break;
+                out.write(buffer,0,len);
+            }
+        }
+        else
+        {
+            while (true)
+            {
+                len=in.read(buffer,0,bufferSize);
+                if (len==-1)
+                    break;
+                out.write(buffer,0,len);
             }
         }
     }
-    
+
 }
