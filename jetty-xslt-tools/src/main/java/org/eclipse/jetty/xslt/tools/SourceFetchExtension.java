@@ -36,7 +36,7 @@ public class SourceFetchExtension
     
     public static String fetch( String location ) throws Exception
     {        
-        System.out.println( "fetch() with one parameter ");
+        System.out.println("Fetch: " + location.trim());
 
             URL url = new URL(location);
 

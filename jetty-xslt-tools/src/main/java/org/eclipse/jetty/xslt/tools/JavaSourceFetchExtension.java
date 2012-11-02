@@ -26,52 +26,13 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
 import java.net.URL;
 
 public class JavaSourceFetchExtension
-{
-    
-    public static String fetch( String location ) throws Exception
-    {        
-        System.out.println( "fetch() with one parameter ");
-
-        String[] bits  = location.split(",");
-        
-        if ( bits.length == 1 )
-        {
-            URL url = new URL(bits[0]);
-
-            // String source = IO.toString(url.openStream());
-
-            CompilationUnit cu = JavaParser.parse(url.openStream());
-            
-            return cu.toString();
-        }
-        else if ( bits.length == 2 )
-        {
-
-            URL url = new URL(bits[0]);
-
-            // String source = IO.toString(url.openStream());
-
-            CompilationUnit cu = JavaParser.parse(url.openStream());
-
-            // visit and print the methods names
-            MethodVisitor mv = new MethodVisitor(bits[1]);
-
-            mv.visit(cu,null);
-
-            return mv.source;
-        }
-        else
-        {
-            return "SourceFetchExtension broke!";
-        }
-    }
-    
+{       
     public static String fetch( String location, String method ) throws Exception
     {        
                 
         if ( method == null || "".equals(method) )
         {
-            System.out.println("fetching " + location.trim());
+            System.out.println("Fetch: " + location.trim());
             
             URL url = new URL(location);
 
@@ -83,7 +44,7 @@ public class JavaSourceFetchExtension
         }
         else
         {
-            System.out.println("fetching " + location.trim() + " / " + method.trim() );
+            System.out.println("Fetch: " + location.trim() + " / " + method.trim() );
 
             URL url = new URL(location);
 
