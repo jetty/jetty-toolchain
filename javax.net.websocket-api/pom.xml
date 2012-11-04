@@ -9,7 +9,7 @@
     <relativePath>../jetty-toolchain-parent</relativePath>
   </parent>
   <groupId>org.eclipse.jetty.drafts</groupId>
-  <artifactId>javax-websocket-api</artifactId>
+  <artifactId>javax.net.websocket-api</artifactId>
   <packaging>jar</packaging>
   <version>0.006.0.EDR-SNAPSHOT</version>
   <name>Jetty :: javax.net.websocket (DRAFT)</name>
