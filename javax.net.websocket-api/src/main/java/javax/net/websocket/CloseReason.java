@@ -161,4 +161,12 @@ public class CloseReason extends java.lang.Object {
 	this.closeCode = closeCode;
 	this.reasonPhrase = reasonPhrase;
     }
+
+    public CloseReason.CloseCode getCloseCode() {
+	return closeCode;
+    }
+
+    public String getReasonPhrase() {
+	return reasonPhrase;
+    }
 }
