@@ -27,6 +27,8 @@ package javax.net.websocket.extensions;
  * @since DRAFT 003
  */
 public abstract class FrameHandler extends java.lang.Object {
+    private final FrameHandler nextHandler;
+
     /**
      * Constructor that creates a FrameHandler with the given framehandler as
      * the next frame handler in the chain.
@@ -34,14 +36,14 @@ public abstract class FrameHandler extends java.lang.Object {
      * @param nextHandler
      */
     public FrameHandler(FrameHandler nextHandler) {
-	// TODO
+	this.nextHandler = nextHandler;
     }
 
     /**
      * The next handler in the handler chain.
      */
     public FrameHandler getNextHandler() {
-	return null; // TODO
+	return nextHandler;
     }
 
     /**
@@ -51,7 +53,6 @@ public abstract class FrameHandler extends java.lang.Object {
      * handler in the chain with the frame passed in.
      */
     public void handleFrame(Frame f) {
-	return; // TODO
+	nextHandler.handleFrame(f);
     }
-
 }
