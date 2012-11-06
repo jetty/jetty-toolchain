@@ -45,7 +45,7 @@ public interface HandshakeRequest {
      * @return the unmodifiable map of the request parameters
      */
     // FIXME: need note about POST params NOT available
-    abstract Map<String, String>[] getParameterMap();
+    abstract Map<String, String[]> getParameterMap();
 
     /**
      * Return the query string associated with the request.
