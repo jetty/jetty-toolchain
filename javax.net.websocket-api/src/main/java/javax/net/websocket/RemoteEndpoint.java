@@ -46,7 +46,7 @@ public interface RemoteEndpoint<T> {
      * 
      * @return the output stream to which the message will be written
      */
-    abstract OutputStream getSendStream() throws IOException;
+    OutputStream getSendStream() throws IOException;
 
     /**
      * Opens an character stream on which a text message may be sent. The
@@ -55,7 +55,7 @@ public interface RemoteEndpoint<T> {
      * 
      * @return the output stream to which the message will be written
      */
-    abstract Writer getSendWriter() throws IOException;
+    Writer getSendWriter() throws IOException;
 
     /**
      * Send a binary message, returning when all of the message has been
@@ -64,7 +64,7 @@ public interface RemoteEndpoint<T> {
      * @param data
      *            the message to be sent
      */
-    abstract void sendBytes(ByteBuffer data) throws IOException;
+    void sendBytes(ByteBuffer data) throws IOException;
 
     /**
      * Initiates the asynchronous transmission of a binary message. This method
@@ -79,9 +79,7 @@ public interface RemoteEndpoint<T> {
      * @param completion
      *            handler that will be notified of progress
      */
-    // FIXME s/completion/handler/
-    abstract Future<SendResult> sendBytes(ByteBuffer data,
-	    SendHandler completion);
+    Future<SendResult> sendBytes(ByteBuffer data, SendHandler completion);
 
     /**
      * Sends a custom developer object, blocking until it has been transmitted.
@@ -90,7 +88,7 @@ public interface RemoteEndpoint<T> {
      * have provided an encoder for this object type in the endpoint
      * configuration.
      */
-    abstract void sendObject(T o) throws IOException, EncodeException;
+    void sendObject(T o) throws IOException, EncodeException;
 
     /**
      * Initiates the transmission of a custom developer object. The developer
@@ -106,7 +104,8 @@ public interface RemoteEndpoint<T> {
      * @param handler
      *            the handler that will be notified of progress
      */
-    abstract Future<SendResult> sendObject(T o, SendHandler handler);
+    // FIXME s/handler/completion/
+    Future<SendResult> sendObject(T o, SendHandler handler);
 
     /**
      * Send a binary message in pieces, blocking until all of the message has
@@ -117,7 +116,7 @@ public interface RemoteEndpoint<T> {
      * @param partialByte
      *            the piece of the message being sent
      */
-    abstract void sendPartialBytes(ByteBuffer partialByte, boolean isLast)
+    void sendPartialBytes(ByteBuffer partialByte, boolean isLast)
 	    throws IOException;
 
     /**
@@ -129,8 +128,7 @@ public interface RemoteEndpoint<T> {
      * @param fragment
      *            the piece of the message being sent
      */
-    abstract void sendPartialString(String fragment, boolean isLast)
-	    throws IOException;
+    void sendPartialString(String fragment, boolean isLast) throws IOException;
 
     /**
      * Send a Ping message containing the given application data to the remote
@@ -140,7 +138,7 @@ public interface RemoteEndpoint<T> {
      * @param applicationData
      *            the data to be carried in the ping request
      */
-    abstract void sendPing(ByteBuffer applicationData);
+    void sendPing(ByteBuffer applicationData);
 
     /**
      * Allows the developer to send an unsolicited Pong message containing the
@@ -150,7 +148,7 @@ public interface RemoteEndpoint<T> {
      * @param applicationData
      *            the application data to be carried in the pong response.
      */
-    abstract void sendPong(ByteBuffer applicationData);
+    void sendPong(ByteBuffer applicationData);
 
     /**
      * Send a text message, blocking until all of the message has been
@@ -159,7 +157,7 @@ public interface RemoteEndpoint<T> {
      * @param text
      *            the message to be sent
      */
-    abstract void sendString(String text) throws IOException;
+    void sendString(String text) throws IOException;
 
     /**
      * Initiates the asynchronous transmission of a text message. This method
@@ -174,6 +172,5 @@ public interface RemoteEndpoint<T> {
      * @param completion
      *            the handler which will be notified of progress
      */
-    // FIXME s/completion/handler/
-    abstract Future<SendResult> sendString(String text, SendHandler completion);
+    Future<SendResult> sendString(String text, SendHandler completion);
 }

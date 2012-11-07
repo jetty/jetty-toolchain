@@ -20,8 +20,6 @@ package javax.net.websocket;
 
 import java.util.Set;
 
-import javax.net.websocket.extensions.Extension;
-
 /**
  * A ClientContainer is an implementation provided object that allows the
  * developer to initiate a web socket handshake from the provided endpoint.
@@ -38,7 +36,8 @@ public interface ClientContainer {
      * @param olc
      *            the client configuration used to connect to the client
      */
-    void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc);
+    void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc)
+	    throws DeploymentException;
 
     /**
      * Return a copy of the Set of the currently active web socket sessions.
@@ -56,7 +55,7 @@ public interface ClientContainer {
      * 
      * @return the set of extensions.
      */
-    Set<Extension> getInstalledExtensions();
+    Set<String> getInstalledExtensions();
 
     /**
      * Returns the maximum size of binary message that this container will
@@ -79,6 +78,7 @@ public interface ClientContainer {
      * 
      * @return the number of seconds idle wed socket sessions are active
      */
+    // FIXME typo "wed socket"
     long getMaxTextMessageBufferSize();
 
     /**

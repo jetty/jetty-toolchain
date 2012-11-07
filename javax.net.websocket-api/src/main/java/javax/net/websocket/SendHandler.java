@@ -30,5 +30,5 @@ public interface SendHandler {
      * @param result
      *            the result
      */
-    abstract void setResult(SendResult result);
+    void setResult(SendResult result);
 }

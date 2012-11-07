@@ -35,8 +35,10 @@ public interface Encoder {
     /**
      * This interface defines how to provide a way to convert a custom object
      * into a binary message.
+     * 
+     * @param <T>
      */
-    public static interface Binary<T> extends Encoder {
+    interface Binary<T> extends Encoder {
 	/**
 	 * Encode the given object into a byte array.
 	 * 
@@ -44,7 +46,7 @@ public interface Encoder {
 	 *            the object being encoded
 	 * @return the binary data
 	 */
-	abstract ByteBuffer encode(T object) throws EncodeException;
+	ByteBuffer encode(T object) throws EncodeException;
     }
 
     /**
@@ -52,8 +54,10 @@ public interface Encoder {
      * write the encoded object to a binary stream.
      * 
      * @since DRAFT 006 / EDR
+     * @param <T>
+     *            the type of the object this encoder can encode.
      */
-    public static interface BinaryStream<T> extends Encoder {
+    interface BinaryStream<T> extends Encoder {
 	/**
 	 * Encode the given object into a binary stream written to the
 	 * implementation provided OutputStream.
@@ -63,15 +67,17 @@ public interface Encoder {
 	 * @param os
 	 *            the output stream where the encoded data is written
 	 */
-	abstract void encode(T object, OutputStream os) throws EncodeException,
+	void encode(T object, OutputStream os) throws EncodeException,
 		IOException;
     }
 
     /**
      * This interface defines how to provide a way to convert a custom object
      * into a text message.
+     * 
+     * @param <T>
      */
-    public static interface Text<T> extends Encoder {
+    interface Text<T> extends Encoder {
 	/**
 	 * Encode the given object into a String.
 	 * 
@@ -79,7 +85,7 @@ public interface Encoder {
 	 *            the object being encoded
 	 * @return the encoded object as a string
 	 */
-	abstract String encode(T object) throws EncodeException;
+	String encode(T object) throws EncodeException;
     }
 
     /**
@@ -87,8 +93,10 @@ public interface Encoder {
      * write the encoded object to a character stream.
      * 
      * @since DRAFT 006 / EDR
+     * @param <T>
+     *            the type of the object this encoder can encode.
      */
-    public static interface TextStream<T> extends Encoder {
+    interface TextStream<T> extends Encoder {
 	/**
 	 * Encode the given object to a character stream writing it to the
 	 * supplied Writer. Implementations of this method may use the
@@ -102,7 +110,7 @@ public interface Encoder {
 	 *            the writer provided by the web socket runtime to write the
 	 *            encoded data
 	 */
-	abstract void encode(T object, Writer writer) throws EncodeException,
+	void encode(T object, Writer writer) throws EncodeException,
 		IOException;
     }
 }

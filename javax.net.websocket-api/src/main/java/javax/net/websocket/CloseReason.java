@@ -40,7 +40,7 @@ public class CloseReason extends java.lang.Object {
 	 * 
 	 * @return the code number
 	 */
-	abstract int getCode();
+	int getCode();
     }
 
     /**
@@ -123,6 +123,10 @@ public class CloseReason extends java.lang.Object {
 	 * the request.
 	 */
 	UNEXPECTED_CONDITION(1011),
+	// FIXME: missing codes from
+	// https://www.ietf.org/mail-archive/web/hybi/current/msg09649.html
+	// FIXME: missing 1012 (SERVICE_RESTART)
+	// FIXME: missing 1013 (TRY_AGAIN_LATER)
 	/**
 	 * 1015 is a reserved value and MUST NOT be set as a status code in a
 	 * Close control frame by an endpoint. It is designated for use in
@@ -162,11 +166,21 @@ public class CloseReason extends java.lang.Object {
 	this.reasonPhrase = reasonPhrase;
     }
 
+    /**
+     * The Close code associated with this CloseReason
+     * 
+     * @return the close code
+     */
     public CloseReason.CloseCode getCloseCode() {
-	return closeCode;
+	return this.closeCode;
     }
 
+    /**
+     * The reason phrase associated with this CloseReason.
+     * 
+     * @return the reason phrase.
+     */
     public String getReasonPhrase() {
-	return reasonPhrase;
+	return this.reasonPhrase;
     }
 }

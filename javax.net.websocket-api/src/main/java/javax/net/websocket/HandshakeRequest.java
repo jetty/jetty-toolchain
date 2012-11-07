@@ -37,7 +37,7 @@ public interface HandshakeRequest {
      * 
      * @return the list of headers
      */
-    abstract Map<String, List<String>> getHeaders();
+    Map<String, List<String>> getHeaders();
 
     /**
      * Return the request parameters associated with the request.
@@ -45,12 +45,13 @@ public interface HandshakeRequest {
      * @return the unmodifiable map of the request parameters
      */
     // FIXME: need note about POST params NOT available
-    abstract Map<String, String[]> getParameterMap();
+    // FIXME: need language about GET query parameters only
+    Map<String, String[]> getParameterMap();
 
     /**
      * Return the query string associated with the request.
      */
-    abstract String getQueryString();
+    String getQueryString();
 
     /**
      * Return the request URI of the handshake request.
@@ -58,8 +59,10 @@ public interface HandshakeRequest {
      * @return the request uri of the handshake request
      */
     // FIXME: should this conform to servlet-api behavior?
+    // FIXME: servlet-api returns a String
+    // FIXME: the URI format was removed recently in other websocket api classes/interfaces
     // FIXME: prune query string?
-    abstract URI getRequestURI();
+    URI getRequestURI();
 
     /**
      * Return a reference to the HttpSession that the web socket handshake that
@@ -68,13 +71,14 @@ public interface HandshakeRequest {
      * @return the http session
      */
     // FIXME: not available in client
-    abstract Object getSession();
+    Object getSession();
 
     /**
      * Return the authenticated user or null if no user is authenticated for
      * this handshake.
      */
-    abstract Principal getUserPrincipal();
+    // FIXME: not available in client
+    Principal getUserPrincipal();
 
     /**
      * Checks whether the current user is in the given role.
@@ -83,5 +87,6 @@ public interface HandshakeRequest {
      *            the role being checked
      * @return whether the user is in the role
      */
-    abstract boolean isUserInRole(String role);
+    // FIXME: not available in client
+    boolean isUserInRole(String role);
 }

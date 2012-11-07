@@ -41,7 +41,7 @@ import java.lang.annotation.Target;
  * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER) // FIXME (was METHOD)
+@Target(ElementType.PARAMETER)
 public @interface WebSocketPathParam {
     /**
      * The name of the variable used in the URI-template. If the name does not

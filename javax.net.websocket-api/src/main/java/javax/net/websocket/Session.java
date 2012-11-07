@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.net.websocket.extensions.Extension;
-
 /**
  * A Web Socket session represents a conversation between two web socket
  * endpoints. As soon as the websocket handshake completes successfully, the web
@@ -37,7 +35,7 @@ import javax.net.websocket.extensions.Extension;
  * 
  * @since DRAFT 001
  */
-public/* FIXME <T> */interface Session /* FIXME <T> */{
+public interface Session<T> {
     /**
      * Register to handle to incoming messages in this conversation.
      */
@@ -96,7 +94,7 @@ public/* FIXME <T> */interface Session /* FIXME <T> */{
      * 
      * @return the negotiated extensions
      */
-    List<Extension> getNegotiatedExtensions();
+    List<String> getNegotiatedExtensions();
 
     /**
      * Return the sub protocol agreed during the websocket handshake for this
@@ -135,6 +133,7 @@ public/* FIXME <T> */interface Session /* FIXME <T> */{
      * 
      * @return the remote endpoint
      */
+    // FIXME: should this default RemoteEndpoint support .sendObject()?
     RemoteEndpoint getRemote();
 
     /**
@@ -143,8 +142,7 @@ public/* FIXME <T> */interface Session /* FIXME <T> */{
      * 
      * @return the remote endpoint instance
      */
-    // FIXME breaks interface on .setEncoders()
-    // RemoteEndpoint<T> getRemoteL(Class<T> c);
+    RemoteEndpoint<T> getRemote(Class<T> c);
 
     /**
      * Return the URI that this session was opened under.

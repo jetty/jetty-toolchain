@@ -18,10 +18,7 @@
 
 package javax.net.websocket;
 
-import java.net.URI;
 import java.util.List;
-
-import javax.net.websocket.extensions.Extension;
 
 /**
  * The DefaultClientConfiguration is a concrete implementation of a client
@@ -29,13 +26,12 @@ import javax.net.websocket.extensions.Extension;
  * own custom configuration behaviors.
  */
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
-
-    private URI uri;
-    private List<Extension> preferredExtensions;
+    private String path;
+    private List<String> preferredExtensions;
     private List<String> preferredSubprotocols;
     private List<Decoder> decoders;
     private List<Encoder> encoders;
-    private List<Extension> extensions;
+    private List<String> extensions;
 
     /**
      * Creates a client configuration that will attempt to connect to the given
@@ -43,8 +39,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * 
      * @param uri
      */
-    public DefaultClientConfiguration(URI uri) {
-	this.uri = uri;
+    public DefaultClientConfiguration(String uri) {
+	this.path = uri;
     }
 
     /**
@@ -70,9 +66,13 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * client would like to use for its sessions.
      */
     @Override
-    public List<Extension> getExtensions() {
+    public List<String> getExtensions() {
 	// FIXME: is this allowed to be null?
 	return extensions;
+    }
+
+    public String getPath() {
+	return path;
     }
 
     /**
@@ -83,10 +83,6 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     public List<String> getPreferredSubprotocols() {
 	// FIXME: is this allowed to be null?
 	return preferredSubprotocols;
-    }
-
-    public URI getURI() {
-	return uri;
     }
 
     /**
@@ -114,7 +110,7 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
      * use.
      */
     public ClientEndpointConfiguration setExtensions(
-	    List<Extension> preferredExtensions) {
+	    List<String> preferredExtensions) {
 	// FIXME: need language about extension order importance
 	// FIXME: need language about configuration/param requirement
 	// FIXME: copy of list or use as-is?

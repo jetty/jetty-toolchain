@@ -27,12 +27,12 @@ package javax.net.websocket;
 public class EncodeException extends Exception {
     private Object object;
 
-    public EncodeException(String message, Object object) {
+    public EncodeException(Object object, String message) {
 	super(message);
 	this.object = object;
     }
 
-    public EncodeException(String message, Object object, Throwable cause) {
+    public EncodeException(Object object, String message, Throwable cause) {
 	super(message, cause);
 	this.object = object;
     }

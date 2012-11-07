@@ -35,7 +35,7 @@ public interface Decoder {
      * This interface defines how a custom object (of type T) is decoded from a
      * web socket message in the form of a byte buffer.
      */
-    public static interface Binary<T> extends Decoder {
+    interface Binary<T> extends Decoder {
 	/**
 	 * Decode the given bytes into an object of type T.
 	 * 
@@ -43,7 +43,7 @@ public interface Decoder {
 	 *            the bytes to be decoded.
 	 * @return the decoded object
 	 */
-	abstract T decode(ByteBuffer bytes) throws DecodeException;
+	T decode(ByteBuffer bytes) throws DecodeException;
 
 	/**
 	 * Answer whether the given bytes can be decoded into an object of type
@@ -52,14 +52,14 @@ public interface Decoder {
 	 * @param bytes
 	 * @return whether or not the bytes can be decoded by this decoder.
 	 */
-	abstract boolean willDecode(ByteBuffer bytes);
+	boolean willDecode(ByteBuffer bytes);
     }
 
     /**
      * This interface defines how a custom object is decoded from a web socket
      * message in the form of a binary stream.
      */
-    public static interface BinaryStream<T> extends Decoder {
+    interface BinaryStream<T> extends Decoder {
 	/**
 	 * Decode the given bytes read from the input stream into an object of
 	 * type T.
@@ -67,14 +67,14 @@ public interface Decoder {
 	 * @param is
 	 *            the input stream carrying the bytes
 	 */
-	abstract T decode(InputStream is) throws DecodeException, IOException;
+	T decode(InputStream is) throws DecodeException, IOException;
     }
 
     /**
      * This interface defines how a custom object is decoded from a web socket
      * message in the form of a string.
      */
-    public static interface Text<T> extends Decoder {
+    interface Text<T> extends Decoder {
 	/**
 	 * Decode the given String into an object of type T.
 	 * 
@@ -82,7 +82,7 @@ public interface Decoder {
 	 *            the string to be decoded
 	 * @return the decoded message as an object of type T
 	 */
-	abstract T decode(String s) throws DecodeException;
+	T decode(String s) throws DecodeException;
 
 	/**
 	 * Answer whether the given String can be decoded into an object of type
@@ -92,14 +92,14 @@ public interface Decoder {
 	 *            the string being tested for decodability
 	 * @return whether this decoder can decoded the supplied string.
 	 */
-	abstract boolean willDecode(String s);
+	boolean willDecode(String s);
     }
 
     /**
      * This interface defines how a custom object of type T is decoded from a
      * web socket message in the form of a character stream.
      */
-    public static interface TextStream<T> extends Decoder {
+    interface TextStream<T> extends Decoder {
 	/**
 	 * Reads the websocket message from the implementation provided Reader
 	 * and decodes it into an instance of the supplied object type.
@@ -109,6 +109,6 @@ public interface Decoder {
 	 * @return the instance of the object that is the decoded web socket
 	 *         message.
 	 */
-	abstract T decode(Reader reader) throws DecodeException, IOException;
+	T decode(Reader reader) throws DecodeException, IOException;
     }
 }

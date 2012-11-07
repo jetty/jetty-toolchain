@@ -22,8 +22,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.websocket.extensions.Extension;
-
 /**
  * The DefaultServerConfiguration is a concrete class that embodies all the
  * configuration parameters for an endpoint that is to be published as a server
@@ -31,10 +29,10 @@ import javax.net.websocket.extensions.Extension;
  * configuration behavior.
  */
 public class DefaultServerConfiguration implements ServerEndpointConfiguration {
-    private URI uri;
+    private String path;
     private List<Decoder> decoders;
     private List<Encoder> encoders;
-    private List<Extension> extensions;
+    private List<String> extensions;
     private List<String> subprotocols;
 
     /**
@@ -47,8 +45,8 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     /**
      * Creates a server configuration with the given URI.
      */
-    public DefaultServerConfiguration(URI uri) {
-	this.uri = uri;
+    public DefaultServerConfiguration(String path) {
+	this.path = path;
     }
 
     /**
@@ -90,13 +88,11 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * algorithms based on other factors.
      */
     @Override
-    public List<Extension> getNegotiatedExtensions(
-	    List<Extension> requestedExtensions) {
-	List<Extension> negotiated = new ArrayList<Extension>();
-	for (Extension requestedExtension : requestedExtensions) {
-	    for (Extension availableExtension : extensions) {
-		if (availableExtension.getName().equals(
-			requestedExtension.getName())) {
+    public List<String> getNegotiatedExtensions(List<String> requestedExtensions) {
+	List<String> negotiated = new ArrayList<String>();
+	for (String requestedExtension : requestedExtensions) {
+	    for (String availableExtension : extensions) {
+		if (availableExtension.equals(requestedExtension)) {
 		    // found a match, by-name
 		    // FIXME: match by parameters?
 		    // FIXME: match by acceptable configuration?
@@ -114,6 +110,9 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * one this server endpoint liked. See <a
      * href="http://tools.ietf.org/html/rfc6455#section-4.2.2"> Sending the
      * Server's Opening Handshake</a>
+     * 
+     * @param requestedSubprotocols
+     * @return
      */
     @Override
     public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {
@@ -125,6 +124,11 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 	return null;
     }
 
+    @Override
+    public String getPath() {
+	return path;
+    }
+
     /**
      * A URI is a match if and only if it is an exact match (.equals()) the URI
      * used to create this configuration. Subclasses may override this method to
@@ -132,10 +136,8 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      */
     @Override
     public boolean matchesURI(URI uri) {
-	if (this.uri == null) {
-	    return false;
-	}
-	return this.uri.equals(uri);
+	// FIXME: need language about what to do when input URI is null
+	return this.path.equals(uri.toString());
     }
 
     /**
@@ -175,8 +177,7 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     /**
      * Sets all the extensions that this configuration will support.
      */
-    public DefaultServerConfiguration setExtensions(List<Extension> extensions) {
-	// FIXME: this should not be a list, but rather a Set.
+    public DefaultServerConfiguration setExtensions(List<String> extensions) {
 	this.extensions.clear();
 	this.extensions.addAll(extensions);
 	return this;

@@ -35,6 +35,5 @@ public interface ServerContainer extends ClientContainer {
      *            the endpoint configuration that the runtime should use to
      *            deploy the endpoint.
      */
-    abstract void publishServer(Endpoint endpoint,
-	    ServerEndpointConfiguration ilc);
+    void publishServer(Endpoint endpoint, ServerEndpointConfiguration ilc);
 }

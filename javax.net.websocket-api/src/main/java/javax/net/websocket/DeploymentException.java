@@ -18,19 +18,16 @@
 
 package javax.net.websocket;
 
-import java.util.List;
-import java.util.Map;
-
 /**
- * The handshake response represents the web socket defined http response that
- * will be sent by the web socket server during the opening handshake.
+ * http://java.net/jira/browse/WEBSOCKET_SPEC-47
  */
-// FIXME: needs to be available on client too
-public interface HandshakeResponse {
-    /**
-     * Return the list of Http Headers that came with the handshake request.
-     * 
-     * @return the headers
-     */
-    Map<String, List<String>> getHeaders();
+public class DeploymentException extends Exception {
+
+    public DeploymentException(String message) {
+	super(message);
+    }
+
+    public DeploymentException(String message, Throwable cause) {
+	super(message, cause);
+    }
 }

@@ -20,8 +20,6 @@ package javax.net.websocket;
 
 import java.util.List;
 
-import javax.net.websocket.extensions.Extension;
-
 /**
  * The ClientEndpointConfiguration is a special kind of endpoint configuration
  * object that contains web socket configuration information specific only to
@@ -29,8 +27,12 @@ import javax.net.websocket.extensions.Extension;
  * 
  * @since DRAFT 001
  */
+// FIXME: need .setCookieStore(java.net.CookieStore cookieStore)
+// FIXME: need .setHeader(String name, String value)
 public interface ClientEndpointConfiguration extends EndpointConfiguration {
     /**
+     * http://java.net/jira/browse/WEBSOCKET_SPEC-45
+     * <p>
      * Return the list of all the extensions that this client supports. These
      * are the extensions that will be used to populate the
      * Sec-WebSocket-Extensions header in the opening handshake for clients
@@ -41,7 +43,7 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
      * 
      * @return a list of extensions
      */
-    abstract List<Extension> getExtensions();
+    List<String> getExtensions();
 
     /**
      * The ordered list of sub protocols a client endpoint would like to use.
@@ -53,6 +55,5 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
      * 
      * @return a list of subprotocols
      */
-    abstract List<String> getPreferredSubprotocols();
-
+    List<String> getPreferredSubprotocols();
 }

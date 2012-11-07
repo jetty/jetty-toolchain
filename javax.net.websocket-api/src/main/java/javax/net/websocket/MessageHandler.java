@@ -18,6 +18,10 @@
 
 package javax.net.websocket;
 
+import java.io.InputStream;
+import java.io.Reader;
+import java.nio.ByteBuffer;
+
 /**
  * Developers implement MessageHandlers in order to receive incoming messages
  * during a web socket conversation. Each web socket session uses no more than
@@ -40,8 +44,7 @@ public interface MessageHandler {
      * with @param last set to true. Messages do not interleave and the parts
      * arrive in order.
      */
-    public static interface AsyncBinary extends
-	    javax.net.websocket.MessageHandler {
+    interface AsyncBinary extends MessageHandler {
 	/**
 	 * Called when part of a binary message has been received.
 	 * 
@@ -51,7 +54,7 @@ public interface MessageHandler {
 	 *            whether or not this is last in the sequence of parts of
 	 *            the message
 	 */
-	abstract void onMessagePart(java.nio.ByteBuffer part, boolean last);
+	void onMessagePart(ByteBuffer part, boolean last);
     }
 
     /**
@@ -61,8 +64,7 @@ public interface MessageHandler {
      * with @param last set to true. Messages do not interleave and the parts
      * arrive in order.
      */
-    public static interface AsyncText extends
-	    javax.net.websocket.MessageHandler {
+    interface AsyncText extends MessageHandler {
 	/**
 	 * Called when part of a text message has been received.
 	 * 
@@ -72,7 +74,7 @@ public interface MessageHandler {
 	 *            Whether or not this is last in the sequence of parts of
 	 *            the message.
 	 */
-	abstract void onMessagePart(java.lang.String part, boolean last);
+	void onMessagePart(String part, boolean last);
     }
 
     /**
@@ -82,22 +84,21 @@ public interface MessageHandler {
      * 
      * @since DRAFT 002
      */
-    public static interface Binary extends javax.net.websocket.MessageHandler {
+    interface Binary extends MessageHandler {
 	/**
 	 * Called when the binary message has been fully received.
 	 * 
 	 * @param data
 	 *            the binary message data
 	 */
-	abstract void onMessage(java.nio.ByteBuffer data);
+	void onMessage(ByteBuffer data);
     }
 
     /**
      * This kind of handler is called when a new binary message arrives that is
      * to be read using a blocking stream. Since: DRAFT 002
      */
-    public static interface BinaryStream extends
-	    javax.net.websocket.MessageHandler {
+    interface BinaryStream extends MessageHandler {
 	/**
 	 * This method is called when a new binary message has begun to arrive.
 	 * The InputStream passed in allows implementors of this handler to read
@@ -108,7 +109,7 @@ public interface MessageHandler {
 	 * @param is
 	 *            the input stream containing the message
 	 */
-	abstract void onMessage(java.io.InputStream is);
+	void onMessage(InputStream is);
     }
 
     /**
@@ -117,8 +118,7 @@ public interface MessageHandler {
      * 
      * @since DRAFT 002
      */
-    public static interface CharacterStream extends
-	    javax.net.websocket.MessageHandler {
+    interface CharacterStream extends MessageHandler {
 	/**
 	 * This method is called when a new text message has begun to arrive.
 	 * The Reader passed in allows implementors of this handler to read the
@@ -129,8 +129,7 @@ public interface MessageHandler {
 	 * @param r
 	 *            the reader containing the message
 	 */
-	abstract void onMessage(java.io.Reader r);
-
+	void onMessage(Reader r);
     }
 
     /**
@@ -140,8 +139,7 @@ public interface MessageHandler {
      * 
      * @since DRAFT 002
      */
-    public static interface DecodedObject<T> extends
-	    javax.net.websocket.MessageHandler {
+    interface DecodedObject<T> extends MessageHandler {
 	/**
 	 * Called when the container receives a message that it has been able to
 	 * decode into an object of type T. Containers will by default be able
@@ -151,20 +149,19 @@ public interface MessageHandler {
 	 * @param customObject
 	 *            the message being sent
 	 */
-	abstract void onMessage(T customObject);
-
+	void onMessage(T customObject);
     }
 
     /**
      * This handler is called back by the container when the container receives
      * a pong message.
      */
-    public static interface Pong extends javax.net.websocket.MessageHandler {
+    interface Pong extends MessageHandler {
 	/**
 	 * Called when the container receives a pong message containing the
 	 * given application data.
 	 */
-	abstract void onPong(java.nio.ByteBuffer applicationData);
+	void onPong(ByteBuffer applicationData);
     }
 
     /**
@@ -172,13 +169,13 @@ public interface MessageHandler {
      * received in parts, the container buffers it until it is has been fully
      * received before this method is called. Since: DRAFT 002
      */
-    public static interface Text extends javax.net.websocket.MessageHandler {
+    interface Text extends MessageHandler {
 	/**
 	 * Called when the text message has been fully received.
 	 * 
 	 * @param text
 	 *            the binary message data FIXME
 	 */
-	abstract void onMessage(java.lang.String text);
+	void onMessage(java.lang.String text);
     }
 }

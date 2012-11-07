@@ -21,8 +21,6 @@ package javax.net.websocket;
 import java.net.URI;
 import java.util.List;
 
-import javax.net.websocket.extensions.Extension;
-
 /**
  * The ServerEndpointConfiguration is a special kind of endpoint configuration
  * object that contains web socket configuration information specific only to
@@ -39,9 +37,11 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param originHeaderValue
      *            the value of the origin header
      */
-    abstract boolean checkOrigin(String originHeaderValue);
+    boolean checkOrigin(String originHeaderValue);
 
     /**
+     * http://java.net/jira/browse/WEBSOCKET_SPEC-45
+     * <p>
      * Return the ordered list of extensions that this server will support given
      * the requested extension list passed in. See <a
      * href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating
@@ -50,8 +50,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param requestedExtensions
      *            the requested extentions, in order
      */
-    abstract List<Extension> getNegotiatedExtensions(
-	    List<Extension> requestedExtensions);
+    List<String> getNegotiatedExtensions(List<String> requestedExtensions);
 
     /**
      * Return the subprotocol this server endpoint has chosen from the requested
@@ -62,8 +61,9 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * 
      * @param requestedSubprotocols
      *            the requested subprotocols
+     * @return the negotiated subprotocol
      */
-    abstract String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
+    String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
 
     /**
      * Answers whether the current configuration matches the given URI. This
@@ -73,7 +73,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param uri
      *            the uri of the incoming handshake
      */
-    abstract boolean matchesURI(URI uri);
+    boolean matchesURI(URI uri);
 
     /**
      * Called by the container after it has formulated a handshake response
@@ -90,7 +90,5 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * @param response
      *            the proposed opening handshake response
      */
-    abstract void modifyHandshake(HandshakeRequest request,
-	    HandshakeResponse response);
-
+    void modifyHandshake(HandshakeRequest request, HandshakeResponse response);
 }

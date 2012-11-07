@@ -31,7 +31,6 @@ import java.util.List;
  * @since DRAFT 001
  */
 public interface EndpointConfiguration {
-
     /**
      * Return the Decoder implementations configured. These will be used by the
      * container to decode incoming messages into the expected custom objects on
@@ -39,7 +38,7 @@ public interface EndpointConfiguration {
      * 
      * @return the list of decoders.
      */
-    abstract List<Decoder> getDecoders();
+    List<Decoder> getDecoders();
 
     /**
      * Return the Encoder implementations configured. These will be used by the
@@ -48,6 +47,10 @@ public interface EndpointConfiguration {
      * 
      * @return the list of encoders.
      */
-    abstract List<Encoder> getEncoders();
+    List<Encoder> getEncoders();
 
+    /**
+     * http://java.net/jira/browse/WEBSOCKET_SPEC-46
+     */
+    String getPath();
 }
