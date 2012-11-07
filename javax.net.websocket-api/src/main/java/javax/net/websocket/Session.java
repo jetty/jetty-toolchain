@@ -37,17 +37,17 @@ import javax.net.websocket.extensions.Extension;
  * 
  * @since DRAFT 001
  */
-public interface Session<T> {
+public/* FIXME <T> */interface Session /* FIXME <T> */{
     /**
      * Register to handle to incoming messages in this conversation.
      */
-    abstract void addMessageHandler(MessageHandler listener);
+    void addMessageHandler(MessageHandler listener);
 
     /**
      * Close the current conversation with a normal status code and no reason
      * phrase.
      */
-    abstract void close() throws IOException;
+    void close() throws IOException;
 
     /**
      * Close the current conversation, giving a reason for the closure. Note the
@@ -57,14 +57,14 @@ public interface Session<T> {
      * @param closeStatus
      *            the reason for the closure
      */
-    abstract void close(CloseReason closeStatus) throws IOException;
+    void close(CloseReason closeStatus) throws IOException;
 
     /**
      * Return the container that this session is part of.
      * 
      * @return the container
      */
-    abstract ClientContainer getContainer();
+    ClientContainer getContainer();
 
     /**
      * Return the number of seconds since the underlying connection had any
@@ -73,7 +73,7 @@ public interface Session<T> {
      * @return the inactive time
      */
     // FIXME: is this physical (net) or logical (mux) connection inactive time?
-    abstract long getInactiveTime();
+    long getInactiveTime();
 
     /**
      * The maximum total length of messages, text or binary, that this Session
@@ -81,7 +81,7 @@ public interface Session<T> {
      * 
      * @return the message size
      */
-    abstract long getMaximumMessageSize();
+    long getMaximumMessageSize();
 
     /**
      * Return an unmodifiable copy of the set of MessageHandlers for this
@@ -89,14 +89,14 @@ public interface Session<T> {
      * 
      * @return the set of message handlers
      */
-    abstract Set<MessageHandler> getMessageHandlers();
+    Set<MessageHandler> getMessageHandlers();
 
     /**
      * Return the list of extensions currently in use for this conversation.
      * 
      * @return the negotiated extensions
      */
-    abstract List<Extension> getNegotiatedExtensions();
+    List<Extension> getNegotiatedExtensions();
 
     /**
      * Return the sub protocol agreed during the websocket handshake for this
@@ -104,7 +104,7 @@ public interface Session<T> {
      * 
      * @return the negotiated subprotocol
      */
-    abstract String getNegotiatedSubprotocol();
+    String getNegotiatedSubprotocol();
 
     /**
      * Return the request parameters associated with the request this session
@@ -112,7 +112,7 @@ public interface Session<T> {
      * 
      * @return the unmodifiable map of the request parameters
      */
-    abstract Map<String, String>[] getParameterMap();
+    Map<String, String[]> getParameterMap();
 
     /**
      * Returns the version of the websocket protocol currently being used. This
@@ -121,13 +121,13 @@ public interface Session<T> {
      * 
      * @return the protocol version
      */
-    abstract String getProtocolVersion();
+    String getProtocolVersion();
 
     /**
      * Return the query string associated with the request this session was
      * opened under.
      */
-    abstract String getQueryString();
+    String getQueryString();
 
     /**
      * Return a reference to the RemoteEndpoint object representing the other
@@ -135,7 +135,7 @@ public interface Session<T> {
      * 
      * @return the remote endpoint
      */
-    abstract RemoteEndpoint getRemote();
+    RemoteEndpoint getRemote();
 
     /**
      * Return a reference to the RemoteEndpoint that can send messages in the
@@ -143,7 +143,8 @@ public interface Session<T> {
      * 
      * @return the remote endpoint instance
      */
-    abstract RemoteEndpoint<T> getRemoteL(Class<T> c);
+    // FIXME breaks interface on .setEncoders()
+    // RemoteEndpoint<T> getRemoteL(Class<T> c);
 
     /**
      * Return the URI that this session was opened under.
@@ -152,7 +153,7 @@ public interface Session<T> {
      */
     // FIXME should this conform to servlet-api
     // FIXME strip query string?
-    abstract URI getRequestURI();
+    URI getRequestURI();
 
     /**
      * Return the number of seconds before this conversation will be closed by
@@ -163,7 +164,7 @@ public interface Session<T> {
      */
     // FIXME: this should be milliseconds
     // FIXME: should conform to Socket.setSoTimeout()
-    abstract long getTimeout();
+    long getTimeout();
 
     /**
      * Return true if and only if the underlying socket is open.
@@ -178,7 +179,7 @@ public interface Session<T> {
      * 
      * @return whether its using a secure transport
      */
-    abstract boolean isSecure();
+    boolean isSecure();
 
     /**
      * Remove the given MessageHandler from the set belonging to this session.
@@ -187,7 +188,7 @@ public interface Session<T> {
      *            the handler to be removed. TBD Threading issues wrt handler
      *            invocations vs removal
      */
-    abstract void removeMessageHandler(MessageHandler listener);
+    void removeMessageHandler(MessageHandler listener);
 
     /**
      * Sets the list of encoders to be used in this session in order of
@@ -198,13 +199,13 @@ public interface Session<T> {
      * @param encoders
      *            the list of encoders
      */
-    abstract void setEncoders(List<Encoder> encoders);
+    void setEncoders(List<Encoder> encoders);
 
     /**
      * Sets the maximum total length of messages, text or binary, that this
      * Session can handle.
      */
-    abstract void setMaximumMessageSize(long length);
+    void setMaximumMessageSize(long length);
 
     /**
      * Set the number of seconds before this conversation will be closed by the
@@ -215,5 +216,5 @@ public interface Session<T> {
      */
     // FIXME: this should be milliseconds
     // FIXME: should conform to Socket.setSoTimeout()
-    abstract void setTimeout(long seconds);
+    void setTimeout(long seconds);
 }
