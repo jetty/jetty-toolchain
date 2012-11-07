@@ -161,6 +161,7 @@ public class CloseReason extends java.lang.Object {
      * @param closeCode
      * @param reasonPhrase
      */
+    // FIXME: limit size of reasonPhrase to what will fit in Close frame
     public CloseReason(CloseReason.CloseCode closeCode, String reasonPhrase) {
 	this.closeCode = closeCode;
 	this.reasonPhrase = reasonPhrase;
