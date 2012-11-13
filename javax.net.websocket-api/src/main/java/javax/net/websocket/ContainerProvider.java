@@ -18,6 +18,7 @@
 
 package javax.net.websocket;
 
+import java.util.Iterator;
 import java.util.ServiceLoader;
 
 /**
@@ -31,11 +32,23 @@ public class ContainerProvider {
 	    .load(ServerContainer.class);
 
     public static ClientContainer getClientContainer() {
-	return clientLoader.iterator().next();
+	Iterator<ClientContainer> iter = clientLoader.iterator();
+	if (iter.hasNext()) {
+	    return iter.next();
+	}
+	System.err.printf("ERROR: ServiceLoader cannot find %s instances.%n",
+		ClientContainer.class);
+	return null;
     }
 
     public static ServerContainer getServerContainer() {
-	return serverLoader.iterator().next();
+	Iterator<ServerContainer> iter = serverLoader.iterator();
+	if (iter.hasNext()) {
+	    return iter.next();
+	}
+	System.err.printf("ERROR: ServiceLoader cannot find %s instances.%n",
+		ServerContainer.class);
+	return null;
     }
 
     public ContainerProvider() {
