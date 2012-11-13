@@ -11,12 +11,12 @@
   <artifactId>javax.websocket-api</artifactId>
   <packaging>jar</packaging>
   <version>0.0.007.draft-SNAPSHOT</version>
-  <name>Jetty :: javax.net.websocket (DRAFT)</name>
+  <name>Jetty :: javax.websocket (DRAFT)</name>
   <description>API of JSR-356 Drafts (will switch to official version when available on maven central)</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <bundle-symbolic-name>javax.net.websocket</bundle-symbolic-name>
-    <osgi-version>0.0.0</osgi-version>
+    <bundle-symbolic-name>javax.websocket</bundle-symbolic-name>
+    <osgi-version>0.0.7</osgi-version>
     <jetty-url>http://www.eclipse.org/jetty/</jetty-url>
   </properties>
   <dependencies>
