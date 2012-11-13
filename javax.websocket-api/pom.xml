@@ -10,7 +10,7 @@
   <groupId>org.eclipse.jetty.drafts</groupId>
   <artifactId>javax.websocket-api</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.006.draft-SNAPSHOT</version>
+  <version>0.0.006.draft</version>
   <name>Jetty :: javax.net.websocket (DRAFT)</name>
   <description>API of JSR-356 Drafts (will switch to official version when available on maven central)</description>
   <properties>
@@ -108,7 +108,7 @@
             </goals>
             <configuration>
               <instructions>
-                <Import-Package></Import-Package>
+                <Import-Package />
                 <_nouses>true</_nouses>
               </instructions>
             </configuration>
