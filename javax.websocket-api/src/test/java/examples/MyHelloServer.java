@@ -1,7 +1,7 @@
 package examples;
 
-import javax.websocket.annotations.WebSocketEndpoint;
-import javax.websocket.annotations.WebSocketMessage;
+import javax.websocket.WebSocketEndpoint;
+import javax.websocket.WebSocketMessage;
 
 @WebSocketEndpoint("/hello")
 public class MyHelloServer {

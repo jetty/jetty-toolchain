@@ -29,11 +29,8 @@ public interface ServerContainer extends ClientContainer {
     /**
      * Publish the given endpoint with the provided configuration information.
      * 
-     * @param endpoint
-     *            the endpoint to be deployed
-     * @param ilc
-     *            the endpoint configuration that the runtime should use to
-     *            deploy the endpoint.
+     * @param endpointClazz
+     *            the class of the endpoint to be deployed.
      */
-    void publishServer(Endpoint endpoint, ServerEndpointConfiguration ilc);
+    void publishServer(Class<? extends Endpoint> endpointClazz);
 }

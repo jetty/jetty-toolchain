@@ -16,7 +16,7 @@
 //  ========================================================================
 //
 
-package javax.websocket.annotations;
+package javax.websocket;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -25,20 +25,18 @@ import java.lang.annotation.Target;
 
 /**
  * This method level annotation can be used to decorate a Java method that
- * wishes to be called when a new web socket session is open.
+ * wishes to be called in order to handle errors.
  * <p>
  * The method may only take the following parameters:-
- * <p>
  * <ul>
  * <li>optional Session parameter</li>
+ * <li>a Throwable parameter</li>
  * <li>Zero to n String parameters annotated with the &#064;WebSocketPathParam
  * annotation.</li>
  * </ul>
  * in any order.
- * 
- * @since Draft 002
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface WebSocketOpen {
+public @interface WebSocketError {
 }

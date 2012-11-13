@@ -1,9 +1,9 @@
 package examples;
 
 import javax.websocket.Session;
-import javax.websocket.annotations.WebSocketEndpoint;
-import javax.websocket.annotations.WebSocketMessage;
-import javax.websocket.annotations.WebSocketPathParam;
+import javax.websocket.WebSocketEndpoint;
+import javax.websocket.WebSocketMessage;
+import javax.websocket.WebSocketPathParam;
 
 @WebSocketEndpoint("/bookings/{guest-id}")
 public class BookingServer {

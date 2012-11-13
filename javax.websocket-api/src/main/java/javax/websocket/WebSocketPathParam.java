@@ -16,7 +16,7 @@
 //  ========================================================================
 //
 
-package javax.websocket.annotations;
+package javax.websocket;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -24,19 +24,32 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This method level annotation can be used to decorate a Java method that
- * wishes to be called in order to handle errors.
+ * This annotation may be used to annotate method parameters on web socket POJOs
+ * where a URI-template has been used in the path-mapping of the
+ * WebSocketEndpoint annotation.
  * <p>
- * The method may only take the following parameters:-
- * <ul>
- * <li>optional Session parameter</li>
- * <li>a Throwable parameter</li>
- * <li>Zero to n String parameters annotated with the &#064;WebSocketPathParam
- * annotation.</li>
- * </ul>
- * in any order.
+ * For example:
+ * 
+ * <pre>
+ * &#064;WebSocketEndpoint("/bookings/{guest-id}");
+ * public class BookingServer { 
+ *   &#064;WebSocketMessage 
+ *   public void processBookingRequest(&#064;WebSocketPathParam("guest-id") String guestID, String message, Session session) { 
+ *     // process booking from the given guest here
+ *   } 
+ * }
+ * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface WebSocketError {
+@Target(ElementType.PARAMETER)
+public @interface WebSocketPathParam {
+    /**
+     * The name of the variable used in the URI-template. If the name does not
+     * match a path variable in the URI-template, the value of the method
+     * parameter this annotation annotates is null.
+     * 
+     * @return the value
+     */
+    public abstract String value();
+
 }

@@ -16,15 +16,13 @@
 //  ========================================================================
 //
 
-package javax.websocket.annotations;
+package javax.websocket;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.websocket.Decoder;
-import javax.websocket.Encoder;
 
 /**
  * This class level annotation declares that the class it decorates is a web
