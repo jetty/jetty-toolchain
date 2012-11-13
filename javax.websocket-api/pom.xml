@@ -10,11 +10,14 @@
   <groupId>org.eclipse.jetty.drafts</groupId>
   <artifactId>javax.websocket-api</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.007.draft-SNAPSHOT</version>
+  <version>0.0.006.draft-SNAPSHOT</version>
   <name>Jetty :: javax.net.websocket (DRAFT)</name>
   <description>API of JSR-356 Drafts (will switch to official version when available on maven central)</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <bundle-symbolic-name>javax.net.websocket</bundle-symbolic-name>
+    <osgi-version>0.0.0</osgi-version>
+    <jetty-url>http://www.eclipse.org/jetty/</jetty-url>
   </properties>
   <dependencies>
     <dependency>
@@ -34,16 +37,98 @@
           <target>1.6</target>
         </configuration>
       </plugin>
+      <!-- Enforcer Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-java</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>[3.0.0,)</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>[1.6,)</version>
+                  <message>[ERROR] OLD JDK [${java.version}] in use. Jetty ${project.version} requires JDK 1.6 or newer</message>
+                </requireJavaVersion>
+                <versionOsgiRule implementation="org.eclipse.jetty.toolchain.enforcer.rules.RequireOsgiCompatibleVersionRule" />
+                <versionRedhatRule implementation="org.eclipse.jetty.toolchain.enforcer.rules.RequireRedhatCompatibleVersionRule" />
+                <versionDebianRule implementation="org.eclipse.jetty.toolchain.enforcer.rules.RequireDebianCompatibleVersionRule" />
+             </rules>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+           <dependency>
+             <groupId>org.eclipse.jetty.toolchain</groupId>
+             <artifactId>jetty-build-support</artifactId>
+             <version>1.1</version>
+           </dependency>
+        </dependencies>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <executions>
           <execution>
+            <id>attach-sources</id>
+            <phase>process-classes</phase>
             <goals>
               <goal>jar</goal>
             </goals>
+            <configuration>
+              <archive>
+                <manifestEntries>
+                  <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                  <Bundle-Name>${project.name}</Bundle-Name>
+                  <Bundle-SymbolicName>${bundle-symbolic-name}.source;singleton:=true</Bundle-SymbolicName>
+                  <Bundle-Vendor>Eclipse.org - Jetty</Bundle-Vendor>
+                  <Bundle-Version>${parsedVersion.osgiVersion}</Bundle-Version>
+                  <Eclipse-SourceBundle>${bundle-symbolic-name};version="${parsedVersion.osgiVersion}";roots:="."</Eclipse-SourceBundle>
+                </manifestEntries>
+              </archive>
+            </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>generate-manifest</id>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+            <configuration>
+              <instructions>
+                <Import-Package></Import-Package>
+                <_nouses>true</_nouses>
+              </instructions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <configuration>
+          <archive>
+            <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+            <manifestEntries>
+              <Implementation-Version>${project.version}</Implementation-Version>
+              <Implementation-Vendor>Eclipse.org - Jetty</Implementation-Vendor>
+              <url>${jetty-url}</url>
+            </manifestEntries>
+          </archive>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -88,6 +173,28 @@
         </dependencies>
       </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.3.4</version>
+          <extensions>true</extensions>
+          <configuration>
+            <instructions>
+              <Bundle-SymbolicName>${bundle-symbolic-name}</Bundle-SymbolicName>
+              <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
+              <Bundle-DocURL>${jetty-url}</Bundle-DocURL>
+              <Bundle-Vendor>Eclipse Jetty Project</Bundle-Vendor>
+              <Bundle-Classpath>.</Bundle-Classpath>
+              <Export-Package>${bundle-symbolic-name}.*;version="${osgi-version}"</Export-Package>
+              <Bundle-Copyright>Copyright (c) 2008-2012 Mort Bay Consulting Pty. Ltd.</Bundle-Copyright>
+              <_versionpolicy>[$(version;==;$(@)),$(version;+;$(@)))</_versionpolicy>
+            </instructions>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
   <reporting>
     <plugins>
