@@ -18,7 +18,7 @@ public class HelloServer extends Endpoint {
     @Override
     public void onOpen(Session session) {
 	final RemoteEndpoint remote = session.getRemote();
-	session.addMessageHandler(new MessageHandler.Text() {
+	session.addMessageHandler(new MessageHandler.Basic<String>() {
 	    @Override
 	    public void onMessage(String text) {
 		try {
