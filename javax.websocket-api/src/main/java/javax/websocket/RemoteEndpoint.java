@@ -38,7 +38,48 @@ import java.util.concurrent.Future;
  * 
  * @since DRAFT 001
  */
-public interface RemoteEndpoint<T> {
+public interface RemoteEndpoint {
+    /**
+     * Send a text message, blocking until all of the message has been
+     * transmitted.
+     * 
+     * @param text
+     *            the message to be sent
+     */
+    void sendString(String text) throws IOException;
+
+    /**
+     * Send a binary message, returning when all of the message has been
+     * transmitted.
+     * 
+     * @param data
+     *            the message to be sent
+     */
+    void sendBytes(ByteBuffer data) throws IOException;
+
+    /**
+     * Send a text message in pieces, blocking until all of the message has been
+     * transmitted. The runtime reads the message in order. Non-final pieces are
+     * sent with isLast set to false. The final piece must be sent with isLast
+     * set to true.
+     * 
+     * @param fragment
+     *            the piece of the message being sent
+     */
+    void sendPartialString(String fragment, boolean isLast) throws IOException;
+
+    /**
+     * Send a binary message in pieces, blocking until all of the message has
+     * been transmitted. The runtime reads the message in order. Non-final
+     * pieces are sent with isLast set to false. The final piece must be sent
+     * with isLast set to true.
+     * 
+     * @param partialByte
+     *            the piece of the message being sent
+     */
+    void sendPartialBytes(ByteBuffer partialByte, boolean isLast)
+	    throws IOException;
+
     /**
      * Opens an output stream on which a binary message may be sent. The
      * developer must close the output stream in order to indicate that the
@@ -58,13 +99,45 @@ public interface RemoteEndpoint<T> {
     Writer getSendWriter() throws IOException;
 
     /**
-     * Send a binary message, returning when all of the message has been
-     * transmitted.
+     * Sends a custom developer object, blocking until it has been transmitted.
+     * Containers will by default be able to encode java primitive types, their
+     * object equivalents, and arrays or collections thereof. The developer will
+     * have provided an encoder for this object type in the endpoint
+     * configuration.
      * 
-     * @param data
-     *            the message to be sent
+     * @param o
+     *            the object to be sent
      */
-    void sendBytes(ByteBuffer data) throws IOException;
+    void sendObject(Object o) throws IOException, EncodeException;
+
+    /**
+     * Initiates the asynchronous transmission of a text message. This method
+     * returns before the message is transmitted. Developers provide a callback
+     * to be notified when the message has been transmitted. Errors in
+     * transmission are given to the developer in the SendResult object.
+     * 
+     * @param text
+     *            the text being sent.
+     * @param completion
+     *            the handler which will be notified of progress.
+     * @return
+     */
+    void sendStringByCompletion(String text, SendHandler completion);
+
+    /**
+     * Initiates the asynchronous transmission of a text message. This method
+     * returns before the message is transmitted. Developers may provide a
+     * callback to be notified when the message has been transmitted, or may use
+     * the returned Future object to track progress of the transmission. Errors
+     * in transmission are given to the developer in the SendResult object in
+     * either case.
+     * 
+     * @param text
+     *            the text being sent
+     * @param completion
+     *            the handler which will be notified of progress
+     */
+    Future<SendResult> sendStringByFuture(String text);
 
     /**
      * Initiates the asynchronous transmission of a binary message. This method
@@ -79,56 +152,52 @@ public interface RemoteEndpoint<T> {
      * @param completion
      *            handler that will be notified of progress
      */
-    Future<SendResult> sendBytes(ByteBuffer data, SendHandler completion);
+    Future<SendResult> sendBytesByFuture(ByteBuffer data);
 
     /**
-     * Sends a custom developer object, blocking until it has been transmitted.
-     * Containers will by default be able to encode java primitive types, their
-     * object equivalents, and arrays or collections thereof. The developer will
-     * have provided an encoder for this object type in the endpoint
-     * configuration.
+     * Initiates the asynchronous transmission of a binary message. This method
+     * returns before the message is transmitted. Developers may provide a
+     * callback to be notified when the message has been transmitted, or may use
+     * the returned Future object to track progress of the transmission. Errors
+     * in transmission are given to the developer in the SendResult object in
+     * either case.
+     * 
+     * @param data
+     *            the data being sent
+     * @param completion
+     *            handler that will be notified of progress
      */
-    void sendObject(T o) throws IOException, EncodeException;
+    void sendBytesByCompletion(ByteBuffer data, SendHandler completion);
 
     /**
-     * Initiates the transmission of a custom developer object. The developer
-     * will have provided an encoder for this object type in the endpoint
-     * configuration. Containers will by default be able to encode java
+     * Initiates the asynchronous transmission of a custom developer object. The
+     * developer will have provided an encoder for this object type in the
+     * endpoint configuration. Containers will by default be able to encode java
      * primitive types, their object equivalents, and arrays or collections
-     * thereof. Progress can be tracked using the Future object, or the
-     * developer can wait for a provided callback object to be notified when
-     * transmission is complete.
+     * thereof. Progress is be tracked using the Future object.
      * 
      * @param o
-     *            the object being sent
-     * @param handler
+     *            the object being sent.
+     * @param completion
+     *            the handler that will be notified of progress
+     * @return future
+     */
+    Future<SendResult> sendObjectByFuture(Object o);
+
+    /**
+     * Initiates the asynchronous transmission of a custom developer object. The
+     * developer will have provided an encoder for this object type in the
+     * endpoint configuration. Containers will by default be able to encode java
+     * primitive types, their object equivalents, and arrays or collections
+     * thereof. Developers are notified when transmission is complete through
+     * the supplied callback object.
+     * 
+     * @param o
+     *            the object being sent.
+     * @param completion
      *            the handler that will be notified of progress
      */
-    // FIXME s/handler/completion/
-    Future<SendResult> sendObject(T o, SendHandler handler);
-
-    /**
-     * Send a binary message in pieces, blocking until all of the message has
-     * been transmitted. The runtime reads the message in order. Non-final
-     * pieces are sent with isLast set to false. The final piece must be sent
-     * with isLast set to true.
-     * 
-     * @param partialByte
-     *            the piece of the message being sent
-     */
-    void sendPartialBytes(ByteBuffer partialByte, boolean isLast)
-	    throws IOException;
-
-    /**
-     * Send a text message in pieces, blocking until all of the message has been
-     * transmitted. The runtime reads the message in order. Non-final pieces are
-     * sent with isLast set to false. The final piece must be sent with isLast
-     * set to true.
-     * 
-     * @param fragment
-     *            the piece of the message being sent
-     */
-    void sendPartialString(String fragment, boolean isLast) throws IOException;
+    void sendObjectByCompletion(Object o, SendHandler completion);
 
     /**
      * Send a Ping message containing the given application data to the remote
@@ -149,28 +218,4 @@ public interface RemoteEndpoint<T> {
      *            the application data to be carried in the pong response.
      */
     void sendPong(ByteBuffer applicationData);
-
-    /**
-     * Send a text message, blocking until all of the message has been
-     * transmitted.
-     * 
-     * @param text
-     *            the message to be sent
-     */
-    void sendString(String text) throws IOException;
-
-    /**
-     * Initiates the asynchronous transmission of a text message. This method
-     * returns before the message is transmitted. Developers may provide a
-     * callback to be notified when the message has been transmitted, or may use
-     * the returned Future object to track progress of the transmission. Errors
-     * in transmission are given to the developer in the SendResult object in
-     * either case.
-     * 
-     * @param text
-     *            the text being sent
-     * @param completion
-     *            the handler which will be notified of progress
-     */
-    Future<SendResult> sendString(String text, SendHandler completion);
 }

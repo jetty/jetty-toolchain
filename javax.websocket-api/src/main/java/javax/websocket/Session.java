@@ -35,7 +35,7 @@ import java.util.Set;
  * 
  * @since DRAFT 001
  */
-public interface Session<T> {
+public interface Session {
     /**
      * Register to handle to incoming messages in this conversation.
      */
@@ -133,16 +133,7 @@ public interface Session<T> {
      * 
      * @return the remote endpoint
      */
-    // FIXME: should this default RemoteEndpoint support .sendObject()?
     RemoteEndpoint getRemote();
-
-    /**
-     * Return a reference to the RemoteEndpoint that can send messages in the
-     * form of objects of class c.
-     * 
-     * @return the remote endpoint instance
-     */
-    RemoteEndpoint<T> getRemote(Class<T> c);
 
     /**
      * Return the URI that this session was opened under.
