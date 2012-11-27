@@ -66,6 +66,7 @@ public interface Decoder {
 	 * 
 	 * @param is
 	 *            the input stream carrying the bytes
+	 * @return the decoded object
 	 */
 	T decode(InputStream is) throws DecodeException, IOException;
     }

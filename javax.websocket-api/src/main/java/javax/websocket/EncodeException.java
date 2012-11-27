@@ -27,16 +27,41 @@ package javax.websocket;
 public class EncodeException extends Exception {
     private Object object;
 
+    /**
+     * Constructor with the object being encoded, and the reason why it failed
+     * to be.
+     * 
+     * @param object
+     *            the object that could not be encoded.
+     * @param message
+     *            the reason for the failure.
+     */
     public EncodeException(Object object, String message) {
 	super(message);
 	this.object = object;
     }
 
+    /**
+     * Constructor with the object being encoded, and the reason why it failed
+     * to be, and the cause.
+     * 
+     * @param object
+     *            the object that could not be encoded.
+     * @param message
+     *            the reason for the failure.
+     * @param cause
+     *            the cause of the problem
+     */
     public EncodeException(Object object, String message, Throwable cause) {
 	super(message, cause);
 	this.object = object;
     }
 
+    /**
+     * Return the Object that could not be encoded.
+     * 
+     * @return the object
+     */
     public Object getObject() {
 	return object;
     }

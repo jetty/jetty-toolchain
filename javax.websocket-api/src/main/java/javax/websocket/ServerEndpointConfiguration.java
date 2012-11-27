@@ -36,6 +36,7 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * 
      * @param originHeaderValue
      *            the value of the origin header
+     * @return whether the check passed or not
      */
     boolean checkOrigin(String originHeaderValue);
 
@@ -43,12 +44,13 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      * http://java.net/jira/browse/WEBSOCKET_SPEC-45
      * <p>
      * Return the ordered list of extensions that this server will support given
-     * the requested extension list passed in. See <a
+     * the requested extension list passed in, the empty list if none. See <a
      * href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating
      * Extensions</a>
      * 
      * @param requestedExtensions
      *            the requested extentions, in order
+     * @return the list of extensions negotiated
      */
     List<String> getNegotiatedExtensions(List<String> requestedExtensions);
 
@@ -66,12 +68,13 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
     String getNegotiatedSubprotocol(List<String> requestedSubprotocols);
 
     /**
-     * Answers whether the current configuration matches the given URI. This
+     * Answers whether the current configuration matches the given path. This
      * method may be overridden by implementations with any number of algorithms
      * for determining a match.
      * 
      * @param uri
      *            the uri of the incoming handshake
+     * @return whether there was a match
      */
     boolean matchesURI(URI uri);
 
@@ -91,4 +94,14 @@ public interface ServerEndpointConfiguration extends EndpointConfiguration {
      *            the proposed opening handshake response
      */
     void modifyHandshake(HandshakeRequest request, HandshakeResponse response);
+
+    /**
+     * Return the path for this endpoint configuration. The path is the URI or
+     * URI-template relative to the websocket root of the server to which the
+     * endpoint using this configuration will be mapped. The path always begins
+     * with a leading "/". A trailing "/" will be ignored.
+     * 
+     * @return the relative path for this configuration.
+     */
+    String getPath();
 }

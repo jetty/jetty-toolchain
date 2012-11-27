@@ -23,11 +23,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-
 /**
  * This class level annotation declares that the class it decorates is a web
- * socket endpoint. The annotation allows the developer to define the URL (or
- * URI template) which this endpoint must be published, and other important
+ * socket endpoint that will be deployed and made available in the URI-space of
+ * a web socket server. The annotation allows the developer to define the URL
+ * (or URI template) which this endpoint will be published, and other important
  * properties of the endpoint to the websocket runtime, such as the encoders it
  * uses to send messages.
  * <p>
@@ -76,7 +76,8 @@ public @interface WebSocketEndpoint {
 
     /**
      * The URI or URI-template (level-1) where the endpoint will be deployed.
-     * The URI us relative to the root of the web socket container.
+     * The URI us relative to the root of the web socket container and must
+     * begin with a leading "/". Trailing "/"'s are ignored.
      * <p>
      * Examples:
      * 
@@ -85,6 +86,8 @@ public @interface WebSocketEndpoint {
      * &#064;WebSocketEndpoint("/chat/{user}")
      * &#064;WebSocketEndpoint("/booking/{privilege-level}")
      * </pre>
+     * 
+     * @return the URI or URI-template
      */
     public String value();
 

@@ -38,10 +38,6 @@ package javax.websocket;
  * @since DRAFT 001
  */
 public abstract class Endpoint {
-    public Endpoint() {
-	/* default constructor */
-    }
-
     /**
      * Developers must provide an EndpointConfiguration so that the container it
      * is deployed in can configure it.
@@ -51,7 +47,10 @@ public abstract class Endpoint {
     public abstract EndpointConfiguration getEndpointConfiguration();
 
     /**
-     * This method is called when the sessoin with the client is terminated
+     * This method is called when the sessoin with the client is terminated.
+     * 
+     * @param closeReason
+     *            the reason the session was closed.
      */
     public void onClose(CloseReason closeReason) {
     }
@@ -75,6 +74,9 @@ public abstract class Endpoint {
      * TBD We may come up with less of a 'catch-all' mechanism for handling
      * exceptions, especially given the varying nature of these categories of
      * exception.
+     * 
+     * @param thr
+     *            the throwable representing the problem.
      */
     public void onError(Throwable thr) {
     }
@@ -82,6 +84,9 @@ public abstract class Endpoint {
     /**
      * Developers may implement this method to be notified when a new
      * conversation has just begun.
+     * 
+     * @param session
+     *            the session that has just been activated.
      */
     public abstract void onOpen(Session session);
 }

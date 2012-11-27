@@ -18,6 +18,7 @@
 
 package javax.websocket;
 
+import java.net.URI;
 import java.util.Set;
 
 /**
@@ -28,16 +29,17 @@ import java.util.Set;
  */
 public interface ClientContainer {
     /**
-     * Connect the supplied endpoint to its server using the supplied handshake
-     * parameters
+     * Connect the supplied annotated object to its server using the supplied
+     * handshake parameters. The supplied object must be a class decorated with
+     * the class level {@link WebSocketEndpoint} annotation.
      * 
      * @param endpoint
-     *            the endpoint which will be connected to the server
-     * @param olc
-     *            the client configuration used to connect to the client
+     *            either subclass of {@link Endpoint} or a POJO annotated with
+     *            {@link WebSocketClient} annotation.
+     * @param path
+     *            the complete path to the server endpoint
      */
-    void connectToServer(Endpoint endpoint, ClientEndpointConfiguration olc)
-	    throws DeploymentException;
+    void connectToServer(Object endpoint, URI path) throws DeploymentException;
 
     /**
      * Return a copy of the Set of the currently active web socket sessions.
@@ -47,7 +49,6 @@ public interface ClientContainer {
      * 
      * @return the set of sessions, active at the time of return.
      */
-    @SuppressWarnings("rawtypes")
     Set<Session> getActiveSessions();
 
     /**
@@ -66,10 +67,10 @@ public interface ClientContainer {
     long getMaxBinaryMessageBufferSize();
 
     /**
-     * Return the maximum time in seconds that a web socket session may be idle
-     * before the container may close it.
+     * Return the maximum time in milliseconds that a web socket session may be
+     * idle before the container may close it.
      * 
-     * @return the number of seconds idle web socket sessions are active
+     * @return the number of milliseconds idle web socket sessions are active
      */
     long getMaxSessionIdleTimeout();
 
@@ -94,7 +95,7 @@ public interface ClientContainer {
      * container may close it.
      * 
      * @param timeout
-     *            the maximum time in seconds
+     *            the maximum time in milliseconds
      */
     void setMaxSessionIdleTimeout(long timeout);
 

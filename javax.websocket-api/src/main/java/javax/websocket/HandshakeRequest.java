@@ -50,6 +50,8 @@ public interface HandshakeRequest {
 
     /**
      * Return the query string associated with the request.
+     * 
+     * @return the query string
      */
     String getQueryString();
 
@@ -60,7 +62,6 @@ public interface HandshakeRequest {
      */
     // FIXME: should this conform to servlet-api behavior?
     // FIXME: servlet-api returns a String
-    // FIXME: the URI format was removed recently in other websocket api classes/interfaces
     // FIXME: prune query string?
     URI getRequestURI();
 

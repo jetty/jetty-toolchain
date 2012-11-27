@@ -32,25 +32,20 @@ import java.util.List;
  */
 public interface EndpointConfiguration {
     /**
-     * Return the Decoder implementations configured. These will be used by the
-     * container to decode incoming messages into the expected custom objects on
-     * MessageListener.onMessage() callbacks.
+     * Return the Decoder implementations configured, the empty list if none.
+     * These will be used by the container to decode incoming messages into the
+     * expected custom objects on MessageListener.onMessage() callbacks.
      * 
      * @return the list of decoders.
      */
     List<Decoder> getDecoders();
 
     /**
-     * Return the Encoder implementations configured. These will be used by the
-     * container to encode custom objects passed into the send() methods on
-     * remote endpoints.
+     * Return the Encoder implementations configured, the empty list if none.
+     * These will be used by the container to encode custom objects passed into
+     * the send() methods on remote endpoints.
      * 
      * @return the list of encoders.
      */
     List<Encoder> getEncoders();
-
-    /**
-     * http://java.net/jira/browse/WEBSOCKET_SPEC-46
-     */
-    String getPath();
 }

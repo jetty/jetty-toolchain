@@ -105,12 +105,15 @@ public interface Session {
     String getNegotiatedSubprotocol();
 
     /**
-     * Return the request parameters associated with the request this session
-     * was opened under.
+     * Return a map of the path parameter names and values used if the server
+     * endpoint was deployed with a URI-template and the client connected with a
+     * particular matching URL.
      * 
-     * @return the unmodifiable map of the request parameters
+     * @return the unmodifiable map of path parameters. The key of the map is
+     *         the parameter name, the values in the map are the parameter
+     *         values.
      */
-    Map<String, String[]> getParameterMap();
+    Map<String, String> getPathParameters();
 
     /**
      * Returns the version of the websocket protocol currently being used. This
@@ -136,6 +139,14 @@ public interface Session {
     RemoteEndpoint getRemote();
 
     /**
+     * Return the request parameters associated with the request this session
+     * was opened under.
+     * 
+     * @return the unmodifiable map of the request parameters
+     */
+    Map<String, String[]> getRequestParameterMap();
+
+    /**
      * Return the URI that this session was opened under.
      * 
      * @return the request URI.
@@ -145,14 +156,12 @@ public interface Session {
     URI getRequestURI();
 
     /**
-     * Return the number of seconds before this conversation will be closed by
-     * the container if it is inactive, ie no messages are either sent or
+     * Return the number of milliseconds before this conversation will be closed
+     * by the container if it is inactive, ie no messages are either sent or
      * received in that time.
      * 
-     * @return the timeout in seconds
+     * @return the timeout in milliseconds.
      */
-    // FIXME: this should be milliseconds
-    // FIXME: should conform to Socket.setSoTimeout()
     long getTimeout();
 
     /**
@@ -197,13 +206,12 @@ public interface Session {
     void setMaximumMessageSize(long length);
 
     /**
-     * Set the number of seconds before this conversation will be closed by the
-     * container if it is inactive, ie no messages are either sent or received.
+     * Set the number of milliseconds before this conversation will be closed by
+     * the container if it is inactive, ie no messages are either sent or
+     * received.
      * 
-     * @param seconds
-     *            the number of seconds
+     * @param ms
+     *            the number of milliseconds.
      */
-    // FIXME: this should be milliseconds
-    // FIXME: should conform to Socket.setSoTimeout()
-    void setTimeout(long seconds);
+    void setTimeout(long ms);
 }

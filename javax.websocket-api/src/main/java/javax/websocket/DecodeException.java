@@ -37,6 +37,7 @@ public class DecodeException extends Exception {
      * the streaming methods or not.
      * 
      * @param bb
+     *            the byte buffer with the data that could not be decoded
      * @param message
      */
     public DecodeException(ByteBuffer bb, String message) {
@@ -44,6 +45,19 @@ public class DecodeException extends Exception {
 	this.bytes = bb;
     }
 
+    /**
+     * Constructor with the data being decoded, and the reason why it failed to
+     * be, and the cause. The buffer may represent the whole message, or part of
+     * the message, depending whether the application is using one of the
+     * streaming methods or not.
+     * 
+     * @param bb
+     *            the byte buffer with the data that could not be decoded
+     * @param message
+     *            the reason for the failure
+     * @param cause
+     *            the cause of the error.
+     */
     public DecodeException(ByteBuffer bb, String message, Throwable cause) {
 	super(message, cause);
 	this.bytes = bb;
@@ -63,6 +77,19 @@ public class DecodeException extends Exception {
 	this.text = encodedString;
     }
 
+    /**
+     * Constructor with the data being decoded, and the reason why it failed to
+     * be, and the cause. The encoded string may represent the whole message, or
+     * part of the message, depending whether the application is using one of
+     * the streaming methods or not.
+     * 
+     * @param encodedString
+     *            the string that could not be decoded
+     * @param message
+     *            the reason for the failure
+     * @param cause
+     *            the cause of the error.
+     */
     public DecodeException(String encodedString, String message, Throwable cause) {
 	super(message, cause);
 	this.text = encodedString;
@@ -70,6 +97,8 @@ public class DecodeException extends Exception {
 
     /**
      * Return the ByteBuffer that cannot be decoded.
+     * 
+     * @return the data not decoded.
      */
     public ByteBuffer getBytes() {
 	return bytes;
@@ -77,6 +106,8 @@ public class DecodeException extends Exception {
 
     /**
      * Return the encoded string that cannot be decoded.
+     * 
+     * @return the text not decoded.
      */
     public String getText() {
 	return text;

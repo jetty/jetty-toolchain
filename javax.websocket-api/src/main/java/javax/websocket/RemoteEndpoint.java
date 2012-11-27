@@ -94,7 +94,7 @@ public interface RemoteEndpoint {
      * developer must close the writer in order to indicate that the complete
      * message has been placed into the character stream.
      * 
-     * @return the output stream to which the message will be written
+     * @return the writer to which the message will be written
      */
     Writer getSendWriter() throws IOException;
 
@@ -120,7 +120,6 @@ public interface RemoteEndpoint {
      *            the text being sent.
      * @param completion
      *            the handler which will be notified of progress.
-     * @return
      */
     void sendStringByCompletion(String text, SendHandler completion);
 
@@ -136,6 +135,7 @@ public interface RemoteEndpoint {
      *            the text being sent
      * @param completion
      *            the handler which will be notified of progress
+     * @return the Future object representing the send operation.
      */
     Future<SendResult> sendStringByFuture(String text);
 
@@ -151,6 +151,7 @@ public interface RemoteEndpoint {
      *            the data being sent
      * @param completion
      *            handler that will be notified of progress
+     * @return the Future object representing the send operation.
      */
     Future<SendResult> sendBytesByFuture(ByteBuffer data);
 
@@ -180,7 +181,7 @@ public interface RemoteEndpoint {
      *            the object being sent.
      * @param completion
      *            the handler that will be notified of progress
-     * @return future
+     * @return the Future object representing the send operation.
      */
     Future<SendResult> sendObjectByFuture(Object o);
 

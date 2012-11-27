@@ -33,11 +33,11 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
     /**
      * http://java.net/jira/browse/WEBSOCKET_SPEC-45
      * <p>
-     * Return the list of all the extensions that this client supports. These
-     * are the extensions that will be used to populate the
-     * Sec-WebSocket-Extensions header in the opening handshake for clients
-     * using this configuration. The first extension in the list is the most
-     * preferred extension. See <a
+     * Return the list of all the extensions that this client supports, the
+     * empty list if there are none. These are the extensions that will be used
+     * to populate the Sec-WebSocket-Extensions header in the opening handshake
+     * for clients using this configuration. The first extension in the list is
+     * the most preferred extension. See <a
      * href="http://tools.ietf.org/html/rfc6455#section-9.1">Negotiating
      * Extensions</a>
      * 
@@ -46,14 +46,14 @@ public interface ClientEndpointConfiguration extends EndpointConfiguration {
     List<String> getExtensions();
 
     /**
-     * The ordered list of sub protocols a client endpoint would like to use.
-     * This list is used to generate the Sec-WebSocket-Protocol header in the
-     * opening handshake for clients using this configuration. The first
-     * protocol name is the most preferred. See <a
+     * The ordered list of sub protocols a client endpoint would like to use,
+     * the empty list if there are none. This list is used to generate the
+     * Sec-WebSocket-Protocol header in the opening handshake for clients using
+     * this configuration. The first protocol name is the most preferred. See <a
      * href="http://tools.ietf.org/html/rfc6455#section-4.1">Cilent Opening
      * Handshake</a>
      * 
-     * @return a list of subprotocols
+     * @return a list of preferred subprotocols
      */
     List<String> getPreferredSubprotocols();
 }

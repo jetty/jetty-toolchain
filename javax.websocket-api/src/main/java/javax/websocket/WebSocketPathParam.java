@@ -24,19 +24,38 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation may be used to annotate method parameters on web socket POJOs
- * where a URI-template has been used in the path-mapping of the
- * WebSocketEndpoint annotation.
+ * This annotation may be used to annotate method parameters on server side web
+ * socket POJOs where a URI-template has been used in the path-mapping of the
+ * WebSocketEndpoint annotation. The method parameter may be of type String or
+ * any Java primitive type or any boxed version thereof. If a client URI matches
+ * the URI-template, but the requested path parameter cannot be decoded, then
+ * the websocket's error handler will be called.
  * <p>
  * For example:
  * 
  * <pre>
- * &#064;WebSocketEndpoint("/bookings/{guest-id}");
- * public class BookingServer { 
- *   &#064;WebSocketMessage 
- *   public void processBookingRequest(&#064;WebSocketPathParam("guest-id") String guestID, String message, Session session) { 
- *     // process booking from the given guest here
- *   } 
+ * &#064;WebSocketEndpoint(&quot;/bookings/{guest-id}&quot;)
+ * public class BookingServer {
+ *     &#064;WebSocketMessage
+ *     public void processBookingRequest(
+ * 	    &#064;WebSocketPathParam(&quot;guest-id&quot;) String guestID, String message,
+ * 	    Session session) {
+ * 	// process booking from the given guest here
+ *     }
+ * }
+ * </pre>
+ * <p>
+ * For example:
+ * 
+ * <pre>
+ * &#064;WebSocketEndpoint(&quot;/rewards/{vip-level}&quot;)
+ * public class RewardServer {
+ *     &#064;WebSocketMessage
+ *     public void processReward(
+ * 	    &#064;WebSocketPathParam(&quot;vip-level&quot;) Integer vipLevel, String message,
+ * 	    Session session) {
+ * 	// process reward here
+ *     }
  * }
  * </pre>
  */
@@ -48,7 +67,7 @@ public @interface WebSocketPathParam {
      * match a path variable in the URI-template, the value of the method
      * parameter this annotation annotates is null.
      * 
-     * @return the value
+     * @return the name of the variable used in the URI-template.
      */
     public abstract String value();
 

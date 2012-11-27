@@ -26,25 +26,23 @@ import java.util.List;
  * own custom configuration behaviors.
  */
 public class DefaultClientConfiguration implements ClientEndpointConfiguration {
-    private String path;
-    private List<String> preferredExtensions;
     private List<String> preferredSubprotocols;
     private List<Decoder> decoders;
     private List<Encoder> encoders;
     private List<String> extensions;
 
     /**
-     * Creates a client configuration that will attempt to connect to the given
-     * URI.
-     * 
-     * @param uri
+     * Creates a client configuration with no preferred sub protocols,
+     * extensions, decoders or encoders.
      */
-    public DefaultClientConfiguration(String uri) {
-	this.path = uri;
+    public DefaultClientConfiguration() {
+	// default constructor
     }
 
     /**
      * Assign the list of decoders this client will use.
+     * 
+     * @return the decoders to use.
      */
     @Override
     public List<Decoder> getDecoders() {
@@ -54,6 +52,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
 
     /**
      * Assign the list of encoders this client will use.
+     * 
+     * @return the encoder list.
      */
     @Override
     public List<Encoder> getEncoders() {
@@ -64,6 +64,8 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     /**
      * Return the extensions, in order of preference, favorite first, that this
      * client would like to use for its sessions.
+     * 
+     * @return the extension list.
      */
     @Override
     public List<String> getExtensions() {
@@ -71,13 +73,11 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
 	return extensions;
     }
 
-    public String getPath() {
-	return path;
-    }
-
     /**
      * Return the protocols, in order of preference, favorite first, that this
      * client would like to use for its sessions.
+     * 
+     * @return the preferred subprotocols.
      */
     @Override
     public List<String> getPreferredSubprotocols() {
@@ -87,6 +87,10 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
 
     /**
      * Assign the list of decoders this client will use.
+     * 
+     * @param decoders
+     *            the extensions
+     * @return this endpoint configuration.
      */
     public ClientEndpointConfiguration setDecoders(List<Decoder> decoders) {
 	// FIXME: copy of list or use as-is?
@@ -97,6 +101,10 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
 
     /**
      * Assign the list of encoders this client will use.
+     * 
+     * @param encoders
+     *            the encoders to use.
+     * @return this endpoint configuration.
      */
     public ClientEndpointConfiguration setEncoders(List<Encoder> encoders) {
 	// FIXME: copy of list or use as-is?
@@ -108,20 +116,27 @@ public class DefaultClientConfiguration implements ClientEndpointConfiguration {
     /**
      * Assign the List of preferred extensions that this client would like to
      * use.
+     * 
+     * @param extensions
+     *            the extensions
+     * @return this endpoint configuration.
      */
-    public ClientEndpointConfiguration setExtensions(
-	    List<String> preferredExtensions) {
+    public ClientEndpointConfiguration setExtensions(List<String> extensions) {
 	// FIXME: need language about extension order importance
 	// FIXME: need language about configuration/param requirement
 	// FIXME: copy of list or use as-is?
-	this.preferredExtensions.clear();
-	this.preferredExtensions.addAll(preferredExtensions);
+	this.extensions.clear();
+	this.extensions.addAll(extensions);
 	return this;
     }
 
     /**
      * Assign the List of preferred subprotocols that this client would like to
      * use.
+     * 
+     * @param preferredSubprotocols
+     *            the preferred subprotocols.
+     * @return this endpoint configuration.
      */
     public DefaultClientConfiguration setPreferredSubprotocols(
 	    List<String> preferredSubprotocols) {

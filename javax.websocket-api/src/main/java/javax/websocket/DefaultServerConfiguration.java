@@ -43,7 +43,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     }
 
     /**
-     * Creates a server configuration with the given URI.
+     * Creates a server configuration with the given path
+     * 
+     * @param path
+     *            the URI or URI template.
      */
     public DefaultServerConfiguration(String path) {
 	this.path = path;
@@ -51,7 +54,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 
     /**
      * Makes a check of the validity of the Origin header sent along with the
-     * opening handshake.
+     * opening handshake following the recommendation at:
+     * http://tools.ietf.org/html/rfc6455#section-4.2
+     * 
+     * @return whether the check passed or not.
      */
     @Override
     public boolean checkOrigin(String originHeaderValue) {
@@ -63,7 +69,9 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     /**
      * Return the Decoder implementations configured. These will be used by the
      * container to decode incoming messages into the expected custom objects on
-     * MessageListener.onMessage() callbacks.
+     * MessageHandler callbacks.
+     * 
+     * @return the decoders.
      */
     @Override
     public List<Decoder> getDecoders() {
@@ -71,9 +79,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     }
 
     /**
-     * Return the Decoder implementations configured. These will be used by the
-     * container to decode incoming messages into the expected custom objects on
-     * MessageListener.onMessage() callbacks.
+     * Return the Encoder implementations configured. These will be used by the
+     * container to encode outgoing messages.
+     * 
+     * @return the encoders.
      */
     @Override
     public List<Encoder> getEncoders() {
@@ -84,8 +93,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * Provides a simple algorithm to return the list of extensions this server
      * will use for the web socket session: the configuration returns a list
      * containing all of the requested extensions passed to this method that it
-     * supports, using the order in the requested Subclasses may provide custom
-     * algorithms based on other factors.
+     * supports, using the order in the requested extensions, the empty list if
+     * none. Subclasses may provide custom algorithms based on other factors.
+     * 
+     * @return the list of extensions.
      */
     @Override
     public List<String> getNegotiatedExtensions(List<String> requestedExtensions) {
@@ -105,14 +116,16 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
     }
 
     /**
-     * Return the subprotocol this server endpoint has chosen from the requested
-     * list supplied by a client who wishes to connect, or none if there wasn't
-     * one this server endpoint liked. See <a
-     * href="http://tools.ietf.org/html/rfc6455#section-4.2.2"> Sending the
-     * Server's Opening Handshake</a>
+     * The default implementation of this method returns, the first subprotocol
+     * in the list sent by the client that the server supports, or null if there
+     * isn't one none. Subclasses may provide custom algorithms based on other
+     * factors.
+     * <p>
+     * See <a href="http://tools.ietf.org/html/rfc6455#section-4.2.2"> Sending
+     * the Server's Opening Handshake</a>
      * 
      * @param requestedSubprotocols
-     * @return
+     * @return the negotiated subprotocol
      */
     @Override
     public String getNegotiatedSubprotocol(List<String> requestedSubprotocols) {
@@ -124,15 +137,28 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 	return null;
     }
 
+    /**
+     * Return the path of this server configuration. The path is a relative URI
+     * or URI-template.
+     * 
+     * @return the path
+     */
     @Override
     public String getPath() {
 	return path;
     }
 
     /**
-     * A URI is a match if and only if it is an exact match (.equals()) the URI
-     * used to create this configuration. Subclasses may override this method to
+     * This default implementation matches the incoming path to the
+     * configuration's URI or URI template if and only if it is an exact match
+     * in the case the configuration is a URI, and if and only if it is a valid
+     * expansion of the configuration URI template, in the case where the
+     * configuration is a URI template. Subclasses may override this method to
      * provide different matching policies.
+     * 
+     * @param uri
+     *            the URL of the incoming request
+     * @return whether it matched this configuration or not.
      */
     @Override
     public boolean matchesURI(URI uri) {
@@ -147,6 +173,11 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
      * cookies sent by the client. Additionally subclasses may choose to
      * override this method to modify the outgoing handshake response. the
      * outgoing handshake response
+     * 
+     * @param request
+     *            the handshake request from the client
+     * @param response
+     *            the handshake response formulated by the container.
      */
     @Override
     public void modifyHandshake(HandshakeRequest request,
@@ -156,6 +187,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 
     /**
      * Sets all the decoders that this configuration will support.
+     * 
+     * @param decoders
+     *            the encoders supported
+     * @return this server configuration instance.
      */
     public DefaultServerConfiguration setDecoders(List<Decoder> decoders) {
 	// FIXME: is this a copy of the list, or use as-is?
@@ -166,6 +201,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 
     /**
      * Sets all the encoders that this configuration will support.
+     * 
+     * @param encoders
+     *            the encoders supported
+     * @return this server configuration instance.
      */
     public DefaultServerConfiguration setEncoders(List<Encoder> encoders) {
 	// FIXME: is this a copy of the list, or use as-is?
@@ -176,6 +215,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 
     /**
      * Sets all the extensions that this configuration will support.
+     * 
+     * @param extensions
+     *            the encoders supported
+     * @return this server configuration instance.
      */
     public DefaultServerConfiguration setExtensions(List<String> extensions) {
 	this.extensions.clear();
@@ -185,6 +228,10 @@ public class DefaultServerConfiguration implements ServerEndpointConfiguration {
 
     /**
      * Sets all the subprotocols that this configuration will support.
+     * 
+     * @param subprotocols
+     *            the encoders supported
+     * @return this server configuration instance.
      */
     public DefaultServerConfiguration setSubprotocols(List<String> subprotocols) {
 	// FIXME: need language about preference and order of protocols
