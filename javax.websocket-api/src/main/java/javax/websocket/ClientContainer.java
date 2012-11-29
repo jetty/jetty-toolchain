@@ -77,9 +77,8 @@ public interface ClientContainer {
     /**
      * Sets the maximum size of text message that this container will buffer.
      * 
-     * @return the number of seconds idle wed socket sessions are active
+     * @return the number of seconds idle web socket sessions are active
      */
-    // FIXME typo "wed socket"
     long getMaxTextMessageBufferSize();
 
     /**
