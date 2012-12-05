@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+     <parent>
+    <groupId>org.eclipse.jetty.toolchain</groupId>
+    <artifactId>jetty-toolchain</artifactId>
+    <version>1.4</version>
+    <relativePath>../jetty-toolchain</relativePath>
+  </parent>
+    <modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.jetty.toolchain.setuid</groupId>
+    <artifactId>jetty-setuid-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Jetty :: SetUID Parent</name>
+    <packaging>pom</packaging>
+    <properties>
+        <!--
+            The jetty-version here only needs to be api compatiable
+        -->
+        <jetty-version>9.0.0.M3</jetty-version>
+        <jetty-test-helper-version>2.0</jetty-test-helper-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <scm>
+        <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
+        <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
+        <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-setuid</url>
+    </scm>
+	<modules>
+		<module>jetty-setuid-java</module>
+		<module>jetty-setuid-native</module>
+		<module>jetty-setuid-test</module>
+	</modules>
+    <build>
+      <pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.eclipse.jetty.toolchain</groupId>
+                <artifactId>jetty-assembly-descriptors</artifactId>
+                <version>1.0</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+        </plugins>
+      </pluginManagement>
+    </build>
+    <profiles>
+        <profile>
+            <id>env-linux</id>
+            <activation>
+                <os>
+                    <name>Linux</name>
+                </os>
+            </activation>
+            <modules>
+                <module>libsetuid-linux</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>env-mac</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <modules>         
+                <module>libsetuid-osx</module>
+            </modules>          
+        </profile>
+
+<!-- 
+        <profile>
+            <id>env-SunOs</id>
+            <activation>
+                <os>
+                    <name>SunOS</name>
+                </os>
+            </activation>
+            <modules>
+                <module>modules/java</module>
+                <module>modules/native</module>
+            </modules>
+            <properties>
+                <jetty-setuid-linkerStartOption>-lc -ldl</jetty-setuid-linkerStartOption>
+                <jetty-setuid-linkerEndOption>target/libsetuid.so</jetty-setuid-linkerEndOption>
+            </properties>
+        </profile>
+
+
+        <profile>
+            <id>env-dos</id>
+            <activation>
+              <os>
+                 <family>dos</family>
+              </os>
+            </activation>
+            <modules>
+                <module>modules/java</module>
+            </modules>
+         </profile>
+
+        <profile>
+            <id>env-windows</id>
+            <activation>
+              <os>
+                 <family>windows</family>
+              </os>
+            </activation>
+            <modules>
+                <module>modules/java</module>
+            </modules>
+         </profile>
+
+        <profile>
+            <id>env-windows-9x</id>
+            <activation>
+              <os>
+                 <family>win9x</family>
+              </os>
+            </activation>
+            <modules>
+                <module>modules/java</module>
+            </modules>
+         </profile>
+-->
+    </profiles>
+</project>
