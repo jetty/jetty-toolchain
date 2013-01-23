@@ -87,6 +87,14 @@ public class IssueParserTest
     }
     
     @Test
+    public void testParseKnownJetty9e()
+    {
+        assertKnownIssue("393385: Make hostname verification configurable in SslContextFactory and enable it by default (See http://www.ietf.org/rfc/rfc2818.txt section 3.1)",
+                "393385", 
+                "Make hostname verification configurable in SslContextFactory and enable it by default (See http://www.ietf.org/rfc/rfc2818.txt section 3.1)");
+    }
+    
+    @Test
     public void testParseKnownEarlyJettyOdd()
     {
         assertKnownIssue("+ Fixed JETTY-68. Complete request after sendRedirect","JETTY-68","Complete request after sendRedirect");
