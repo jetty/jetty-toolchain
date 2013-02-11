@@ -8,11 +8,12 @@
     <relativePath>../jetty-toolchain-parent</relativePath>
   </parent>
   <groupId>org.eclipse.jetty.drafts</groupId>
-  <artifactId>javax.websocket-api</artifactId>
-  <packaging>jar</packaging>
-  <version>0.0.008.draft-SNAPSHOT</version>
+  <artifactId>javax.websocket-all</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.012.draft-SNAPSHOT</version>
   <name>Jetty :: javax.websocket (DRAFT)</name>
   <description>API of JSR-356 Drafts (will switch to official version when available on maven central)</description>
+  <url>http://websocket-spec.java.net</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <bundle-symbolic-name>javax.websocket</bundle-symbolic-name>
@@ -242,5 +243,9 @@
     <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
     <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/javax-websocket-api</url>
   </scm>
+  <modules>
+    <module>client</module>
+    <module>server</module>
+  </modules>
 </project>
 
