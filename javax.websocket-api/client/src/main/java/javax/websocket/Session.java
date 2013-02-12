@@ -142,7 +142,7 @@ public interface Session {
      * @return the negotiated extensions
      * @see DRAFT 012
      */
-    List<String> getNegotiatedExtensions();
+    List<Extension> getNegotiatedExtensions();
 
     /**
      * Return the sub protocol agreed during the websocket handshake for this
