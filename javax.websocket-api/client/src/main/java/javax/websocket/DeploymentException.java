@@ -24,7 +24,7 @@ package javax.websocket;
  * Checked exception indicating some kind of failure either to publish an
  * endpoint on its server, or a failure to connect a client to its server.
  * 
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public class DeploymentException extends Exception {
     private static final long serialVersionUID = 7576860738144220015L;

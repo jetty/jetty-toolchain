@@ -24,8 +24,7 @@ import java.nio.ByteBuffer;
  * A general exception that occurs when trying to decode a custom object from a
  * text or binary message.
  * 
- * @since DRAFT 002
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public class DecodeException extends Exception {
     private static final long serialVersionUID = 006L;

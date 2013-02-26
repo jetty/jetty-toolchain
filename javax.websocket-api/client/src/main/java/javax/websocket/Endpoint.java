@@ -20,25 +20,37 @@ package javax.websocket;
 
 /**
  * The Web Socket Endpoint represents an object that can handle a web socket
- * conversations.
- * <p>
- * When deployed as a server endpoint, that is to say, the endpoint is
- * registered to a URL, the server instantiates a new endpoint instance for each
- * client connection.
- * <p>
- * If deployed as a client, the endpoint will be instantiated once per single
- * connection to the server.
- * <p>
- * If the endpoint is a server which will cater to multiple clients, each
- * endpoint instance corresponding to each active client is called by no more
- * than one thread at a time.
- * <p>
- * This means that when implementing/overriding the methods of Endpoint, the
- * developer is guaranteed that there will be at most one thread in each
- * endpoint instance.
+ * conversations. When deployed as a server endpoint, that is to say, the
+ * endpoint is registered to a URL, the server instantiates a new endpoint
+ * instance for each client connection. If deployed as a client, the endpoint
+ * will be instantiated once per single connection to the server. If the
+ * endpoint is a server which will cater to multiple clients, each endpoint
+ * instance corresponding to each active client is called by no more than one
+ * thread at a time. This means that when implementing/overriding the methods of
+ * Endpoint, the developer is guaranteed that there will be at most one thread
+ * in each endpoint instance. </br></br> Here is an example of a simple endpoint
+ * that echoes any incoming text message back to the sender. <br>
+ * <br>
+ * <code>
+ * public class EchoServer extends Endpoint {
+ *  <br><br><br>  
+ *  &nbsp;public void onOpen(Session session, EndpointConfiguration configuration) {<br><br>
+ *  &nbsp;&nbsp;final RemoteEndpoint remote = session.getBasicRemote();<br>
+ *  &nbsp;&nbsp;session.addMessageHandler(new MessageHandler.Basic<String>() {<br>
+ *  &nbsp;&nbsp;&nbsp;public void onMessage(String text) {<br>
+ *  &nbsp;&nbsp;&nbsp;&nbsp;try {<br>
+ *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;remote.sendString("Got your message (" + text + "). Thanks !");<br>
+ *  &nbsp;&nbsp;&nbsp;&nbsp;} catch (IOException ioe) {<br>
+ *  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// handle send failure here<br>
+ *  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+ *  &nbsp;&nbsp;&nbsp;}<br>
+ *  &nbsp;&nbsp;});<br><br>
  * 
- * @since DRAFT 001
- * @see DRAFT 012
+ * &nbsp;}<br>
+ * }
+ * </code>
+ * 
+ * @see DRAFT 013
  */
 public abstract class Endpoint {
 

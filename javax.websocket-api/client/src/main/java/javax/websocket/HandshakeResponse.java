@@ -25,7 +25,7 @@ import java.util.Map;
  * The handshake response represents the web socket-defined Http response that
  * is the response to the opening handshake request.
  * 
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public interface HandshakeResponse {
     /**

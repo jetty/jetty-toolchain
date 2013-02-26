@@ -10,7 +10,7 @@
   <groupId>org.eclipse.jetty.drafts</groupId>
   <artifactId>javax.websocket-all</artifactId>
   <packaging>pom</packaging>
-  <version>0.0.012.draft-SNAPSHOT</version>
+  <version>0.0.013.draft-SNAPSHOT</version>
   <name>Jetty :: javax.websocket (DRAFT)</name>
   <description>API of JSR-356 Drafts (will switch to official version when available on maven central)</description>
   <url>http://websocket-spec.java.net</url>

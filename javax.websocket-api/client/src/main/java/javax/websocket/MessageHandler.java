@@ -30,8 +30,11 @@ package javax.websocket;
  * with the possibility of their MessageHandler being called concurrently by
  * multiple threads, each one arising from a different client session.
  * 
- * @since DRAFT 001
- * @see DRAFT 012
+ * <br>
+ * <br>
+ * See {@link Endpoint} for a usage example.
+ * 
+ * @see DRAFT 013
  */
 public interface MessageHandler {
     /**
@@ -60,10 +63,9 @@ public interface MessageHandler {
      * @param <T>
      *            The type of the object that represent pieces of the incoming
      *            message that this MessageHandler will consume.
-     * 
-     * @since DRAFT 002
      */
     interface Async<T> extends MessageHandler {
+
 	/**
 	 * Called when the next part of a message has been fully received.
 	 * 
@@ -111,10 +113,9 @@ public interface MessageHandler {
      * @param <T>
      *            The type of the message object that this MessageHandler will
      *            consume.
-     * 
-     * @since DRAFT 002
      */
     interface Basic<T> extends MessageHandler {
+
 	/**
 	 * Called when the message has been fully received.
 	 * 

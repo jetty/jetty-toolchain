@@ -26,7 +26,7 @@ import java.io.UnsupportedEncodingException;
  * defined in RFC 6455.
  * 
  * @since DRAFT 001
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public class CloseReason extends java.lang.Object {
     /**
@@ -227,8 +227,13 @@ public class CloseReason extends java.lang.Object {
      *            the reason phrase
      */
     public CloseReason(CloseReason.CloseCode closeCode, String reasonPhrase) {
+	if (closeCode == null) {
+	    throw new IllegalArgumentException("closeCode cannot be null");
+	}
+
 	try {
-	    if (reasonPhrase.getBytes("UTF-8").length > 123) {
+	    if ((reasonPhrase != null)
+		    && (reasonPhrase.getBytes("UTF-8").length > 123)) {
 		throw new IllegalArgumentException(
 			"Reason Phrase cannot exceed 123 UTF-8 encoded bytes: "
 				+ reasonPhrase);
@@ -237,7 +242,7 @@ public class CloseReason extends java.lang.Object {
 	    throw new IllegalStateException(uee);
 	}
 	this.closeCode = closeCode;
-	this.reasonPhrase = reasonPhrase;
+	this.reasonPhrase = "".equals(reasonPhrase) ? null : reasonPhrase;
     }
 
     /**
@@ -255,7 +260,7 @@ public class CloseReason extends java.lang.Object {
      * @return the reason phrase.
      */
     public String getReasonPhrase() {
-	return this.reasonPhrase;
+	return (this.reasonPhrase == null) ? "" : this.reasonPhrase;
     }
 
     /**
@@ -266,7 +271,8 @@ public class CloseReason extends java.lang.Object {
      */
     @Override
     public String toString() {
-	return "CloseReason[" + this.closeCode.getCode() + ", " + reasonPhrase
-		+ "]";
+	return (this.reasonPhrase == null) ? "CloseReason["
+		+ this.closeCode.getCode() + "]" : "CloseReason["
+		+ this.closeCode.getCode() + "," + reasonPhrase + "]";
     }
 }

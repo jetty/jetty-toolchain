@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.eclipse.jetty.drafts</groupId>
     <artifactId>javax.websocket-all</artifactId>
-    <version>0.0.012.draft-SNAPSHOT</version>
+    <version>0.0.013.draft-SNAPSHOT</version>
   </parent>
 
   <artifactId>javax.websocket-api</artifactId>

@@ -25,20 +25,19 @@ import java.lang.annotation.Target;
 
 /**
  * This method level annotation can be used to decorate a Java method that
- * wishes to be called in order to handle errors.
- * <p>
- * The method may only take the following parameters:-
+ * wishes to be called in order to handle errors. </p> The method may only take
+ * the following parameters:-
  * <ul>
  * <li>optional {@link Session} parameter</li>
  * <li>a {@link java.lang.Throwable} parameter</li>
  * <li>Zero to n String parameters annotated with the
- * {@link javax.websocket.server.WebSocketPathParam} annotation</li>
+ * {@link javax.websocket.server.PathParam} annotation</li>
  * </ul>
- * in any order.
+ * </br> The parameters may appear in any order.
  * 
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface WebSocketError {
+public @interface OnError {
 }

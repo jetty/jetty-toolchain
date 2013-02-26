@@ -29,8 +29,7 @@ import java.nio.ByteBuffer;
  * subinterfaces that allow encoding algorithms to encode custom objects to:
  * text, binary data, character stream and write to an output stream.
  * 
- * @since DRAFT 002
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public interface Encoder {
 

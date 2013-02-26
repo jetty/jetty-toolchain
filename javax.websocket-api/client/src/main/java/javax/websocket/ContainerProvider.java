@@ -18,7 +18,6 @@
 
 package javax.websocket;
 
-import java.util.Iterator;
 import java.util.ServiceLoader;
 
 /**
@@ -28,35 +27,42 @@ import java.util.ServiceLoader;
  * ServiceLoader</a> to load an implementation of ContainerProvider.
  * Specifically, the fully qualified classname of the container implementation
  * of ContainerProvider must be listed in the
- * META-INF/services/javax.websocket.ContainerProvider file in the JAR file
- * containing the websocket API.e implementations of ServerContainer and
- * ClientContainer.
+ * META-INF/services/javax.websocket.ContainerProvider file in the
+ * implementation JAR file.
  * 
  * @see DRAFT 012
  */
 public abstract class ContainerProvider {
+
+    /**
+     * Obtain a new instance of a WebSocketContainer. The method looks for the
+     * ContainerProvider implementation class in the order listed in the
+     * META-INF/services/javax.websocket.ContainerProvider file, returning the
+     * WebSocketContainer implementation from the ContainerProvider
+     * implementation that is not null.
+     * 
+     * @return an implementation provided instance of type WebSocketContainer
+     */
     public static WebSocketContainer getWebSocketContainer() {
-	Iterator<ContainerProvider> iter = ServiceLoader.load(
-		ContainerProvider.class).iterator();
-	if (!iter.hasNext()) {
-	    throw new RuntimeException("Could not find implementation class");
+	WebSocketContainer wsc = null;
+	for (ContainerProvider impl : ServiceLoader
+		.load(ContainerProvider.class)) {
+	    wsc = impl.getContainer(WebSocketContainer.class);
+	    if (wsc != null) {
+		return wsc;
+	    }
 	}
 
-	ContainerProvider impl = iter.next();
-	WebSocketContainer wsc = impl.getContainer(WebSocketContainer.class);
-	if (wsc == null) {
-	    throw new RuntimeException("Implementation: " + impl
-		    + " yielded a null WebSocketContainer");
-	}
-	return wsc;
+	throw new RuntimeException("Could not find an implementation class.");
     }
 
     /**
      * Load the container implementation.
      * 
      * @param <T>
+     *            the implementation class
      * @param containerClass
-     * @return
+     * @return the implementation class
      */
     protected abstract <T> T getContainer(Class<T> containerClass);
 }

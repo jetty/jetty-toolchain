@@ -21,8 +21,7 @@ package javax.websocket;
 /**
  * A simple callback object for asynchronous sending of web socket messages.
  * 
- * @since DRAFT 002
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public interface SendHandler {
     /**

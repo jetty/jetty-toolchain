@@ -28,8 +28,7 @@ import java.nio.ByteBuffer;
  * provide the web socket container a way web socket messages into developer
  * defined custom objects.
  * 
- * @since DRAFT 002
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public interface Decoder {
     /**

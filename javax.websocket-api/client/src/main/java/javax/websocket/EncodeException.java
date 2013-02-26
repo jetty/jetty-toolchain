@@ -22,8 +22,7 @@ package javax.websocket;
  * A general exception that occurs when trying to encode a custom object to a
  * string or binary message.
  * 
- * @since DRAFT 002
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public class EncodeException extends Exception {
     private static final long serialVersionUID = 622704354840240848L;

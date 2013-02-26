@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
  * 
  * <code>
  * <pre>
- * &#064;WebSocketClient(subprotocols = &quot;chat&quot;)
+ * &#064;ClientEndpoint(subprotocols = &quot;chat&quot;)
  * public class ChatClient {
  *     &#064;WebSocketMessage
  *     public void processMessageFromServer(String message, Session session) {
@@ -45,12 +45,24 @@ import java.lang.annotation.Target;
  * </pre>
  * </code>
  * 
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-public @interface WebSocketClient {
+public @interface ClientEndpoint {
+    /**
+     * An optional custom configurator class that the developer would like to
+     * use to provide custom configuration of new instances of this endpoint.
+     * The implementation creates a new instance of the configurator per logical
+     * endpoint.
+     * 
+     * @return the custom configurator class, or
+     *         ClientEndpointConfigurator.class if none was provided in the
+     *         annotation.
+     */
+    public Class<? extends ClientEndpointConfigurator> configurator() default ClientEndpointConfigurator.class;
+
     /**
      * The array of Java classes that are to act as Decoders for messages coming
      * into the client.

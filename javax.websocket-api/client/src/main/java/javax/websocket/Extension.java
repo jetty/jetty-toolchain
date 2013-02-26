@@ -24,7 +24,7 @@ import java.util.List;
  * A simple representation of a websocket extension as a name and map of
  * extension parameters.
  * 
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 public interface Extension {
     /**

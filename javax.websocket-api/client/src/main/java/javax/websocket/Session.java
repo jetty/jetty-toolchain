@@ -18,6 +18,7 @@
 
 package javax.websocket;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.URI;
 import java.security.Principal;
@@ -33,7 +34,7 @@ import java.util.Set;
  * this newly created session by providing a MessageHandler to the session, and
  * can send messages to the other end of the conversation by means of the
  * RemoteEndpoint object obtained from this session.<br>
- * <p>
+ * <p/>
  * Once the session is closed, it is no longer valid for use by applications.
  * Calling any of its methods once the session has been closed will result in an
  * {@link java.lang.IllegalStateException} being thrown. Developers should
@@ -41,10 +42,16 @@ import java.util.Set;
  * {@link Endpoint#onClose(javax.websocket.Session, javax.websocket.CloseReason) }
  * method.
  * 
- * @since DRAFT 001
- * @see DRAFT 012
+ * <br>
+ * <br>
+ * Session objects may be called by multiple threads. Implementations must
+ * ensure the integrity of the mutable properties of the session under such
+ * circumstances.
+ * 
+ * @see DRAFT 013
  */
-public interface Session {
+public interface Session extends Closeable {
+
     /**
      * Register to handle to incoming messages in this conversation. A maximum
      * of one message handler per native websocket message type (text, binary,
@@ -54,17 +61,18 @@ public interface Session {
      * incoming pong messages. For further details of which message handlers
      * handle which of the native websocket message types please see
      * {@link MessageHandler.Basic} and {@link MessageHandler.Async}. Adding
-     * more than one of any one type will result in a runtime exception.
+     * more than one of any one type will result in a runtime exception.<br>
+     * <br>
+     * <br>
+     * See {@link Endpoint} for a usage example.
      * 
      * @param handler
      *            the MessageHandler to be added.
      * @throws IllegalStateException
      *             if there is already a MessageHandler registered for the same
      *             native websocket message type as this handler.
-     * @see DRAFT 012
      */
-    void addMessageHandler(MessageHandler listener)
-	    throws IllegalStateException;
+    void addMessageHandler(MessageHandler handler) throws IllegalStateException;
 
     /**
      * Close the current conversation with a normal status code and no reason
@@ -72,30 +80,44 @@ public interface Session {
      * 
      * @throws IOException
      *             if there was a connection error closing the connection.
-     * @see DRAFT 012
      */
+    @Override
     void close() throws IOException;
 
     /**
      * Close the current conversation, giving a reason for the closure. Note the
-     * websocket spec defines the acceptable uses of status codes and reason
-     * phrases. If the application cannot determine a suitable close code to use
-     * for the closeReason, it is recommended to use
+     * websocket specification defines the acceptable uses of status codes and
+     * reason phrases. If the application cannot determine a suitable close code
+     * to use for the closeReason, it is recommended to use
      * {@link CloseReason.CloseCodes#NO_STATUS_CODE}.
      * 
      * @param closeReason
      *            the reason for the closure.
      * @throws IOException
      *             if there was a connection error closing the connection
-     * @see DRAFT 012
      */
-    void close(CloseReason closeStatus) throws IOException;
+    void close(CloseReason closeReason) throws IOException;
+
+    /**
+     * Return a reference a RemoteEndpoint object representing the peer of this
+     * conversation that is able to send messages synchronously to the peer.
+     * 
+     * @return the remote endpoint.
+     */
+    RemoteEndpoint.Async getAsyncRemote();
+
+    /**
+     * Return a reference a RemoteEndpoint object representing the peer of this
+     * conversation that is able to send messages asynchronously to the peer.
+     * 
+     * @return the remote endpoint.
+     */
+    RemoteEndpoint.Basic getBasicRemote();
 
     /**
      * Return the container that this session is part of.
      * 
-     * @return the container
-     * @see DRAFT 012
+     * @return the container.
      */
     WebSocketContainer getContainer();
 
@@ -105,25 +127,35 @@ public interface Session {
      * is implementation dependent.
      * 
      * @return the unique identifier for this session instance.
-     * @see DRAFT 012
      */
     String getId();
 
     /**
      * The maximum length of incoming binary messages that this Session can
-     * buffer.
+     * buffer. If the implementation receives a binary message that it cannot
+     * buffer because it is too large, it must close the session with a close
+     * code of {@link CloseReason.CloseCodes#TOO_BIG}.
      * 
-     * @return the message size.
-     * @see DRAFT 012
+     * @return the maximum binary message size that can be buffered.
      */
     int getMaxBinaryMessageBufferSize();
 
     /**
-     * The maximum length of incoming text messages that this Session can
-     * buffer.
+     * Return the number of milliseconds before this conversation may be closed
+     * by the container if it is inactive, i.e. no messages are either sent or
+     * received in that time.
      * 
-     * @return the message size.
-     * @see DRAFT 012
+     * @return the timeout in milliseconds.
+     */
+    long getMaxIdleTimeout();
+
+    /**
+     * The maximum length of incoming text messages that this Session can
+     * buffer. If the implementation receives a text message that it cannot
+     * buffer because it is too large, it must close the session with a close
+     * code of {@link CloseReason.CloseCodes#TOO_BIG}.
+     * 
+     * @return the maximum text message size that can be buffered.
      */
     int getMaxTextMessageBufferSize();
 
@@ -131,16 +163,14 @@ public interface Session {
      * Return an unmodifiable copy of the set of MessageHandlers for this
      * Session.
      * 
-     * @return the set of message handlers
-     * @see DRAFT 012
+     * @return the set of message handlers.
      */
     Set<MessageHandler> getMessageHandlers();
 
     /**
      * Return the list of extensions currently in use for this conversation.
      * 
-     * @return the negotiated extensions
-     * @see DRAFT 012
+     * @return the negotiated extensions.
      */
     List<Extension> getNegotiatedExtensions();
 
@@ -148,8 +178,8 @@ public interface Session {
      * Return the sub protocol agreed during the websocket handshake for this
      * conversation.
      * 
-     * @return the negotiated subprotocol
-     * @see DRAFT 012
+     * @return the negotiated subprotocol, or the empty string if there isn't
+     *         one.
      */
     String getNegotiatedSubprotocol();
 
@@ -163,19 +193,16 @@ public interface Session {
      * session.isOpen() to check.
      * 
      * @return the set of sessions, open at the time of return.
-     * @see DRAFT 012
      */
     Set<Session> getOpenSessions();
 
     /**
-     * Return a map of the path parameter names and values used if the server
-     * endpoint was deployed with a URI-template and the client connected with a
-     * particular matching URL.
+     * Return a map of the path parameter names and values used associated with
+     * the request this session was opened under.
      * 
      * @return the unmodifiable map of path parameters. The key of the map is
      *         the parameter name, the values in the map are the parameter
      *         values.
-     * @see DRAFT 012
      */
     Map<String, String> getPathParameters();
 
@@ -184,8 +211,7 @@ public interface Session {
      * is taken as the value of the Sec-WebSocket-Version header used in the
      * opening handshake. i.e. "13".
      * 
-     * @return the protocol version
-     * @see DRAFT 012
+     * @return the protocol version.
      */
     String getProtocolVersion();
 
@@ -194,53 +220,30 @@ public interface Session {
      * opened under.
      * 
      * @return the query string
-     * @see DRAFT 012
      */
     String getQueryString();
-
-    /**
-     * Return a reference to the RemoteEndpoint object representing the other
-     * end of this conversation.
-     * 
-     * @return the remote endpoint
-     * @see DRAFT 012
-     */
-    RemoteEndpoint getRemote();
 
     /**
      * Return the request parameters associated with the request this session
      * was opened under.
      * 
-     * @return the unmodifiable map of the request parameters
-     * @see DRAFT 012
+     * @return the unmodifiable map of the request parameters.
      */
     Map<String, List<String>> getRequestParameterMap();
 
     /**
-     * Return the URI that this session was opened under.
+     * Return the URI under which this session was opened, including the query
+     * string if there is one.
      * 
      * @return the request URI.
-     * @see DRAFT 012
      */
-    // FIXME strip query string?
     URI getRequestURI();
-
-    /**
-     * Return the number of milliseconds before this conversation will be closed
-     * by the container if it is inactive, ie no messages are either sent or
-     * received in that time.
-     * 
-     * @return the timeout in milliseconds.
-     * @see DRAFT 012
-     */
-    long getTimeout();
 
     /**
      * Return the authenticated user for this Session or null if no user is
      * authenticated for this session.
      * 
      * @return the user principal.
-     * @see DRAFT 012
      */
     Principal getUserPrincipal();
 
@@ -256,15 +259,13 @@ public interface Session {
      * object may not be recreated after a failover.
      * 
      * @return an editable Map of application data.
-     * @see DRAFT 012
      */
     Map<String, Object> getUserProperties();
 
     /**
      * Return true if and only if the underlying socket is open.
      * 
-     * @return whether the session is active
-     * @see DRAFT 012
+     * @return whether the session is active.
      */
     boolean isOpen();
 
@@ -272,8 +273,7 @@ public interface Session {
      * Return true if and only if the underlying socket is using a secure
      * transport.
      * 
-     * @return whether its using a secure transport
-     * @see DRAFT 012
+     * @return whether its using a secure transport.
      */
     boolean isSecure();
 
@@ -283,8 +283,7 @@ public interface Session {
      * it is no longer in use.
      * 
      * @param handler
-     *            the handler to be removed
-     * @see DRAFT 012
+     *            the handler to be removed.
      */
     void removeMessageHandler(MessageHandler handler);
 
@@ -294,9 +293,19 @@ public interface Session {
      * 
      * @param length
      *            the maximum length.
-     * @see DRAFT 012
      */
     void setMaxBinaryMessageBufferSize(int length);
+
+    /**
+     * Set the non-zero number of milliseconds before this session will be
+     * closed by the container if it is inactive, ie no messages are either sent
+     * or received. A value that is 0 or negative indicates the session will
+     * never timeout due to inactivity.
+     * 
+     * @param milliseconds
+     *            the number of milliseconds.
+     */
+    void setMaxIdleTimeout(long milliseconds);
 
     /**
      * Sets the maximum length of incoming text messages that this Session can
@@ -304,18 +313,6 @@ public interface Session {
      * 
      * @param length
      *            the maximum length.
-     * @see DRAFT 012
      */
     void setMaxTextMessageBufferSize(int length);
-
-    /**
-     * Set the number of milliseconds before this conversation will be closed by
-     * the container if it is inactive, ie no messages are either sent or
-     * received.
-     * 
-     * @param milliseconds
-     *            the number of milliseconds.
-     * @see DRAFT 012
-     */
-    void setTimeout(long milliseconds);
 }

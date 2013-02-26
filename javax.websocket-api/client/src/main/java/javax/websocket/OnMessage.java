@@ -54,8 +54,7 @@ import java.lang.annotation.Target;
  * <li> {@link PongMessage} for handling pong messages</li>
  * </ul>
  * <li>and Zero to n String or Java primitive parameters annotated with the
- * {@link javax.websocket.server.WebSocketPathParam} annotation for server
- * endpoints.</li>
+ * {@link javax.websocket.server.PathParam} annotation for server endpoints.</li>
  * <li>and an optional {@link Session} parameter</li>
  * </ol>
  * <p/>
@@ -67,10 +66,11 @@ import java.lang.annotation.Target;
  * ByteBuffer, byte[], any Java primitive or class equivalent, and anything for
  * which there is an encoder. If the method uses a Java primitive as a return
  * value, the implementation must construct the text message to send using the
- * standard Java string representation of the Java primitive. If the method uses
- * a class equivalent of a Java primitive as a return value, the implementation
- * must construct the text message from the Java primitive equivalent as
- * described above.
+ * standard Java string representation of the Java primitive unless there
+ * developer provided encoder for the type configured for this endpoint, in
+ * which case that encoder must be used. If the method uses a class equivalent
+ * of a Java primitive as a return value, the implementation must construct the
+ * text message from the Java primitive equivalent as described above.
  * 
  * </br>Developers should note that if developer closes the session during the
  * invocation of a method with a return type, the method will complete but the
@@ -80,44 +80,42 @@ import java.lang.annotation.Target;
  * <p/>
  * For example:
  * 
- * <code>
  * <pre>
- * &nbsp;@WebSocketMessage
+ * <code>
+ * &nbsp;@OnMessage
  * public void processGreeting(String message, Session session) {
  * &nbsp;&nbsp;System.out.println("Greeting received:" + message);
  * }
- * </pre>
  * </code>
+ * </pre>
  * 
  * For example:
  * 
- * <code>
  * <pre>
- * &nbsp;@WebSocketMessage
+ * <code>
+ * &nbsp;@OnMessage
  * public void processUpload(byte[] b, boolean last, Session session) {
  * &nbsp;&nbsp;// process partial data here, which check on last to see if these is more on the way
  * }
- * </pre>
  * </code>
+ * </pre>
  * 
  * Developers should not continue to reference message objects of type
  * {@link java.io.Reader}, {@link java.nio.ByteBuffer} or
  * {@link java.io.InputStream} after the annotated method has completed, since
  * they may be recycled by the implementation.
  * 
- * @since Draft 002
- * @see DRAFT 012
+ * @see DRAFT 013
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface WebSocketMessage {
+public @interface OnMessage {
     /**
      * Specifies the maximum size of message in bytes that the method this
      * annotates will be able to process, or -1 to indicate that there is no
      * maximum. The default is -1.
      * 
-     * @return the maximum size in bytes
+     * @return the maximum size in bytes.
      */
-    public long maxMessageSize() default -1L;
-
+    public long maxMessageSize() default -1;
 }
