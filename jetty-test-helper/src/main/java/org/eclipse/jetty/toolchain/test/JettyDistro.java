@@ -539,7 +539,7 @@ public class JettyDistro
 
         ConsoleParser parser = new ConsoleParser();
         List<String[]> jmxList = parser.newPattern("JMX Remote URL: (.*)",0);
-        List<String[]> connList = parser.newPattern("Started [A-Za-z]*Connector@([0-9]*\\.[0-9]*\\.[0-9]*\\.[0-9]*):([0-9]*)",1);
+        List<String[]> connList = parser.newPattern("Started [A-Za-z]*Connector@.*[\\({]([0-9]*\\.[0-9]*\\.[0-9]*\\.[0-9]*):([0-9]*)[\\)}].*",1);
 
         startPump("STDOUT",parser,this.pid.getInputStream());
         startPump("STDERR",parser,this.pid.getErrorStream());
