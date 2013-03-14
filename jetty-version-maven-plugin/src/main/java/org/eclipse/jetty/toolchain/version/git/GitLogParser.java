@@ -15,7 +15,6 @@
  *******************************************************************************/
 package org.eclipse.jetty.toolchain.version.git;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +79,6 @@ public class GitLogParser implements GitOutputParser
         return issues;
     }
 
-    @Override
     public void parseEnd()
     {
         if (activeCommit != null)
@@ -89,8 +87,7 @@ public class GitLogParser implements GitOutputParser
         }
     }
 
-    @Override
-    public void parseLine(int linenum, String line) throws IOException
+    public void parseLine(int linenum, String line) throws ParseException
     {
         if (activeCommit == null)
         {
@@ -107,14 +104,7 @@ public class GitLogParser implements GitOutputParser
         }
         else if (line.startsWith(AUTHOR_DATE))
         {
-            try
-            {
-                activeCommit.parseAuthorDate(line.substring(AUTHOR_DATE.length()));
-            }
-            catch (ParseException e)
-            {
-                throw new IOException("Unable to parse author date at line #" + linenum,e);
-            }
+            activeCommit.parseAuthorDate(line.substring(AUTHOR_DATE.length()));
         }
         else if (line.startsWith(COMMITTER_NAME))
         {
@@ -122,14 +112,7 @@ public class GitLogParser implements GitOutputParser
         }
         else if (line.startsWith(COMMITTER_DATE))
         {
-            try
-            {
-                activeCommit.parseCommitterDate(line.substring(COMMITTER_DATE.length()));
-            }
-            catch (ParseException e)
-            {
-                throw new IOException("Unable to parse committer date at line #" + linenum,e);
-            }
+            activeCommit.parseCommitterDate(line.substring(COMMITTER_DATE.length()));
         }
         else if (line.startsWith(SUBJECT))
         {
@@ -150,7 +133,6 @@ public class GitLogParser implements GitOutputParser
         }
     }
 
-    @Override
     public void parseStart()
     {
         commits.clear();

@@ -15,13 +15,13 @@
  *******************************************************************************/
 package org.eclipse.jetty.toolchain.version.git;
 
-import java.io.IOException;
+import java.text.ParseException;
 
 public interface GitOutputParser
 {
     void parseEnd();
 
-    void parseLine(int linenum, String line) throws IOException;
+    void parseLine(int linenum, String line) throws ParseException;
 
     void parseStart();
 }

@@ -17,6 +17,7 @@ package org.eclipse.jetty.toolchain.version.git;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
 import org.junit.Assert;
@@ -25,7 +26,7 @@ import org.junit.Test;
 public class GitTagParserTest extends AbstractGitTestCase
 {
     @Test
-    public void testGitTagParse() throws IOException
+    public void testGitTagParse() throws IOException, ParseException
     {
         File sampleFile = MavenTestingUtils.getTestResourceFile("git-tag.txt");
         GitTagParser parser = new GitTagParser();

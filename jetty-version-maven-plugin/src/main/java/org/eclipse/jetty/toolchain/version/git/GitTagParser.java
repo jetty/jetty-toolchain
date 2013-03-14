@@ -15,7 +15,7 @@
  *******************************************************************************/
 package org.eclipse.jetty.toolchain.version.git;
 
-import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,14 +30,12 @@ public class GitTagParser implements GitOutputParser
         return tagIds;
     }
 
-    @Override
     public void parseEnd()
     {
         /* ignore */
     }
 
-    @Override
-    public void parseLine(int linenum, String line) throws IOException
+    public void parseLine(int linenum, String line) throws ParseException
     {
         if (StringUtils.isNotBlank(line))
         {
@@ -45,7 +43,6 @@ public class GitTagParser implements GitOutputParser
         }
     }
 
-    @Override
     public void parseStart()
     {
         /* ignore */

@@ -15,7 +15,7 @@
  *******************************************************************************/
 package org.eclipse.jetty.toolchain.version.git;
 
-import java.io.IOException;
+import java.text.ParseException;
 
 import org.apache.maven.plugin.logging.Log;
 
@@ -30,19 +30,16 @@ public class Git2LogParser implements GitOutputParser
         this.commandId = commandId;
     }
 
-    @Override
     public void parseEnd()
     {
         /* ignore */
     }
 
-    @Override
-    public void parseLine(int linenum, String line) throws IOException
+    public void parseLine(int linenum, String line) throws ParseException
     {
         log.debug("[" + commandId + "]: " + line);
     }
 
-    @Override
     public void parseStart()
     {
         /* ignore */

@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 
 import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.IOUtil;
@@ -53,6 +54,10 @@ public class OutputHandler extends Thread
                 linenum++;
                 parser.parseLine(linenum,line);
             }
+        }
+        catch (ParseException e)
+        {
+            log.debug(e);
         }
         catch (IOException e)
         {

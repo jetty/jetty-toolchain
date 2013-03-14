@@ -17,6 +17,7 @@ package org.eclipse.jetty.toolchain.version.git;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class GitLogParserTest extends AbstractGitTestCase
     public TestingDir testdir = new TestingDir();
 
     @Test
-    public void testParseGitLogTag() throws IOException
+    public void testParseGitLogTag() throws IOException, ParseException
     {
         File sampleFile = MavenTestingUtils.getTestResourceFile("git-log-specific-tag.txt");
         GitLogParser parser = new GitLogParser();
@@ -50,7 +51,7 @@ public class GitLogParserTest extends AbstractGitTestCase
     }
 
     @Test
-    public void testParseIssueIds() throws IOException
+    public void testParseIssueIds() throws IOException, ParseException
     {
         File sampleFile = MavenTestingUtils.getTestResourceFile("git-log-to-commit.txt");
         GitLogParser parser = new GitLogParser();
@@ -74,7 +75,7 @@ public class GitLogParserTest extends AbstractGitTestCase
     }
 
     @Test
-    public void testParseLongGitLog() throws IOException
+    public void testParseLongGitLog() throws IOException, ParseException
     {
         File sampleFile = MavenTestingUtils.getTestResourceFile("git-log-to-commit.txt");
         GitLogParser parser = new GitLogParser();
@@ -96,7 +97,7 @@ public class GitLogParserTest extends AbstractGitTestCase
     }
     
     @Test
-    public void testParseJetty9GitLog() throws IOException
+    public void testParseJetty9GitLog() throws IOException, ParseException
     {
         File sampleFile = MavenTestingUtils.getTestResourceFile("git-jetty9-log.txt");
         GitLogParser parser = new GitLogParser();
@@ -148,7 +149,7 @@ public class GitLogParserTest extends AbstractGitTestCase
     }
 
     @Test
-    public void testParseSingleGitLog() throws IOException
+    public void testParseSingleGitLog() throws IOException, ParseException
     {
         File sampleFile = MavenTestingUtils.getTestResourceFile("git-log-specific-commit.txt");
         GitLogParser parser = new GitLogParser();

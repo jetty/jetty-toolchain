@@ -29,7 +29,6 @@ import org.apache.maven.plugin.MojoFailureException;
  */
 public class AttachVersionMojo extends AbstractVersionMojo
 {
-    @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
         if (!hasVersionTextFile("attach-version-text"))

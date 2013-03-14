@@ -24,7 +24,6 @@ public class IssueIdComparator implements Comparator<String>
     // Use natural language ordering.
     private final Collator collator = Collator.getInstance();
 
-    @Override
     public int compare(String o1, String o2)
     {
         CollationKey key1 = toKey(o1);

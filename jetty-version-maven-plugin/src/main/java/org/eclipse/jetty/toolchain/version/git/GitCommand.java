@@ -60,8 +60,8 @@ public class GitCommand
         }
         catch (InterruptedException e)
         {
-            getLog().error("Process didn't complete",e);
-            throw new IOException("Process did not complete",e);
+            getLog().error("Git Process didn't complete",e);
+            throw new IOException("Git Process did not complete");
         }
         finally
         {

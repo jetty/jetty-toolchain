@@ -23,7 +23,6 @@ public class IssueComparator implements Comparator<Issue>
 {
     private final Collator collator = Collator.getInstance();
 
-    @Override
     public int compare(Issue o1, Issue o2)
     {
         CollationKey key1 = toKey(o1);

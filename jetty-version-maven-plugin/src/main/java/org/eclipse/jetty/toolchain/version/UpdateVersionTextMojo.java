@@ -100,7 +100,6 @@ public class UpdateVersionTextMojo extends AbstractVersionMojo
      */
     private File versionTextOuputFile;
 
-    @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
         if (!hasVersionTextFile("gen-version-text"))

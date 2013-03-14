@@ -19,12 +19,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 
 import org.codehaus.plexus.util.IOUtil;
 
 public abstract class AbstractGitTestCase
 {
-    protected void parseSampleFile(GitOutputParser parser, File sampleFile) throws IOException
+    protected void parseSampleFile(GitOutputParser parser, File sampleFile) throws IOException, ParseException
     {
         FileReader reader = null;
         BufferedReader buf = null;
