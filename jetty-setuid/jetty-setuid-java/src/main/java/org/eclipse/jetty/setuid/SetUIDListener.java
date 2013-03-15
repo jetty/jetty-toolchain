@@ -19,12 +19,14 @@
 package org.eclipse.jetty.setuid;
 
 import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.util.component.LifeCycle;
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
 
 /**
- * This extension of {@link Server} will make a JNI call to set the unix UID.
+ * This LifeCycleListener may be added to a {@link Server} to make a JNI call to set the unix UID.
  * 
  * This can be used to start the server as root so that privileged ports may be accessed and then switch to a non-root user for security. Depending on the value
  * of {@link #setStartServerAsPrivileged(boolean)}, either the server will be started and then the UID set; or the {@link Server#getConnectors()} will be opened
@@ -32,14 +34,13 @@ import org.eclipse.jetty.util.log.Logger;
  * a privileged user, but will not work if the application code also needs to open privileged ports.
  * 
  * <p>
- * The configured umask is set before the server is started and the configured uid is set after the server is started.
+ * The configured umask is set before the server is started and the configured gid/uid is set after the server is started.
  * </p>
  * 
  */
-@Deprecated
-public class SetUIDServer extends Server
+public class SetUIDListener implements LifeCycle.Listener
 {
-    private static final Logger LOG = Log.getLogger(SetUIDServer.class);
+    private static final Logger LOG = Log.getLogger(SetUIDListener.class);
 
     private int _uid = 0;
     private int _gid = 0;
@@ -121,8 +122,36 @@ public class SetUIDServer extends Server
         return _rlimitNoFiles;
     }
 
-    @Override
-    protected void doStart() throws Exception
+    protected void setGidUid()
+    {
+        if (_gid != 0)
+        {
+            LOG.info("Setting GID=" + _gid);
+            SetUID.setgid(_gid);
+        }
+        if (_uid != 0)
+        {
+            LOG.info("Setting UID=" + _uid);
+            SetUID.setuid(_uid);
+            Passwd pw = SetUID.getpwuid(_uid);
+            System.setProperty("user.name",pw.getPwName());
+            System.setProperty("user.home",pw.getPwDir());
+        }
+    }
+    
+    
+    public void lifeCycleFailure(LifeCycle server, Throwable cause)
+    {
+      
+    }
+
+    public void lifeCycleStarted(LifeCycle server)
+    {
+        if (_startServerAsPrivileged)
+            setGidUid();
+    }
+
+    public void lifeCycleStarting(LifeCycle lifecycle)
     {
         if (_umask > -1)
         {
@@ -139,50 +168,48 @@ public class SetUIDServer extends Server
             LOG.info("Set " + SetUID.getrlimitnofiles());
         }
 
+        // If we are starting the server privileged, delay the setuid until started.
         if (_startServerAsPrivileged)
+            return;
+        
+        // Start the thread pool and connectors
+        try
         {
-            super.doStart();
-            if (_gid != 0)
+            Server server = (Server)lifecycle;
+            if (server.getThreadPool() instanceof LifeCycle)
+                ((LifeCycle)server.getThreadPool()).start();
+            Connector[] connectors = server.getConnectors();
+            if (connectors!=null)
             {
-                LOG.info("Setting GID=" + _gid);
-                SetUID.setgid(_gid);
-            }
-            if (_uid != 0)
-            {
-                LOG.info("Setting UID=" + _uid);
-                SetUID.setuid(_uid);
-                Passwd pw = SetUID.getpwuid(_uid);
-                System.setProperty("user.name",pw.getPwName());
-                System.setProperty("user.home",pw.getPwDir());
+                for (Connector connector : connectors)
+                {
+                    if (connector instanceof NetworkConnector)
+                    {
+                        ((NetworkConnector)connector).open();
+                        LOG.info("Opened " +connector);
+                    }
+                    else
+                        connector.start();
+                }
             }
         }
-        else
+        catch(Exception e)
         {
-            Connector[] connectors = getConnectors();
-            for (int i = 0; connectors != null && i < connectors.length; i++)
-            {
-                connectors[i].start();
-            }
-            
-            if (_gid != 0)
-            {
-                LOG.info("Setting GID=" + _gid);
-                SetUID.setgid(_gid);
-            }
-            
-            if (_uid != 0)
-            {
-                LOG.info("Setting UID=" + _uid);
-                SetUID.setuid(_uid);
-                Passwd pw = SetUID.getpwuid(_uid);
-                System.setProperty("user.name",pw.getPwName());
-                System.setProperty("user.home",pw.getPwDir());
-            }
-            
-            super.doStart();
+            throw new RuntimeException(e);
         }
+        setGidUid();
     }
 
+    public void lifeCycleStopped(LifeCycle arg0)
+    {
+        
+    }
+
+    public void lifeCycleStopping(LifeCycle arg0)
+    {
+        
+    }
+    
     /* ------------------------------------------------------------ */
     /**
      * @return the startServerAsPrivileged
