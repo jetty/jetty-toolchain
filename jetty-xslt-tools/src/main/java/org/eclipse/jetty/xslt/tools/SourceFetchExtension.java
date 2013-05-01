@@ -18,6 +18,8 @@
 
 package org.eclipse.jetty.xslt.tools;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,18 +31,23 @@ import java.io.Writer;
 import java.net.URL;
 
 
-public class SourceFetchExtension
+public class SourceFetchExtension extends AbstractFetchException
 {
     /* ------------------------------------------------------------------- */
     public static int bufferSize = 64*1024;
     
     public static String fetch( String location ) throws Exception
-    {        
-        System.out.println("Fetch: " + location.trim());
-
+    {   
+        
+        File fetchFile = checkCache( location );
+        
+        if ( fetchFile == null )
+        {
             URL url = new URL(location);
+            fetchFile = cache(location,url.openStream());
+        }
 
-            return toString(url.openStream());
+        return toString(new FileInputStream(fetchFile));
     }
     
     /* ------------------------------------------------------------ */

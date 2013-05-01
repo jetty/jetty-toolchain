@@ -33,7 +33,7 @@ public class SourceFetchExtensionTest
         
         Assert.assertNotNull(src);
 
-        System.out.println(src);
+        //System.out.println(src);
     }
 
 }

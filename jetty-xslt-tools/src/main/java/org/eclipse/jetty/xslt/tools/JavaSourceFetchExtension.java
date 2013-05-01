@@ -23,34 +23,33 @@ import japa.parser.ast.CompilationUnit;
 import japa.parser.ast.body.MethodDeclaration;
 import japa.parser.ast.visitor.VoidVisitorAdapter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.net.URL;
 
-public class JavaSourceFetchExtension
+public class JavaSourceFetchExtension extends AbstractFetchException
 {       
     public static String fetch( String location, String method ) throws Exception
     {        
-                
+        File fetchFile = checkCache( location );
+        
+        if ( fetchFile == null )
+        {
+            URL url = new URL(location);
+            fetchFile = cache(location,url.openStream());
+        }       
+        
+
         if ( method == null || "".equals(method) )
         {
-            System.out.println("Fetch: " + location.trim());
-            
-            URL url = new URL(location);
-
-            // String source = IO.toString(url.openStream());
-
-            CompilationUnit cu = JavaParser.parse(url.openStream());
+            CompilationUnit cu = JavaParser.parse(new FileInputStream(fetchFile));
             
             return cu.toString();
         }
         else
         {
-            System.out.println("Fetch: " + location.trim() + " / " + method.trim() );
-
-            URL url = new URL(location);
-
-            // String source = IO.toString(url.openStream());
-
-            CompilationUnit cu = JavaParser.parse(url.openStream());
+            CompilationUnit cu = JavaParser.parse(new FileInputStream(fetchFile));
 
             // visit and print the methods names
             MethodVisitor mv = new MethodVisitor(method);
