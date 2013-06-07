@@ -22,7 +22,7 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
 /**
- * Add notation for tracking test execution.
+ * Adds simple System.err output tracking of test method execution.
  * <p>
  * Note: {@link AdvancedRunner} performs tracking as well, there is no need
  * for this &#064;Rule if you have AdvancedRunner in use.

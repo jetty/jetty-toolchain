@@ -42,6 +42,16 @@ public final class MavenTestingUtils
         /* prevent instantiation */
     }
 
+    /**
+     * Obtain a reference to the maven ${basedir} for the module.
+     * <p>
+     * Note: while running in maven, the ${basedir} is populated by maven and used by the surefire-plugin.
+     * <br>
+     * While running in eclipse, the ${basedir} property is unset, resulting in this method falling back to
+     * ${user.dir} equivalent use.
+     * 
+     * @return the equivalent to the maven ${basedir} property.
+     */
     public static File getBasedir()
     {
         if (basedir == null)
@@ -102,9 +112,10 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Get the in <code>/target/tests/</code> code that uses the an arbitrary name.
+     * Get the directory reference to the maven <code>${basedir}/target/tests/</code> path.
      * 
-     * @return the dir in <code>/target/tests/</code> that uses the an arbitrary name.
+     * @return the maven <code>${basedir}/target/tests/</code> directory. 
+     *         Note: will not validate that the directory exists, or create the directory)
      */
     public static File getTargetTestingDir()
     {
@@ -112,11 +123,12 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Get a dir in /target/ that uses the an arbitrary name.
+     * Get a directory reference to the maven <code>${basedir}/target/tests/test-${testname}</code> using
+     * the supplied testname
      * 
      * @param testname
      *            the testname to create directory against.
-     * @return the dir in /target/ that uses the an arbitrary name.
+     * @return the maven <code>${basedir}/target/tests/test-${testname}</code> directory
      */
     public static File getTargetTestingDir(String testname)
     {
@@ -124,67 +136,74 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Get a dir in /target/ that uses the JUnit 3.x {@link TestCase#getName()} to make itself unique.
+     * Get a directory reference to the  <code>${basedir}/target/tests/test-${testname}</code>
+     *  that uses the JUnit 3.x {@link TestCase#getName()} to make itself unique.
      * 
      * @param test
      *            the junit 3.x testcase to base this new directory on.
-     * @return the dir in /target/ that uses the JUnit 3.x {@link TestCase#getName()} to make itself unique.
+     * @return the maven <code>${basedir}/target/tests/test-${testname}</code> directory.
      */
     public static File getTargetTestingDir(TestCase test)
     {
         return getTargetTestingDir(test.getName());
     }
 
+    /**
+     * Get a URI reference to a path (File or Dir) within the maven "${basedir}/target" directory.
+     * 
+     * @param path the relative path to use
+     * @return the URI reference to the target path
+     */
     public static URI getTargetURI(String path) throws MalformedURLException
     {
         return getBaseURI().resolve("target/").resolve(path);
     }
 
+    /**
+     * Get a URL reference to a path (File or Dir) within the maven "${basedir}/target" directory.
+     * 
+     * @param path the relative path to use
+     * @return the URL reference to the target path
+     * @throws MalformedURLException
+     */
     public static URL getTargetURL(String path) throws MalformedURLException
     {
         return getTargetURI(path).toURL();
     }
 
     /**
-     * Get a dir in /target/ that uses the an arbitrary name.
+     * Obtain a testing directory reference in maven 
+     * <code>${basedir}/target/tests/${condensed-classname}/${methodname}</code> 
+     * path that uses an condensed directory
+     * name based on the testclass and subdirectory based on the testmethod being run. 
      * <p>
-     * Best if used with {@link TestingDir} junit rule.
-     * 
-     * <pre>
-     * &#064;Rule
-     * public TestingDir testdir = new TestingDir();
-     * 
-     * &#064;Test
-     * public void testFoo()
-     * {
-     *     Assert.assertTrue(&quot;Testing dir exists&quot;,testdir.getDir().exists());
-     * }
-     * </pre>
+     * Note: the &#064;Rule {@link TestingDir} is a better choice in most cases.
      * 
      * @param testclass
      *            the class for the test case
      * @param testmethodname
      *            the test method name
-     * @return the File path to the testname sepecific testing directory underneath the <code>${basedir}/target</code>
+     * @return the File path to the testname specific testing directory underneath the <code>${basedir}/target/tests/</code>
      *         sub directory
+     * @see FS
+     * @see TestingDir
      */
     public static File getTargetTestingDir(final Class<?> testclass, final String testmethodname)
     {
         String classname = testclass.getName();
         String methodname = testmethodname;
 
-        classname = condensePackageString(classname);
+        classname = StringMangler.condensePackageString(classname);
 
         if (OS.IS_WINDOWS)
         {
             /* Condense the directory names to make them more friendly for the 
              * 255 character pathname limitations that exist on windows.
              */
-            methodname = maxStringLength(30,methodname);
+            methodname = StringMangler.maxStringLength(30,methodname);
         }
 
-        File testsDir = new File(getTargetDir(),"tests");
-        File dir = new File(testsDir,classname + File.separatorChar + methodname);
+        File dir = new File(getTargetTestingDir(),classname + File.separatorChar + methodname);
         FS.ensureDirExists(dir);
         return dir;
     }
@@ -195,23 +214,39 @@ public final class MavenTestingUtils
         public String methodname;
     }
 
+    /**
+     * Using Junit 3.x test naming standards, attempt to discover a suitable test directory name
+     * based on the execution stack when this method is called.
+     *  
+     * @return the testing directory name (only the name, not the full path)
+     * @deprecated Upgrade to Junit 4.x and use the {@link TestingDir} &#064;Rule instead
+     */
     public static String getTestIDAsPath()
     {
         TestID id = getTestID();
 
-        id.classname = condensePackageString(id.classname);
+        id.classname = StringMangler.condensePackageString(id.classname);
 
         if (OS.IS_WINDOWS)
         {
             /* Condense the directory names to make them more friendly for the 
              * 255 character pathname limitations that exist on windows.
              */
-            id.methodname = maxStringLength(30,id.methodname);
+            id.methodname = StringMangler.maxStringLength(30,id.methodname);
         }
 
         return id.classname + File.separatorChar + id.methodname;
     }
 
+    /**
+     * Get a file reference to a required file in the project module path, based on relative
+     * path references from maven ${basedir}.
+     * <p>
+     * Note: will throw assertion error if path does point to an existing file
+     * 
+     * @param path the relative path to reference
+     * @return the file reference (must exist)
+     */
     public static File getProjectFile(String path)
     {
         File file = new File(getBasedir(),OS.separators(path));
@@ -219,6 +254,15 @@ public final class MavenTestingUtils
         return file;
     }
 
+    /**
+     * Get a directory reference to a required directory in the project module path, based on relative
+     * path references from maven ${basedir}.
+     * <p>
+     * Note: will throw assertion error if path does point to an existing directory
+     * 
+     * @param path the relative path to reference
+     * @return the directory reference (must exist)
+     */
     public static File getProjectDir(String path)
     {
         File dir = new File(getBasedir(),OS.separators(path));
@@ -269,65 +313,13 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Condenses a classname by stripping down the package name to just the first character of each package name
-     * segment.
+     * Get a dir from the maven <code>${basedir}/src/test/resource</code> directory.
      * <p>
-     * 
-     * <pre>
-     * Examples:
-     * "org.eclipse.jetty.test.FooTest"           = "oejt.FooTest"
-     * "org.eclipse.jetty.server.logging.LogTest" = "orjsl.LogTest"
-     * </pre>
-     * 
-     * @param classname
-     *            the fully qualified class name
-     * @return the condensed name
-     */
-    protected static String condensePackageString(String classname)
-    {
-        String parts[] = classname.split("\\.");
-        StringBuilder dense = new StringBuilder();
-        for (int i = 0; i < (parts.length - 1); i++)
-        {
-            dense.append(parts[i].charAt(0));
-        }
-        dense.append('.').append(parts[parts.length - 1]);
-        return dense.toString();
-    }
-
-    /**
-     * Smash a long string to fit within the max string length, by taking the middle section of the string and replacing
-     * them with an ellipsis "..."
-     * <p>
-     * 
-     * <pre>
-     * Examples:
-     * .maxStringLength("Eatagramovabits", 5)
-     * </pre>
-     * 
-     * @param max
-     *            the maximum size of the string
-     * @param raw
-     *            the raw string to smash
-     * @return the ellipsis'd version of the string.
-     */
-    protected static String maxStringLength(int max, String raw)
-    {
-        int length = raw.length();
-        if (length <= max)
-        {
-            return raw;
-        }
-
-        return raw.substring(0,3) + "..." + raw.substring((length - max) + 6);
-    }
-
-    /**
-     * Get a dir from the <code>src/test/resource</code> directory.
+     * Note: will throw assertion error if path does point to an existing directory
      * 
      * @param name
      *            the name of the path to get (it must exist as a dir)
-     * @return the dir in <code>src/test/resource</code>
+     * @return the dir in the maven <code>${basedir}/src/test/resource</code> path
      */
     public static File getTestResourceDir(String name)
     {
@@ -337,11 +329,13 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Get a file from the <code>src/test/resource</code> directory.
+     * Get a file from the maven <code>${basedir}/src/test/resource</code> directory.
+     * <p>
+     * Note: will throw assertion error if path does point to an existing file
      * 
      * @param name
      *            the name of the path to get (it must exist as a file)
-     * @return the file in <code>src/test/resource</code>
+     * @return the file in maven <code>${basedir}/src/test/resource</code>
      */
     public static File getTestResourceFile(String name)
     {
@@ -351,11 +345,11 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Get a path resource (File or Dir) from the <code>src/test/resource</code> directory.
+     * Get a path resource (File or Dir) from the maven <code>${basedir}/src/test/resource</code> directory.
      * 
      * @param name
      *            the name of the path to get (it must exist)
-     * @return the path in <code>src/test/resource</code>
+     * @return the path in maven <code>${basedir}/src/test/resource</code>
      */
     public static File getTestResourcePath(String name)
     {
@@ -365,9 +359,9 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Get the directory to the <code>src/test/resource</code> directory
+     * Get the directory reference to the maven <code>${basedir}/src/test/resource</code> directory
      * 
-     * @return the directory {@link File} to the <code>src/test/resources</code> directory
+     * @return the directory {@link File} to the maven <code>${basedir}/src/test/resource</code> directory
      */
     public static File getTestResourcesDir()
     {

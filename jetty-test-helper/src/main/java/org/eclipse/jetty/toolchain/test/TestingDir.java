@@ -28,12 +28,52 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * A junit 4.x {@link Rule} to provide a common, easy to use, testing directory that is unique per unit test.
+ * A junit 4.x {@link Rule} to provide a common, easy to use, testing directory that is unique per unit test method.
  * <p>
  * Similar in scope to the {@link TemporaryFolder} rule, as it creates a directory, when asked (via {@link #getDir()} or {@link #getEmptyDir()}) in the maven
- * project familiar and friendly location: <code>${basedir}/target/tests/${testclass}/${testmethod}</code>.
+ * project familiar and friendly maven location of <code>${basedir}/target/tests/${testclass}/${testmethod}</code>.
  * <p>
- * Note: existing facilities within {@link MavenTestingUtils} for keeping the directory name short for the sake of windows users is being used.
+ * Note: {@link MavenTestingUtils} will keep the directory name short for the sake of windows users.
+ * <p>
+ * This is best suited for Tests that will benefit from a unit directory per test method.
+ * If you desire to have a test directory per test class, with all test methods sharing the same test directory, then
+ * consider using the {@link MavenTestingUtils#getTargetTestingDir(String)}
+ * 
+ * <p>
+ * Example use:
+ * 
+ * <pre>
+ * public class TestingDirTest
+ * {
+ *     &#064;Rule
+ *     public TestingDir testingdir = new TestingDir();
+ * 
+ *     &#064;Test
+ *     public void testUseDirectory()
+ *     {
+ *         File appDir = testingdir.getFile("app");
+ *         File tmpDir = testingdir.getFile("tmp");
+ *         
+ *         FS.ensureDirEmpty(appDir);
+ *         FS.ensureDirEmpty(tmpDir);
+ *         
+ *         File index = new File(appDir, "index.html");
+ *         FileWriter writer = new FileWriter(index);
+ *         writer.write("Hello World");
+ *         writer.close();
+ *         
+ *         Server server = new Server();
+ *         server.setTmpDir(tmpDir);
+ *         server.addWebApp(appDir);
+ *         server.start();
+ *         
+ *         Client client = new Client();
+ *         String response = client.request("http://localhost/app/");
+ * 
+ *         Assert.assertThat(response,containsString("Hello World"));
+ *     }
+ * }
+ * </pre>
  */
 public class TestingDir implements TestRule
 {

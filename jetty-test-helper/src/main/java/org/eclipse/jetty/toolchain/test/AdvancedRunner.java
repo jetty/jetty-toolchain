@@ -31,8 +31,11 @@ import org.junit.runners.model.InitializationError;
 /**
  * Tiered Junit 4 Test Runner.
  * <p>
- * Supports &#064;Slow annotation on test methods to only have those tests run during a long test run.
+ * Supports &#064;{@link org.eclipse.jetty.toolchain.test.annotation.Slow Slow} and 
+ * &#064;{@link org.eclipse.jetty.toolchain.test.annotation.Stress Stress} supplemental
+ * annotation on test methods to allow for filtering of what class of test to execute.
  * <p>
+ * 
  * 
  * <pre>
  *    &#064;Test
@@ -42,7 +45,7 @@ import org.junit.runners.model.InitializationError;
  *    }
  *    
  *    &#064;Test
- *    &#064;{@link org.eclipse.jetty.toolchain.test.annotation.Stress Stress}
+ *    &#064;{@link org.eclipse.jetty.toolchain.test.annotation.Stress Stress}("requirements to satisfy this test")
  *    public void testUsingLotsOfResources() {
  *       ... do something that uses lots of resources ...
  *    }
@@ -52,6 +55,22 @@ import org.junit.runners.model.InitializationError;
  *       ... do something that happens quickly ...
  *    }
  * </pre>
+ * 
+ * To enable / disable the various tests, you have some System properties you can utilize.
+ * <p>
+ * 
+ * <dl>
+ *   <dt>-Dtest.fast</dt>
+ *   <dd>If present, this will disable &#064;{@link Slow}</dd>
+ *   
+ *   <dt>-Dtest.slow=(boolean)</dt>
+ *   <dd>Enable or disable the &#064;{@link Slow} tests.<br>
+ *   Default: true</dd>
+ *   
+ *   <dt>-Dtest.stress=(boolean)</dt>
+ *   <dd>Enable or disable the &#064;{@link Stress} tests.<br>
+ *   Default: false</dd>
+ * </dl>
  */
 public class AdvancedRunner extends BlockJUnit4ClassRunner
 {

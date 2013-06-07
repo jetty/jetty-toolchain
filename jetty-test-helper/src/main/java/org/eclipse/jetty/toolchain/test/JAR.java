@@ -116,6 +116,13 @@ public final class JAR
         }
     }
 
+    /**
+     * Create a JAR file out of the contents of a specific directory (recursively)
+     * 
+     * @param srcDir the source directory
+     * @param jarFile the desination jar file to create
+     * @throws IOException
+     */
     public static void create(File srcDir, File jarFile) throws IOException
     {
         JarOutputStream jarout = null;

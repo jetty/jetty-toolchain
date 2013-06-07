@@ -110,10 +110,10 @@ public final class IO
     }
 
     /**
-     * Copy files or directories
+     * Copy files or directories.
      * 
-     * @param from
-     * @param to
+     * @param from the from path
+     * @param to the destination path
      * @throws IOException
      */
     public static void copy(File from, File to) throws IOException
@@ -128,6 +128,13 @@ public final class IO
         }
     }
     
+    /**
+     * Copy the contents of a directory from one directory to another.
+     * 
+     * @param from the from directory
+     * @param to the destination directory
+     * @throws IOException
+     */
     public static void copyDir(File from, File to) throws IOException
     {
         FS.ensureDirExists(to);
@@ -153,6 +160,12 @@ public final class IO
         }
     }
 
+    /**
+     * Copy the entire {@link InputStream} to the {@link OutputStream}
+     * @param in the input stream to read from
+     * @param out the output stream to write to
+     * @throws IOException
+     */
     public static void copy(InputStream in, OutputStream out) throws IOException
     {
         byte buffer[] = new byte[BUFFER_SIZE];
@@ -169,6 +182,13 @@ public final class IO
         }
     }
 
+    /**
+     * Copy a file from one place to another
+     * 
+     * @param from the file to copy
+     * @param to the destination file to create
+     * @throws IOException
+     */
     public static void copyFile(File from, File to) throws IOException
     {
         FileInputStream in = null;

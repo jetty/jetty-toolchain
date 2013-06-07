@@ -23,6 +23,9 @@ import java.io.IOException;
 
 import org.junit.Assert;
 
+/**
+ * Common FileSystem utility methods
+ */
 public final class FS
 {
     private FS() {
