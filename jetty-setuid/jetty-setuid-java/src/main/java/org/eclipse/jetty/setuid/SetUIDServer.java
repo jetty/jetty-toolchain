@@ -124,6 +124,10 @@ public class SetUIDServer extends Server
     @Override
     protected void doStart() throws Exception
     {
+        String jettyUserEnvVariable = System.getenv("JETTY_USER");
+        if (jettyUserEnvVariable != null)
+            LOG.warn("JETTY_USER set to: {}. If JETTY_USER is set, starting jetty as root and using " +
+                    "jetty-setuid to switch user won't work!!!", jettyUserEnvVariable);
         if (_umask > -1)
         {
             LOG.info("Setting umask=0" + Integer.toString(_umask,8));
