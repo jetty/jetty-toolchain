@@ -1,6 +1,6 @@
 package org.eclipse.jetty.toolchain.test;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.CoreMatchers.*;
 import java.util.List;
 
 import org.junit.Assert;
