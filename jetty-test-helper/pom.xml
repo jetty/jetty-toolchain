@@ -9,7 +9,7 @@
   </parent>
   <artifactId>jetty-test-helper</artifactId>
   <packaging>jar</packaging>
-  <version>2.4-SNAPSHOT</version>
+  <version>2.4</version>
   <name>Jetty Toolchain :: Test Helper</name>
   <description>Unit Testing Support for Jetty (common classes for some unit tests)</description>
   <properties>
