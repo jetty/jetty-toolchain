@@ -18,11 +18,10 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -33,28 +32,42 @@ import java.util.concurrent.locks.ReentrantLock;
 @SuppressWarnings("serial")
 public class EventQueue<E> extends LinkedBlockingQueue<E>
 {
+    public static final boolean DEBUG = false;
+    private static final long DEBUG_START = System.currentTimeMillis();
     private final ReentrantLock lock = new ReentrantLock();
-    private AtomicReference<CountDownLatch> expectedEventCountLatch = new AtomicReference<CountDownLatch>();
+    private final Condition countReached = lock.newCondition();
+    private int goalCount = Integer.MAX_VALUE;
 
     @Override
     public boolean add(E o)
     {
-        boolean ret = super.add(o);
-        triggerCountdown();
-        return ret;
+        debug("add(%s)",o);
+        lock.lock();
+        try
+        {
+            boolean ret = super.add(o);
+            debug("added: %s",o);
+            goalCheck();
+            return ret;
+        }
+        finally
+        {
+            lock.unlock();
+        }
     }
 
     public void awaitEventCount(int expectedEventCount, int timeoutDuration, TimeUnit timeoutUnit) throws TimeoutException, InterruptedException
     {
-        lock.lock(); // wait until any active awaitEventCount() calls to complete
+        debug("awaitEventCount(%d,%d,%s)",expectedEventCount,timeoutDuration,timeoutUnit);
+        lock.lock();
         try
         {
-            CountDownLatch latch = new CountDownLatch(expectedEventCount);
-            expectedEventCountLatch.set(latch);
-
-            if (!latch.await(timeoutDuration,timeoutUnit))
+            goalCount = expectedEventCount;
+            goalCheck();
+            debug("awaiting countReached");
+            if (!countReached.await(timeoutDuration,timeoutUnit))
             {
-                throw new TimeoutException(String.format("Timeout waiting for %d events",expectedEventCount));
+                throw new TimeoutException(String.format("Timeout waiting for %d events (found %d)",expectedEventCount,size()));
             }
         }
         finally
@@ -63,23 +76,46 @@ public class EventQueue<E> extends LinkedBlockingQueue<E>
         }
     }
 
+    private void debug(String format, Object... args)
+    {
+        if (DEBUG)
+        {
+            StringBuilder fmt2 = new StringBuilder();
+            fmt2.append(String.format("%,6d [EventQueue|",System.currentTimeMillis() - DEBUG_START));
+            fmt2.append(Thread.currentThread().getName());
+            fmt2.append("] ").append(String.format(format,args));
+            System.err.println(fmt2);
+        }
+    }
+
+    private void goalCheck()
+    {
+        if (super.size() >= goalCount)
+        {
+            countReached.signalAll();
+        }
+    }
+
     @Override
     public boolean offer(E o)
     {
-        boolean ret = super.offer(o);
-        triggerCountdown();
-        return ret;
+        debug("offer(%s)",o);
+        lock.lock();
+        try
+        {
+            boolean ret = super.offer(o);
+            debug("offered: %s",o);
+            goalCheck();
+            return ret;
+        }
+        finally
+        {
+            lock.unlock();
+        }
     }
 
-    private void triggerCountdown()
+    public void shutdown()
     {
-        synchronized (this)
-        {
-            CountDownLatch countdown = expectedEventCountLatch.get();
-            if (countdown != null)
-            {
-                countdown.countDown();
-            }
-        }
+        // TODO Auto-generated method stub
     }
 }
