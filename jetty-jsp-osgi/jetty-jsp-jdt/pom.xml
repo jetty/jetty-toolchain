@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <parent>
+     <groupId>org.eclipse.jetty.toolchain</groupId>
+     <artifactId>jetty-jsp-osgi</artifactId>
+     <version>2.3.2-SNAPSHOT</version>
+     <relativePath>../pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.jetty.toolchain</groupId>
+  <artifactId>jetty-jsp-jdt</artifactId>
+  <name>Jetty :: JSP JDT Compiler</name>
+  <packaging>jar</packaging>
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <scm>
+      <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
+      <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
+      <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-jsp/jetty-jsp-jdt</url>
+  </scm>
+      <dependencies>
+         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+         </dependency>
+         <dependency>
+             <groupId>org.glassfish.web</groupId>
+             <artifactId>javax.servlet.jsp</artifactId>
+         </dependency>
+         <dependency>
+           <groupId>org.eclipse.jetty.orbit</groupId>
+           <artifactId>org.eclipse.jdt.core</artifactId>
+           <version>3.8.2.v20130121</version>
+             <exclusions>
+               <exclusion>
+                 <groupId>org.eclipse.jetty.orbit</groupId>
+                 <artifactId>javax.servlet</artifactId>
+              </exclusion>
+             </exclusions>
+         </dependency>
+      </dependencies>
+
+      <build>
+        <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <id>parse-version</id>
+                <goals>
+                  <goal>parse-version</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+              <archive>
+                <manifestEntries>
+                  <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                  <Bundle-SymbolicName>org.eclipse.jetty.jsp.jdt;singleton:=true</Bundle-SymbolicName>
+                  <Bundle-Name>Jetty JSP JDT Compiler</Bundle-Name>
+                  <Bundle-Version>${parsedVersion.osgiVersion}</Bundle-Version>
+                  <Export-Package>org.apache.jasper.compiler;version="2.3.2"</Export-Package>
+                </manifestEntries>
+              </archive>
+            </configuration>
+          </plugin>
+        </plugins>
+  </build>
+</project>

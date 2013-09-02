@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.eclipse.jetty.toolchain</groupId>
+    <artifactId>jetty-toolchain</artifactId>
+    <version>1.4</version>
+    <relativePath>../jetty-toolchain</relativePath>
+  </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.eclipse.jetty.toolchain</groupId>
+    <artifactId>jetty-jsp-osgi</artifactId>
+    <version>2.3.2-SNAPSHOT</version>
+    <name>Jetty :: JSP OSGi Parent</name>
+    <packaging>pom</packaging>
+    <properties>
+        <jsp.impl.version>2.3.2</jsp.impl.version>
+    </properties>
+    <scm>
+        <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
+        <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
+        <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-jsp-osgi</url>
+    </scm>
+    <modules>
+        <module>jetty-jsp-fragment</module>
+        <module>jetty-jsp-jdt</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+         <dependency>
+             <groupId>org.glassfish.web</groupId>
+             <artifactId>javax.servlet.jsp</artifactId>
+             <version>${jsp.impl.version}</version>
+         </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+      <plugins>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <configuration>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
+</project>

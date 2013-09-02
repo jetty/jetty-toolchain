@@ -1,0 +1,121 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <parent>
+     <groupId>org.eclipse.jetty.toolchain</groupId>
+     <artifactId>jetty-jsp-osgi</artifactId>
+     <version>2.3.2-SNAPSHOT</version>
+     <relativePath>../pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.jetty.toolchain</groupId>
+  <artifactId>jetty-jsp-fragment</artifactId>
+  <name>Jetty :: JSP Fragment</name>
+  <packaging>jar</packaging>
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+     <dependency>
+         <groupId>org.glassfish.web</groupId>
+         <artifactId>javax.servlet.jsp</artifactId>
+     </dependency>
+     <dependency>
+         <groupId>org.eclipse.jetty.toolchain</groupId>
+         <artifactId>jetty-jsp-jdt</artifactId>
+         <version>2.3.2-SNAPSHOT</version>
+     </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <executions>
+            <execution>
+                <id>unpack-classes</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>unpack-dependencies</goal>
+                </goals>
+                <configuration>
+                  <includeGroupIds>org.glassfish.web,org.eclipse.jetty.toolchain</includeGroupIds>
+                  <excludes>META-INF/**</excludes>
+                  <outputDirectory>target/classes</outputDirectory>
+                </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <id>parse-version</id>
+                <goals>
+                  <goal>parse-version</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+              <archive>
+                <manifestEntries>
+                  <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+                  <Bundle-SymbolicName>org.eclipse.jetty.jsp.fragment;singleton:=true</Bundle-SymbolicName>
+                  <Bundle-Name>Jetty JSP Fragment</Bundle-Name>
+                  <Bundle-Version>${parsedVersion.osgiVersion}</Bundle-Version>
+                  <Implementation-Version>2.3.2</Implementation-Version>
+                  <Specification-Version>2.3</Specification-Version>
+                  <Export-Package>org.apache.jasper,
+org.apache.jasper.runtime;version="2.3.2",
+org.apache.jasper.compiler;version="2.3.2",
+org.apache.jasper.security;version="2.3.2",
+org.apache.jasper.resources;version="2.3.2",
+org.apache.jasper.compiler.tagplugin;version="2.3.2",
+org.apache.jasper.tagplugins.jstl;version="2.3.2",
+org.glassfish.jsp.api;version="2.3.2",
+org.apache.jasper.servlet;version="2.3.2",
+org.apache.jasper.xmlparse;version="2.3.2"
+                  </Export-Package>
+                  <Import-Package>
+org.eclipse.jdt.core.compiler;resolution:=optional,
+org.eclipse.jdt.internal.compiler;resolution:=optional,
+org.eclipse.jdt.internal.compiler.classfmt;resolution:=optional,
+org.eclipse.jdt.internal.compiler.env;resolution:=optional,
+org.eclipse.jdt.internal.compiler.impl;resolution:=optional,
+org.eclipse.jdt.internal.compiler.problem;resolution:=optional,
+javax.el;version="[3.0,3.1)",
+javax.servlet;version="[3.1,3.2)",
+javax.servlet.resources;version="[3.1,3.2)",
+javax.servlet.descriptor;version="[3.1,3.2)",
+javax.servlet.http;version="[3.1,3.2)",
+javax.servlet.jsp.resources;version="[3.1,3.2)",
+javax.servlet.jsp;version="2.3",
+javax.servlet.jsp.el;version="2.3",
+javax.servlet.jsp.tagext;version="2.3",
+javax.tools,
+javax.xml.parsers,
+javax.xml.transform,
+javax.xml.transform.dom,
+javax.xml.transform.stream,
+javax.xml.validation,
+org.w3c.dom,
+org.w3c.dom.ls,
+org.xml.sax,
+org.xml.sax.ext,org.xml.sax.helpers
+                  </Import-Package>
+                  <Fragment-Host>org.eclipse.jetty.osgi.boot</Fragment-Host>
+                </manifestEntries>
+              </archive>
+            </configuration>
+          </plugin>
+
+        </plugins>
+  </build>
+</project>
