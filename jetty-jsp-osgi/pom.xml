@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.eclipse.jetty.toolchain</groupId>
     <artifactId>jetty-jsp-osgi</artifactId>
-    <version>2.3.2</version>
+    <version>2.3.2-SNAPSHOT</version>
     <name>Jetty :: JSP OSGi Parent</name>
     <packaging>pom</packaging>
     <properties>
