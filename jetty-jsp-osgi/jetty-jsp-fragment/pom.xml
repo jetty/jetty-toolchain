@@ -18,14 +18,23 @@
          <groupId>org.glassfish.web</groupId>
          <artifactId>javax.servlet.jsp</artifactId>
      </dependency>
+     <!-- here purely to make glassfish code compile, which is only necessary so that we can generate a source jar -->
+     <dependency><groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><version>3.0.1</version><scope>provided</scope></dependency>
      <dependency>
          <groupId>org.eclipse.jetty.toolchain</groupId>
          <artifactId>jetty-jsp-jdt</artifactId>
-         <version>2.3.2-SNAPSHOT</version>
+         <version>${project.version}</version>
+         <exclusions>
+            <exclusion>
+              <groupId>javax.servlet</groupId>
+              <artifactId>javax.servlet-api</artifactId>
+            </exclusion>
+         </exclusions>
      </dependency>
   </dependencies>
 
   <build>
+    <sourceDirectory>${project.build.directory}/sources</sourceDirectory>
     <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -33,15 +42,40 @@
           <executions>
             <execution>
                 <id>unpack-classes</id>
-                <phase>prepare-package</phase>
                 <goals>
                   <goal>unpack-dependencies</goal>
                 </goals>
                 <configuration>
                   <includeGroupIds>org.glassfish.web,org.eclipse.jetty.toolchain</includeGroupIds>
                   <excludes>META-INF/**</excludes>
-                  <outputDirectory>target/classes</outputDirectory>
+                  <outputDirectory>target/depclasses</outputDirectory>
                 </configuration>
+            </execution>
+            <execution>
+              <id>unpack-glassfish-sources</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>unpack-dependencies</goal>
+              </goals>
+              <configuration>
+                <classifier>sources</classifier>
+                <includeGroupIds>org.glassfish.web</includeGroupIds>
+                <excludes>META-INF/**,**/JDTJavaCompiler.java</excludes>
+                <outputDirectory>target/sources</outputDirectory>
+              </configuration>
+            </execution>
+            <execution>
+              <id>unpack-sources</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>unpack-dependencies</goal>
+              </goals>
+              <configuration>
+                <classifier>sources</classifier>
+                <includeGroupIds>org.eclipse.jetty.toolchain</includeGroupIds>
+                <excludes>META-INF/**</excludes>
+                <outputDirectory>target/sources</outputDirectory>
+              </configuration>
             </execution>
           </executions>
         </plugin>
@@ -61,9 +95,40 @@
           </plugin>
 
           <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>3.0</version>
+              <configuration>
+                 <source>1.7</source>
+                 <target>1.7</target>
+                 <compilerArgument>-Xlint:unchecked</compilerArgument>
+                 <excludes>
+                    <exclude>org/apache/jasper/compiler/AntJavaCompiler.java</exclude>
+                    <exclude>org.apache/jasper/util/SystemLogHandler.java</exclude>
+                    <exclude>org/apache/jasper/runtime/PerThreadTagHandlerPool.java</exclude>
+                 </excludes>
+              </configuration>
+          </plugin>
+
+         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-source-plugin</artifactId>
+           <version>2.2.1</version>
+           <executions>
+             <execution>
+               <id>attach-sources</id>
+               <goals>
+                 <goal>jar-no-fork</goal>
+               </goals>
+             </execution>
+           </executions>
+          </plugin>
+
+          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
-            <configuration>
+             <configuration>
+              <classesDirectory>target/depclasses</classesDirectory>
               <archive>
                 <manifestEntries>
                   <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
@@ -113,7 +178,27 @@ org.xml.sax.ext,org.xml.sax.helpers
                   <Fragment-Host>org.eclipse.jetty.osgi.boot</Fragment-Host>
                 </manifestEntries>
               </archive>
-            </configuration>
+             </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+              <execution>
+                <id>javadoc-jar</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <includeDependencySources>true</includeDependencySources>
+                  <dependencySourceIncludes>
+                    <dependencySourceInclude>org.glassfish.web:*</dependencySourceInclude>
+                    <dependencySourceInclude>org.eclipse.jetty.toolchain:*</dependencySourceInclude>
+                 </dependencySourceIncludes>
+                </configuration>
+              </execution>
+            </executions>
           </plugin>
 
         </plugins>

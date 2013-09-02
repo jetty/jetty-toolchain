@@ -18,48 +18,69 @@
       <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
       <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-jsp/jetty-jsp-jdt</url>
   </scm>
-      <dependencies>
-         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-         </dependency>
-         <dependency>
-             <groupId>org.glassfish.web</groupId>
-             <artifactId>javax.servlet.jsp</artifactId>
-         </dependency>
-         <dependency>
-           <groupId>org.eclipse.jetty.orbit</groupId>
-           <artifactId>org.eclipse.jdt.core</artifactId>
-           <version>3.8.2.v20130121</version>
-             <exclusions>
-               <exclusion>
-                 <groupId>org.eclipse.jetty.orbit</groupId>
-                 <artifactId>javax.servlet</artifactId>
-              </exclusion>
-             </exclusions>
-         </dependency>
-      </dependencies>
+  <dependencies>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+     </dependency>
+     <dependency>
+         <groupId>org.glassfish.web</groupId>
+         <artifactId>javax.servlet.jsp</artifactId>
+     </dependency>
+     <dependency>
+       <groupId>org.eclipse.jetty.orbit</groupId>
+       <artifactId>org.eclipse.jdt.core</artifactId>
+       <version>3.8.2.v20130121</version>
+         <exclusions>
+           <exclusion>
+             <groupId>org.eclipse.jetty.orbit</groupId>
+             <artifactId>javax.servlet</artifactId>
+          </exclusion>
+         </exclusions>
+     </dependency>
+  </dependencies>
 
-      <build>
-        <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.7</version>
-            <executions>
-              <execution>
-                <id>parse-version</id>
-                <goals>
-                  <goal>parse-version</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+  <build>
+    <plugins>
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>parse-version</id>
+            <goals>
+              <goal>parse-version</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>package</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
             <configuration>
               <archive>
                 <manifestEntries>
@@ -67,11 +88,12 @@
                   <Bundle-SymbolicName>org.eclipse.jetty.jsp.jdt;singleton:=true</Bundle-SymbolicName>
                   <Bundle-Name>Jetty JSP JDT Compiler</Bundle-Name>
                   <Bundle-Version>${parsedVersion.osgiVersion}</Bundle-Version>
-                  <Export-Package>org.apache.jasper.compiler;version="2.3.2"</Export-Package>
                 </manifestEntries>
               </archive>
             </configuration>
-          </plugin>
-        </plugins>
+          </execution>
+        </executions>
+       </plugin>
+     </plugins>
   </build>
 </project>

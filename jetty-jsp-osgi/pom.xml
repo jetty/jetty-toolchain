@@ -20,8 +20,8 @@
         <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-jsp-osgi</url>
     </scm>
     <modules>
-        <module>jetty-jsp-fragment</module>
         <module>jetty-jsp-jdt</module>
+        <module>jetty-jsp-fragment</module>
     </modules>
     <dependencyManagement>
         <dependencies>
