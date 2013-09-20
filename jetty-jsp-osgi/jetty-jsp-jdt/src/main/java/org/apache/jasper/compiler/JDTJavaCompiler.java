@@ -178,6 +178,12 @@ public class JDTJavaCompiler implements JavaCompiler {
         } else if(sourceVM.equals("1.5")) {
             settings.put(CompilerOptions.OPTION_Source,
                          CompilerOptions.VERSION_1_5);
+        } else if(sourceVM.equals("1.6")) {
+            settings.put(CompilerOptions.OPTION_Source,
+                         CompilerOptions.VERSION_1_6);
+        } else if(sourceVM.equals("1.7")) {
+            settings.put(CompilerOptions.OPTION_Source,
+                         CompilerOptions.VERSION_1_7);
         } else {
             log.warning("Unknown source VM " + sourceVM + " ignored.");
             settings.put(CompilerOptions.OPTION_Source,
@@ -201,6 +207,12 @@ public class JDTJavaCompiler implements JavaCompiler {
         } else if(targetVM.equals("1.5")) {
             settings.put(CompilerOptions.OPTION_TargetPlatform,
                          CompilerOptions.VERSION_1_5);
+        } else if(targetVM.equals("1.6")) {
+            settings.put(CompilerOptions.OPTION_TargetPlatform,
+                         CompilerOptions.VERSION_1_6);
+        } else if(targetVM.equals("1.7")) {
+            settings.put(CompilerOptions.OPTION_TargetPlatform,
+                         CompilerOptions.VERSION_1_7);
         } else {
             log.warning("Unknown target VM " + targetVM + " ignored.");
             settings.put(CompilerOptions.OPTION_TargetPlatform,
