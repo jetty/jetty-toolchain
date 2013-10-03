@@ -181,7 +181,15 @@ public class SetUIDListener implements LifeCycle.Listener
         {
             Server server = (Server)lifecycle;
             if (server.getThreadPool() instanceof LifeCycle)
-                ((LifeCycle)server.getThreadPool()).start();
+            {
+                LifeCycle tplc=(LifeCycle)server.getThreadPool();
+                if (!tplc.isRunning())
+                {
+                    // Start the Threadpool early, but make the server manage it
+                    server.manage(tplc);
+                    tplc.start();
+                }
+            }
             Connector[] connectors = server.getConnectors();
             if (connectors!=null)
             {
@@ -192,8 +200,11 @@ public class SetUIDListener implements LifeCycle.Listener
                         ((NetworkConnector)connector).open();
                         LOG.info("Opened " +connector);
                     }
-                    else
+                    else if (!connector.isRunning())
+                    {
+                        server.manage(connector);
                         connector.start();
+                    }
                 }
             }
         }
