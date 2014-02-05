@@ -141,6 +141,7 @@ public class BenchmarkHelper implements Runnable
         lastOldUsed = old;
     }
 
+    @SuppressWarnings("restriction")
     public boolean startStatistics()
     {
         // Support for multiple nodes requires to ignore start requests after the first
@@ -216,6 +217,7 @@ public class BenchmarkHelper implements Runnable
         }
     }
 
+    @SuppressWarnings("restriction")
     public boolean stopStatistics()
     {
         synchronized (this)
