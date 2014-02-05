@@ -21,8 +21,6 @@ package org.eclipse.jetty.toolchain.test;
 import java.io.File;
 
 import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.rules.TemporaryFolder;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
