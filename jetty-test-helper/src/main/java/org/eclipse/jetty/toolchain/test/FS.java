@@ -97,13 +97,13 @@ public final class FS
 
         for (File file : dir.listFiles())
         {
-            if (file.isFile())
-            {
-                Assert.assertTrue("Failed to delete file: " + file.getAbsolutePath(),file.delete());
-            }
-            else if (file.isDirectory())
+            if (file.isDirectory())
             {
                 recursiveDelete(file);
+            }
+            else
+            {
+                Assert.assertTrue("Failed to delete file: " + file.getAbsolutePath(),file.delete());
             }
         }
 
