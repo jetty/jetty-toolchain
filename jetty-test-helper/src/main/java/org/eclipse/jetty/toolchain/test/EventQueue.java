@@ -63,7 +63,8 @@ public class EventQueue<E> extends LinkedBlockingQueue<E>
         try
         {
             goalCount = expectedEventCount;
-            goalCheck();
+            if (goalCheck())
+                return;
             debug("awaiting countReached");
             if (!countReached.await(timeoutDuration,timeoutUnit))
             {
@@ -88,12 +89,14 @@ public class EventQueue<E> extends LinkedBlockingQueue<E>
         }
     }
 
-    private void goalCheck()
+    private boolean goalCheck()
     {
-        if (super.size() >= goalCount)
+        if (size() >= goalCount)
         {
             countReached.signalAll();
+            return true;
         }
+        return false;
     }
 
     @Override
