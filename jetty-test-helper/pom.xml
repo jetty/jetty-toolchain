@@ -5,7 +5,7 @@
     <artifactId>jetty-toolchain</artifactId>
     <groupId>org.eclipse.jetty.toolchain</groupId>
     <version>1.4</version>
-    <relativePath>../jetty-toolchain-parent</relativePath>
+    <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <artifactId>jetty-test-helper</artifactId>
   <packaging>jar</packaging>
