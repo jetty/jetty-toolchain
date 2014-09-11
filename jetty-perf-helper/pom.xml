@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jetty-perf-helper</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
     <name>Jetty Toolchain :: Performance Helper</name>
     <description>Performance/Benchmark Support for Jetty</description>
 
@@ -35,7 +35,8 @@
         <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
         <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
         <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-perf-helper</url>
-    </scm>
+      <tag>jetty-perf-helper-1.0.3</tag>
+  </scm>
 
 </project>
 
