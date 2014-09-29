@@ -126,16 +126,19 @@ public class MeasureRecorder
             String eol = System.lineSeparator();
             StringBuilder builder = new StringBuilder();
 
+            long average = 0;
             long measureAt50thPercentile = 0;
             long measureAt99thPercentile = 0;
 
             if (count == 1)
             {
+                average = total;
                 measureAt50thPercentile = min;
                 measureAt99thPercentile = max;
             }
             else if (count > 1)
             {
+                average = total / count;
                 long samples = 0;
                 long maxLatencyBucketFrequency = 0;
                 long previousMeasure = 0;
@@ -194,9 +197,10 @@ public class MeasureRecorder
                 }
             }
 
-            builder.append(String.format("%s - %d samples | 50th%%/99th%%/100th%% = %d/%d/%d %s%n",
+            builder.append(String.format("%s - %d samples | avg/50th%%/99th%%/max = %d/%d/%d/%d %s%n",
                     name,
                     count,
+                    converter.convert(average),
                     converter.convert(measureAt50thPercentile),
                     converter.convert(measureAt99thPercentile),
                     converter.convert(max),
