@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>jetty-perf-helper</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.4</version>
+    <version>1.0.5-SNAPSHOT</version>
     <name>Jetty Toolchain :: Performance Helper</name>
     <description>Performance/Benchmark Support for Jetty</description>
 
