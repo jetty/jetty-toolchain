@@ -353,7 +353,6 @@ public class PlatformMonitor implements Runnable
         public String toString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.append(EOL);
             builder.append("========================================").append(EOL);
             builder.append("Monitoring Started at ").append(new Date(date)).append(EOL);
             builder.append("Operative System: ").append(os).append(EOL);
@@ -368,7 +367,7 @@ public class PlatformMonitor implements Runnable
                     .append(" MiB").append(EOL);
             builder.append("Young Generation Heap Size: ").append(mebiBytes(heap.getMax() - tenured.getMax()))
                     .append(" MiB").append(EOL);
-            builder.append("- - - - - - - - - - - - - - - - - - - - ").append(EOL);
+            builder.append("- - - - - - - - - - - - - - - - - - - - ");
             return builder.toString();
         }
     }
@@ -408,7 +407,7 @@ public class PlatformMonitor implements Runnable
                     .append(" MiB").append(EOL);
             builder.append("Average CPU Load: ").append(percent(cpuTime, time)).append("/")
                     .append(100 * cores).append(EOL);
-            builder.append("========================================").append(EOL);
+            builder.append("========================================");
             return builder.toString();
         }
     }
