@@ -197,9 +197,10 @@ public class MeasureRecorder
                 }
             }
 
-            builder.append(String.format("%s - %d samples | avg/50th%%/99th%%/max = %d/%d/%d/%d %s%n",
+            builder.append(String.format("%s - %d samples | min/avg/50th%%/99th%%/max = %d/%d/%d/%d/%d %s",
                     name,
                     count,
+                    converter.convert(min),
                     converter.convert(average),
                     converter.convert(measureAt50thPercentile),
                     converter.convert(measureAt99thPercentile),
