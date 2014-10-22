@@ -113,11 +113,11 @@ public class PlatformMonitor implements Runnable
         {
             if ("PS Eden Space".equals(memoryPool.getName()) ||
                     "Par Eden Space".equals(memoryPool.getName()) ||
-                    "G1 Eden".equals(memoryPool.getName()))
+                    "G1 Eden Space".equals(memoryPool.getName()))
                 emp = memoryPool;
             else if ("PS Survivor Space".equals(memoryPool.getName()) ||
                     "Par Survivor Space".equals(memoryPool.getName()) ||
-                    "G1 Survivor".equals(memoryPool.getName()))
+                    "G1 Survivor Space".equals(memoryPool.getName()))
                 smp = memoryPool;
             else if ("PS Old Gen".equals(memoryPool.getName()) ||
                     "CMS Old Gen".equals(memoryPool.getName()) ||
@@ -249,9 +249,12 @@ public class PlatformMonitor implements Runnable
                 start.freeMemory = os.getFreePhysicalMemorySize();
             }
             start.heap = heapMemory.getHeapMemoryUsage();
-            start.eden = edenMemoryPool.getUsage();
-            start.survivor = survivorMemoryPool.getUsage();
-            start.tenured = tenuredMemoryPool.getUsage();
+            if (hasMemoryPools)
+            {
+                start.eden = edenMemoryPool.getUsage();
+                start.survivor = survivorMemoryPool.getUsage();
+                start.tenured = tenuredMemoryPool.getUsage();
+            }
 
             return start;
         }
