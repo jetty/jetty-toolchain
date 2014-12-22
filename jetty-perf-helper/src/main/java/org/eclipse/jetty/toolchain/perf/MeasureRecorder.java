@@ -25,6 +25,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * @deprecated Use {@link org.HdrHistogram.Histogram} to record measures instead,
+ *             and {@link org.eclipse.jetty.toolchain.perf.HistogramSnapshot} to
+ *             format the histogram values.
+ */
+@Deprecated
 public class MeasureRecorder
 {
     private final AtomicLong count = new AtomicLong();
@@ -32,11 +38,11 @@ public class MeasureRecorder
     private final AtomicLong max = new AtomicLong();
     private final AtomicLong total = new AtomicLong();
     private final ConcurrentMap<Long, AtomicLong> measures = new ConcurrentHashMap<>();
-    private final Converter converter;
+    private final MeasureConverter converter;
     private final String name;
     private final String unit;
 
-    public MeasureRecorder(Converter converter, String name, String unit)
+    public MeasureRecorder(MeasureConverter converter, String name, String unit)
     {
         this.converter = converter;
         this.name = name;
@@ -103,6 +109,10 @@ public class MeasureRecorder
         }
     }
 
+    /**
+     * @deprecated Use {@link org.eclipse.jetty.toolchain.perf.HistogramSnapshot} instead
+     */
+    @Deprecated
     public class Snapshot
     {
         public final long count;
@@ -209,10 +219,5 @@ public class MeasureRecorder
 
             return builder.toString();
         }
-    }
-
-    public interface Converter
-    {
-        public long convert(long measure);
     }
 }
