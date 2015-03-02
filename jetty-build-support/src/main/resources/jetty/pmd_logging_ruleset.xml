@@ -14,7 +14,7 @@
       <description>
 AvoidAnonymousLogging finds instances of Anonymous logging use.
 This is bad form and treats logging of the system as a whole, not
-descrete parts that can be adjusted (attaching different levels and
+discrete parts that can be adjusted (attaching different levels and
 appenders depending on need)
       </description>
       <priority>3</priority>
