@@ -18,12 +18,30 @@
 
 package org.eclipse.jetty.toolchain.test;
 
+/**
+ * Common Java JVM/JDK environment utilities
+ */
 public class JDK
 {
+    /**
+     * True if JDK is 1.5 (or newer) 
+     */
     public static final boolean IS_5 = isJavaVersionAtLeast(1,5);
+    /**
+     * True if JDK is 1.6 (or newer) 
+     */
     public static final boolean IS_6 = isJavaVersionAtLeast(1,6);
+    /**
+     * True if JDK is 1.7 (or newer) 
+     */
     public static final boolean IS_7 = isJavaVersionAtLeast(1,7);
+    /**
+     * True if JDK is 1.8 (or newer) 
+     */
     public static final boolean IS_8 = isJavaVersionAtLeast(1,8);
+    /**
+     * True if JDK is 1.9 (or newer) 
+     */
     public static final boolean IS_9 = isJavaVersionAtLeast(1,9);
 
     private static boolean isJavaVersionAtLeast(int maj, int min)

@@ -99,6 +99,11 @@ public final class JAR
         }
     }
 
+    /**
+     * Close a JAR file.
+     * 
+     * @param jar the JarFile to close
+     */
     public static void close(JarFile jar)
     {
         if (jar == null)
@@ -120,8 +125,8 @@ public final class JAR
      * Create a JAR file out of the contents of a specific directory (recursively)
      * 
      * @param srcDir the source directory
-     * @param jarFile the desination jar file to create
-     * @throws IOException
+     * @param jarFile the destination jar file to create
+     * @throws IOException if unable to create the jar file, or read the source directory
      */
     public static void create(File srcDir, File jarFile) throws IOException
     {

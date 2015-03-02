@@ -21,18 +21,20 @@ package org.eclipse.jetty.toolchain.test;
 import org.junit.internal.AssumptionViolatedException;
 
 /**
- * Flag indicating that {@link Test} is part of special group of tests.
+ * Flag indicating that {@link org.junit.Test} is part of special group of tests.
  */
 public final class PropertyFlag
 {
-    private PropertyFlag() {
+    private PropertyFlag()
+    {
         /* prevent instantiation */
     }
-    
+
     /**
-     * Returns flag indicating if <code>-D&lt;flag&gt;</code> or <code>-D&lt;flag&gt=true</code> is enabled.
+     * Returns flag indicating if <code>-D&lt;flag&gt;</code> or <code>-D&lt;flag&gt;=true</code> is enabled.
      * 
-     * @param property name of the system property representing this flag
+     * @param property
+     *            name of the system property representing this flag
      * @return true if enabled
      */
     public static boolean isEnabled(String property)
@@ -52,16 +54,19 @@ public final class PropertyFlag
     }
 
     /**
-     * Labels the test method as belonging to Stress testing.
+     * Junit Assumption based on the value of a System Property.
      * <p>
-     * Checks for the existence of the "STRESS" system property, if found, it allows the test to execute. If not found,
-     * the test is flagged as ignored and returned.
+     * If property is found, with no value, then it assumed to be true. Otherwise the value is parsed a
+     * {@link Boolean#parseBoolean(String)} and used for junit assume logic.
+     * 
+     * @param property
+     *            the system property to look for
      */
     public static void assume(String property)
     {
         if (!isEnabled(property))
         {
-            throw new AssumptionViolatedException("Test is not enabled");
+            throw new AssumptionViolatedException("System Property '" + property + "' not set");
         }
     }
 }

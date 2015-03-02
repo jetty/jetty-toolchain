@@ -28,10 +28,11 @@ import org.junit.Assert;
  */
 public final class FS
 {
-    private FS() {
+    private FS()
+    {
         /* prevent instantiation */
     }
-    
+
     /**
      * Delete a file or a directory.
      * <p>
@@ -42,10 +43,11 @@ public final class FS
      */
     public static void delete(File path)
     {
-        if(!path.exists()) {
+        if (!path.exists())
+        {
             return; // nothing to delete. we're done.
         }
-        
+
         if (path.isFile())
         {
             deleteFile(path);
@@ -206,6 +208,7 @@ public final class FS
      * @param file
      *            the file to create or update the timestamp of.
      * @throws IOException
+     *             if unable to create the new file.
      */
     public static void touch(File file) throws IOException
     {

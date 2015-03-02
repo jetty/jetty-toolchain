@@ -36,7 +36,7 @@ public final class MavenTestingUtils
     private static URI baseURI;
     private static File testResourcesDir;
     private static File targetDir;
-    
+
     private MavenTestingUtils()
     {
         /* prevent instantiation */
@@ -45,10 +45,9 @@ public final class MavenTestingUtils
     /**
      * Obtain a reference to the maven ${basedir} for the module.
      * <p>
-     * Note: while running in maven, the ${basedir} is populated by maven and used by the surefire-plugin.
-     * <br>
-     * While running in eclipse, the ${basedir} property is unset, resulting in this method falling back to
-     * ${user.dir} equivalent use.
+     * Note: while running in maven, the ${basedir} is populated by maven and used by the surefire-plugin. <br>
+     * While running in eclipse, the ${basedir} property is unset, resulting in this method falling back to ${user.dir}
+     * equivalent use.
      * 
      * @return the equivalent to the maven ${basedir} property.
      */
@@ -114,7 +113,7 @@ public final class MavenTestingUtils
     /**
      * Get the directory reference to the maven <code>${basedir}/target/tests/</code> path.
      * 
-     * @return the maven <code>${basedir}/target/tests/</code> directory. 
+     * @return the maven <code>${basedir}/target/tests/</code> directory.
      *         Note: will not validate that the directory exists, or create the directory)
      */
     public static File getTargetTestingDir()
@@ -136,8 +135,8 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Get a directory reference to the  <code>${basedir}/target/tests/test-${testname}</code>
-     *  that uses the JUnit 3.x {@link TestCase#getName()} to make itself unique.
+     * Get a directory reference to the <code>${basedir}/target/tests/test-${testname}</code> that uses the JUnit 3.x
+     * {@link TestCase#getName()} to make itself unique.
      * 
      * @param test
      *            the junit 3.x testcase to base this new directory on.
@@ -151,8 +150,11 @@ public final class MavenTestingUtils
     /**
      * Get a URI reference to a path (File or Dir) within the maven "${basedir}/target" directory.
      * 
-     * @param path the relative path to use
+     * @param path
+     *            the relative path to use
      * @return the URI reference to the target path
+     * @throws MalformedURLException
+     *             if unable to create a new target url due to URL error.
      */
     public static URI getTargetURI(String path) throws MalformedURLException
     {
@@ -162,9 +164,11 @@ public final class MavenTestingUtils
     /**
      * Get a URL reference to a path (File or Dir) within the maven "${basedir}/target" directory.
      * 
-     * @param path the relative path to use
+     * @param path
+     *            the relative path to use
      * @return the URL reference to the target path
      * @throws MalformedURLException
+     *             if unable to create a new target url due to URL error.
      */
     public static URL getTargetURL(String path) throws MalformedURLException
     {
@@ -172,10 +176,9 @@ public final class MavenTestingUtils
     }
 
     /**
-     * Obtain a testing directory reference in maven 
-     * <code>${basedir}/target/tests/${condensed-classname}/${methodname}</code> 
-     * path that uses an condensed directory
-     * name based on the testclass and subdirectory based on the testmethod being run. 
+     * Obtain a testing directory reference in maven
+     * <code>${basedir}/target/tests/${condensed-classname}/${methodname}</code> path that uses an condensed directory
+     * name based on the testclass and subdirectory based on the testmethod being run.
      * <p>
      * Note: the &#064;Rule {@link TestingDir} is a better choice in most cases.
      * 
@@ -183,8 +186,8 @@ public final class MavenTestingUtils
      *            the class for the test case
      * @param testmethodname
      *            the test method name
-     * @return the File path to the testname specific testing directory underneath the <code>${basedir}/target/tests/</code>
-     *         sub directory
+     * @return the File path to the testname specific testing directory underneath the
+     *         <code>${basedir}/target/tests/</code> sub directory
      * @see FS
      * @see TestingDir
      */
@@ -217,7 +220,7 @@ public final class MavenTestingUtils
     /**
      * Using Junit 3.x test naming standards, attempt to discover a suitable test directory name
      * based on the execution stack when this method is called.
-     *  
+     * 
      * @return the testing directory name (only the name, not the full path)
      * @deprecated Upgrade to Junit 4.x and use the {@link TestingDir} &#064;Rule instead
      */
@@ -244,7 +247,8 @@ public final class MavenTestingUtils
      * <p>
      * Note: will throw assertion error if path does point to an existing file
      * 
-     * @param path the relative path to reference
+     * @param path
+     *            the relative path to reference
      * @return the file reference (must exist)
      */
     public static File getProjectFile(String path)
@@ -260,7 +264,8 @@ public final class MavenTestingUtils
      * <p>
      * Note: will throw assertion error if path does point to an existing directory
      * 
-     * @param path the relative path to reference
+     * @param path
+     *            the relative path to reference
      * @return the directory reference (must exist)
      */
     public static File getProjectDir(String path)

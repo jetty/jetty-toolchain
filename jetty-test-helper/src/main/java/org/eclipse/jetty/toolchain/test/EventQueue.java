@@ -28,10 +28,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * Event Queue for capturing potential events within a testing scenario.
  * 
  * @param <E>
+ *            the type of entry in this EventQueue
  */
 @SuppressWarnings("serial")
 public class EventQueue<E> extends LinkedBlockingQueue<E>
 {
+    @SuppressWarnings("javadoc")
     public static final boolean DEBUG = false;
     private static final long DEBUG_START = System.currentTimeMillis();
     private final ReentrantLock lock = new ReentrantLock();
@@ -56,6 +58,20 @@ public class EventQueue<E> extends LinkedBlockingQueue<E>
         }
     }
 
+    /**
+     * Await a specific event count
+     * 
+     * @param expectedEventCount
+     *            the number of events to wait for
+     * @param timeoutDuration
+     *            the timeout duration
+     * @param timeoutUnit
+     *            the timeout unit
+     * @throws TimeoutException
+     *             if timeout while waiting for the event count
+     * @throws InterruptedException
+     *             if await was interrupted
+     */
     public void awaitEventCount(int expectedEventCount, int timeoutDuration, TimeUnit timeoutUnit) throws TimeoutException, InterruptedException
     {
         debug("awaitEventCount(%d,%d,%s)",expectedEventCount,timeoutDuration,timeoutUnit);
@@ -117,8 +133,11 @@ public class EventQueue<E> extends LinkedBlockingQueue<E>
         }
     }
 
+    /**
+     * Shutdown the queue.
+     */
     public void shutdown()
     {
-        // TODO Auto-generated method stub
+        /* nothing to do */
     }
 }

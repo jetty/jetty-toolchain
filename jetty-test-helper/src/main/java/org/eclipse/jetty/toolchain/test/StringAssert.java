@@ -22,6 +22,9 @@ import java.util.List;
 
 import org.junit.Assert;
 
+/**
+ * Collection of common asserts for Strings.
+ */
 public final class StringAssert
 {
     private StringAssert() {

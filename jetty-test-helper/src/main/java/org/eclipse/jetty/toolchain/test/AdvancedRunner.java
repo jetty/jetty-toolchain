@@ -34,8 +34,6 @@ import org.junit.runners.model.InitializationError;
  * Supports &#064;{@link org.eclipse.jetty.toolchain.test.annotation.Slow Slow} and 
  * &#064;{@link org.eclipse.jetty.toolchain.test.annotation.Stress Stress} supplemental
  * annotation on test methods to allow for filtering of what class of test to execute.
- * <p>
- * 
  * 
  * <pre>
  *    &#064;Test
@@ -57,7 +55,6 @@ import org.junit.runners.model.InitializationError;
  * </pre>
  * 
  * To enable / disable the various tests, you have some System properties you can utilize.
- * <p>
  * 
  * <dl>
  *   <dt>-Dtest.fast</dt>
@@ -77,6 +74,7 @@ public class AdvancedRunner extends BlockJUnit4ClassRunner
     private boolean slowTestsEnabled = false;
     private boolean stressTestsEnabled = false;
 
+    @SuppressWarnings("javadoc")
     public AdvancedRunner(Class<?> klass) throws InitializationError
     {
         super(klass);

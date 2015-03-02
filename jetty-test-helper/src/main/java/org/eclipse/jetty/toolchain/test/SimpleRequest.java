@@ -24,7 +24,6 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.UnknownHostException;
 import java.util.Properties;
 
 /**
@@ -39,11 +38,26 @@ public class SimpleRequest
 {
     private URI baseUri;
 
-    public SimpleRequest(URI serverURI) throws UnknownHostException
+    /**
+     * Setup a SimpleRequest initiator against serverURI
+     * 
+     * @param serverURI
+     *            the server URI to base all requests off of
+     */
+    public SimpleRequest(URI serverURI)
     {
         this.baseUri = serverURI;
     }
 
+    /**
+     * Initiate a simple GET request on the path specified.
+     * 
+     * @param relativePath
+     *            the relative path of the serverURI to resource for this GET request
+     * @return the response contents
+     * @throws IOException
+     *             if unable to communicate with server
+     */
     public String getString(String relativePath) throws IOException
     {
         URI uri = this.baseUri.resolve(relativePath);
@@ -77,6 +91,19 @@ public class SimpleRequest
         }
     }
 
+    /**
+     * Initiate a simple GET request on the path specified, returning the response contents as a {@link Properties}
+     * object.
+     * <p>
+     * This expects that the GET response will be in the form of a Properties text file, in a format that is suitable
+     * for {@link Properties#load(InputStream)} use.
+     * 
+     * @param relativePath
+     *            the relative path of the serverURI to resource for this GET request
+     * @return the response contents as a {@link Properties} object.
+     * @throws IOException
+     *             if unable to communicate with server
+     */
     public Properties getProperties(String relativePath) throws IOException
     {
         URI uri = this.baseUri.resolve(relativePath);

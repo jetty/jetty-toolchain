@@ -18,6 +18,7 @@
 
 package org.eclipse.jetty.toolchain.test.http;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -29,6 +30,13 @@ public class SimpleHttpResponse
     private final Map<String, String> headers;
     private final String body;
 
+    /**
+     * Initialize the immutable HTTP Response details
+     * 
+     * @param code the response status code
+     * @param headers the response headers
+     * @param body the response body content
+     */
     public SimpleHttpResponse(String code, Map<String, String> headers, String body)
     {
         this.code = code;
@@ -36,16 +44,25 @@ public class SimpleHttpResponse
         this.body = body;
     }
 
+    /**
+     * @return the response status code
+     */
     public String getCode()
     {
         return code;
     }
 
+    /**
+     * @return the response headers
+     */
     public Map<String, String> getHeaders()
     {
-        return headers;
+        return Collections.unmodifiableMap(headers);
     }
 
+    /**
+     * @return the response body content
+     */
     public String getBody()
     {
         return body;

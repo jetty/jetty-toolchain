@@ -46,9 +46,11 @@ public class SimpleHttpParser
      * Reads from the given {@link BufferedReader} and returns the parsed response in a {@link SimpleHttpResponse}
      * object.
      *
-     * @param reader the inputReader to parse the response from
-     * @return {@link SimpleHttpResponse}   a {@link SimpleHttpResponse} object representing the parsed response
+     * @param reader
+     *            the inputReader to parse the response from
+     * @return {@link SimpleHttpResponse} a {@link SimpleHttpResponse} object representing the parsed response
      * @throws IOException
+     *             if unable to read/parse the raw lines of http
      */
     public SimpleHttpResponse readResponse(BufferedReader reader) throws IOException
     {
@@ -57,7 +59,7 @@ public class SimpleHttpParser
         if (line == null)
             throw new EOFException();
         Matcher responseLine = Pattern.compile("HTTP/1.1" + "\\s+(\\d+)").matcher(line);
-        assertThat("http version is 1.1", responseLine.lookingAt(), is(true));
+        assertThat("http version is 1.1",responseLine.lookingAt(),is(true));
         String code = responseLine.group(1);
 
         Map<String, String> headers = new LinkedHashMap<String, String>();
@@ -66,13 +68,13 @@ public class SimpleHttpParser
             if (line.trim().length() == 0)
                 break;
 
-            parseHeader(line, headers);
+            parseHeader(line,headers);
         }
 
         StringBuilder body;
         if (headers.containsKey("content-length"))
         {
-            body = parseContentLengthDelimitedBody(reader, headers);
+            body = parseContentLengthDelimitedBody(reader,headers);
         }
         else if ("chunked".equals(headers.get("transfer-encoding")))
         {
@@ -80,10 +82,10 @@ public class SimpleHttpParser
         }
         else
         {
-            body = parseEOFDelimitedBody(reader, headers);
+            body = parseEOFDelimitedBody(reader,headers);
         }
 
-        return new SimpleHttpResponse(code, headers, body.toString().trim());
+        return new SimpleHttpResponse(code,headers,body.toString().trim());
     }
 
     private void parseHeader(String line, Map<String, String> headers)
@@ -92,7 +94,7 @@ public class SimpleHttpParser
         assertTrue(header.lookingAt());
         String headerName = header.group(1);
         String headerValue = header.group(2);
-        headers.put(headerName.toLowerCase(), headerValue.toLowerCase());
+        headers.put(headerName.toLowerCase(),headerValue.toLowerCase());
     }
 
     private StringBuilder parseContentLengthDelimitedBody(BufferedReader reader, Map<String, String> headers) throws IOException
@@ -114,7 +116,7 @@ public class SimpleHttpParser
         }
         catch (SocketTimeoutException e)
         {
-            System.err.printf("Read %,d bytes (out of an expected %,d bytes)%n", readLen, length);
+            System.err.printf("Read %,d bytes (out of an expected %,d bytes)%n",readLen,length);
             throw e;
         }
         return body;
@@ -130,11 +132,11 @@ public class SimpleHttpParser
             if ("0".equals(line))
             {
                 line = reader.readLine();
-                assertThat("There's no more content after as 0 indicated the final chunk", line, is(""));
+                assertThat("There's no more content after as 0 indicated the final chunk",line,is(""));
                 break;
             }
 
-            int length = Integer.parseInt(line, 16);
+            int length = Integer.parseInt(line,16);
             //TODO: UTF-8 reader from joakim
             for (int i = 0; i < length; ++i)
             {

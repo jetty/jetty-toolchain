@@ -26,7 +26,6 @@ import org.junit.runner.Description;
  * <p>
  * Note: {@link AdvancedRunner} performs tracking as well, there is no need
  * for this &#064;Rule if you have AdvancedRunner in use.
- * <p>
  * <pre>
  *   &#064;Rule
  *   public TestTracker ttracker = new TestTracker();

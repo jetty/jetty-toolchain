@@ -26,9 +26,9 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * A junit 4.x {@link Rule} to provide a common, easy to use, testing directory that is unique per unit test method.
+ * A junit 4.x {@link org.junit.Rule} to provide a common, easy to use, testing directory that is unique per unit test method.
  * <p>
- * Similar in scope to the {@link TemporaryFolder} rule, as it creates a directory, when asked (via {@link #getDir()} or {@link #getEmptyDir()}) in the maven
+ * Similar in scope to the {@link org.junit.rules.TemporaryFolder} rule, as it creates a directory, when asked (via {@link #getDir()} or {@link #getEmptyDir()}) in the maven
  * project familiar and friendly maven location of <code>${basedir}/target/tests/${testclass}/${testmethod}</code>.
  * <p>
  * Note: {@link MavenTestingUtils} will keep the directory name short for the sake of windows users.

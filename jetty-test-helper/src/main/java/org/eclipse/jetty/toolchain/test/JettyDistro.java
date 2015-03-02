@@ -414,6 +414,8 @@ public class JettyDistro
     /**
      * Create a <code>${jetty.home}/lib/self/${jarFilename}</code> jar file from the content in the <code>${project.basedir}/target/classes/</code> directory.
      * 
+     * @param jarFilename the jar filename to create library from
+     * 
      * @throws IOException
      *             if unable to copy the directory tree
      */
@@ -572,7 +574,7 @@ public class JettyDistro
         }
     }
 
-    public static List<String> splitAndUnescapeCommandLine(CharSequence rawCmdLine)
+    static List<String> splitAndUnescapeCommandLine(CharSequence rawCmdLine)
     {
         List<String> cmds = new ArrayList<String>();
 
@@ -755,7 +757,7 @@ public class JettyDistro
     /**
      * enable debug on the jetty process
      * 
-     * @param debug
+     * @param debug flag to enable debug on the jetty process
      */
     public void setDebug(boolean debug)
     {
@@ -841,6 +843,12 @@ public class JettyDistro
         }
     }
 
+    /**
+     * Set the startup timeout, failing if the startup takes too long.
+     * 
+     * @param startTime the start time
+     * @param timeUnit the start time unit
+     */
     public void setStartTime(long startTime, TimeUnit timeUnit)
     {
         this.startTime = startTime;

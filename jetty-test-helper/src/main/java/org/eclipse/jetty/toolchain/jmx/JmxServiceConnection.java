@@ -29,8 +29,8 @@ import javax.management.remote.JMXConnectorServer;
 import javax.management.remote.JMXConnectorServerFactory;
 import javax.management.remote.JMXServiceURL;
 
+import org.eclipse.jetty.toolchain.test.IO;
 
-/* ------------------------------------------------------------ */
 /**
  * JmxServiceConnection
  * 
@@ -39,37 +39,31 @@ import javax.management.remote.JMXServiceURL;
  */
 public class JmxServiceConnection
 {
-    private String _serviceUrl;
-    private MBeanServer _server;
-    private JMXConnectorServer _connectorServer;
-    private JMXConnector _serverConnector;
-    private MBeanServerConnection _serviceConnection;
-    
-    /* ------------------------------------------------------------ */
+    private String serviceUrl;
+    private MBeanServer server;
+    private JMXConnectorServer connectorServer;
+    private JMXConnector serverConnector;
+    private MBeanServerConnection serviceConnection;
+
     /**
      * Construct a loopback connection to an internal server
-     * 
-     * @throws IOException
      */
     public JmxServiceConnection()
-        throws IOException
     {
         this(null);
     }
-    
-    /* ------------------------------------------------------------ */
+
     /**
      * Construct a connection to specified server
      * 
-     * @param url URL of JMX server
-     * @throws IOException
+     * @param url
+     *            URL of JMX server
      */
     public JmxServiceConnection(String url)
-        throws IOException
     {
-        _serviceUrl = url;
+        serviceUrl = url;
     }
-    
+
     /**
      * Retrieve an external URL for the JMX server
      * 
@@ -77,9 +71,9 @@ public class JmxServiceConnection
      */
     public String getServiceUrl()
     {
-    	return _serviceUrl;
+        return serviceUrl;
     }
-    
+
     /* ------------------------------------------------------------ */
     /**
      * Retrieve a connection to MBean server
@@ -88,80 +82,73 @@ public class JmxServiceConnection
      */
     public MBeanServerConnection getConnection()
     {
-        return _serviceConnection;
+        return serviceConnection;
     }
 
-    public void connect()
-        throws IOException
+    public void connect() throws IOException
     {
-        if (_serviceConnection == null)
+        if (serviceConnection == null)
         {
-            if (_serviceUrl == null)
+            if (serviceUrl == null)
+            {
                 openLoopbackConnection();
+            }
             else
-                openServerConnection(_serviceUrl);
+            {
+                openServerConnection(serviceUrl);
+            }
         }
     }
-    /* ------------------------------------------------------------ */
+
     /**
      * Open a loopback connection to local JMX server
      * 
      * @throws IOException
      */
-    private void openLoopbackConnection()
-        throws IOException
+    private void openLoopbackConnection() throws IOException
     {
-        _server = ManagementFactory.getPlatformMBeanServer();       
+        server = ManagementFactory.getPlatformMBeanServer();
 
         JMXServiceURL serviceUrl = new JMXServiceURL("service:jmx:rmi://");
-        _connectorServer = JMXConnectorServerFactory.newJMXConnectorServer(serviceUrl, null, _server);
-        _connectorServer.start();
-        
-        _serviceUrl = _connectorServer.getAddress().toString();
-        
-        _serverConnector = JMXConnectorFactory.connect(_connectorServer.getAddress());      
-        _serviceConnection = _serverConnector.getMBeanServerConnection();
+        connectorServer = JMXConnectorServerFactory.newJMXConnectorServer(serviceUrl,null,server);
+        connectorServer.start();
+
+        this.serviceUrl = connectorServer.getAddress().toString();
+
+        serverConnector = JMXConnectorFactory.connect(connectorServer.getAddress());
+        serviceConnection = serverConnector.getMBeanServerConnection();
     }
-    
-    /* ------------------------------------------------------------ */
+
     /**
      * Open a connection to remote JMX server
      * 
      * @param url
      * @throws IOException
      */
-    private void openServerConnection(String url)
-        throws IOException
+    private void openServerConnection(String url) throws IOException
     {
-        _serviceUrl = url;
-        
-        JMXServiceURL serviceUrl = new JMXServiceURL(_serviceUrl);
-        _serverConnector = JMXConnectorFactory.connect(serviceUrl);
-        _serviceConnection = _serverConnector.getMBeanServerConnection();
+        serviceUrl = url;
+        serverConnector = JMXConnectorFactory.connect(new JMXServiceURL(serviceUrl));
+        serviceConnection = serverConnector.getMBeanServerConnection();
     }
-    
-    /* ------------------------------------------------------------ */
+
     /**
      * Close the connections
      */
     public void disconnect()
     {
-        try
+        IO.close(serverConnector);
+
+        if (connectorServer != null)
         {
-            if (_serverConnector != null)
+            try
             {
-                _serverConnector.close();
-                _serviceConnection = null;
+                connectorServer.stop();
             }
-            if (_connectorServer != null)
+            catch (Exception ignore)
             {
-                _connectorServer.stop();
-                _connectorServer = null;
+                /* ignore */
             }
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace(System.out);
         }
     }
 }

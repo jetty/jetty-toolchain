@@ -36,14 +36,23 @@ import java.io.Writer;
  */
 public final class IO
 {
+    @SuppressWarnings("javadoc")
     public static final int BUFFER_SIZE = 64 * 1024;
-    
-    private IO() {
+
+    private IO()
+    {
         /* prevent instantiation */
     }
 
     /**
      * Copy Reader to Writer out until EOF or exception.
+     * 
+     * @param in
+     *            the Reader to read from
+     * @param out
+     *            the Writer to write to
+     * @throws IOException
+     *             if unable to copy the contents
      */
     public static void copy(Reader in, Writer out) throws IOException
     {
@@ -112,9 +121,12 @@ public final class IO
     /**
      * Copy files or directories.
      * 
-     * @param from the from path
-     * @param to the destination path
+     * @param from
+     *            the from path
+     * @param to
+     *            the destination path
      * @throws IOException
+     *             if unable to copy the file
      */
     public static void copy(File from, File to) throws IOException
     {
@@ -127,13 +139,16 @@ public final class IO
             copyFile(from,to);
         }
     }
-    
+
     /**
      * Copy the contents of a directory from one directory to another.
      * 
-     * @param from the from directory
-     * @param to the destination directory
+     * @param from
+     *            the from directory
+     * @param to
+     *            the destination directory
      * @throws IOException
+     *             if unable to copy the file
      */
     public static void copyDir(File from, File to) throws IOException
     {
@@ -145,10 +160,15 @@ public final class IO
         }
     }
 
+    /**
+     * A {@link FileFilter} for obtaining a list of contents that does not contain the special
+     * <code>.</code> and <code>..</code> entries that some JVM environments report.
+     */
     public static class SafeFileFilter implements FileFilter
     {
+        @SuppressWarnings("javadoc")
         public static final SafeFileFilter INSTANCE = new SafeFileFilter();
-        
+
         public boolean accept(File path)
         {
             String name = path.getName();
@@ -162,9 +182,13 @@ public final class IO
 
     /**
      * Copy the entire {@link InputStream} to the {@link OutputStream}
-     * @param in the input stream to read from
-     * @param out the output stream to write to
+     * 
+     * @param in
+     *            the input stream to read from
+     * @param out
+     *            the output stream to write to
      * @throws IOException
+     *             if unable to copy the stream
      */
     public static void copy(InputStream in, OutputStream out) throws IOException
     {
@@ -185,9 +209,11 @@ public final class IO
     /**
      * Copy a file from one place to another
      * 
-     * @param from the file to copy
-     * @param to the destination file to create
-     * @throws IOException
+     * @param from
+     *            the file to copy
+     * @param to
+     *            the destination file to create
+     * @throws IOException if unable to copy the file
      */
     public static void copyFile(File from, File to) throws IOException
     {

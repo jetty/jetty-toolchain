@@ -24,12 +24,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Indication for test cases that require extra knowledge to setup the testing 
- * environment properly.  (Such as more memory required than usual, or a
+ * Indication for test cases that require extra knowledge to setup the testing
+ * environment properly. (Such as more memory required than usual, or a
  * calm system to run large I/O tests on)
  * <p>
- * Tests that have been marked as Stress can often be moved to Slow as time progresses
- * (and general system capabilities improve).
+ * Tests that have been marked as Stress can often be moved to Slow as time progresses (and general system capabilities
+ * improve).
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
@@ -40,7 +40,9 @@ public @interface Stress
      * <p>
      * Indicate what sort of environmental concerns this test has.
      * <p>
-     * Eg: "High memory use: > 2GB", "High file descriptor use", "Needs calm system"
+     * Eg: "High memory use: &gt; 2GB", "High file descriptor use", "Needs calm system"
+     * 
+     * @return the string reason why the test is set as Stress.
      */
-    String value(); 
+    String value();
 }
