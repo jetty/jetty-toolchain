@@ -24,17 +24,7 @@ import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
 
 /**
- * This extension of {@link Server} will make a JNI call to set the unix UID.
- * 
- * This can be used to start the server as root so that privileged ports may be accessed and then switch to a non-root user for security. Depending on the value
- * of {@link #setStartServerAsPrivileged(boolean)}, either the server will be started and then the UID set; or the {@link Server#getConnectors()} will be opened
- * with a call to {@link Connector#open()}, the UID set and then the server is started. The later is the default and avoids any webapplication code being run as
- * a privileged user, but will not work if the application code also needs to open privileged ports.
- * 
- * <p>
- * The configured umask is set before the server is started and the configured uid is set after the server is started.
- * </p>
- * 
+ * @deprecated use {@link SetUIDListener} instead
  */
 @Deprecated
 public class SetUIDServer extends Server

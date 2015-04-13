@@ -26,17 +26,17 @@ import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Logger;
 
 /**
- * This LifeCycleListener may be added to a {@link Server} to make a JNI call to set the unix UID.
- * 
- * This can be used to start the server as root so that privileged ports may be accessed and then switch to a non-root user for security. Depending on the value
- * of {@link #setStartServerAsPrivileged(boolean)}, either the server will be started and then the UID set; or the {@link Server#getConnectors()} will be opened
- * with a call to {@link Connector#open()}, the UID set and then the server is started. The later is the default and avoids any webapplication code being run as
- * a privileged user, but will not work if the application code also needs to open privileged ports.
- * 
- * <p>
- * The configured umask is set before the server is started and the configured gid/uid is set after the server is started.
- * </p>
- * 
+ * <p>This LifeCycleListener may be added to a {@link Server} to make a JNI call to set the unix UID.</p>
+ * <p>This can be used to start the server as root so that privileged ports may
+ * be accessed and then switch to a non-root user for security. Depending on
+ * the value of {@link #setStartServerAsPrivileged(boolean)}, either the server
+ * will be started and then the UID set; or the {@link Server#getConnectors()}
+ * will be opened, the UID set and then the server is started. The latter is
+ * the default and avoids any web application code being run as a privileged
+ * user, but will not work if the application code also needs to open
+ * privileged ports.</p>
+ * <p>The configured umask is set before the server is started and the
+ * configured gid/uid is set after the server is started.</p>
  */
 public class SetUIDListener implements LifeCycle.Listener
 {
