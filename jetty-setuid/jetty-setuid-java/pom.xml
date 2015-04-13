@@ -8,27 +8,6 @@
     <artifactId>jetty-setuid-java</artifactId>
     <name>Jetty :: SetUID Java</name>
     <packaging>jar</packaging>
-    <build>
-        <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-assembly-plugin</artifactId>
-              <executions>
-                <execution>
-                  <phase>package</phase>
-                  <goals>
-                    <goal>single</goal>
-                  </goals>
-                  <configuration>
-                    <descriptorRefs>
-                      <descriptorRef>config</descriptorRef>
-                    </descriptorRefs>
-                  </configuration>
-                </execution>
-              </executions>
-            </plugin>
-        </plugins>
-    </build>
     <dependencies>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
