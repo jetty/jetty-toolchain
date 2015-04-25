@@ -27,7 +27,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
-import java.time.Instant;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 
@@ -417,7 +417,7 @@ public final class FS
         if (Files.exists(file))
         {
             FileTime timeOrig = Files.getLastModifiedTime(file);
-            Files.setLastModifiedTime(file,FileTime.from(Instant.now()));
+            Files.setLastModifiedTime(file,FileTime.from(System.currentTimeMillis(), TimeUnit.MILLISECONDS));
             FileTime timeNow = Files.getLastModifiedTime(file);
             // Verify that timestamp was actually updated.
             Assert.assertThat("Timestamp updated",timeOrig,not(equalTo(timeNow)));
