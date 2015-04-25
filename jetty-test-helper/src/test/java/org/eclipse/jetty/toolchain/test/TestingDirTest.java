@@ -1,7 +1,9 @@
 package org.eclipse.jetty.toolchain.test;
 
 import static org.hamcrest.CoreMatchers.*;
-import java.io.File;
+
+import java.io.IOException;
+import java.nio.file.Path;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -13,11 +15,11 @@ public class TestingDirTest
     public TestingDir testingdir = new TestingDir();
 
     @Test
-    public void testGetDir()
+    public void testGetPath() throws IOException
     {
         String expected = OS.separators("/target/tests/");
-        File dir = testingdir.getDir();
-        String fullpath = dir.getAbsolutePath();
+        Path dir = testingdir.getPath();
+        String fullpath = dir.toString();
 
         Assert.assertThat(fullpath,containsString(expected));
     }

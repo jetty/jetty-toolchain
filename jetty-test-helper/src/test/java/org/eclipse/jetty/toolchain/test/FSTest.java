@@ -22,7 +22,7 @@ public class FSTest
     @Test
     public void testIsTestingDirInvalid()
     {
-        assertInvalidTestingDir(MavenTestingUtils.getBasedir());
+        assertInvalidTestingDir(MavenTestingUtils.getBaseDir());
 
         String tmpdir = System.getProperty("java.io.tmpdir");
         assertInvalidTestingDir(new File(tmpdir));
@@ -56,7 +56,7 @@ public class FSTest
 
         PathAssert.assertDirExists("pre-delete",testdir);
         FS.deleteDirectory(testdir);
-        PathAssert.assertNotExists("post-delete",testdir);
+        PathAssert.assertNotPathExists("post-delete",testdir);
     }
 
     private void createDummyDirectoryContent(File testdir) throws IOException
