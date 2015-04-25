@@ -18,7 +18,7 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import org.junit.internal.AssumptionViolatedException;
+import org.junit.AssumptionViolatedException;
 
 /**
  * Flag indicating that {@link org.junit.Test} is part of special group of tests.

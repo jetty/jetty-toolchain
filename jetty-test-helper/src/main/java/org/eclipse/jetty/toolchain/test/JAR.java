@@ -40,8 +40,6 @@ public final class JAR
     
     /**
      * Unpack JAR file into destination directory.
-     * <p>
-     * Note: Mostly used by {@link JettyDistro#unpackConfig(String)}
      * 
      * @param jarFile
      *            the jar file to unpack

@@ -19,8 +19,9 @@
 package org.eclipse.jetty.toolchain.test;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-import org.junit.Assert;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -75,7 +76,7 @@ import org.junit.runners.model.Statement;
  */
 public class TestingDir implements TestRule
 {
-    private File dir;
+    private Path dir;
 
     public Statement apply(final Statement statement, final Description description)
     {
@@ -84,7 +85,7 @@ public class TestingDir implements TestRule
             @Override
             public void evaluate() throws Throwable
             {
-                dir = MavenTestingUtils.getTargetTestingDir(description.getTestClass(),description.getMethodName());
+                dir = MavenTestingUtils.getTargetTestingPath(description.getTestClass(),description.getMethodName()).toRealPath();
                 FS.ensureEmpty(dir);
                 statement.evaluate();
             }
@@ -98,15 +99,29 @@ public class TestingDir implements TestRule
      * 
      * @return the test specific directory.
      */
-    public File getDir()
+    public Path getPath()
     {
-        if (dir.exists())
+        if (Files.exists(dir))
         {
             return dir;
         }
 
-        Assert.assertTrue("Creating testing dir",dir.mkdirs());
+        FS.ensureDirExists(dir);
         return dir;
+    }
+
+    /**
+     * Get the test specific directory to use for testing work directory.
+     * <p>
+     * Name is derived from the test classname &amp; method name.
+     * 
+     * @return the test specific directory.
+     * @deprecated use <code>javax.nio.file</code> replacement {@link #getPath()} instead
+     */
+    @Deprecated
+    public File getDir()
+    {
+        return getPath().toFile();
     }
 
     /**
@@ -117,10 +132,26 @@ public class TestingDir implements TestRule
      * @param name
      *            the path name of the file (supports deep paths)
      * @return the file reference.
+     * @deprecated use <code>javax.nio.file</code> replacement {@link #getPathFile(String)} instead
      */
+    @Deprecated
     public File getFile(String name)
     {
-        return new File(dir,OS.separators(name));
+        return getPathFile(name).toFile();
+    }
+    
+    /**
+     * Get a {@link Path} file reference for content inside of the test specific test directory.
+     * <p>
+     * Note: No assertions are made if the file exists or not.
+     * 
+     * @param name
+     *            the path name of the file (supports deep paths)
+     * @return the file reference.
+     */
+    public Path getPathFile(String name)
+    {
+        return dir.resolve(name);
     }
 
     /**
@@ -137,16 +168,22 @@ public class TestingDir implements TestRule
      * Get the unique testing directory while ensuring that it is empty (if not).
      * 
      * @return the unique testing directory, created, and empty.
+     * @deprecated use <code>javax.nio.file</code> replacement {@link #getEmptyPathDir()} instead
      */
+    @Deprecated
     public File getEmptyDir()
     {
-        if (dir.exists())
-        {
-            FS.ensureEmpty(dir);
-            return dir;
-        }
-
-        Assert.assertTrue("Creating testing dir",dir.mkdirs());
+        return getEmptyPathDir().toFile();
+    }
+    
+    /**
+     * Get the unique testing directory while ensuring that it is empty (if not).
+     * 
+     * @return the unique testing directory, created, and empty.
+     */
+    public Path getEmptyPathDir()
+    {
+        FS.ensureEmpty(dir);
         return dir;
     }
 }
