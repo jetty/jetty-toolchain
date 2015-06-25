@@ -9,7 +9,7 @@
   </parent>
   <artifactId>jetty-build-support</artifactId>
   <packaging>jar</packaging>
-  <version>1.4</version>
+  <version>1.5-SNAPSHOT</version>
   <name>Jetty Toolchain :: Build Support</name>
   <description>Build Support for Jetty (Contains Enforcer Rules, PMD Rulesets, etc ...)</description>
   <properties>
@@ -103,7 +103,7 @@
     <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
     <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
     <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-build-support</url>
-    <tag>jetty-build-support-1.4</tag>
+    <tag>HEAD</tag>
   </scm>
 </project>
 
