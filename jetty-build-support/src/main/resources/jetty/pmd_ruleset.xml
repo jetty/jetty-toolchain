@@ -80,7 +80,7 @@
    <rule name="ExplicitIgnoredCatchBlock"
          since="1.0"
          message="Set catch variable to 'ignore' to indicate it being ignored"
-         class="net.sourceforge.pmd.rules.XPathRule">
+         class="net.sourceforge.pmd.lang.rule.XPathRule">
       <description>
 ExplicitIgnoredCatchBlock finds instances where an exception is caught,
 but nothing is done.  In most circumstances, this swallows an exception

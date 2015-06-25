@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ruleset name="Custom PMD Ruleset"
-   xmlns="http://pmd.sf.net/ruleset/1.0.0"
+   xmlns="http://pmd.sf.net/ruleset/2.0.0"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"
-   xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd">
+   xsi:schemaLocation="http://pmd.sf.net/ruleset/2.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd">
    <description>PMD Logging Rule Set for Jetty</description>
 
    <!-- CUSTOM RULES -->
    <rule name="AvoidAnonymousLogging"
          since="1.0"
+         language="java"
          message="Use named logging, not anonymous"
-         class="net.sourceforge.pmd.rules.XPathRule">
+         class="net.sourceforge.pmd.lang.rule.XPathRule">
       <description>
 AvoidAnonymousLogging finds instances of Anonymous logging use.
 This is bad form and treats logging of the system as a whole, not
