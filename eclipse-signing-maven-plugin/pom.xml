@@ -9,7 +9,7 @@
 
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>eclipse-signing-maven-plugin</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <name>Jetty :: Toolchain :: Eclipse Signing Maven Plugin</name>
   <description>Plugin for signing code on the eclipse build servers.</description>
   <packaging>maven-plugin</packaging>
