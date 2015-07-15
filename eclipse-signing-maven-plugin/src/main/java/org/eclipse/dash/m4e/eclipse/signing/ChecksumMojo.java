@@ -1,7 +1,7 @@
 package org.eclipse.dash.m4e.eclipse.signing;
 
 //========================================================================
-//Copyright (c) 2010 Intalio, Inc.
+//Copyright (c) 2010-2015 Intalio, Inc.
 //------------------------------------------------------------------------
 //All rights reserved. This program and the accompanying materials
 //are made available under the terms of the Eclipse Public License v1.0
@@ -43,13 +43,13 @@ import org.w3c.dom.NodeList;
 
 /**
  * This plugin walks through a p2 repository and repairs the artifacts.xml.
- * <br/>
+ * <p>
  * It also insert the property <code>&lt;property name='publishPackFilesAsSiblings' value='true'/&gt;</code>
  * and the mapping rules if they were not present already:
- * <br/>
+ * </p>
  * <code>&lt;rule filter='(&amp; (classifier=osgi.bundle) (format=packed))'
  *    output='${repoUrl}/plugins/${id}_${version}.jar.pack.gz'/&gt;</code>
- * <br/><code>&lt;rule filter='(&amp; (classifier=org.eclipse.update.feature) (format=packed))'
+ * <code>&lt;rule filter='(&amp; (classifier=org.eclipse.update.feature) (format=packed))'
  *    output='${repoUrl}/features/${id}_${version}.jar.pack.gz'/&gt;</code>
  * @goal fixCheckSums
  * @phase package

@@ -1,7 +1,7 @@
 package org.eclipse.dash.m4e.eclipse.signing;
 
 //========================================================================
-//Copyright (c) 2010 Intalio, Inc.
+//Copyright (c) 2010-2015 Intalio, Inc.
 //------------------------------------------------------------------------
 //All rights reserved. This program and the accompanying materials
 //are made available under the terms of the Eclipse Public License v1.0
@@ -69,7 +69,7 @@ public class SignMojo extends AbstractEclipseSigningMojo
     /**
      * directory to send artifact to be signed
      * 
-     * should be akin to: /home/data/httpd/download-staging.priv/rt/<project>
+     * should be akin to: /home/data/httpd/download-staging.priv/rt/&lt;project&gt;
      * 
      * @parameter
      * @required
@@ -99,7 +99,9 @@ public class SignMojo extends AbstractEclipseSigningMojo
      */
     protected int maxZipChecks;
 
-    /** @component */
+    /** 
+     * @component 
+     */
     protected PlexusContainer plexus;
 
     public void execute() throws MojoExecutionException, MojoFailureException

@@ -1,7 +1,7 @@
 package org.eclipse.dash.m4e.eclipse.signing;
 
 //========================================================================
-//Copyright (c) 2010 Intalio, Inc.
+//Copyright (c) 2010-2015 Intalio, Inc.
 //------------------------------------------------------------------------
 //All rights reserved. This program and the accompanying materials
 //are made available under the terms of the Eclipse Public License v1.0
@@ -24,6 +24,13 @@ import org.apache.maven.wagon.CommandExecutor;
 import org.apache.maven.wagon.Wagon;
 import org.codehaus.mojo.wagon.shared.WagonUtils;
 
+
+
+/**
+ * AbstractEclipseSigningMojo
+ *
+ *
+ */
 public abstract class AbstractEclipseSigningMojo extends AbstractMojo
 {
     /**
@@ -79,7 +86,7 @@ public abstract class AbstractEclipseSigningMojo extends AbstractMojo
 
     /**
      * 
-     * @return
+     * @return whether or not we are running on an eclipse build machine
      * @throws Exception
      */
     protected boolean runningOnBuildMachine() throws Exception
@@ -94,11 +101,21 @@ public abstract class AbstractEclipseSigningMojo extends AbstractMojo
         }
     }
 
+    /**
+     * @param location of wagon target
+     * @return adjusted wagon path
+     */
     protected String adjustToWagonPath(String location)
     {
         return wagonPath + File.separator + location;
     }
 
+
+
+    /**
+     * @return synthesize the url for wagon
+     * @throws Exception
+     */
     protected String getWagonUrl() throws Exception
     {
         if (wagonProtocol == null || wagonHost == null || wagonPath == null)
@@ -114,6 +131,14 @@ public abstract class AbstractEclipseSigningMojo extends AbstractMojo
         return wagonProtocol + wagonHost + wagonPath;
     }
 
+
+
+    /**
+     * @param id 
+     * @param url
+     * @return wagon instance
+     * @throws MojoExecutionException
+     */
     protected Wagon createWagon(String id, String url) throws MojoExecutionException
     {
         try
@@ -127,6 +152,12 @@ public abstract class AbstractEclipseSigningMojo extends AbstractMojo
 
     }
 
+
+    /**
+     * @param wagon the wagon instance
+     * @return a commandexecutor
+     * @throws Exception
+     */
     protected CommandExecutor getCommandExecutor(Wagon wagon) throws Exception
     {
         if (!(wagon instanceof CommandExecutor))
