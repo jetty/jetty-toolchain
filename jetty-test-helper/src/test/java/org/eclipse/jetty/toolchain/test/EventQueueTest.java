@@ -37,6 +37,7 @@ import org.junit.Test;
  * The timings found in the test.. 1) The ScheduledFuture delay on starting to wait for event count 2) The ScheduledFuture delay on starting to generate events
  * 3) The timeout on waiting for the event count (used by the EventQueue implementation) 4) The timeout on waiting for the test assertions to be satisfied
  */
+@SuppressWarnings("javadoc")
 public class EventQueueTest
 {
     public class EventAdder implements Callable<Void>

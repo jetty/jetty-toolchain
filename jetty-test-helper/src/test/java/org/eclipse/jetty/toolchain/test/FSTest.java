@@ -1,12 +1,14 @@
 package org.eclipse.jetty.toolchain.test;
 
 import static org.hamcrest.CoreMatchers.*;
+
 import java.io.File;
 import java.io.IOException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+@SuppressWarnings("javadoc")
 public class FSTest
 {
     private void assertInvalidTestingDir(File dir)

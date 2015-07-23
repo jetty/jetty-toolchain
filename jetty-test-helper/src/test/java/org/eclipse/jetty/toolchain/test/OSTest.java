@@ -1,9 +1,9 @@
 package org.eclipse.jetty.toolchain.test;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
+@SuppressWarnings("javadoc")
 public class OSTest
 {
     @Test

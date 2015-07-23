@@ -23,6 +23,7 @@ import static org.hamcrest.CoreMatchers.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+@SuppressWarnings("javadoc")
 public class StringManglerTest
 {
     @Test
