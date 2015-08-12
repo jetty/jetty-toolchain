@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.util.concurrent.TimeUnit;
@@ -137,9 +138,9 @@ public final class FS
     {
         String location = path.toAbsolutePath().toString();
 
-        if (Files.exists(path))
+        if (Files.exists(path,LinkOption.NOFOLLOW_LINKS))
         {
-            Assert.assertTrue("Path must be a file: " + location,Files.isRegularFile(path));
+            Assert.assertTrue("Path must be a file or link: " + location,Files.isRegularFile(path) || Files.isSymbolicLink(path));
             Assert.assertTrue("Can only delete content within the /target/tests/ directory: " + location,FS.isTestingDir(path.getParent()));
             try
             {

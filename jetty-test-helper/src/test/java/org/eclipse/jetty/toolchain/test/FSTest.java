@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -92,6 +93,8 @@ public class FSTest
         File d = new File(testdir,"subdir");
         FS.ensureDirExists(d);
 
+        Files.createSymbolicLink(d.toPath().resolve("brokenlink"),d.toPath().resolve("doesNotExist"));
+        
         for (int i = 0; i < 10; i++)
         {
             f = new File(d,"subdummy-" + i);
