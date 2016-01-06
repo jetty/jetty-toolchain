@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-schemas</artifactId>
-  <version>3.1-SNAPSHOT</version>
+  <version>3.1</version>
   <name>Jetty :: Schemas</name>
   <packaging>jar</packaging>
   <properties>
@@ -18,6 +18,7 @@
       <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
       <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
       <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-schemas</url>
+    <tag>jetty-schemas-3.1</tag>
   </scm>
   <build>
         <plugins>
