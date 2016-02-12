@@ -5,11 +5,11 @@ The modules contained in this toolchain project change very infrequently
 and at different rates.  Instead of re-releasing unchanged modules over
 and over to release a module in this project do the following:
 
-> cd jetty-test-helper    (cd into the project you want to release)
-> mvn -Peclipse-release -Dusername=<user> release:prepare
-> mvn release:perform
+    cd jetty-test-helper    (cd into the project you want to release)
+    mvn -Peclipse-release -Dusername=<user> release:prepare
+    mvn release:perform
 
-Then go to oss.sonatype.org to close and release the project.
+Then go to https://oss.sonatype.org to close and release the project.
 
 Should there be changes to the deployment locations or metadata you
 want to change deploy a new parent from the jetty.toolchain project
