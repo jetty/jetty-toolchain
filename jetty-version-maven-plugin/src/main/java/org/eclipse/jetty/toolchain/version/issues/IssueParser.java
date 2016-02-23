@@ -15,12 +15,12 @@
  *******************************************************************************/
 package org.eclipse.jetty.toolchain.version.issues;
 
+import org.codehaus.plexus.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.codehaus.plexus.util.StringUtils;
 
 public class IssueParser
 {
@@ -31,12 +31,16 @@ public class IssueParser
     {
         // Possible delimitors between issue id and text
         String DELIM = "[-\\[\\]: ]*";
-        
+
         issue_id_patterns = new ArrayList<Pattern>();
-        issue_id_patterns.add(Pattern.compile("^[\\[\\s]*[Bb]ug ([0-9]{6,})" + DELIM)); // Bugzilla id (from mylyn)
-        issue_id_patterns.add(Pattern.compile("^([0-9]{6,})" + DELIM)); // Bugzilla id
-        issue_id_patterns.add(Pattern.compile("^[\\[\\s]*[Bb]ug (JETTY-[0-9]{2,})" + DELIM)); // Jira id (from mylyn)
-        issue_id_patterns.add(Pattern.compile("(JETTY-[0-9]{2,})[^0-9]")); // Jira id
+        // Github Based
+        issue_id_patterns.add(Pattern.compile("^[\\[\\s]*[I]ssue #([0-9]{2,})" + DELIM));
+        // Bugzilla Based
+        issue_id_patterns.add(Pattern.compile("^[\\[\\s]*[Bb]ug ([0-9]{6,})" + DELIM));
+        issue_id_patterns.add(Pattern.compile("^([0-9]{6,})" + DELIM));
+        // Jira Based
+        issue_id_patterns.add(Pattern.compile("^[\\[\\s]*[Bb]ug (JETTY-[0-9]{2,})" + DELIM));
+        issue_id_patterns.add(Pattern.compile("(JETTY-[0-9]{2,})[^0-9]"));
     }
 
     /**
@@ -85,16 +89,37 @@ public class IssueParser
             if (mat.find())
             {
                 id = mat.group(1);
-                // Cleanup Subject Line
                 subject = subject.substring(mat.end());
-                if (subject.startsWith("- "))
-                {
-                    subject = subject.substring(2);
-                }
-                return new Issue(id,subject.trim());
+                // Cleanup Subject Line
+                subject = cleanSubjectLine(subject);
+                return new Issue(id,subject);
             }
         }
 
         return null;
+    }
+
+    private String cleanSubjectLine(String subject)
+    {
+        if (subject.startsWith("- "))
+        {
+            subject = subject.substring(2);
+        }
+
+        Pattern endPunctuation = Pattern.compile("^(.*)\\s*[\\.!,]+\\s*$");
+        Matcher mat = endPunctuation.matcher(subject);
+        if (mat.matches())
+        {
+            subject = mat.group(1);
+        }
+
+        Pattern parenWrapped = Pattern.compile("^\\s*\\((.*)\\)\\s*$");
+        mat = parenWrapped.matcher(subject);
+        if (mat.matches())
+        {
+            subject = mat.group(1);
+        }
+
+        return subject.trim();
     }
 }

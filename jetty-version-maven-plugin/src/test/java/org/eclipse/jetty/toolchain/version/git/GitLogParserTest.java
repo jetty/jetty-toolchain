@@ -28,6 +28,7 @@ import org.eclipse.jetty.toolchain.version.VersionPattern;
 import org.eclipse.jetty.toolchain.version.VersionText;
 import org.eclipse.jetty.toolchain.version.issues.Issue;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -95,7 +96,7 @@ public class GitLogParserTest extends AbstractGitTestCase
 
         Assert.assertEquals("Commits by Jesse",79,jesseCount);
     }
-    
+
     @Test
     public void testParseJetty9GitLog() throws IOException, ParseException
     {
@@ -116,21 +117,21 @@ public class GitLogParserTest extends AbstractGitTestCase
         }
 
         Assert.assertEquals("Commits by Joakim",10,joakimCount);
-        
+
         // Test for known issues
         List<String> issueIds = new ArrayList<String>();
         issueIds.add("391483");
         issueIds.add("388079");
         issueIds.add("391588");
         issueIds.add("JETTY-1515");
-        
+
         for(Issue issue: parser.getIssues()) {
             if(issueIds.contains(issue.getId())) {
                 issueIds.remove(issue.getId());
             }
             // System.out.printf("Issue[%s] %s%n", issue.getId(), issue.getText());
         }
-        
+
         if(issueIds.size()>0) {
             StringBuilder err = new StringBuilder();
             err.append("Issue parser failed to find issue id");
@@ -144,8 +145,82 @@ public class GitLogParserTest extends AbstractGitTestCase
             err.append(".");
             Assert.assertEquals(err.toString(), 0, issueIds.size());
         }
-        
+
         Assert.assertEquals("Issue count", 42, parser.getIssues().size());
+    }
+
+    @Test
+    public void testParseJetty93_GitHubLog() throws IOException, ParseException
+    {
+        File sampleFile = MavenTestingUtils.getTestResourceFile("git-log-9.3.7..HEAD.txt");
+        GitLogParser parser = new GitLogParser();
+        parseSampleFile(parser,sampleFile);
+
+        Assert.assertNotNull("parser.gitCommitLogs",parser.getGitCommitLogs());
+        Assert.assertEquals("parser.gitCommitLogs.size",75,parser.getGitCommitLogs().size());
+
+        int joakimCount = 0;
+        int simoneCount = 0;
+        int gregCount = 0;
+        for (GitCommit commit : parser.getGitCommitLogs())
+        {
+            if (commit.getAuthorName().contains("Joakim"))
+            {
+                joakimCount++;
+            } else if (commit.getAuthorName().contains("Simone"))
+            {
+                simoneCount++;
+            } else if (commit.getAuthorName().contains("Greg"))
+            {
+                gregCount++;
+            }
+        }
+
+        // The expected values were hand counted in the raw file
+        Assert.assertEquals("Commits by Joakim",18,joakimCount);
+        Assert.assertEquals("Commits by Simone",25,simoneCount);
+        Assert.assertEquals("Commits by Greg",21,gregCount);
+
+        // Test for some known issues (not all)
+        List<String> issueIds = new ArrayList<String>();
+        // Bugzilla Ids
+        issueIds.add("478918");
+        issueIds.add("487714");
+        issueIds.add("487158");
+        issueIds.add("487750");
+        issueIds.add("484446");
+        issueIds.add("486511");
+        issueIds.add("486394");
+
+        // Github Issues
+        issueIds.add("81");
+        issueIds.add("84");
+        issueIds.add("83");
+        issueIds.add("80");
+        issueIds.add("79");
+
+        for(Issue issue: parser.getIssues()) {
+            if(issueIds.contains(issue.getId())) {
+                issueIds.remove(issue.getId());
+            }
+            // System.out.printf("Issue[%s] %s%n", issue.getId(), issue.getText());
+        }
+
+        if(issueIds.size()>0) {
+            StringBuilder err = new StringBuilder();
+            err.append("Issue parser failed to find issue id");
+            if(issueIds.size()>1) {
+                err.append("s");
+            }
+            err.append(":");
+            for(String id: issueIds) {
+                err.append(" ").append(id);
+            }
+            err.append(".");
+            Assert.assertEquals(err.toString(), 0, issueIds.size());
+        }
+
+        Assert.assertEquals("Issue count", 48, parser.getIssues().size());
     }
 
     @Test
@@ -160,5 +235,13 @@ public class GitLogParserTest extends AbstractGitTestCase
         GitCommit commit = parser.getGitCommitLog(0);
         Assert.assertNotNull("parser.getGitCommitLog(0)",commit);
         Assert.assertEquals("commit.id","596fa1bd4edebc21de0389ff70b10b8060667ed1",commit.getCommitId());
+    }
+
+    @Test
+    @Ignore
+    public void testShowPrettyFormat()
+    {
+        GitLogParser parser = new GitLogParser();
+        System.out.println(parser.getFormat());
     }
 }

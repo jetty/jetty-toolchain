@@ -40,7 +40,7 @@
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
       <artifactId>jetty-test-helper</artifactId>
-      <version>1.6</version>
+      <version>3.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -50,8 +50,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.7</source>
+          <target>1.7</target>
         </configuration>
       </plugin>
       <plugin>
@@ -70,8 +70,8 @@
     </plugins>
   </build>
   <scm>
-    <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
-    <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
-    <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-version-maven-plugin</url>
+    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:ssh://github.com/eclipse/jetty.toolchain.git</developerConnection>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-version-maven-plugin</url>
   </scm>
 </project>

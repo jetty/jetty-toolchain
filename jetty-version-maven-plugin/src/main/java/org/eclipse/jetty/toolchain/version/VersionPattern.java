@@ -22,6 +22,7 @@ public class VersionPattern
 {
     public static final VersionPattern ECLIPSE = new VersionPattern("jetty-VERSION");
     public static final VersionPattern CODEHAUS = new VersionPattern("jetty@codehaus-VERSION");
+
     private final String key;
     private final Pattern pat;
     private String lastVersion;
