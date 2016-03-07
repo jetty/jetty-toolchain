@@ -67,5 +67,14 @@ public class JDKTest
             assertThat("JVM(" + ver + ") / JDK.IS_8",JDK.IS_8,is(true));
             assertThat("JVM(" + ver + ") / JDK.IS_9",JDK.IS_9,is(false));
         }
+        else if (ver.startsWith("9"))
+        {
+            System.err.println("Testing JDK.IS_9 - " + ver);
+            assertThat("JVM(" + ver + ") / JDK.IS_5",JDK.IS_5,is(true));
+            assertThat("JVM(" + ver + ") / JDK.IS_6",JDK.IS_6,is(true));
+            assertThat("JVM(" + ver + ") / JDK.IS_7",JDK.IS_7,is(true));
+            assertThat("JVM(" + ver + ") / JDK.IS_8",JDK.IS_8,is(true));
+            assertThat("JVM(" + ver + ") / JDK.IS_9",JDK.IS_9,is(true));
+        }
     }
 }

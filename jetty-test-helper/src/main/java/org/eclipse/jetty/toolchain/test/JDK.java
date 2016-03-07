@@ -40,9 +40,9 @@ public class JDK
      */
     public static final boolean IS_8 = isJavaVersionAtLeast(1,8);
     /**
-     * True if JDK is 1.9 (or newer) 
+     * True if JDK is 9.0 (or newer)
      */
-    public static final boolean IS_9 = isJavaVersionAtLeast(1,9);
+    public static final boolean IS_9 = isJavaVersionAtLeast(9,0);
 
     private static boolean isJavaVersionAtLeast(int maj, int min)
     {
@@ -52,13 +52,13 @@ public class JDK
             System.err.println("## ERROR: System.getProperty('java.version') == null !?");
             return false;
         }
-        String vparts[] = jver.split("\\.");
+        String vparts[] = jver.split("[-.]");
         if (vparts.length < 2)
         {
             System.err.println("## ERROR: Invalid java version format '" + jver + "'");
             return false;
         }
-        return (toInt(vparts[0]) >= maj && toInt(vparts[1]) >= min);
+        return toInt(vparts[0]) > maj || (toInt(vparts[0]) == maj && toInt(vparts[1]) >= min);
     }
 
     private static int toInt(String val)
