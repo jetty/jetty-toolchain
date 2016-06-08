@@ -51,21 +51,6 @@ public final class MavenTestingUtils
      * 
      * @return the equivalent to the maven ${basedir} property.
      * @see #getBasePath()
-     * @deprecated use {@link #getBaseDir()} instead
-     */
-    @Deprecated
-    public static File getBasedir()
-    {
-        return getBaseDir();
-    }
-    
-    /**
-     * Obtain a {@link File} reference to the maven ${basedir} for the module.
-     * <p>
-     * Convenience method for <code>MavenTestingUtils.getBasePath().toFile()</code>
-     * 
-     * @return the equivalent to the maven ${basedir} property.
-     * @see #getBasePath()
      */
     public static File getBaseDir()
     {
@@ -354,31 +339,6 @@ public final class MavenTestingUtils
     {
         public String classname;
         public String methodname;
-    }
-
-    /**
-     * Using Junit 3.x test naming standards, attempt to discover a suitable test directory name
-     * based on the execution stack when this method is called.
-     * 
-     * @return the testing directory name (only the name, not the full path)
-     * @deprecated Upgrade to Junit 4.x and use the {@link TestingDir} &#064;Rule instead
-     */
-    @Deprecated
-    public static String getTestIDAsPath()
-    {
-        TestID id = getTestID();
-
-        id.classname = StringMangler.condensePackageString(id.classname);
-
-        if (OS.IS_WINDOWS)
-        {
-            /* Condense the directory names to make them more friendly for the 
-             * 255 character pathname limitations that exist on windows.
-             */
-            id.methodname = StringMangler.maxStringLength(30,id.methodname);
-        }
-
-        return id.classname + File.separatorChar + id.methodname;
     }
 
     /**

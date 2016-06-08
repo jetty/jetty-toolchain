@@ -97,36 +97,6 @@ public final class PathAssert
      *            message about the test (used in case of assertion failure)
      * @param path
      *            the path that should exist
-     * @deprecated use {@link #assertPathExists(String, File)} instead
-     */
-    @Deprecated
-    public static void assertExists(String msg, File path)
-    {
-        assertPathExists(msg,path);
-    }
-
-    /**
-     * Assert that the path exist.
-     * 
-     * @param msg
-     *            message about the test (used in case of assertion failure)
-     * @param path
-     *            the path that should exist
-     * @deprecated use {@link #assertPathExists(String, Path)} instead
-     */
-    @Deprecated
-    public static void assertExists(String msg, Path path)
-    {
-        assertPathExists(msg,path);
-    }
-
-    /**
-     * Assert that the path exist.
-     * 
-     * @param msg
-     *            message about the test (used in case of assertion failure)
-     * @param path
-     *            the path that should exist
      */
     public static void assertPathExists(String msg, File path)
     {
@@ -146,36 +116,6 @@ public final class PathAssert
         Assert.assertTrue(msg + " path should exist: " + path,Files.exists(path));
     }
 
-    /**
-     * Assert that the path does not exist.
-     * 
-     * @param msg
-     *            message about the test (used in case of assertion failure)
-     * @param path
-     *            the path that should not exist
-     * @deprecated use {@link #assertNotPathExists(String, File)} instead
-     */
-    @Deprecated
-    public static void assertNotExists(String msg, File path)
-    {
-        assertNotPathExists(msg,path);
-    }
-
-    /**
-     * Assert that the path does not exist.
-     * 
-     * @param msg
-     *            message about the test (used in case of assertion failure)
-     * @param path
-     *            the path that should not exist
-     * @deprecated use {@link #assertNotPathExists(String, Path)} instead
-     */
-    @Deprecated
-    public static void assertNotExists(String msg, Path path)
-    {
-        assertNotPathExists(msg,path);
-    }
-    
     /**
      * Assert that the path does not exist.
      * 

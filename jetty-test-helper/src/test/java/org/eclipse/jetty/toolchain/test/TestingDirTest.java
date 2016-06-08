@@ -18,7 +18,7 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.containsString;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -40,6 +40,6 @@ public class TestingDirTest
         Path dir = testingdir.getPath();
         String fullpath = dir.toString();
 
-        Assert.assertThat(fullpath,containsString(expected));
+        Assert.assertThat(fullpath, containsString(expected));
     }
 }

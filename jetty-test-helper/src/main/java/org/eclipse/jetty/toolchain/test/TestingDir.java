@@ -18,7 +18,6 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -29,7 +28,7 @@ import org.junit.runners.model.Statement;
 /**
  * A junit 4.x {@link org.junit.Rule} to provide a common, easy to use, testing directory that is unique per unit test method.
  * <p>
- * Similar in scope to the {@link org.junit.rules.TemporaryFolder} rule, as it creates a directory, when asked (via {@link #getDir()} or {@link #getEmptyDir()}) in the maven
+ * Similar in scope to the {@link org.junit.rules.TemporaryFolder} rule, as it creates a directory, when asked (via {@link #getPath()} or {@link #getEmptyPathDir()}) in the maven
  * project familiar and friendly maven location of <code>${basedir}/target/tests/${testclass}/${testmethod}</code>.
  * <p>
  * Note: {@link MavenTestingUtils} will keep the directory name short for the sake of windows users.
@@ -48,30 +47,30 @@ import org.junit.runners.model.Statement;
  *     public TestingDir testingdir = new TestingDir();
  * 
  *     &#064;Test
- *     public void testUseDirectory()
+ *     public void testUseDirectory() throws IOException
  *     {
- *         File appDir = testingdir.getFile("app");
- *         File tmpDir = testingdir.getFile("tmp");
- *         
- *         FS.ensureDirEmpty(appDir);
- *         FS.ensureDirEmpty(tmpDir);
- *         
- *         File index = new File(appDir, "index.html");
- *         FileWriter writer = new FileWriter(index);
- *         writer.write("Hello World");
- *         writer.close();
- *         
+ *         Path appDir = testingdir.getPathFile("app");
+ *         Path tmpDir = testingdir.getPathFile("tmp");
+ *
+ *         FS.ensureEmpty(appDir);
+ *         FS.ensureEmpty(tmpDir);
+ *
+ *         Path index = appDir.resolve("index.html");
+ *         try(BufferedWriter writer = Files.newBufferedWriter(index, StandardCharsets.UTF_8))
+ *         {
+ *             writer.write("Hello World");
+ *         }
+ *
  *         Server server = new Server();
  *         server.setTmpDir(tmpDir);
  *         server.addWebApp(appDir);
  *         server.start();
- *         
+ *
  *         Client client = new Client();
  *         String response = client.request("http://localhost/app/");
- * 
- *         Assert.assertThat(response,containsString("Hello World"));
+ *
+ *         Assert.assertThat(response, containsString("Hello World"));
  *     }
- * }
  * </pre>
  */
 public class TestingDir implements TestRule
@@ -111,36 +110,6 @@ public class TestingDir implements TestRule
     }
 
     /**
-     * Get the test specific directory to use for testing work directory.
-     * <p>
-     * Name is derived from the test classname &amp; method name.
-     * 
-     * @return the test specific directory.
-     * @deprecated use <code>javax.nio.file</code> replacement {@link #getPath()} instead
-     */
-    @Deprecated
-    public File getDir()
-    {
-        return getPath().toFile();
-    }
-
-    /**
-     * Get a file inside of the test specific test directory.
-     * <p>
-     * Note: No assertions are made if the file exists or not.
-     * 
-     * @param name
-     *            the path name of the file (supports deep paths)
-     * @return the file reference.
-     * @deprecated use <code>javax.nio.file</code> replacement {@link #getPathFile(String)} instead
-     */
-    @Deprecated
-    public File getFile(String name)
-    {
-        return getPathFile(name).toFile();
-    }
-    
-    /**
      * Get a {@link Path} file reference for content inside of the test specific test directory.
      * <p>
      * Note: No assertions are made if the file exists or not.
@@ -164,18 +133,6 @@ public class TestingDir implements TestRule
         FS.ensureEmpty(dir);
     }
 
-    /**
-     * Get the unique testing directory while ensuring that it is empty (if not).
-     * 
-     * @return the unique testing directory, created, and empty.
-     * @deprecated use <code>javax.nio.file</code> replacement {@link #getEmptyPathDir()} instead
-     */
-    @Deprecated
-    public File getEmptyDir()
-    {
-        return getEmptyPathDir().toFile();
-    }
-    
     /**
      * Get the unique testing directory while ensuring that it is empty (if not).
      * 
