@@ -84,7 +84,8 @@ public class EventQueue<E> extends LinkedBlockingQueue<E>
             debug("awaiting countReached");
             if (!countReached.await(timeoutDuration,timeoutUnit))
             {
-                throw new TimeoutException(String.format("Timeout waiting for %d events (found %d)",expectedEventCount,size()));
+                throw new TimeoutException(String.format("Timeout (%d %s) waiting for %d events (found %d)",
+                        timeoutDuration, timeoutUnit.name(), expectedEventCount, size()));
             }
         }
         finally
