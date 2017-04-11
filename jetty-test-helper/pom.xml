@@ -89,7 +89,7 @@
           <aggregate>true</aggregate>
           <strictCheck>true</strictCheck>
           <properties>
-             <copyright-range>${project.inceptionYear}-2015</copyright-range>
+             <copyright-range>${project.inceptionYear}-2017</copyright-range>
           </properties>
           <mapping>
             <java>DOUBLESLASH_STYLE</java>
@@ -101,7 +101,7 @@
         <executions>
           <execution>
             <id>check-headers</id>
-            <phase>verify</phase>
+            <phase>validate</phase>
             <goals>
               <goal>check</goal>
             </goals>
