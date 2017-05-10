@@ -24,17 +24,17 @@ public final class Hex
 {
     private static final char[] hexcodes = "0123456789ABCDEF".toCharArray();
     
-    public static byte[] asByteArray(String hstr)
+    public static byte[] asByteArray(String hexString)
     {
-        if ((hstr.length() < 0) || ((hstr.length() % 2) != 0))
+        if ((hexString.length() < 0) || ((hexString.length() % 2) != 0))
         {
-            throw new IllegalArgumentException(String.format("Invalid string length of <%d>", hstr.length()));
+            throw new IllegalArgumentException(String.format("Invalid string length of <%d>", hexString.length()));
         }
         
-        int size = hstr.length() / 2;
+        int size = hexString.length() / 2;
         byte buf[] = new byte[size];
         byte hex;
-        int len = hstr.length();
+        int len = hexString.length();
         
         int idx = (int) Math.floor(((size * 2) - (double) len) / 2);
         for (int i = 0; i < len; i++)
@@ -42,10 +42,10 @@ public final class Hex
             hex = 0;
             if (i >= 0)
             {
-                hex = (byte) (Character.digit(hstr.charAt(i), 16) << 4);
+                hex = (byte) (Character.digit(hexString.charAt(i), 16) << 4);
             }
             i++;
-            hex += (byte) (Character.digit(hstr.charAt(i), 16));
+            hex += (byte) (Character.digit(hexString.charAt(i), 16));
             
             buf[idx] = hex;
             idx++;
@@ -54,19 +54,19 @@ public final class Hex
         return buf;
     }
     
-    public static ByteBuffer asByteBuffer(String hstr)
+    public static ByteBuffer asByteBuffer(String hexString)
     {
-        return ByteBuffer.wrap(asByteArray(hstr));
+        return ByteBuffer.wrap(asByteArray(hexString));
     }
     
-    public static String asHex(byte buf[])
+    public static String asHex(byte buffer[])
     {
-        int len = buf.length;
+        int len = buffer.length;
         char out[] = new char[len * 2];
         for (int i = 0; i < len; i++)
         {
-            out[i * 2] = hexcodes[(buf[i] & 0xF0) >> 4];
-            out[(i * 2) + 1] = hexcodes[(buf[i] & 0x0F)];
+            out[i * 2] = hexcodes[(buffer[i] & 0xF0) >> 4];
+            out[(i * 2) + 1] = hexcodes[(buffer[i] & 0x0F)];
         }
         return String.valueOf(out);
     }
