@@ -174,7 +174,7 @@
   </reporting>
   <scm>
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
-    <developerConnection>scm:git:https://github.com/eclipse/jetty.toolchain.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-test-helper</url>
   </scm>
 </project>
