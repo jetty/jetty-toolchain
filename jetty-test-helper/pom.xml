@@ -164,10 +164,9 @@
     </plugins>
   </reporting>
   <scm>
-    <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
-    <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
-    <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-test-helper</url>
-    <tag>HEAD</tag>
+    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:https://github.com/eclipse/jetty.toolchain.git</developerConnection>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-test-helper</url>
   </scm>
 </project>
 
