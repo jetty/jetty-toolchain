@@ -1,9 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <parent>
-     <groupId>org.eclipse.jetty.toolchain</groupId>
-     <artifactId>jetty-toolchain</artifactId>
-     <version>1.4</version>
-     <relativePath>../jetty-toolchain</relativePath>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.eclipse.jetty.toolchain</groupId>
+    <artifactId>jetty-toolchain</artifactId>
+    <version>1.5</version>
+    <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
@@ -12,66 +14,100 @@
   <name>Jetty :: Schemas</name>
   <packaging>jar</packaging>
   <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <scm>
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
-    <url>https://github.com/eclipse/jetty.toolchain</url>
+    <url>https://github.com/eclipse/jetty.toolchain/jetty-schemas</url>
+    <tag>HEAD</tag>
   </scm>
   <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>artifact-jar</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-jar</id>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <archive>
-                        <manifestFile>target/classes/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>manifest</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>org.eclipse.jetty.schemas;singleton:=true</Bundle-SymbolicName>
-                        <Bundle-Name>Jetty Servlet Schemas</Bundle-Name>
-                        <Bundle-RequiredExecutionEnvironment>J2SE-1.7</Bundle-RequiredExecutionEnvironment>
-                        <_nouses>true</_nouses>
-                        <Export-Package>
- javax.servlet.resources;version="4.0",
- javax.servlet.jsp.resources;version="4.0",
- *
-                        </Export-Package>
-                    </instructions>
-                </configuration>
-            </plugin>
-        </plugins>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>test-jar</id>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <archive>
+            <manifestFile>target/classes/META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>org.eclipse.jetty.schemas;singleton:=true</Bundle-SymbolicName>
+            <Bundle-Name>Jetty Servlet Schemas</Bundle-Name>
+            <Bundle-RequiredExecutionEnvironment>J2SE-1.7</Bundle-RequiredExecutionEnvironment>
+            <_nouses>true</_nouses>
+            <Export-Package>
+              javax.servlet.resources;version="4.0",
+              javax.servlet.jsp.resources;version="4.0",
+              *
+            </Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+        <configuration>
+          <useReleaseProfile>true</useReleaseProfile>
+          <releaseProfiles>eclipse-release</releaseProfiles>
+        </configuration>
+      </plugin>
+    </plugins>
 
   </build>
 </project>
