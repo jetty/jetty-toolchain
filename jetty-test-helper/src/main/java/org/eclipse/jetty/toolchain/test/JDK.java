@@ -46,19 +46,26 @@ public class JDK
 
     private static boolean isJavaVersionAtLeast(int maj, int min)
     {
-        String jver = System.getProperty("java.version");
-        if (jver == null)
+        String jvmSpecVer = System.getProperty("java.vm.specification.version");
+        if (jvmSpecVer == null)
         {
-            System.err.println("## ERROR: System.getProperty('java.version') == null !?");
+            System.err.println("## ERROR: System.getProperty('java.vm.specification.version') == null !?");
             return false;
         }
-        String vparts[] = jver.split("[-.]");
-        if (vparts.length < 2)
+
+        String versionParts[] = jvmSpecVer.split("[-.]");
+        int actualMaj = 0;
+        int actualMin = 0;
+
+        if (versionParts.length > 0)
         {
-            System.err.println("## ERROR: Invalid java version format '" + jver + "'");
-            return false;
+            actualMaj = toInt(versionParts[0]);
+            if(versionParts.length > 1)
+            {
+                actualMin = toInt(versionParts[1]);
+            }
         }
-        return toInt(vparts[0]) > maj || (toInt(vparts[0]) == maj && toInt(vparts[1]) >= min);
+        return actualMaj > maj || (actualMaj == maj && actualMin >= min);
     }
 
     private static int toInt(String val)
