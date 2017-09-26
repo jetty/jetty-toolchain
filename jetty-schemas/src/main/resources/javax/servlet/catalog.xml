@@ -38,6 +38,7 @@
 <uri name="http://java.sun.com/xml/ns/javaee/javaee_5.xsd" uri="resources/javaee_5.xsd"/>
 <uri name="http://java.sun.com/xml/ns/javaee/javaee_6.xsd" uri="resources/javaee_6.xsd"/>
 <uri name="http://xmlns.jcp.org/xml/ns/javaee/javaee_7.xsd" uri="resources/javaee_7.xsd"/>
+<uri name="http://xmlns.jcp.org/xml/ns/javaee/javaee_8.xsd" uri="resources/javaee_8.xsd"/>
 
 <uri name="http://java.sun.com/xml/ns/j2ee/j2ee_web_services_1_1.xsd" uri="resources/j2ee_web_services_1_1.xsd"/>
 <uri name="http://java.sun.com/xml/ns/javaee/javaee_web_services_1_2.xsd" uri="resources/javaee_web_services_1_2.xsd"/>
@@ -55,11 +56,14 @@
 <uri name="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" uri="resources/web-app_2_5.xsd"/>
 <uri name="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" uri="resources/web-app_3_0.xsd"/>
 <uri name="http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" uri="resources/web-app_3_1.xsd"/>
+<uri name="http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" uri="resources/web-app_4_0.xsd"/>
 
 <uri name="http://java.sun.com/xml/ns/javaee/web-common_3_0.xsd" uri="resources/web-common_3_0.xsd"/>
 <uri name="http://xmlns.jcp.org/xml/ns/javaee/web-common_3_1.xsd" uri="resources/web-common_3_1.xsd"/>
+<uri name="http://xmlns.jcp.org/xml/ns/javaee/web-common_4_0.xsd" uri="resources/web-common_4_0.xsd"/>
 
 <uri name="http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd" uri="resources/web-fragment_3_0.xsd"/>
 <uri name="http://xmlns.jcp.org/xml/ns/javaee/web-fragment_3_1.xsd" uri="resources/web-fragment_3_1.xsd"/>
+<uri name="http://xmlns.jcp.org/xml/ns/javaee/web-fragment_4_0.xsd" uri="resources/web-fragment_4_0.xsd"/>
 
 </catalog>
