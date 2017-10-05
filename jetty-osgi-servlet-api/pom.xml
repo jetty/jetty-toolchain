@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-osgi-servlet-api</artifactId>
-  <version>3.1-SNAPSHOT</version>
+  <version>4.0-SNAPSHOT</version>
   <name>Jetty :: Servlet API and Schemas for OSGi </name>
   <packaging>jar</packaging>
   <properties>
@@ -194,7 +194,7 @@
                   <Bundle-Description>Combined servlet api and schemas for use in osgi environments</Bundle-Description>
                   <Bundle-RequiredExecutionEnvironment>J2SE-1.5</Bundle-RequiredExecutionEnvironment>
                   <_nouses>true</_nouses>
-                  <Export-Package>!javax.servlet.jsp.*,javax.servlet.*;version="3.1",*</Export-Package>
+                  <Export-Package>!javax.servlet.jsp.*,javax.servlet.*;version="4.0",*</Export-Package>
               </instructions>
           </configuration>
       </plugin>
@@ -226,12 +226,12 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
+      <version>4.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
       <artifactId>jetty-schemas</artifactId>
-      <version>3.1.M0</version>
+      <version>4.0.0</version>
     </dependency>
   </dependencies>
 </project>
