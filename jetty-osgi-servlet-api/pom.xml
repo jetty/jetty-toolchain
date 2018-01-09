@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-osgi-servlet-api</artifactId>
-  <version>4.0.1</version>
+  <version>4.0-SNAPSHOT</version>
   <name>Jetty :: Servlet API and Schemas for OSGi </name>
   <packaging>jar</packaging>
   <properties>
@@ -18,7 +18,7 @@
       <connection>scm:git:http://github.com/gitroot/eclipse/jetty.toolchain.git</connection>
       <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
       <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-osgi-servlet-api</url>
-      <tag>jetty-osgi-servlet-api-4.0.1</tag>
+      <tag>HEAD</tag>
   </scm>
   <build>
     <plugins>
