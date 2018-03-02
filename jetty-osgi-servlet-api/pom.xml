@@ -2,7 +2,7 @@
    <parent>
      <groupId>org.eclipse.jetty.toolchain</groupId>
      <artifactId>jetty-toolchain</artifactId>
-     <version>1.4</version>
+     <version>1.6-SNAPSHOT</version>
      <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>

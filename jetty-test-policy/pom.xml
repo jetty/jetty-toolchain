@@ -13,15 +13,19 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <compilerArgument>-Xlint:all</compilerArgument>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
+        <artifactId>maven-jarsigner-plugin</artifactId>
+        <version>1.4</version>
         <executions>
-          <execution>
-            <id>build</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
           <execution>
             <id>sign</id>
             <configuration>

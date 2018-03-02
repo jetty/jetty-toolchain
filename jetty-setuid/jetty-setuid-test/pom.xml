@@ -80,9 +80,15 @@
     <profile>
       <id>env-mac</id>
       <activation>
+        <!--
         <os>
           <family>mac</family>
         </os>
+        -->
+        <property>
+          <name>osx-build</name>
+          <value>true</value>
+        </property>
       </activation>
       <build>
         <plugins>
