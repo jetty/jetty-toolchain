@@ -19,6 +19,7 @@
 package org.eclipse.jetty.toolchain.test;
 
 import static org.eclipse.jetty.toolchain.test.ExtraMatchers.*;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
@@ -61,5 +62,27 @@ public class ExtraMatchersTest
         
         expectedThrowable.expect(AssertionError.class);
         assertThat("Order", actual, ordered(expected));
+    }
+
+    @Test
+    public void testRegexMatch_Simple()
+    {
+        assertThat("Regex", "Apple Pie", regex("Apple.*"));
+        assertThat("Regex", "Cherry Pie", not(regex("Apple.*")));
+    }
+
+    @Test
+    public void testRegexMatch_Pattern()
+    {
+        assertThat("Regex", "Apple Pie", regex(".*p{2,}.*"));
+        assertThat("Regex", "Cherry Pie", not(regex(".*p{2,}.*")));
+    }
+
+    @Test
+    public void testRegexMatch_Pattern_Or()
+    {
+        assertThat("Regex", "Apple Pie", regex("^(Apple|Cherry).*"));
+        assertThat("Regex", "Cherry Pie", regex("^(Apple|Cherry).*"));
+        assertThat("Regex", "Blueberry Pie", not(regex("^(Apple|Cherry).*")));
     }
 }

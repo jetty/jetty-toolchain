@@ -21,6 +21,7 @@ package org.eclipse.jetty.toolchain.test;
 import java.util.List;
 
 import org.eclipse.jetty.toolchain.test.matchers.IsOrderedCollectionContaining;
+import org.eclipse.jetty.toolchain.test.matchers.RegexMatcher;
 
 /**
  * Extra Matchers for the Junit Hamcrest users out there.
@@ -49,5 +50,20 @@ public class ExtraMatchers
     public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> ordered(List<T> itemMatchers)
     {
         return new IsOrderedCollectionContaining(itemMatchers);
+    }
+
+    /**
+     * Create a matcher for {@link String} that matches against a regex pattern.
+     *
+     * <p>
+     *     Returns success based on {@code java.util.regex.Pattern.matcher(input).matches();}
+     * </p>
+     *
+     * @param pattern the {@link java.util.regex.Pattern} syntax pattern to match against.
+     * @return the Regex Matcher
+     */
+    public static org.hamcrest.Matcher<java.lang.String> regex(String pattern)
+    {
+        return new RegexMatcher(pattern);
     }
 }
