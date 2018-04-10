@@ -63,7 +63,7 @@ public final class JAR
             while (entries.hasMoreElements())
             {
                 JarEntry entry = entries.nextElement();
-                destFile = new File(destDir,OS.separators(entry.getName()));
+                destFile = new File(destDir,FS.separators(entry.getName()));
                 if (entry.isDirectory())
                 {
                     FS.ensureDirExists(destFile);

@@ -36,7 +36,7 @@ public class TestingDirTest
     @Test
     public void testGetPath() throws IOException
     {
-        String expected = OS.separators("/target/tests/");
+        String expected = FS.separators("/target/tests/");
         Path dir = testingdir.getPath();
         String fullpath = dir.toString();
 

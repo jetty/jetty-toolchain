@@ -19,6 +19,9 @@
 package org.eclipse.jetty.toolchain.test;
 
 import static org.hamcrest.CoreMatchers.endsWith;
+import static org.junit.jupiter.api.condition.OS.LINUX;
+import static org.junit.jupiter.api.condition.OS.MAC;
+import static org.junit.jupiter.api.condition.OS.WINDOWS;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +29,8 @@ import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
 
 @SuppressWarnings("javadoc")
 public class FSTest
@@ -60,11 +64,11 @@ public class FSTest
     public void testIsTestingDirValid()
     {
         File testingDir = MavenTestingUtils.getTargetTestingDir();
-        Assert.assertThat("Ensuring that our expectations are sane",testingDir.getAbsolutePath(),endsWith(OS.separators("target/tests")));
+        Assert.assertThat("Ensuring that our expectations are sane",testingDir.getAbsolutePath(),endsWith(FS.separators("target/tests")));
 
         assertValidTestingDir(testingDir);
         assertValidTestingDir(new File(testingDir,"foo"));
-        assertValidTestingDir(new File(testingDir,OS.separators("oejt.Dummy/lib/jsp")));
+        assertValidTestingDir(new File(testingDir,FS.separators("oejt.Dummy/lib/jsp")));
     }
 
     @Test
@@ -108,5 +112,21 @@ public class FSTest
             f = new File(d,"subdummy-" + i);
             FS.touch(f);
         }
+    }
+
+    @Test
+    @EnabledOnOs(WINDOWS)
+    public void testSeparatorsWindows()
+    {
+        Assert.assertEquals("target\\tests\\tests-Foo", FS.separators("target/tests/tests-Foo"));
+        Assert.assertEquals("target\\tests\\tests-Foo", FS.separators("target/tevsts\\tests-Foo"));
+    }
+
+    @Test
+    @EnabledOnOs({LINUX, MAC})
+    public void testSeparatorsUnix()
+    {
+        Assert.assertEquals("target/tests/tests-Foo", FS.separators("target/tests/tests-Foo"));
+        Assert.assertEquals("target/tests/tests-Foo", FS.separators("target/tests\\tests-Foo"));
     }
 }

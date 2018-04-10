@@ -517,7 +517,7 @@ public final class MavenTestingUtils
      */
     public static File getTestResourceFile(String name)
     {
-        File file = new File(getTestResourcesDir(),OS.separators(name));
+        File file = new File(getTestResourcesDir(),FS.separators(name));
         PathAssert.assertFileExists("Test Resource File",file);
         return file;
     }

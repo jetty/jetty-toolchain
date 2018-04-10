@@ -429,4 +429,30 @@ public final class FS
             Assert.assertTrue("Created new file?: " + file,Files.exists(file));
         }
     }
+
+    /**
+     * Convert path separators to the System path separators.
+     * <p>
+     * This helps ensure that the paths provided in the unit tests work equally as well on unix / osx / windows.
+     *
+     * @param path
+     *            the raw path to convert
+     * @return the converted path
+     */
+    public static String separators(String path)
+    {
+        StringBuilder ret = new StringBuilder();
+        for (char c : path.toCharArray())
+        {
+            if ((c == '/') || (c == '\\'))
+            {
+                ret.append(File.separatorChar);
+            }
+            else
+            {
+                ret.append(c);
+            }
+        }
+        return ret.toString();
+    }
 }
