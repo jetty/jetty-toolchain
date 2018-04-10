@@ -119,7 +119,7 @@ public class FSTest
     public void testSeparatorsWindows()
     {
         Assert.assertEquals("target\\tests\\tests-Foo", FS.separators("target/tests/tests-Foo"));
-        Assert.assertEquals("target\\tests\\tests-Foo", FS.separators("target/tevsts\\tests-Foo"));
+        Assert.assertEquals("target\\tests\\tests-Foo", FS.separators("target/tests\\tests-Foo"));
     }
 
     @Test
