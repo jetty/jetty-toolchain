@@ -19,6 +19,7 @@
 package org.eclipse.jetty.toolchain.test.jupiter;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Path;
 
@@ -34,9 +35,9 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
 {
     @Override
-    public void beforeEach(ExtensionContext context)
+    public void beforeEach(ExtensionContext context) throws IOException
     {
-        if(!context.getTestInstance().isPresent())
+        if (!context.getTestInstance().isPresent())
             throw new RuntimeException("Unable to use @" + WorkDir.class.getSimpleName() + " on this type of test");
 
         Object obj = context.getTestInstance().get();
@@ -45,16 +46,12 @@ public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
 
         for (Field field : obj.getClass().getDeclaredFields())
         {
-            if (field.getType() != Path.class)
-                continue;
-
-            WorkDir anno = field.getAnnotation(WorkDir.class);
-            if (anno == null)
-                continue;
+            if (!field.getType().isAssignableFrom(WorkDir.class))
+                continue; // skip
 
             try
             {
-                field.set(obj, testPath);
+                field.set(obj, new WorkDir(testPath));
             }
             catch (IllegalAccessException iae)
             {
@@ -63,7 +60,7 @@ public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
         }
     }
 
-    private Path toPath(Class<?> classContext, ExtensionContext context)
+    private Path toPath(Class<?> classContext, ExtensionContext context) throws IOException
     {
         StringBuilder dirName = new StringBuilder();
 
@@ -90,12 +87,20 @@ public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
     {
-        return (parameterContext.isAnnotated(WorkDir.class) && parameterContext.getParameter().getType() == Path.class);
+        return parameterContext.getParameter().getType() .isAssignableFrom(WorkDir.class);
     }
 
     @Override
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
     {
-        return toPath(parameterContext.getDeclaringExecutable().getDeclaringClass(), extensionContext);
+        try
+        {
+            Path dir = toPath(parameterContext.getDeclaringExecutable().getDeclaringClass(), extensionContext);
+            return new WorkDir(dir);
+        }
+        catch (IOException e)
+        {
+            throw new ParameterResolutionException("Unable to resolve work dir", e);
+        }
     }
 }

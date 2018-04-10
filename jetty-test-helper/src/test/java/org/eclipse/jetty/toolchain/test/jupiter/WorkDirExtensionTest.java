@@ -22,8 +22,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import java.nio.file.Path;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -33,19 +31,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(WorkDirExtension.class)
 public class WorkDirExtensionTest
 {
-    @WorkDir
-    public Path fieldDir;
+    public WorkDir fieldDir;
 
     @Test
     public void testWorkDir_AsField()
     {
         assertThat("testingDir", fieldDir, is(notNullValue()));
+        assertThat("testingDir.getPath()", fieldDir.getPath(), is(notNullValue()));
     }
 
     @Test
-    public void testWorkDir_AsParam(@WorkDir Path dir)
+    public void testWorkDir_AsParam(WorkDir dir)
     {
         assertThat("testingDir", dir, is(notNullValue()));
+        assertThat("testingDir.getPath()", dir.getPath(), is(notNullValue()));
     }
 }
 
