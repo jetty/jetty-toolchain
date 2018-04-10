@@ -120,6 +120,11 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.1.1</version>
     </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-library</artifactId>
+      <version>1.3</version>
+    </dependency>
   </dependencies>
   <scm>
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>

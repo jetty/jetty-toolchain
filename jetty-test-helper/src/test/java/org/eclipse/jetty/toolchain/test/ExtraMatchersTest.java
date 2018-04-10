@@ -20,6 +20,7 @@ package org.eclipse.jetty.toolchain.test;
 
 import static org.eclipse.jetty.toolchain.test.ExtraMatchers.*;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
@@ -84,5 +85,12 @@ public class ExtraMatchersTest
         assertThat("Regex", "Apple Pie", regex("^(Apple|Cherry).*"));
         assertThat("Regex", "Cherry Pie", regex("^(Apple|Cherry).*"));
         assertThat("Regex", "Blueberry Pie", not(regex("^(Apple|Cherry).*")));
+    }
+
+    @Test
+    public void testGreaterThan()
+    {
+        // Silly test ensures that existing hamcrest usage continues to work (re: junit 5 upgrade)
+        assertThat("Value", 100, greaterThan(50));
     }
 }
