@@ -23,14 +23,13 @@ import org.junit.runner.Description;
 
 /**
  * Adds simple System.err output tracking of test method execution.
- * <p>
- * Note: {@link AdvancedRunner} performs tracking as well, there is no need
- * for this &#064;Rule if you have AdvancedRunner in use.
  * <pre>
  *   &#064;Rule
  *   public TestTracker ttracker = new TestTracker();
  * </pre>
+ * @deprecated no replacement
  */
+@Deprecated
 public class TestTracker extends TestWatcher
 {
     @Override

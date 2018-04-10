@@ -18,10 +18,11 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.endsWith;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 
 import org.junit.Assert;
@@ -93,7 +94,14 @@ public class FSTest
         File d = new File(testdir,"subdir");
         FS.ensureDirExists(d);
 
-        Files.createSymbolicLink(d.toPath().resolve("brokenlink"),d.toPath().resolve("doesNotExist"));
+        try
+        {
+            Files.createSymbolicLink(d.toPath().resolve("brokenlink"), d.toPath().resolve("doesNotExist"));
+        }
+        catch (FileSystemException ignore)
+        {
+            // Some OS's (Windows) cannot create symlinks, so we ignore this failure
+        }
         
         for (int i = 0; i < 10; i++)
         {

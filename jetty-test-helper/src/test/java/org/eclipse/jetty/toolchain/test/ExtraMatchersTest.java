@@ -19,7 +19,7 @@
 package org.eclipse.jetty.toolchain.test;
 
 import static org.eclipse.jetty.toolchain.test.ExtraMatchers.*;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;

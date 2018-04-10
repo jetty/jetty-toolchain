@@ -18,6 +18,8 @@
 
 package org.eclipse.jetty.toolchain.test;
 
+import junit.framework.TestCase;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -25,8 +27,6 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
-
-import junit.framework.TestCase;
 
 import org.junit.Assert;
 
@@ -317,12 +317,9 @@ public final class MavenTestingUtils
      */
     public static Path getTargetTestingPath(final Class<?> testclass, final String testmethodname)
     {
-        String classname = testclass.getName();
         String methodname = testmethodname;
 
-        classname = StringMangler.condensePackageString(classname);
-
-        if (OS.IS_WINDOWS)
+        if (org.junit.jupiter.api.condition.OS.WINDOWS.isCurrentOs())
         {
             /* Condense the directory names to make them more friendly for the 
              * 255 character pathname limitations that exist on windows.
@@ -414,7 +411,6 @@ public final class MavenTestingUtils
      * from the execution stack.
      * 
      * @return the unit test id found via execution stack and junit 3.8 naming conventions.
-     * @see #getTestIDAsPath()
      */
     private static TestID getTestID()
     {
