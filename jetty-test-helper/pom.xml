@@ -15,6 +15,7 @@
   <properties>
     <maven.version>3.0</maven.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- see https://github.com/junit-team/junit5/issues/809 -->
     <junit.platform.version>1.2.0-SNAPSHOT</junit.platform.version>
     <junit.vintage.version>5.1.1</junit.vintage.version>
     <junit.jupiter.version>5.1.1</junit.jupiter.version>
@@ -171,6 +172,19 @@
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-test-helper</url>
     <tag>HEAD</tag>
   </scm>
+
+  <repositories>
+    <repository>
+      <id>oss.sonatype.snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
 
   <pluginRepositories>
     <pluginRepository>
