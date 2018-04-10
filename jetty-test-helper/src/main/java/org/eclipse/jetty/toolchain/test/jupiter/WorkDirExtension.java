@@ -79,6 +79,15 @@ public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
             {
                 dirName.append(methodname);
             }
+
+            if(!context.getDisplayName().startsWith(methodname))
+            {
+                dirName.append(context.getDisplayName().trim());
+            }
+        }
+        else
+        {
+            dirName.append(context.getDisplayName().trim());
         }
 
         return MavenTestingUtils.getTargetTestingPath().resolve(dirName.toString());

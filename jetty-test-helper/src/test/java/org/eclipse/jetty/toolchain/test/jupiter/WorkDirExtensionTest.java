@@ -24,6 +24,8 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * Testing Junit Jupiter behavior with {@link WorkDir} and {@link WorkDirExtension}
@@ -45,6 +47,13 @@ public class WorkDirExtensionTest
     {
         assertThat("testingDir", dir, is(notNullValue()));
         assertThat("testingDir.getPath()", dir.getPath(), is(notNullValue()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"foo", "bar"})
+    public void testWorkDir_WithParameterized()
+    {
+        fieldDir.getPath();
     }
 }
 
