@@ -21,6 +21,7 @@ package org.eclipse.jetty.toolchain.test;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.function.Supplier;
 
 public final class StackUtils
 {
@@ -38,5 +39,10 @@ public final class StackUtils
         {
             return "Unable to get stacktrace for: " + t;
         }
+    }
+
+    public static Supplier<String> supply(Throwable t)
+    {
+        return () -> toString(t);
     }
 }
