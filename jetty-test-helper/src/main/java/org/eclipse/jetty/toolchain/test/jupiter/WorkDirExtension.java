@@ -18,9 +18,12 @@
 
 package org.eclipse.jetty.toolchain.test.jupiter;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.URLEncoder;
 import java.nio.file.Path;
 
 import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
@@ -82,12 +85,12 @@ public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
 
             if(!context.getDisplayName().startsWith(methodname))
             {
-                dirName.append(context.getDisplayName().trim());
+                dirName.append(URLEncoder.encode(context.getDisplayName().trim(),UTF_8.toString()));
             }
         }
         else
         {
-            dirName.append(context.getDisplayName().trim());
+            dirName.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
         }
 
         return MavenTestingUtils.getTargetTestingPath().resolve(dirName.toString());
