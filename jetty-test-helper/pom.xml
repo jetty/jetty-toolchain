@@ -15,10 +15,7 @@
   <properties>
     <maven.version>3.0</maven.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- see https://github.com/junit-team/junit5/issues/809 -->
-    <junit.platform.version>1.2.0-SNAPSHOT</junit.platform.version>
-    <junit.vintage.version>5.1.1</junit.vintage.version>
-    <junit.jupiter.version>5.1.1</junit.jupiter.version>
+    <junit.engine.version>5.2.0</junit.engine.version>
   </properties>
   <build>
     <plugins>
@@ -114,50 +111,32 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.21.0</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>${junit.platform.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.jupiter.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>${junit.vintage.version}</version>
-          </dependency>
-        </dependencies>
+        <version>3.0.0-SNAPSHOT</version>
       </plugin>
     </plugins>
   </build>
   <dependencies>
-    <!-- junit platform -->
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-runner</artifactId>
-      <version>${junit.platform.version}</version>
-    </dependency>
-    <!-- junit jupiter -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.jupiter.version}</version>
+      <version>${junit.engine.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>${junit.engine.version}</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <version>${junit.jupiter.version}</version>
+      <version>${junit.engine.version}</version>
     </dependency>
-    <!-- junit vintage -->
+    <!-- we need it for compile so cannot use transitive from junit-vintage-engine -->
     <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <version>${junit.vintage.version}</version>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -175,27 +154,27 @@
 
   <repositories>
     <repository>
-      <id>oss.sonatype.snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
+      <id>apache.snapshots</id>
+      <url>https://repository.apache.org/content/repositories/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </repository>
   </repositories>
 
   <pluginRepositories>
     <pluginRepository>
-      <id>oss.sonatype.snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
+      <id>apache.snapshots</id>
+      <url>https://repository.apache.org/content/repositories/snapshots</url>
       <releases>
         <enabled>false</enabled>
       </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </pluginRepository>
   </pluginRepositories>
 
