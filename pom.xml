@@ -7,7 +7,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>jetty-toolchain</module>
-    <module>eclipse-signing-maven-plugin</module>
     <module>jetty-artifact-remote-resources</module>
     <module>jetty-assembly-descriptors</module>
     <module>jetty-build-support</module>
