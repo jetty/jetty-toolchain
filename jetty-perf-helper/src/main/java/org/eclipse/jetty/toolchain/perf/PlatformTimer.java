@@ -22,27 +22,31 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Detects and reports the timer resolution of the current running platform.
- * <p />
+ * <div>
  * Unfortunately, {@link Thread#sleep(long)} on many platforms has a resolution of 1 ms
  * or even of 10 ms, so calling {@code Thread.sleep(2)} often results in a 10 ms sleep.
- * <p />
+ * </div>
+ * <div>
  * The same applies for {@link Thread#sleep(long, int)} and {@link Object#wait(long, int)}:
  * they are not accurate, especially on virtualized platforms (like Amazon EC2, where the
  * resolution can be as high as 64 ms).
- * <p />
+ * </div>
+ * <div>
  * {@link System#nanoTime()} is precise enough, but we would need to loop continuously
  * checking the nano time until the sleep period is elapsed; to avoid busy looping pegging
  * the CPUs, {@link Thread#yield()} is called to attempt to reduce the CPU load.
- * <p />
+ * </div>
+ * <div>
  * Typical usage to impose a precise throughput to requests:
  * <pre>
  * PlatformTimer timer = PlatformTimer.detect();
- * for (int i = 0; i < 100; ++i)
+ * for (int i = 0; i &lt; 100; ++i)
  * {
  *     performRequest();
  *     timer.sleep(microseconds);
  * }
  * </pre>
+ * </div>
  */
 public class PlatformTimer
 {

@@ -14,7 +14,6 @@
     <module>jetty-osgi-servlet-api</module>
     <module>jetty-perf-helper</module>
     <module>jetty-schemas</module>
-    <module>jetty-setuid</module>
     <module>jetty-test-helper</module>
     <module>jetty-test-policy</module>
     <module>jetty-xslt-tools</module>
@@ -32,4 +31,18 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>setuid</id>
+      <activation>
+        <property>
+          <name>setuid</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <modules>
+        <module>jetty-setuid</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>

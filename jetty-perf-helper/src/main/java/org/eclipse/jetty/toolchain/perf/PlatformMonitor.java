@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Helper class that reports a number of information about the JVM and the OS,
  * useful to monitor the JVM during a benchmark.
- * <p />
+ * <div>
  * Typical usage:
  * <pre>
  * PlatformMonitor monitor = new PlatformMonitor();
@@ -65,11 +65,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * and a {@link Start} object is returned for the first paired {@link #start()}
  * call, and a {@link Stop} object is returned for the last paired
  * {@link #stop()} call.
- * <p />
+ * </div>
+ * <div>
  * GC activity is being polled, by default every 250 ms, see
  * {@link #setMemoryPollInterval(long)}.
  * If the benchmark triggers GC at a higher rate, the results reported
  * by this class may be inaccurate.
+ * </div>
  */
 public class PlatformMonitor implements Runnable
 {
@@ -178,7 +180,7 @@ public class PlatformMonitor implements Runnable
 
     /**
      * Starts monitoring the platform.
-     * <p />
+     * <div>
      * This method returns a {@link Start} object the first time it is invoked,
      * or the first time it is invoked after paired {@link #stop()} calls.
      * For example:
@@ -193,7 +195,7 @@ public class PlatformMonitor implements Runnable
      * start = monitor.start();       // first start call after paired stops, start != null
      * stop = monitor.stop();         // paired stop call, stop != null
      * </pre>
-     *
+     * </div>
      * @return a {@link Start} object if the monitoring started,
      * null for additional calls to this method not paired with
      * a {@link #stop()} call.
