@@ -52,31 +52,21 @@ def getFullBuild(jdk, os) {
               // withMaven doesn't label..
               // Report failures in the jenkins UI
               junit testResults:'**/target/surefire-reports/TEST-*.xml'
-              // Collect up the jacoco execution results
-              def jacocoExcludes =
-                      // build tools
-                      "**/org/eclipse/jetty/ant/**" + ",**/org/eclipse/jetty/maven/**" +
-                              ",**/org/eclipse/jetty/jspc/**" +
-                              // example code / documentation
-                              ",**/org/eclipse/jetty/embedded/**" + ",**/org/eclipse/jetty/asyncrest/**" +
-                              ",**/org/eclipse/jetty/demo/**" +
-                              // special environments / late integrations
-                              ",**/org/eclipse/jetty/gcloud/**" + ",**/org/eclipse/jetty/infinispan/**" +
-                              ",**/org/eclipse/jetty/osgi/**" + ",**/org/eclipse/jetty/spring/**" +
-                              ",**/org/eclipse/jetty/http/spi/**" +
-                              // test classes
-                              ",**/org/eclipse/jetty/tests/**" + ",**/org/eclipse/jetty/test/**";
-              step( [$class          : 'JacocoPublisher',
-                     inclusionPattern: '**/org/eclipse/jetty/**/*.class',
-                     exclusionPattern: jacocoExcludes,
-                     execPattern     : '**/target/jacoco.exec',
-                     classPattern    : '**/target/classes',
-                     sourcePattern   : '**/src/main/java'] )
-              // Report on Maven and Javadoc warnings
-              step( [$class        : 'WarningsPublisher',
-                     consoleParsers: [[parserName: 'Maven'],
-                                      [parserName: 'JavaDoc'],
-                                      [parserName: 'JavaC']]] )
+              if(runReports(jdk)){
+                // Collect up the jacoco execution results
+                def jacocoExcludes = "";
+                step( [$class          : 'JacocoPublisher',
+                       inclusionPattern: '**/org/eclipse/jetty/**/*.class',
+                       exclusionPattern: jacocoExcludes,
+                       execPattern     : '**/target/jacoco.exec',
+                       classPattern    : '**/target/classes',
+                       sourcePattern   : '**/src/main/java'] )
+                // Report on Maven and Javadoc warnings
+                step( [$class        : 'WarningsPublisher',
+                       consoleParsers: [[parserName: 'Maven'],
+                                        [parserName: 'JavaDoc'],
+                                        [parserName: 'JavaC']]] )
+              }
             }
           }
         }
@@ -111,6 +101,9 @@ def getFullBuild(jdk, os) {
   }
 }
 
+def runReports(jdk) {
+  return jdk == "jdk8"
+}
 
 // True if this build is part of the "active" branches
 // for Jetty.
