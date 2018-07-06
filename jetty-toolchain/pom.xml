@@ -1,27 +1,52 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <groupId>org.eclipse.jetty</groupId>
     <artifactId>jetty-parent</artifactId>
     <version>18</version>
   </parent>
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-toolchain</artifactId>
   <version>1.6-SNAPSHOT</version>
   <name>Jetty Toolchain :: Parent</name>
   <packaging>pom</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <scm>
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.project</url>
     <tag>HEAD</tag>
   </scm>
+
+  <profiles>
+    <profile>
+      <id>jdk9</id>
+      <activation>
+        <jdk>[9,)</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <release>8</release>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.1</version>
         <configuration>
           <useReleaseProfile>false</useReleaseProfile>
           <goals>deploy</goals>
@@ -30,12 +55,22 @@
         </configuration>
       </plugin>
     </plugins>
+
     <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+          <configuration>
+            <source>8</source>
+            <target>8</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.0.1</version>
           <configuration>
             <failOnError>false</failOnError>
             <charset>UTF-8</charset>
@@ -118,6 +153,11 @@
               </tag>
             </tags>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
         </plugin>
       </plugins>
     </pluginManagement>
