@@ -32,6 +32,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 
 /**
  * Helper class that reports a number of information about the JVM and the OS,
@@ -75,17 +76,17 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class PlatformMonitor implements Runnable
 {
+    private static final MemoryUsage ZERO_MEMORY_USAGE = new MemoryUsage(0, 0, 0, 0);
+
     private final OperatingSystemMXBean operatingSystem;
     private final CompilationMXBean jitCompiler;
     private final MemoryMXBean heapMemory;
     private final AtomicInteger starts = new AtomicInteger();
-    private final MemoryPoolMXBean edenMemoryPool;
-    private final MemoryPoolMXBean survivorMemoryPool;
-    private final MemoryPoolMXBean tenuredMemoryPool;
-    private final boolean hasMemoryPools;
-    private final GarbageCollectorMXBean youngCollector;
-    private final GarbageCollectorMXBean oldCollector;
-    private final boolean hasCollectors;
+    private final Supplier<MemoryUsage> edenMemoryPool;
+    private final Supplier<MemoryUsage> survivorMemoryPool;
+    private final Supplier<MemoryUsage> tenuredMemoryPool;
+    private final GarbageCollector youngCollector;
+    private final GarbageCollector oldCollector;
     private ScheduledFuture<?> memoryPoller;
     private ScheduledExecutorService scheduler;
     private long memoryPollInterval = 250;
@@ -113,41 +114,46 @@ public class PlatformMonitor implements Runnable
         MemoryPoolMXBean omp = null;
         for (MemoryPoolMXBean memoryPool : memoryPools)
         {
-            if ("PS Eden Space".equals(memoryPool.getName()) ||
-                    "Par Eden Space".equals(memoryPool.getName()) ||
-                    "G1 Eden Space".equals(memoryPool.getName()))
+            String memoryPoolName = memoryPool.getName();
+            if ("PS Eden Space".equals(memoryPoolName) ||
+                    "Par Eden Space".equals(memoryPoolName) ||
+                    "G1 Eden Space".equals(memoryPoolName))
                 emp = memoryPool;
-            else if ("PS Survivor Space".equals(memoryPool.getName()) ||
-                    "Par Survivor Space".equals(memoryPool.getName()) ||
-                    "G1 Survivor Space".equals(memoryPool.getName()))
+            else if ("PS Survivor Space".equals(memoryPoolName) ||
+                    "Par Survivor Space".equals(memoryPoolName) ||
+                    "G1 Survivor Space".equals(memoryPoolName))
                 smp = memoryPool;
-            else if ("PS Old Gen".equals(memoryPool.getName()) ||
-                    "CMS Old Gen".equals(memoryPool.getName()) ||
-                    "G1 Old Gen".equals(memoryPool.getName()))
+            else if ("PS Old Gen".equals(memoryPoolName) ||
+                    "CMS Old Gen".equals(memoryPoolName) ||
+                    "G1 Old Gen".equals(memoryPoolName) ||
+                    "Shenandoah".equals(memoryPoolName) ||
+                    "ZHeap".equals(memoryPoolName))
                 omp = memoryPool;
         }
-        edenMemoryPool = emp;
-        survivorMemoryPool = smp;
-        tenuredMemoryPool = omp;
-        hasMemoryPools = emp != null && smp != null && omp != null;
+        edenMemoryPool = emp == null ? () -> ZERO_MEMORY_USAGE : emp::getUsage;
+        survivorMemoryPool = smp == null ? () -> ZERO_MEMORY_USAGE : smp::getUsage;
+        tenuredMemoryPool = omp == null ? () -> ZERO_MEMORY_USAGE : omp::getUsage;
 
         List<GarbageCollectorMXBean> garbageCollectors = ManagementFactory.getGarbageCollectorMXBeans();
         GarbageCollectorMXBean yc = null;
         GarbageCollectorMXBean oc = null;
         for (GarbageCollectorMXBean garbageCollector : garbageCollectors)
         {
-            if ("PS Scavenge".equals(garbageCollector.getName()) ||
-                    "ParNew".equals(garbageCollector.getName()) ||
-                    "G1 Young Generation".equals(garbageCollector.getName()))
+            String gcName = garbageCollector.getName();
+            if ("PS Scavenge".equals(gcName) ||
+                    "ParNew".equals(gcName) ||
+                    "G1 Young Generation".equals(gcName) ||
+                    "Shenandoah Pauses".equals(gcName))
                 yc = garbageCollector;
-            else if ("PS MarkSweep".equals(garbageCollector.getName()) ||
-                    "ConcurrentMarkSweep".equals(garbageCollector.getName()) ||
-                    "G1 Old Generation".equals(garbageCollector.getName()))
+            else if ("PS MarkSweep".equals(gcName) ||
+                    "ConcurrentMarkSweep".equals(gcName) ||
+                    "G1 Old Generation".equals(gcName) ||
+                    "Shenandoah Cycles".equals(gcName) ||
+                    "ZGC".equals(gcName))
                 oc = garbageCollector;
         }
-        youngCollector = yc;
-        oldCollector = oc;
-        hasCollectors = yc != null && oc != null;
+        youngCollector = yc == null ? GarbageCollector.NO_GARBAGE_COLLECTOR : GarbageCollector.from(yc);
+        oldCollector = oc == null ? GarbageCollector.NO_GARBAGE_COLLECTOR : GarbageCollector.from(oc);
     }
 
     public long getMemoryPollInterval()
@@ -162,9 +168,9 @@ public class PlatformMonitor implements Runnable
 
     public void run()
     {
-        long eden = edenMemoryPool.getUsage().getUsed();
-        long survivor = survivorMemoryPool.getUsage().getUsed();
-        long tenured = tenuredMemoryPool.getUsage().getUsed();
+        long eden = edenMemoryPool.get().getUsed();
+        long survivor = survivorMemoryPool.get().getUsed();
+        long tenured = tenuredMemoryPool.get().getUsed();
 
         if (lastEden < eden)
             stop.edenBytes += eden - lastEden;
@@ -215,22 +221,16 @@ public class PlatformMonitor implements Runnable
 
             time = System.nanoTime();
 
-            if (hasMemoryPools)
-            {
-                lastEden = edenMemoryPool.getUsage().getUsed();
-                lastSurvivor = survivorMemoryPool.getUsage().getUsed();
-                lastTenured = tenuredMemoryPool.getUsage().getUsed();
-                scheduler = Executors.newSingleThreadScheduledExecutor();
-                memoryPoller = scheduler.scheduleWithFixedDelay(this, memoryPollInterval, memoryPollInterval, TimeUnit.MILLISECONDS);
-            }
+            lastEden = edenMemoryPool.get().getUsed();
+            lastSurvivor = survivorMemoryPool.get().getUsed();
+            lastTenured = tenuredMemoryPool.get().getUsed();
+            scheduler = Executors.newSingleThreadScheduledExecutor();
+            memoryPoller = scheduler.scheduleWithFixedDelay(this, memoryPollInterval, memoryPollInterval, TimeUnit.MILLISECONDS);
 
-            if (hasCollectors)
-            {
-                youngCount = youngCollector.getCollectionCount();
-                youngTime = youngCollector.getCollectionTime();
-                oldCount = oldCollector.getCollectionCount();
-                oldTime = oldCollector.getCollectionTime();
-            }
+            youngCount = youngCollector.getCollectionCount();
+            youngTime = youngCollector.getCollectionTime();
+            oldCount = oldCollector.getCollectionCount();
+            oldTime = oldCollector.getCollectionTime();
 
             if (operatingSystem instanceof com.sun.management.OperatingSystemMXBean)
             {
@@ -251,12 +251,9 @@ public class PlatformMonitor implements Runnable
                 start.freeMemory = os.getFreePhysicalMemorySize();
             }
             start.heap = heapMemory.getHeapMemoryUsage();
-            if (hasMemoryPools)
-            {
-                start.eden = edenMemoryPool.getUsage();
-                start.survivor = survivorMemoryPool.getUsage();
-                start.tenured = tenuredMemoryPool.getUsage();
-            }
+            start.eden = edenMemoryPool.get();
+            start.survivor = survivorMemoryPool.get();
+            start.tenured = tenuredMemoryPool.get();
 
             return start;
         }
@@ -281,29 +278,13 @@ public class PlatformMonitor implements Runnable
             stop.time = System.nanoTime() - time;
             stop.jitTime = jitCompiler.getTotalCompilationTime() - jitTime;
 
-            if (hasMemoryPools)
-            {
-                memoryPoller.cancel(false);
-                scheduler.shutdown();
-            }
-            else
-            {
-                stop.edenBytes = stop.survivorBytes = stop.tenuredBytes = -1;
-            }
+            memoryPoller.cancel(false);
+            scheduler.shutdown();
 
-            if (hasCollectors)
-            {
-                stop.youngTime = youngCollector.getCollectionTime() - youngTime;
-                stop.oldTime = oldCollector.getCollectionTime() - oldTime;
-                stop.youngCount = youngCollector.getCollectionCount() - youngCount;
-                stop.oldCount = oldCollector.getCollectionCount() - oldCount;
-            }
-            else
-            {
-                stop.youngTime = stop.oldTime = -1;
-                stop.youngCount = stop.oldCount = -1;
-            }
-
+            stop.youngTime = youngCollector.getCollectionTime() - youngTime;
+            stop.oldTime = oldCollector.getCollectionTime() - oldTime;
+            stop.youngCount = youngCollector.getCollectionCount() - youngCount;
+            stop.oldCount = oldCollector.getCollectionCount() - oldCount;
 
             if (operatingSystem instanceof com.sun.management.OperatingSystemMXBean)
             {
@@ -414,6 +395,47 @@ public class PlatformMonitor implements Runnable
                     .append(100 * cores).append(EOL);
             builder.append("========================================");
             return builder.toString();
+        }
+    }
+
+    private interface GarbageCollector
+    {
+        static final GarbageCollector NO_GARBAGE_COLLECTOR = new GarbageCollector()
+        {
+        };
+
+        static GarbageCollector from(GarbageCollectorMXBean mxBean)
+        {
+            return new GarbageCollector()
+            {
+                @Override
+                public long getCollectionCount()
+                {
+                    return mxBean.getCollectionCount();
+                }
+
+                @Override
+                public long getCollectionTime()
+                {
+                    return mxBean.getCollectionTime();
+                }
+            };
+        }
+
+        /**
+         * @return the total number of collections that have occurred.
+         */
+        public default long getCollectionCount()
+        {
+            return 0;
+        }
+
+        /**
+         * @return the approximate accumulated collection elapsed time in milliseconds.
+         */
+        public default long getCollectionTime()
+        {
+            return 0;
         }
     }
 }
