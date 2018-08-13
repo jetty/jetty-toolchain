@@ -163,7 +163,9 @@
           <version>3.1.0</version>
           <configuration>
             <archive>
+              <!-- Only needed if bundle/OSGi built out a manifest first
               <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                -->
               <manifestEntries>
                 <Implementation-Version>${project.version}</Implementation-Version>
                 <Implementation-Vendor>Eclipse.org - Jetty</Implementation-Vendor>
