@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.eclipse.jetty.toolchain</groupId>
     <artifactId>jetty-toolchain</artifactId>
-    <version>1.5</version>
+    <version>1.6-SNAPSHOT</version>
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -15,10 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <scm>
-    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
-    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
-    <url>https://github.com/eclipse/jetty.toolchain/jetty-schemas</url>
-    <tag>HEAD</tag>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-schemas</url>
   </scm>
   <build>
     <plugins>

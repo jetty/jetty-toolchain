@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.eclipse.jetty.toolchain</groupId>
     <artifactId>jetty-toolchain</artifactId>
-    <version>1.4</version>
+    <version>1.6-SNAPSHOT</version>
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <artifactId>jetty-test-policy</artifactId>
@@ -12,15 +12,6 @@
   <description>Test Resources for Jetty</description> 
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <compilerArgument>-Xlint:all</compilerArgument>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jarsigner-plugin</artifactId>
@@ -45,8 +36,6 @@
     </plugins>
   </build>
   <scm>
-    <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
-    <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
-    <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-test-policy</url>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-test-policy</url>
   </scm>
 </project>

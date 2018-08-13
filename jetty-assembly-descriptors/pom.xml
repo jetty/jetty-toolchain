@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.eclipse.jetty.toolchain</groupId>
     <artifactId>jetty-toolchain</artifactId>
-    <version>1.4</version>
+    <version>1.6-SNAPSHOT</version>
     <relativePath>../jetty-toolchain/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -10,8 +10,6 @@
   <name>Jetty Toolchain :: Assembly Descriptors</name>
   <version>1.1-SNAPSHOT</version>
   <scm>
-    <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
-    <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
-    <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-assembly-descriptors</url>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-assembly-descriptors</url>
   </scm>
 </project>

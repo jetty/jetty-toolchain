@@ -15,11 +15,9 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <scm>
-      <connection>scm:git:http://github.com/gitroot/eclipse/jetty.toolchain.git</connection>
-      <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
-      <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-osgi-servlet-api</url>
-      <tag>HEAD</tag>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-osgi-servlet-api</url>
   </scm>
+
   <build>
     <plugins>
 

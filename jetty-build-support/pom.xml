@@ -4,7 +4,7 @@
   <parent>
     <artifactId>jetty-toolchain</artifactId>
     <groupId>org.eclipse.jetty.toolchain</groupId>
-    <version>1.4</version>
+    <version>1.6-SNAPSHOT</version>
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <artifactId>jetty-build-support</artifactId>
@@ -19,19 +19,6 @@
   </properties>
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.2</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -100,10 +87,7 @@
     </dependency>
   </dependencies>
   <scm>
-    <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
-    <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
-    <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-build-support</url>
-    <tag>HEAD</tag>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-build-support</url>
   </scm>
 </project>
 
