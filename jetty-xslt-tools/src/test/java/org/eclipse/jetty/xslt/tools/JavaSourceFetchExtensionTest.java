@@ -29,7 +29,7 @@ public class JavaSourceFetchExtensionTest
     {
         JavaSourceFetchExtension srcFetch = new JavaSourceFetchExtension();
         
-        String src = srcFetch.fetch("http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/plain/jetty-http/src/main/java/org/eclipse/jetty/http/HttpCookie.java", "getName");
+        String src = srcFetch.fetch("https://raw.githubusercontent.com/eclipse/jetty.project/jetty-9.4.x/jetty-http/src/main/java/org/eclipse/jetty/http/HttpCookie.java", "getName");
         
         Assert.assertNotNull(src);
 

@@ -29,7 +29,7 @@ public class SourceFetchExtensionTest
     {
         SourceFetchExtension srcFetch = new SourceFetchExtension();
         
-        String src = srcFetch.fetch("http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/plain/pom.xml");
+        String src = srcFetch.fetch("https://raw.githubusercontent.com/eclipse/jetty.project/jetty-9.4.x/pom.xml");
         
         Assert.assertNotNull(src);
 
