@@ -4,7 +4,7 @@
   <parent>
     <artifactId>jetty-toolchain</artifactId>
     <groupId>org.eclipse.jetty.toolchain</groupId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.6</version>
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <artifactId>jetty-test-helper</artifactId>
