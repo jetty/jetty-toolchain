@@ -30,12 +30,19 @@ public class TestTrackerExtension implements BeforeEachCallback
     @Override
     public void beforeEach( ExtensionContext extensionContext )
     {
-        //String displayName = extensionContext.getDisplayName();
-        // we do not manage displayName here
-        Optional<Method> method = extensionContext.getTestMethod();
-        Optional<Class<?>> clazz = extensionContext.getTestClass();
-        System.err.printf("Running %s.%s()%n",
-                          clazz.isPresent()?clazz.get().getName():"",
-                          method.isPresent()?method.get().getName():"");
+        Method method = extensionContext.getRequiredTestMethod();
+        Class<?> clazz = extensionContext.getRequiredTestClass();
+        if(method.getParameterCount()>0) {
+            String displayName = extensionContext.getDisplayName();
+            System.err.printf("Running %s.%s(%s)%n", //
+                              clazz.getName(), //
+                              method.getName(), //
+                              displayName);
+        } else {
+            System.err.printf("Running %s.%s()%n", //
+                              clazz.getName(), //
+                              method.getName());
+        }
+
     }
 }
