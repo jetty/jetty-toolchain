@@ -30,7 +30,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 /**
  * Testing Junit Jupiter behavior with {@link WorkDir} and {@link WorkDirExtension}
  */
-@ExtendWith(WorkDirExtension.class)
+@ExtendWith({WorkDirExtension.class, TestTrackerExtension.class})
 public class WorkDirExtensionTest
 {
     public WorkDir fieldDir;

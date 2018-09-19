@@ -20,8 +20,10 @@ package org.eclipse.jetty.toolchain.test;
 
 import static org.hamcrest.CoreMatchers.*;
 
+import org.eclipse.jetty.toolchain.test.jupiter.TestTrackerExtension;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 @SuppressWarnings("javadoc")
 public class StringManglerTest
