@@ -22,7 +22,6 @@ import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import java.lang.reflect.Method;
-import java.util.Optional;
 
 public class TestTrackerExtension implements BeforeEachCallback
 {
