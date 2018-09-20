@@ -18,14 +18,13 @@
 
 package org.eclipse.jetty.toolchain.test.jupiter;
 
+import java.lang.reflect.Method;
+
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-import java.lang.reflect.Method;
-
 public class TestTrackerExtension implements BeforeEachCallback
 {
-
     @Override
     public void beforeEach( ExtensionContext extensionContext )
     {
@@ -42,7 +41,7 @@ public class TestTrackerExtension implements BeforeEachCallback
                 System.err.printf( "Running %s.%s(%s)%n", //
                                    clazz.getName(), //
                                    method.getName(), //
-                                   displayName );
+                                   safe(displayName) );
             }
             else
             {
@@ -51,5 +50,43 @@ public class TestTrackerExtension implements BeforeEachCallback
                                    method.getName() );
             }
         }
+    }
+
+    /**
+     * Clean the input string of control characters that can
+     * impact the output to the logs in harmful ways.
+     *
+     * @param string input string
+     * @return clean form of input string
+     */
+    public CharSequence safe(String string)
+    {
+        StringBuilder ret = new StringBuilder(string.length());
+        for(char c: string.toCharArray())
+        {
+            if( (c<=0x1F) || (c==0x7F) )
+            {
+                switch(c)
+                {
+                    case '\r':
+                        ret.append("\\r");
+                        break;
+                    case '\n':
+                        ret.append("\\n");
+                        break;
+                    case '\t':
+                        ret.append("\\t");
+                        break;
+                    default:
+                        ret.append("\\u00").append(String.format("%02x",(byte)c));
+                        break;
+                }
+            }
+            else
+            {
+                ret.append(c);
+            }
+        }
+        return ret;
     }
 }

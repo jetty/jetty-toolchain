@@ -54,7 +54,7 @@ public class WorkDirExtensionTest
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"foo", "bar"})
+    @ValueSource(strings = {"foo", "bar", "a longer\nstring\r\bwith\tcontrol\0characters"})
     public void testWorkDir_WithParameterized(String val)
     {
         fieldDir.getPath();
