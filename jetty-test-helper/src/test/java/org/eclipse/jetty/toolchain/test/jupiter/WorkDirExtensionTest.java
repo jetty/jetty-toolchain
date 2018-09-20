@@ -34,7 +34,7 @@ import java.util.stream.Stream;
 /**
  * Testing Junit Jupiter behavior with {@link WorkDir} and {@link WorkDirExtension}
  */
-@ExtendWith({WorkDirExtension.class, TestTrackerExtension.class})
+@ExtendWith({WorkDirExtension.class})
 public class WorkDirExtensionTest
 {
     public WorkDir fieldDir;

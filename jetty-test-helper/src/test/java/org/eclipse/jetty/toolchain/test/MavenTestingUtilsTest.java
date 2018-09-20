@@ -18,12 +18,14 @@
 
 package org.eclipse.jetty.toolchain.test;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @SuppressWarnings("javadoc")
 public class MavenTestingUtilsTest
@@ -32,7 +34,7 @@ public class MavenTestingUtilsTest
     public void testGetTargetDir()
     {
         File dir = MavenTestingUtils.getTargetDir();
-        Assert.assertEquals("target",dir.getName());
+        assertEquals("target",dir.getName());
     }
 
     @Test
@@ -96,7 +98,7 @@ public class MavenTestingUtilsTest
         
         URL url = MavenTestingUtils.getTargetURL("url.log");
         
-        Assert.assertEquals( actual.toURI().toURL().toExternalForm(), url.toExternalForm());        
+        assertEquals( actual.toURI().toURL().toExternalForm(), url.toExternalForm());
     }
     
     @Test
@@ -110,6 +112,6 @@ public class MavenTestingUtilsTest
     
     private void assertSamePath(File expected, File actual)
     {
-        Assert.assertEquals(expected.getAbsolutePath(),actual.getAbsolutePath());
+        assertEquals(expected.getAbsolutePath(),actual.getAbsolutePath());
     }
 }

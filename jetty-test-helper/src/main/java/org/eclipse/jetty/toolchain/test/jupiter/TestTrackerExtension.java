@@ -29,19 +29,25 @@ public class TestTrackerExtension implements BeforeEachCallback
     @Override
     public void beforeEach( ExtensionContext extensionContext )
     {
-        Method method = extensionContext.getRequiredTestMethod();
-        Class<?> clazz = extensionContext.getRequiredTestClass();
-        if(method.getParameterCount()>0) {
-            String displayName = extensionContext.getDisplayName();
-            System.err.printf("Running %s.%s(%s)%n", //
-                              clazz.getName(), //
-                              method.getName(), //
-                              displayName);
-        } else {
-            System.err.printf("Running %s.%s()%n", //
-                              clazz.getName(), //
-                              method.getName());
+        Boolean logDisplay = Boolean.getBoolean("jetty.testtracker.log");
+        if(logDisplay)
+        {
+            Method method = extensionContext.getRequiredTestMethod();
+            Class<?> clazz = extensionContext.getRequiredTestClass();
+            if ( method.getParameterCount() > 0 )
+            {
+                String displayName = extensionContext.getDisplayName();
+                System.err.printf( "Running %s.%s(%s)%n", //
+                                   clazz.getName(), //
+                                   method.getName(), //
+                                   displayName );
+            }
+            else
+            {
+                System.err.printf( "Running %s.%s()%n", //
+                                   clazz.getName(), //
+                                   method.getName() );
+            }
         }
-
     }
 }
