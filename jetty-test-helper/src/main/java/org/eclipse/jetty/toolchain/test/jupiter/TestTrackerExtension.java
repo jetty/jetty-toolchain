@@ -34,6 +34,8 @@ public class TestTrackerExtension implements BeforeEachCallback
         {
             Method method = extensionContext.getRequiredTestMethod();
             Class<?> clazz = extensionContext.getRequiredTestClass();
+            // until junit issue fixed https://github.com/junit-team/junit5/issues/1139
+            // we cannot get argument values so use a mix with displayName for methods with args
             if ( method.getParameterCount() > 0 )
             {
                 String displayName = extensionContext.getDisplayName();
