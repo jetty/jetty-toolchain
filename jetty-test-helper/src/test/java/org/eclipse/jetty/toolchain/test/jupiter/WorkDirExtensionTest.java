@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -56,6 +57,12 @@ public class WorkDirExtensionTest
     @ParameterizedTest
     @ValueSource(strings = {"foo", "bar", "a longer\nstring\r\bwith\tcontrol\0characters"})
     public void testWorkDir_WithParameterized(String val)
+    {
+        fieldDir.getPath();
+    }
+
+    @Test
+    public void testWorkDir_TestInfo(TestInfo testInfo)
     {
         fieldDir.getPath();
     }

@@ -88,4 +88,42 @@ public final class StringMangler
 
         return ret.toString();
     }
+
+    /**
+     * Clean the input string of control characters that can
+     * impact the output to the logs in harmful ways.
+     *
+     * @param string input string
+     * @return clean form of input string
+     */
+    public static CharSequence escapeJava(String string)
+    {
+        StringBuilder ret = new StringBuilder(string.length());
+        for(char c: string.toCharArray())
+        {
+            if( (c<=0x1F) || (c==0x7F) )
+            {
+                switch(c)
+                {
+                    case '\r':
+                        ret.append("\\r");
+                        break;
+                    case '\n':
+                        ret.append("\\n");
+                        break;
+                    case '\t':
+                        ret.append("\\t");
+                        break;
+                    default:
+                        ret.append("\\u00").append(String.format("%02x",(byte)c));
+                        break;
+                }
+            }
+            else
+            {
+                ret.append(c);
+            }
+        }
+        return ret;
+    }
 }
