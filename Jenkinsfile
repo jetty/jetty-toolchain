@@ -47,7 +47,7 @@ def getFullBuild(jdk, os) {
                       globalMavenSettingsConfig: 'oss-settings.xml',
                       mavenLocalRepo: localRepo) {
                 //
-                sh "mvn -V -B clean install -DfailIfNoTests=false -Dmaven.test.failure.ignore=true -T3 -e "
+                sh "mvn -V -B clean install -DfailIfNoTests=false -Dmaven.test.failure.ignore=true -T3 -Djetty.testtracker.log=true -e "
               }
               // withMaven doesn't label..
               // Report failures in the jenkins UI
