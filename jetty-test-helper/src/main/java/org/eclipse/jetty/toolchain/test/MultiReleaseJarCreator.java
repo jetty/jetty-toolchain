@@ -91,11 +91,6 @@ public class MultiReleaseJarCreator
 
     private final Path outputDir;
 
-    public MultiReleaseJarCreator(TestingDir testingdir)
-    {
-        this(testingdir.getPath());
-    }
-
     public MultiReleaseJarCreator(Path outputDir)
     {
         this.outputDir = outputDir;

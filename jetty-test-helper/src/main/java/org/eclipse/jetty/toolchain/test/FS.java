@@ -19,6 +19,9 @@
 package org.eclipse.jetty.toolchain.test;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,8 +32,6 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.util.concurrent.TimeUnit;
-
-import org.junit.Assert;
 
 /**
  * Common FileSystem utility methods
@@ -67,7 +68,7 @@ public final class FS
         }
         else
         {
-            Assert.fail("Not able to delete path, not a file or directory? : " + path.toAbsolutePath());
+            fail("Not able to delete path, not a file or directory? : " + path.toAbsolutePath());
         }
     }
 
@@ -120,10 +121,10 @@ public final class FS
      */
     public static void deleteFile(File path)
     {
-        Assert.assertTrue("Path must be a file: " + path.getAbsolutePath(),path.isFile());
-        Assert.assertTrue("Can only delete content within the /target/tests/ directory: " + path.getAbsolutePath(),FS.isTestingDir(path.getParentFile()));
+        assertTrue(path.isFile(), "Path must be a file: " + path.getAbsolutePath());
+        assertTrue(FS.isTestingDir(path.getParentFile()), "Can only delete content within the /target/tests/ directory: " + path.getAbsolutePath());
 
-        Assert.assertTrue("Failed to delete file: " + path.getAbsolutePath(),path.delete());
+        assertTrue(path.delete(), "Failed to delete file: " + path.getAbsolutePath());
     }
 
     /**
@@ -140,15 +141,15 @@ public final class FS
 
         if (Files.exists(path,LinkOption.NOFOLLOW_LINKS))
         {
-            Assert.assertTrue("Path must be a file or link: " + location,Files.isRegularFile(path) || Files.isSymbolicLink(path));
-            Assert.assertTrue("Can only delete content within the /target/tests/ directory: " + location,FS.isTestingDir(path.getParent()));
+            assertTrue(Files.isRegularFile(path) || Files.isSymbolicLink(path), "Path must be a file or link: " + location);
+            assertTrue(FS.isTestingDir(path.getParent()), "Can only delete content within the /target/tests/ directory: " + location);
             try
             {
-                Assert.assertTrue("Failed to delete file: " + location,Files.deleteIfExists(path));
+                assertTrue(Files.deleteIfExists(path), "Failed to delete file: " + location);
             }
             catch (IOException e)
             {
-                throw new AssertionError("Unable to delete file: " + location,e);
+                fail("Unable to delete file: " + location,e);
             }
         }
     }
@@ -167,15 +168,15 @@ public final class FS
 
         if (Files.exists(path))
         {
-            Assert.assertTrue("Path must be a file: " + location,Files.isDirectory(path));
-            Assert.assertTrue("Can only delete content within the /target/tests/ directory: " + location,FS.isTestingDir(path.getParent()));
+            assertTrue(Files.isDirectory(path), "Path must be a file: " + location);
+            assertTrue(FS.isTestingDir(path.getParent()),"Can only delete content within the /target/tests/ directory: " + location);
             try
             {
-                Assert.assertTrue("Failed to delete directory: " + location,Files.deleteIfExists(path));
+                assertTrue(Files.deleteIfExists(path),"Failed to delete directory: " + location);
             }
             catch (IOException e)
             {
-                throw new AssertionError("Unable to delete directory: " + location,e);
+                fail("Unable to delete directory: " + location,e);
             }
         }
     }
@@ -183,7 +184,7 @@ public final class FS
     private static void recursiveDeleteDir(Path path)
     {
         String location = path.toAbsolutePath().toString();
-        Assert.assertTrue("Can only delete content within the /target/tests/ directory: " + location,FS.isTestingDir(path));
+        assertTrue(FS.isTestingDir(path),"Can only delete content within the /target/tests/ directory: " + location);
 
         // Get entries in this path
         try (DirectoryStream<Path> dir = Files.newDirectoryStream(path))
@@ -202,11 +203,11 @@ public final class FS
         }
         catch (DirectoryIteratorException e)
         {
-            throw new AssertionError("Unable to (recursively) delete path: " + location, e);
+            fail("Unable to (recursively) delete path: " + location, e);
         }
         catch (IOException e)
         {
-            throw new AssertionError("Unable to (recursively) delete path: " + location, e);
+            fail("Unable to (recursively) delete path: " + location, e);
         }
 
         // delete itself
@@ -270,17 +271,6 @@ public final class FS
     }
 
     /**
-     * Ensure the provided directory exists, and contains no content (empty)
-     * 
-     * @param testingdir
-     *            the dir to check.
-     */
-    public static void ensureEmpty(TestingDir testingdir)
-    {
-        ensureEmpty(testingdir.getPath());
-    }
-
-    /**
      * Ensure the provided directory does not exist, delete it if present
      * 
      * @param dir
@@ -315,11 +305,11 @@ public final class FS
     {
         if (dir.exists())
         {
-            Assert.assertTrue("Path exists, but should be a Dir : " + dir.getAbsolutePath(),dir.isDirectory());
+            assertTrue(dir.isDirectory(),"Path exists, but should be a Dir : " + dir.getAbsolutePath());
         }
         else
         {
-            Assert.assertTrue("Creating dir: " + dir,dir.mkdirs());
+            assertTrue(dir.mkdirs(),"Creating dir: " + dir);
         }
     }
 
@@ -333,18 +323,18 @@ public final class FS
     {
         if (Files.exists(dir))
         {
-            Assert.assertTrue("Path exists, but should be a Dir : " + dir.toAbsolutePath(),Files.isDirectory(dir));
+            assertTrue(Files.isDirectory(dir),"Path exists, but should be a Dir : " + dir.toAbsolutePath());
         }
         else
         {
             try
             {
                 Files.createDirectories(dir);
-                Assert.assertTrue("Failed to create dir: " + dir,Files.exists(dir));
+                assertTrue(Files.exists(dir),"Failed to create dir: " + dir);
             }
             catch (IOException e)
             {
-                throw new AssertionError("Failed to create directory: " + dir,e);
+                fail("Failed to create directory: " + dir,e);
             }
         }
     }
@@ -397,11 +387,11 @@ public final class FS
     {
         if (file.exists())
         {
-            Assert.assertTrue("Updating last modified timestamp",file.setLastModified(System.currentTimeMillis()));
+            assertTrue(file.setLastModified(System.currentTimeMillis()),"Updating last modified timestamp");
         }
         else
         {
-            Assert.assertTrue("Creating file: " + file,file.createNewFile());
+            assertTrue(file.createNewFile(),"Creating file: " + file);
         }
     }
 
@@ -421,12 +411,12 @@ public final class FS
             Files.setLastModifiedTime(file,FileTime.from(System.currentTimeMillis(), TimeUnit.MILLISECONDS));
             FileTime timeNow = Files.getLastModifiedTime(file);
             // Verify that timestamp was actually updated.
-            Assert.assertThat("Timestamp updated",timeOrig,not(equalTo(timeNow)));
+            assertThat("Timestamp updated",timeOrig,not(equalTo(timeNow)));
         }
         else
         {
             Files.createFile(file);
-            Assert.assertTrue("Created new file?: " + file,Files.exists(file));
+            assertTrue(Files.exists(file),"Created new file?: " + file);
         }
     }
 

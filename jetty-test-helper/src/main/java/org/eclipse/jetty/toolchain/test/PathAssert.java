@@ -18,11 +18,12 @@
 
 package org.eclipse.jetty.toolchain.test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import org.junit.Assert;
 
 /**
  * Assertions of various FileSytem Paths
@@ -45,7 +46,7 @@ public final class PathAssert
     public static void assertDirExists(String msg, File path)
     {
         assertPathExists(msg,path);
-        Assert.assertTrue(msg + " path should be a Dir : " + path.getAbsolutePath(),path.isDirectory());
+        assertTrue(path.isDirectory(),msg + " path should be a Dir : " + path.getAbsolutePath());
     }
 
     /**
@@ -59,7 +60,7 @@ public final class PathAssert
     public static void assertDirExists(String msg, Path path)
     {
         assertPathExists(msg,path);
-        Assert.assertTrue(msg + " path should be a Dir : " + path,Files.isDirectory(path));
+        assertTrue(Files.isDirectory(path),msg + " path should be a Dir : " + path);
     }
 
     /**
@@ -73,7 +74,7 @@ public final class PathAssert
     public static void assertFileExists(String msg, File path)
     {
         assertPathExists(msg,path);
-        Assert.assertTrue(msg + " path should be a File : " + path.getAbsolutePath(),path.isFile());
+        assertTrue(path.isFile(),msg + " path should be a File : " + path.getAbsolutePath());
     }
 
     /**
@@ -87,7 +88,7 @@ public final class PathAssert
     public static void assertFileExists(String msg, Path path)
     {
         assertPathExists(msg,path);
-        Assert.assertTrue(msg + " path should be a File : " + path,Files.isRegularFile(path));
+        assertTrue(Files.isRegularFile(path),msg + " path should be a File : " + path);
     }
 
     /**
@@ -100,7 +101,7 @@ public final class PathAssert
      */
     public static void assertPathExists(String msg, File path)
     {
-        Assert.assertTrue(msg + " path should exist: " + path.getAbsolutePath(),path.exists());
+        assertTrue(path.exists(),msg + " path should exist: " + path.getAbsolutePath());
     }
 
     /**
@@ -113,7 +114,7 @@ public final class PathAssert
      */
     public static void assertPathExists(String msg, Path path)
     {
-        Assert.assertTrue(msg + " path should exist: " + path,Files.exists(path));
+        assertTrue(Files.exists(path),msg + " path should exist: " + path);
     }
 
     /**
@@ -126,7 +127,7 @@ public final class PathAssert
      */
     public static void assertNotPathExists(String msg, File path)
     {
-        Assert.assertFalse(msg + " path should not exist: " + path.getAbsolutePath(),path.exists());
+        assertFalse(path.exists(),msg + " path should not exist: " + path.getAbsolutePath());
     }
 
     /**
@@ -139,6 +140,6 @@ public final class PathAssert
      */
     public static void assertNotPathExists(String msg, Path path)
     {
-        Assert.assertFalse(msg + " path should not exist: " + path,Files.exists(path));
+        assertFalse(Files.exists(path),msg + " path should not exist: " + path);
     }
 }

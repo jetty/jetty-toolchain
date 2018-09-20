@@ -19,9 +19,9 @@
 package org.eclipse.jetty.toolchain.test;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("javadoc")
 public class StringManglerTest
@@ -29,15 +29,15 @@ public class StringManglerTest
     @Test
     public void testCondensePackageString()
     {
-        Assert.assertThat(StringMangler.condensePackageString("org.eclipse.jetty.test.FooTest"),is("oejt.FooTest"));
-        Assert.assertThat(StringMangler.condensePackageString("org.eclipse.jetty.server.logging.LogTest"),is("oejsl.LogTest"));
+        assertThat(StringMangler.condensePackageString("org.eclipse.jetty.test.FooTest"),is("oejt.FooTest"));
+        assertThat(StringMangler.condensePackageString("org.eclipse.jetty.server.logging.LogTest"),is("oejsl.LogTest"));
     }
 
     @Test
     public void testMaxStringLength()
     {
-        Assert.assertThat(StringMangler.maxStringLength(9,"Eatagramovabits"),is("Eat...its"));
-        Assert.assertThat(StringMangler.maxStringLength(10,"Eatagramovabits"),is("Eat...bits"));
-        Assert.assertThat(StringMangler.maxStringLength(11,"Eatagramovabits"),is("Eata...bits"));
+        assertThat(StringMangler.maxStringLength(9,"Eatagramovabits"),is("Eat...its"));
+        assertThat(StringMangler.maxStringLength(10,"Eatagramovabits"),is("Eat...bits"));
+        assertThat(StringMangler.maxStringLength(11,"Eatagramovabits"),is("Eata...bits"));
     }
 }

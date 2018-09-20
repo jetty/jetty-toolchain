@@ -18,7 +18,7 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import java.net.URL;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.TestInfo;
 
 /**
  * Common utility methods for working with JUnit tests cases in a maven friendly way.
@@ -217,33 +217,33 @@ public final class MavenTestingUtils
 
     /**
      * Get a {@link File} reference to the <code>${basedir}/target/tests/test-${testname}</code> directory.
-     * Uses the JUnit 3.x {@link TestCase#getName()} to make a unique directory name per test.
+     * Uses the JUnit 5.x {@link TestInfo#getDisplayName()} to make a unique directory name per test.
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetTestingPath(TestCase.getName()).toFile()</code>
-     * 
-     * @param test
-     *            the junit 3.x testcase to base this new directory on.
+     *
+     * @param testInfo
+     *            the junit 5.x testcase to base this new directory on.
      * @return the maven <code>${basedir}/target/tests/test-${testname}</code> directory.
      */
-    public static File getTargetTestingDir(TestCase test)
+    public static File getTargetTestingDir(TestInfo testInfo)
     {
-        return getTargetTestingPath(test.getName()).toFile();
+        return getTargetTestingPath(testInfo.getDisplayName()).toFile();
     }
 
     /**
      * Get a {@link Path} reference to the <code>${basedir}/target/tests/test-${testname}</code> directory.
-     * Uses the JUnit 3.x {@link TestCase#getName()} to make a unique directory name per test.
+     * Uses the JUnit 5.x {@link TestInfo#getDisplayName()} to make a unique directory name per test.
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetTestingPath(TestCase.getName())</code>
-     * 
-     * @param test
-     *            the junit 3.x testcase to base this new directory on.
+     *
+     * @param testInfo
+     *            the junit 5.x testcase to base this new directory on.
      * @return the maven <code>${basedir}/target/tests/test-${testname}</code> directory.
      * @see #getTargetTestingPath(String)
      */
-    public static Path getTargetTestingPath(TestCase test)
+    public static Path getTargetTestingPath(TestInfo testInfo)
     {
-        return getTargetTestingPath(test.getName());
+        return getTargetTestingPath(testInfo.getDisplayName());
     }
 
     /**
@@ -280,11 +280,7 @@ public final class MavenTestingUtils
      * Obtain a testing directory reference in maven
      * <code>${basedir}/target/tests/${condensed-classname}/${methodname}</code> path that uses an condensed directory
      * name based on the testclass and subdirectory based on the testmethod being run.
-     * <p>
-     * Note: the &#064;Rule {@link TestingDir} is a better choice in most cases.
-     * <p>
-     * Convenience method for <code>MavenTestingUtils.getTargetTestingDir(testclass, testmethodname).toFile()</code>
-     * 
+     *
      * @param testclass
      *            the class for the test case
      * @param testmethodname
@@ -292,28 +288,6 @@ public final class MavenTestingUtils
      * @return the File path to the testname specific testing directory underneath the
      *         <code>${basedir}/target/tests/</code> sub directory
      * @see FS
-     * @see TestingDir
-     */
-    public static File getTargetTestingDir(final Class<?> testclass, final String testmethodname)
-    {
-        return getTargetTestingPath(testclass,testmethodname).toFile();
-    }
-    
-    /**
-     * Obtain a testing directory reference in maven
-     * <code>${basedir}/target/tests/${condensed-classname}/${methodname}</code> path that uses an condensed directory
-     * name based on the testclass and subdirectory based on the testmethod being run.
-     * <p>
-     * Note: the &#064;Rule {@link TestingDir} is a better choice in most cases.
-     * 
-     * @param testclass
-     *            the class for the test case
-     * @param testmethodname
-     *            the test method name
-     * @return the File path to the testname specific testing directory underneath the
-     *         <code>${basedir}/target/tests/</code> sub directory
-     * @see FS
-     * @see TestingDir
      */
     public static Path getTargetTestingPath(final Class<?> testclass, final String testmethodname)
     {
@@ -443,7 +417,7 @@ public final class MavenTestingUtils
         err.append(".getTestID(), must occur from within stack frame of ");
         err.append("test method, not @Before, @After, @BeforeClass, ");
         err.append("@AfterClass, or Constructors of test case.");
-        Assert.fail(err.toString());
+        fail(err.toString());
         return null;
     }
 

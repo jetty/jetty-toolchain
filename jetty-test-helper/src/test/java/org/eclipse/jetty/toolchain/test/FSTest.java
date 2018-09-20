@@ -19,6 +19,10 @@
 package org.eclipse.jetty.toolchain.test;
 
 import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.condition.OS.LINUX;
 import static org.junit.jupiter.api.condition.OS.MAC;
 import static org.junit.jupiter.api.condition.OS.WINDOWS;
@@ -28,7 +32,6 @@ import java.io.IOException;
 import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 
@@ -37,12 +40,12 @@ public class FSTest
 {
     private void assertInvalidTestingDir(File dir)
     {
-        Assert.assertFalse("Should be an invalid testing directory: " + dir.getAbsolutePath(),FS.isTestingDir(dir));
+        assertFalse(FS.isTestingDir(dir),"Should be an invalid testing directory: " + dir.getAbsolutePath());
     }
 
     private void assertValidTestingDir(File dir)
     {
-        Assert.assertTrue("Should be a valid testing directory: " + dir.getAbsolutePath(),FS.isTestingDir(dir));
+        assertTrue(FS.isTestingDir(dir),"Should be a valid testing directory: " + dir.getAbsolutePath());
     }
 
     @Test
@@ -64,7 +67,7 @@ public class FSTest
     public void testIsTestingDirValid()
     {
         File testingDir = MavenTestingUtils.getTargetTestingDir();
-        Assert.assertThat("Ensuring that our expectations are sane",testingDir.getAbsolutePath(),endsWith(FS.separators("target/tests")));
+        assertThat("Ensuring that our expectations are sane",testingDir.getAbsolutePath(),endsWith(FS.separators("target/tests")));
 
         assertValidTestingDir(testingDir);
         assertValidTestingDir(new File(testingDir,"foo"));
@@ -118,15 +121,15 @@ public class FSTest
     @EnabledOnOs(WINDOWS)
     public void testSeparatorsWindows()
     {
-        Assert.assertEquals("target\\tests\\tests-Foo", FS.separators("target/tests/tests-Foo"));
-        Assert.assertEquals("target\\tests\\tests-Foo", FS.separators("target/tests\\tests-Foo"));
+        assertEquals("target\\tests\\tests-Foo", FS.separators("target/tests/tests-Foo"));
+        assertEquals("target\\tests\\tests-Foo", FS.separators("target/tests\\tests-Foo"));
     }
 
     @Test
     @EnabledOnOs({LINUX, MAC})
     public void testSeparatorsUnix()
     {
-        Assert.assertEquals("target/tests/tests-Foo", FS.separators("target/tests/tests-Foo"));
-        Assert.assertEquals("target/tests/tests-Foo", FS.separators("target/tests\\tests-Foo"));
+        assertEquals("target/tests/tests-Foo", FS.separators("target/tests/tests-Foo"));
+        assertEquals("target/tests/tests-Foo", FS.separators("target/tests\\tests-Foo"));
     }
 }

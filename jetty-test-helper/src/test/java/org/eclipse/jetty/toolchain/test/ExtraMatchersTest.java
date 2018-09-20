@@ -20,30 +20,25 @@ package org.eclipse.jetty.toolchain.test;
 
 import static org.eclipse.jetty.toolchain.test.ExtraMatchers.*;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("javadoc")
 public class ExtraMatchersTest
 {
-    @Rule
-    public ExpectedException expectedThrowable = ExpectedException.none();
-    
     @Test
     public void testOrderedFail()
     {
         List<String> actual = Arrays.asList(new String[] { "avocado", "banana", "cherry" });
         List<String> expected = Arrays.asList(new String[] { "apple", "banana", "cherry" });
-        
-        expectedThrowable.expect(AssertionError.class);
-        assertThat("Order", actual, ordered(expected));
+
+        assertThrows(AssertionError.class, ()-> assertThat("Order", actual, ordered(expected)));
     }
     
     @Test
@@ -61,8 +56,7 @@ public class ExtraMatchersTest
         List<String> actual = Arrays.asList(new String[] { "banana", "apple", "cherry" });
         List<String> expected = Arrays.asList(new String[] { "apple", "banana", "cherry" });
         
-        expectedThrowable.expect(AssertionError.class);
-        assertThat("Order", actual, ordered(expected));
+        assertThrows(AssertionError.class, ()-> assertThat("Order", actual, ordered(expected)));
     }
 
     @Test
