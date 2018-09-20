@@ -18,19 +18,17 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import static org.hamcrest.CoreMatchers.endsWith;
-import static org.junit.jupiter.api.condition.OS.LINUX;
-import static org.junit.jupiter.api.condition.OS.MAC;
-import static org.junit.jupiter.api.condition.OS.WINDOWS;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledOnOs;
+import static org.hamcrest.CoreMatchers.endsWith;
+import static org.junit.jupiter.api.condition.OS.*;
 
 @SuppressWarnings("javadoc")
 public class FSTest
