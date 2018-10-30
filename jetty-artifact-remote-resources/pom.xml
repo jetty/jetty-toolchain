@@ -11,6 +11,8 @@
   <version>1.2-SNAPSHOT</version>
   <scm>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-artifact-remote-resources</url>
+    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
   </scm>
   <build>
     <plugins>
