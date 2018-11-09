@@ -15,7 +15,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <scm>
+    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-schemas</url>
+    <tag>HEAD</tag>
   </scm>
   <build>
     <plugins>
