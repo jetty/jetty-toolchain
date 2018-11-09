@@ -2,7 +2,7 @@
    <parent>
      <groupId>org.eclipse.jetty.toolchain</groupId>
      <artifactId>jetty-toolchain</artifactId>
-     <version>1.4</version>
+     <version>1.6</version>
      <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -12,41 +12,69 @@
   <name>Jetty :: Schemas</name>
   <packaging>jar</packaging>
   <properties>
+      <maven.version>3.0</maven.version>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <scm>
-      <connection>scm:git:http://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</connection>
-      <developerConnection>scm:git:ssh://git.eclipse.org/gitroot/jetty/org.eclipse.jetty.toolchain.git</developerConnection>
-      <url>http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/tree/jetty-schemas</url>
+    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-schemas</url>
+    <tag>HEAD</tag>
   </scm>
   <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>artifact-jar</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-jar</id>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <archive>
-                        <manifestFile>target/classes/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
-                </configuration>
-            </plugin>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>test-jar</id>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <archive>
+            <manifestFile>target/classes/META-INF/MANIFEST.MF</manifestFile>
+          </archive>
+        </configuration>
+      </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
+                <version>3.5.1</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -88,7 +116,34 @@
           </execution>
         </executions>
       </plugin>
-        </plugins>
-
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
+          <configuration>
+            <useReleaseProfile>true</useReleaseProfile>
+            <releaseProfiles>eclipse-release</releaseProfiles>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.6.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>
