@@ -74,7 +74,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>4.1.0</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -93,9 +93,7 @@
                         <_nouses>true</_nouses>
                         <Export-Package>
  javax.servlet.resources;version="3.1",
- javax.servlet.jsp.resources;version="3.1",
- javax.servlet;version="3.1",
- *
+ javax.servlet.jsp.resources;version="3.1"
                         </Export-Package>
                     </instructions>
                 </configuration>
