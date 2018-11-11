@@ -94,6 +94,7 @@
                         <Export-Package>
  javax.servlet.resources;version="3.1",
  javax.servlet.jsp.resources;version="3.1",
+ javax.servlet;version="3.1",
  *
                         </Export-Package>
                     </instructions>
