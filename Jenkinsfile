@@ -1,7 +1,7 @@
 #!groovy
 
 // if removing jdk look at the test made for deploying
-def jdks = ["jdk8", "jdk11"]
+def jdks = ["jdk8", "jdk9", "jdk10", "jdk11"]
 def oss = ["linux"] //windows?  ,"linux-docker"
 def builds = [:]
 for (def os in oss) {

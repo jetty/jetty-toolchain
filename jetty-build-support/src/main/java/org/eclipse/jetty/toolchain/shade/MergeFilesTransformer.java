@@ -33,12 +33,28 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
+/**
+ * <p>
+ * This transformer (used by Maven Shade plugin will merge few files {@link #files} content
+ * in the {@link #resource} within the shaded jar.
+ * </p>
+ * <p>
+ * Per default the current content of the resource (if existing) will preserved.
+ * This can be changed using the parameter {@link #preserveResourceContent}
+ * </p>
+ */
 public class MergeFilesTransformer
     implements ResourceTransformer
 {
 
+    /**
+     * paths to files to merge in the jar
+     */
     private List<String> files;
 
+    /**
+     * the resource in the jar file to generate/modify
+     */
     private String resource;
 
     /**
