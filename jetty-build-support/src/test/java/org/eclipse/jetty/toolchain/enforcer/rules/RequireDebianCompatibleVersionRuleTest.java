@@ -17,44 +17,56 @@ package org.eclipse.jetty.toolchain.enforcer.rules;
 //========================================================================
 
 import org.apache.maven.enforcer.rule.api.EnforcerRuleException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class RequireDebianCompatibleVersionRuleTest
 {
     @Test
-    public void testGoodDebianVersions() throws EnforcerRuleException
+    public void testGoodDebianVersions()
+        throws EnforcerRuleException
     {
         RequireDebianCompatibleVersionRule rule = new RequireDebianCompatibleVersionRule();
-        rule.ensureValidDebianVersion("1.0.0");
-        rule.ensureValidDebianVersion("7.0.2.RC0");
+        rule.ensureValidDebianVersion( "1.0.0" );
+        rule.ensureValidDebianVersion( "7.0.2.RC0" );
     }
 
     @Test
-    public void testSkippedSnapshotDebianVersions() throws EnforcerRuleException
+    public void testSkippedSnapshotDebianVersions()
+        throws EnforcerRuleException
     {
         RequireDebianCompatibleVersionRule rule = new RequireDebianCompatibleVersionRule();
-        rule.ensureValidDebianVersion("1.0.0-SNAPSHOT");
-        rule.ensureValidDebianVersion("7.0.2.SNAPSHOT");
+        rule.ensureValidDebianVersion( "1.0.0-SNAPSHOT" );
+        rule.ensureValidDebianVersion( "7.0.2.SNAPSHOT" );
     }
 
-    @Test(expected = EnforcerRuleException.class)
-    public void testBadDebianVersionDash() throws EnforcerRuleException
+    @Test
+    public void testBadDebianVersionDash()
+        throws EnforcerRuleException
     {
-        RequireDebianCompatibleVersionRule rule = new RequireDebianCompatibleVersionRule();
-        rule.ensureValidDebianVersion("7.0.2-RC0");
+        Assertions.assertThrows( EnforcerRuleException.class, () -> {
+            RequireDebianCompatibleVersionRule rule = new RequireDebianCompatibleVersionRule();
+            rule.ensureValidDebianVersion( "7.0.2-RC0" );
+        } );
     }
-    
-    @Test(expected = EnforcerRuleException.class)
-    public void testBadDebianVersionUnderscore() throws EnforcerRuleException
+
+    @Test
+    public void testBadDebianVersionUnderscore()
+        throws EnforcerRuleException
     {
-        RequireDebianCompatibleVersionRule rule = new RequireDebianCompatibleVersionRule();
-        rule.ensureValidDebianVersion("7.0.2_RC0");
+        Assertions.assertThrows( EnforcerRuleException.class, () -> {
+            RequireDebianCompatibleVersionRule rule = new RequireDebianCompatibleVersionRule();
+            rule.ensureValidDebianVersion( "7.0.2_RC0" );
+        } );
     }
-    
-    @Test(expected = EnforcerRuleException.class)
-    public void testBadDebianVersionReservedAlpha() throws EnforcerRuleException
+
+    @Test
+    public void testBadDebianVersionReservedAlpha()
+        throws EnforcerRuleException
     {
-        RequireDebianCompatibleVersionRule rule = new RequireDebianCompatibleVersionRule();
-        rule.ensureValidDebianVersion("7.0.2.alpha3");
+        Assertions.assertThrows( EnforcerRuleException.class, () -> {
+            RequireDebianCompatibleVersionRule rule = new RequireDebianCompatibleVersionRule();
+            rule.ensureValidDebianVersion( "7.0.2.alpha3" );
+        } );
     }
 }

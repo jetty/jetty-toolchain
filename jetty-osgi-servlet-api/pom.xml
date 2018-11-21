@@ -102,7 +102,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>2.3</version>
+        <version>3.2.1</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -135,12 +135,26 @@
                <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                   <resource>META-INF/MANIFEST.MF</resource>
-                  <file>target/classes/META-INF/MANIFEST.MF</file>
+                  <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
                 </transformer>
+                 <transformer implementation="org.eclipse.jetty.toolchain.shade.MergeFilesTransformer">
+                   <resource>META-INF/LICENSE</resource>
+                   <files>
+                     <file>${project.build.directory}/sources/META-INF/LICENSE</file>
+                     <file>${project.build.directory}/sources/META-INF/LICENSE.txt</file>
+                   </files>
+                 </transformer>
               </transformers>
             </configuration>
           </execution>
         </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.eclipse.jetty.toolchain</groupId>
+            <artifactId>jetty-build-support</artifactId>
+            <version>1.5-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
       </plugin>
 
 
@@ -251,7 +265,7 @@
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
       <artifactId>jetty-schemas</artifactId>
-      <version>4.0.1</version>
+      <version>4.0.2</version>
     </dependency>
   </dependencies>
 </project>
