@@ -1,52 +1,65 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <parent>
-     <groupId>org.eclipse.jetty.toolchain</groupId>
-     <artifactId>jetty-toolchain</artifactId>
-     <version>1.6</version>
-     <relativePath>../jetty-toolchain</relativePath>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.eclipse.jetty.toolchain</groupId>
+    <artifactId>jetty-toolchain</artifactId>
+    <version>1.6</version>
+    <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
-  <artifactId>jetty-osgi-servlet-api</artifactId>
+  <artifactId>jetty-servlet-api</artifactId>
   <version>4.0-SNAPSHOT</version>
   <name>Jetty :: Servlet API and Schemas for JPMS and OSGi</name>
   <packaging>jar</packaging>
+
   <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.version>3.0</maven.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <scm>
-    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-servlet-api</url>
-  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty.toolchain</groupId>
+      <artifactId>jetty-schemas</artifactId>
+      <version>4.0.3</version>
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>
-
-       <plugin>
-         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5</version>
-        <dependencies>
-           <dependency>
-             <groupId>org.apache.maven.scm</groupId>
-             <artifactId>maven-scm-api</artifactId>
-             <version>1.9.1</version>
-           </dependency>
-           <dependency>
-             <groupId>org.apache.maven.scm</groupId>
-             <artifactId>maven-scm-provider-gitexe</artifactId>
-             <version>1.9.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.8.0</version>
         <configuration>
           <skipMain>true</skipMain>
           <skip>true</skip>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-api</artifactId>
+            <version>1.9.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>1.9.1</version>
+          </dependency>
+        </dependencies>
       </plugin>
 
       <plugin>
@@ -97,8 +110,6 @@
         </executions>
       </plugin>
 
-
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -108,8 +119,8 @@
             <phase>package</phase>
             <goals>
               <goal>shade</goal>
-            </goals> 
-            <configuration> 
+            </goals>
+            <configuration>
               <createSourcesJar>false</createSourcesJar>
               <shadeSourcesContent>true</shadeSourcesContent>
               <createDependencyReducedPom>false</createDependencyReducedPom>
@@ -119,7 +130,7 @@
                   <include>javax.servlet:javax.servlet-api</include>
                 </includes>
               </artifactSet>
-               <filters>
+              <filters>
                 <filter>
                   <artifact>*:*</artifact>
                   <excludes>
@@ -131,38 +142,44 @@
                     <exclude>META-INF/MANIFEST.MF</exclude>
                   </excludes>
                 </filter>
-               </filters>
-               <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+              </filters>
+              <transformers>
+                <transformer
+                  implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                   <resource>META-INF/MANIFEST.MF</resource>
                   <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
                 </transformer>
-                 <transformer implementation="org.eclipse.jetty.toolchain.shade.MergeFilesTransformer">
-                   <resource>META-INF/LICENSE</resource>
-                   <files>
-                     <file>${project.build.directory}/sources/META-INF/LICENSE</file>
-                     <file>${project.build.directory}/sources/META-INF/LICENSE.txt</file>
-                   </files>
-                 </transformer>
+                <!-- NOT SURE WE ARE ALLOWED TO ALTER THE LICENSE OF THESE FILES
+                <transformer
+                  implementation="org.eclipse.jetty.toolchain.shade.MergeFilesTransformer">
+                  <resource>META-INF/LICENSE</resource>
+                  <files>
+                    <file>${project.build.directory}/sources/META-INF/LICENSE</file>
+                    <file>${project.build.directory}/sources/META-INF/LICENSE.txt</file>
+                  </files>
+                </transformer>
+                 -->
               </transformers>
             </configuration>
           </execution>
         </executions>
         <dependencies>
+          <!-- For org.eclipse.jetty.toolchain.shade.MergeFilesTransformer
           <dependency>
             <groupId>org.eclipse.jetty.toolchain</groupId>
             <artifactId>jetty-build-support</artifactId>
             <version>1.5-SNAPSHOT</version>
           </dependency>
+           -->
         </dependencies>
       </plugin>
 
 
-     <!-- source maven plugin creates the source bundle and adds manifest -->
+      <!-- source maven plugin creates the source bundle and adds manifest -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.1.2</version>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -175,10 +192,13 @@
                 <manifestEntries>
                   <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                   <Bundle-Name>${project.name}</Bundle-Name>
-                  <Bundle-SymbolicName>org.eclipse.jetty.osgi-servlet-api.source</Bundle-SymbolicName>
+                  <Bundle-SymbolicName>org.eclipse.jetty.osgi-servlet-api.source
+                  </Bundle-SymbolicName>
                   <Bundle-Vendor>Eclipse.org - Jetty</Bundle-Vendor>
                   <Bundle-Version>${parsedVersion.osgiVersion}</Bundle-Version>
-                  <Eclipse-SourceBundle>org.eclipse.jetty.osgi-servlet-api;version="${parsedVersion.osgiVersion}";roots:="."</Eclipse-SourceBundle>
+                  <Eclipse-SourceBundle>
+                    org.eclipse.jetty.osgi-servlet-api;version="${parsedVersion.osgiVersion}";roots:="."
+                  </Eclipse-SourceBundle>
                 </manifestEntries>
               </archive>
             </configuration>
@@ -186,86 +206,96 @@
         </executions>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <tags>
+            <tag>
+              <name>apiNote</name>
+              <placement>a</placement>
+              <head>API Note:</head>
+            </tag>
+            <tag>
+              <name>implSpec</name>
+              <placement>a</placement>
+              <head>Implementation Requirements:</head>
+            </tag>
+            <tag>
+              <name>implNote</name>
+              <placement>a</placement>
+              <head>Implementation Note:</head>
+            </tag>
+          </tags>
+        </configuration>
+      </plugin>
 
       <!-- generate the manifest for the classes jar -->
       <plugin>
-          <groupId>org.apache.felix</groupId>
-          <artifactId>maven-bundle-plugin</artifactId>
-          <version>3.5.1</version>
-          <extensions>true</extensions>
-          <executions>
-              <execution>
-                  <id>bundle-manifest</id>
-                  <goals>
-                      <goal>manifest</goal>
-                  </goals>
-              </execution>
-          </executions>
-          <configuration>
-              <instructions>
-                  <Bundle-SymbolicName>org.eclipse.jetty.osgi-servlet-api</Bundle-SymbolicName>
-                  <Bundle-Name>Jetty Servlet API and Schemas for OSGi</Bundle-Name>
-                  <Bundle-Description>Combined servlet api and schemas for use in osgi environments</Bundle-Description>
-                  <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
-                  <_nouses>true</_nouses>
-                  <Export-Package>!javax.servlet.jsp.*,javax.servlet.*;version="4.0",*</Export-Package>
-              </instructions>
-          </configuration>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>3.5.1</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <instructions>
+            <Automatic-Module-Name>jetty-servlet-api</Automatic-Module-Name>
+            <Bundle-SymbolicName>org.eclipse.jetty.osgi-servlet-api</Bundle-SymbolicName>
+            <Bundle-Name>Jetty Servlet API and Schemas for JPMS and OSGi</Bundle-Name>
+            <Bundle-Description>Combined servlet api and schemas for use in JPMS and OSGi environments
+            </Bundle-Description>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
+            <_nouses>true</_nouses>
+            <Export-Package>!javax.servlet.jsp.*,javax.servlet.*;version="4.0",*</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <!-- this module has no source files of its own -->
+          <skip>true</skip>
+        </configuration>
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>eclipse-release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.0.0-M1</version>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-             <tags>
-              <tag>
-                <name>apiNote</name>
-                <placement>a</placement>
-                <head>API Note:</head>
-              </tag>
-              <tag>
-                <name>implSpec</name>
-                <placement>a</placement>
-                <head>Implementation Requirements:</head>
-              </tag>
-              <tag>
-                <name>implNote</name>
-                <placement>a</placement>
-                <head>Implementation Note:</head>
-               </tag>
-              </tags>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 
-  <dependencies>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty.toolchain</groupId>
-      <artifactId>jetty-schemas</artifactId>
-      <version>4.0.3</version>
-    </dependency>
-  </dependencies>
+  <scm>
+    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-servlet-api</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>jetty.snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/jetty-snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 </project>
