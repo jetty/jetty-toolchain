@@ -11,7 +11,7 @@
     <module>jetty-assembly-descriptors</module>
     <module>jetty-build-support</module>
     <module>jetty-distribution-remote-resources</module>
-    <module>jetty-osgi-servlet-api</module>
+    <module>jetty-servlet-api</module>
     <module>jetty-perf-helper</module>
     <module>jetty-schemas</module>
     <module>jetty-test-helper</module>
