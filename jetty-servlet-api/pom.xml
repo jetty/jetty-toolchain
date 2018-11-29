@@ -149,7 +149,6 @@
                   <resource>META-INF/MANIFEST.MF</resource>
                   <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
                 </transformer>
-                <!-- NOT SURE WE ARE ALLOWED TO ALTER THE LICENSE OF THESE FILES
                 <transformer
                   implementation="org.eclipse.jetty.toolchain.shade.MergeFilesTransformer">
                   <resource>META-INF/LICENSE</resource>
@@ -158,19 +157,16 @@
                     <file>${project.build.directory}/sources/META-INF/LICENSE.txt</file>
                   </files>
                 </transformer>
-                 -->
               </transformers>
             </configuration>
           </execution>
         </executions>
         <dependencies>
-          <!-- For org.eclipse.jetty.toolchain.shade.MergeFilesTransformer
           <dependency>
             <groupId>org.eclipse.jetty.toolchain</groupId>
             <artifactId>jetty-build-support</artifactId>
-            <version>1.5-SNAPSHOT</version>
+            <version>1.5</version>
           </dependency>
-           -->
         </dependencies>
       </plugin>
 
