@@ -191,8 +191,7 @@
                 <manifestEntries>
                   <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
                   <Bundle-Name>${project.name}</Bundle-Name>
-                  <Bundle-SymbolicName>org.eclipse.jetty.osgi-servlet-api.source
-                  </Bundle-SymbolicName>
+                  <Bundle-SymbolicName>org.eclipse.jetty.servlet-api.source</Bundle-SymbolicName>
                   <Bundle-Vendor>Eclipse.org - Jetty</Bundle-Vendor>
                   <Bundle-Version>${parsedVersion.osgiVersion}</Bundle-Version>
                   <Eclipse-SourceBundle>
@@ -256,7 +255,7 @@
         <configuration>
           <instructions>
             <Automatic-Module-Name>jetty.servlet.api</Automatic-Module-Name>
-            <Bundle-SymbolicName>org.eclipse.jetty.osgi-servlet-api</Bundle-SymbolicName>
+            <Bundle-SymbolicName>org.eclipse.jetty.servlet-api</Bundle-SymbolicName>
             <Bundle-Name>Jetty Servlet API and Schemas for JPMS and OSGi</Bundle-Name>
             <Bundle-Description>Combined servlet api and schemas for use in JPMS and OSGi environments
             </Bundle-Description>
