@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-servlet-api</artifactId>
-  <version>4.0-SNAPSHOT</version>
+  <version>4.0.0-SNAPSHOT</version>
   <name>Jetty :: Servlet API and Schemas for JPMS and OSGi</name>
   <packaging>jar</packaging>
 
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.0</version>
+      <version>4.0.1</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
@@ -47,17 +47,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.5</version>
+        <version>2.5.3</version>
         <dependencies>
           <dependency>
             <groupId>org.apache.maven.scm</groupId>
             <artifactId>maven-scm-api</artifactId>
-            <version>1.9.1</version>
+            <version>1.11.1</version>
           </dependency>
           <dependency>
             <groupId>org.apache.maven.scm</groupId>
             <artifactId>maven-scm-provider-gitexe</artifactId>
-            <version>1.9.1</version>
+            <version>1.11.1</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -65,7 +65,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.8</version>
+        <version>3.1.1</version>
         <executions>
           <execution>
             <id>unpack-source</id>
@@ -86,7 +86,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.9</version>
+        <version>3.0.0</version>
         <executions>
           <execution>
             <id>set-osgi-version</id>
@@ -144,8 +144,7 @@
                 </filter>
               </filters>
               <transformers>
-                <transformer
-                  implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                   <resource>META-INF/MANIFEST.MF</resource>
                   <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
                 </transformer>
@@ -215,6 +214,7 @@
           </execution>
         </executions>
         <configuration>
+          <doclint>none</doclint>
           <tags>
             <tag>
               <name>apiNote</name>
@@ -239,7 +239,7 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>4.1.0</version>
         <extensions>true</extensions>
         <executions>
           <execution>
@@ -251,12 +251,12 @@
         </executions>
         <configuration>
           <instructions>
-            <Automatic-Module-Name>jetty-servlet-api</Automatic-Module-Name>
+            <Automatic-Module-Name>jetty.servlet.api</Automatic-Module-Name>
             <Bundle-SymbolicName>org.eclipse.jetty.osgi-servlet-api</Bundle-SymbolicName>
             <Bundle-Name>Jetty Servlet API and Schemas for JPMS and OSGi</Bundle-Name>
             <Bundle-Description>Combined servlet api and schemas for use in JPMS and OSGi environments
             </Bundle-Description>
-            <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
             <_nouses>true</_nouses>
             <Export-Package>!javax.servlet.jsp.*,javax.servlet.*;version="4.0",*</Export-Package>
           </instructions>
