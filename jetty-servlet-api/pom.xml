@@ -123,7 +123,7 @@
             <configuration>
               <createSourcesJar>false</createSourcesJar>
               <shadeSourcesContent>true</shadeSourcesContent>
-              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <createDependencyReducedPom>true</createDependencyReducedPom>
               <artifactSet>
                 <includes>
                   <include>org.eclipse.jetty.toolchain:jetty-schemas</include>
@@ -169,7 +169,6 @@
         </dependencies>
       </plugin>
 
-
       <!-- source maven plugin creates the source bundle and adds manifest -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -182,6 +181,7 @@
             <goals>
               <goal>jar</goal>
             </goals>
+<!--
             <configuration>
               <archive>
                 <manifestEntries>
@@ -196,6 +196,7 @@
                 </manifestEntries>
               </archive>
             </configuration>
+-->
           </execution>
         </executions>
       </plugin>
@@ -257,7 +258,14 @@
             </Bundle-Description>
             <Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
             <_nouses>true</_nouses>
-            <Export-Package>!javax.servlet.jsp.*,javax.servlet.*;version="4.0",*</Export-Package>
+            <Export-Package>
+              javax.servlet;uses:="javax.servlet.annotation,javax.servlet.descriptor";version="4.0.0",
+              javax.servlet.resources;version="4.0.0",
+              javax.servlet.jsp.resources;version="4.0.0",
+              javax.servlet.annotation;uses:="javax.servlet";version="4.0.0",
+              javax.servlet.http;uses:="javax.servlet";version="4.0.0",
+              javax.servlet.descriptor;version="4.0.0"
+            </Export-Package>
           </instructions>
         </configuration>
       </plugin>
