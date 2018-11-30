@@ -124,6 +124,7 @@
               <createSourcesJar>false</createSourcesJar>
               <shadeSourcesContent>true</shadeSourcesContent>
               <createDependencyReducedPom>true</createDependencyReducedPom>
+              <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
               <artifactSet>
                 <includes>
                   <include>org.eclipse.jetty.toolchain:jetty-schemas</include>
