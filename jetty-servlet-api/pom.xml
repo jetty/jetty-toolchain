@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-servlet-api</artifactId>
-  <version>4.0.0-SNAPSHOT</version>
+  <version>4.0.1-SNAPSHOT</version>
   <name>Jetty :: Servlet API and Schemas for JPMS and OSGi</name>
   <packaging>jar</packaging>
 
@@ -148,7 +148,6 @@
                   <resource>META-INF/MANIFEST.MF</resource>
                   <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
                 </transformer>
-                <!-- NOT SURE WE ARE ALLOWED TO ALTER THE LICENSE OF THESE FILES
                 <transformer
                   implementation="org.eclipse.jetty.toolchain.shade.MergeFilesTransformer">
                   <resource>META-INF/LICENSE</resource>
@@ -157,19 +156,16 @@
                     <file>${project.build.directory}/sources/META-INF/LICENSE.txt</file>
                   </files>
                 </transformer>
-                 -->
               </transformers>
             </configuration>
           </execution>
         </executions>
         <dependencies>
-          <!-- For org.eclipse.jetty.toolchain.shade.MergeFilesTransformer
           <dependency>
             <groupId>org.eclipse.jetty.toolchain</groupId>
             <artifactId>jetty-build-support</artifactId>
-            <version>1.5-SNAPSHOT</version>
+            <version>1.5</version>
           </dependency>
-           -->
         </dependencies>
       </plugin>
 
@@ -195,7 +191,7 @@
                   <Bundle-Vendor>Eclipse.org - Jetty</Bundle-Vendor>
                   <Bundle-Version>${parsedVersion.osgiVersion}</Bundle-Version>
                   <Eclipse-SourceBundle>
-                    org.eclipse.jetty.osgi-servlet-api;version="${parsedVersion.osgiVersion}";roots:="."
+                    org.eclipse.jetty.servlet-api;version="${parsedVersion.osgiVersion}";roots:="."
                   </Eclipse-SourceBundle>
                 </manifestEntries>
               </archive>
