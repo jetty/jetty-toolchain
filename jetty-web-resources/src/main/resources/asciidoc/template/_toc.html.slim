@@ -1,0 +1,13 @@
+- require 'pathname'
+
+#toc class=(attr 'toc-class', 'toc')
+  #toctitle =(attr 'toc-title')
+  / JETTY: check if a _toc.adoc file is defined, it if is then use it in place
+  / of the standard document sections
+  / Note: have to pass in the templates to the load_file call 
+  / both are rendered through block_outline.html.slim
+  - if (Pathname("_toc.adoc").exist?)
+    - tdoc = Asciidoctor.load_file '_toc.adoc', template_dirs: this.options[:template_dirs]
+    == converter.convert tdoc, 'outline'
+  - else
+    == converter.convert document, 'outline'
