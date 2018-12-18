@@ -6,7 +6,8 @@
       li
         / JETTY: test if of the section starts with a http or https in which case
         / render as an external link, otherwise render normally
-        - if "#{sec.id}".start_with?("http://") || "#{sec.id}".start_with?("https://")
+        /! #{sec.id}
+        - if "#{sec.id}".start_with?("http://") || "#{sec.id}".start_with?("https://") || "#{sec.id}".start_with?("_")
           =section_title sec
         - else
           a href="##{sec.id}" =section_title sec

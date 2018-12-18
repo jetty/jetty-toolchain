@@ -1,10 +1,10 @@
 doctype 5
 html lang=(attr :lang, 'en' unless attr? :nolang)
   head
-    meta charset=(attr :encoding, 'UTF-8')
+    meta charset=(attr :encoding, 'utf-8')
     /[if IE]
       meta http-equiv="X-UA-Compatible" content="IE=edge"
-    meta name='viewport' content='width=device-width, initial-scale=1.0'
+    meta name='viewport' content='width=device-width, initial-scale=1'
     meta name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}"
     = html_meta_if 'application-name', (attr 'app-name')
     = html_meta_if 'author', (attr :authors)
@@ -19,13 +19,15 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
     - unless (docinfo_content = docinfo).empty?
       =docinfo_content
   body(
-    id=id
+    id="body_solstice"
     class=[(attr :doctype), ("#{attr 'toc-class'} toc-#{attr 'toc-position', 'left'}" if (attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto'))]
-    style=style_value(max_width: (attr 'max-width')))
-    - unless noheader
-      include _header.html
-    #content =content
-    - unless !footnotes? || (attr? :nofootnotes)
-      include _footnotes.html
-    - unless nofooter
-      include _footer.html
+    )
+    include _eclipse_header.html
+    /include _eclipse_breadcrumb.html
+    main id="main-wrapper"
+      - unless noheader
+        include _header.html
+      #content =content
+      - unless nofooter
+        include _footer.html
+    include _eclipse_footer.html
