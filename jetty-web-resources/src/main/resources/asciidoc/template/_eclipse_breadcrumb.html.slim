@@ -1,11 +1,17 @@
-/! breadcrumb - start
-section class="default-breadcrumbs hidden-print breadcrumbs-default-margin" id="breadcrumb"
-  div class="container"
-    h3 class="sr-only" Breadcrumbs
-      div class="row"
-        div class="col-sm-24">
-          ol class="breadcrumb">
-            li
-              a href="/jetty/" Home
-            li class="active"
-/! breadcrumb - end
+- if ((attr 'breadcrumb').to_s.empty?)
+  /! breadcrumb - off
+- else
+  - if (attr 'breadcrumb').eql?('on')
+    /! breadcrumb - on
+    section class="default-breadcrumbs hidden-print breadcrumbs-default-margin" id="breadcrumb"
+      div class="container"
+        h3 class="sr-only" Breadcrumbs
+        div class="row"
+          div class="col-sm-24"
+            ol class="breadcrumb"
+              li
+                a href="/jetty/" Home
+              li class="active"
+                b TODO
+  - else
+    /! breadcrumb - value

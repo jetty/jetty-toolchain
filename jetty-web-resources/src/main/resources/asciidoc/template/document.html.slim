@@ -23,11 +23,12 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
     class=[(attr :doctype), ("#{attr 'toc-class'} toc-#{attr 'toc-position', 'left'}" if (attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto'))]
     )
     include _eclipse_header.html
-    /include _eclipse_breadcrumb.html
+    include _eclipse_breadcrumb.html
     main id="main-wrapper"
       - unless noheader
         include _header.html
       #content =content
       - unless nofooter
         include _footer.html
-    include _eclipse_footer.html
+    - if (!(attr 'no-eclipse-footer').to_s.empty?)
+      include _eclipse_footer.html

@@ -2,9 +2,40 @@
 
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
 
-footer#solstice-footer {
-  position: relative;
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /*height: 110px;*/
+  z-index: 10;
+  color: #4c4d4e;
+  text-decoration: none;
+  background-color: #f9f9f9;
+  background: #404040 100% 0 no-repeat;
+  background-size: cover;
 }
+
+section#breadcrumb {
+  position:fixed;
+  top: 115px;
+  width: 100%;
+}
+
+main {
+  position:relative;
+  padding-bottom: 450px;
+  width: 100%;
+}
+
+footer#solstice-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+}
+
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
   display: block;
@@ -801,40 +832,16 @@ p a>code:hover {
 }
 
 #toctitle {
-  background-image: url(../images/jetty-logo.svg);
+  /*background-image: url(../images/jetty-logo.svg);
   background-position: left top;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
   background-size: 200px 50px;
   padding-top: 50px;
   color: #7a2518;
   font-size: 1.2em;
 }
 
-header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  height: 110px;
-  z-index: 10;
-  color: #4c4d4e;
-  text-decoration: none;
-  background-color: #f9f9f9;
-  background: #404040 100% 0 no-repeat;
-  background-size: cover;
-}
 
-main {
-  padding-bottom: 450px;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1001;
-}
 
 @media only screen and (min-width: 768px) {
   #toctitle {
