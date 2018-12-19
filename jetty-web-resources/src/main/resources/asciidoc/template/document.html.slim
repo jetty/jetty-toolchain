@@ -20,7 +20,6 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
       =docinfo_content
   body(
     id="body_solstice"
-    class=[(attr :doctype), ("#{attr 'toc-class'} toc-#{attr 'toc-position', 'left'}" if (attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto'))]
     )
     include _eclipse_header.html
     include _eclipse_breadcrumb.html

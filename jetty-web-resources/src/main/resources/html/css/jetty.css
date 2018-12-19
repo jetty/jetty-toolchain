@@ -1,6 +1,13 @@
 @charset "UTF-8";
-@import "asciidoctor/plain.css";
+@import "asciidoctor/asciidoctor.css";
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+
+html body {
+
+  font-family: sans-serif;
+
+
+}
 
 header {
   position: fixed;
@@ -16,21 +23,30 @@ header {
   background-size: cover;
 }
 
-div#toc.toc2 {
-  top: 150px;
-}
 
 section#breadcrumb {
   position:fixed;
   top: 115px;
+  left: 0;
   width: 100%;
 }
 
-main {
+main#main-wrapper {
   position:relative;
   top: 150px;
+  left: 0;
   padding-bottom: 450px;
   width: 100%;
+}
+
+#content {
+  padding-left: 150px;
+}
+
+div#toc.toc2 {
+  float:left;
+  left: 0;
+  top: 150px;
 }
 
 footer#solstice-footer {
@@ -39,4 +55,14 @@ footer#solstice-footer {
   left: 0;
   width: 100%;
   z-index: 1001;
+}
+
+a {
+  color: #2156a5;
+  text-decoration:none;
+  line-height:inherit
+}
+
+a:visited {
+  color: #2156a5;
 }
