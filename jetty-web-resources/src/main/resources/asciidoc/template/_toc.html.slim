@@ -2,8 +2,10 @@
 
 #toc class=(attr 'toc-class', 'toc')
   - if (document.attr? 'toc-image')
-    a href=(attr 'toc-image-url')
-      img src=image_uri((attr 'toc-image'))
+    #toc-image
+      a href=(attr 'toc-image-url')
+        img src=image_uri((attr 'toc-image')) width='80%'
+    #toctitle =(attr 'toc-title')
   - else
     #toctitle =(attr 'toc-title')
 

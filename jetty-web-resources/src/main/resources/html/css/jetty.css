@@ -4,7 +4,7 @@
 
 html body {
 
-  font-family: sans-serif;
+  font-family: "Open Sans", "Noto Serif", "DejaVu Serif", serif;
 
 
 }
@@ -37,15 +37,28 @@ main#main-wrapper {
   left: 0;
   padding-bottom: 450px;
   width: 100%;
+  length: 100%;
+}
+#header {
+  padding-left: 150px;
 }
 
 #content {
   padding-left: 150px;
 }
 
+#footer {
+  padding-left: 150px;
+}
+
+div#toc-image {
+  padding-bottom: 15px;
+}
+
 div#toc.toc2 {
   float:left;
   left: 0;
+  width: 20%;
   top: 150px;
 }
 

@@ -529,4 +529,26 @@ module Slim::Helpers
       (%(fa-flip-#{attr :flip}) if attr? :flip)
     ].compact
   end
+
+  #----
+  # generate breadcrumb array based on path
+  #
+  # @params empty or String of form /path/filename.adoc
+  # @return [Array] of breadcrumb entries.
+  def breadcrumbs( path )
+    @breadcrumbs = Array.new;
+    @t = '';
+    @i = 0;
+    crumbs = path.split('/');
+
+    @breadcrumbs.push("Home", "/");
+
+    crumbs.each do |d|
+      @t = @t + d + '/';
+      @breadcrumbs.push([d, @t]);
+      @i = @i + 1;
+    end
+
+    return @breadcrumbs;
+  end
 end

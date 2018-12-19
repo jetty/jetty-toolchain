@@ -1,17 +1,10 @@
-- if ((attr 'breadcrumb').to_s.empty?)
-  /! breadcrumb - off
-- else
-  - if (attr 'breadcrumb').eql?('on')
-    /! breadcrumb - on
-    section class="default-breadcrumbs hidden-print breadcrumbs-default-margin" id="breadcrumb"
-      div class="container"
-        h3 class="sr-only" Breadcrumbs
-        div class="row"
-          div class="col-sm-24"
-            ol class="breadcrumb"
+- if (document.attr? 'breadcrumb')
+  section class="default-breadcrumbs hidden-print breadcrumbs-default-margin" id="breadcrumb"
+    div class="container"
+      h3 class="sr-only" Breadcrumbs
+      div class="row"
+        div class="col-sm-24"
+          ol class="breadcrumb"
+            - breadcrumbs((attr 'docfile').rpartition('asciidoc/')[2]).each do |crumb, link|
               li
-                a href="/jetty/" Home
-              li class="active"
-                b TODO
-  - else
-    /! breadcrumb - value
+                a href="/jetty/#{link}" #{crumb}
