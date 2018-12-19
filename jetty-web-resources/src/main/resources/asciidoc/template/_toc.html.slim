@@ -1,12 +1,12 @@
 - require 'pathname'
 
 #toc class=(attr 'toc-class', 'toc')
-  - if (!(attr 'toc-image').to_s.empty?)
+  - if (document.attr? 'toc-image')
     a href=(attr 'toc-image-url')
       img src=image_uri((attr 'toc-image'))
   - else
     #toctitle =(attr 'toc-title')
-    
+
   / JETTY: check if a _toc.adoc file is defined, it if is then use it in place
   / of the standard document sections
   / Note: have to pass in the templates to the load_file call

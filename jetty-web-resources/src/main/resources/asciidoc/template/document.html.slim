@@ -30,5 +30,5 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
       #content =content
       - unless nofooter
         include _footer.html
-    - if (!(attr 'no-eclipse-footer').to_s.empty?)
+    - if (!(document.attr? 'no-eclipse-footer'))
       include _eclipse_footer.html
