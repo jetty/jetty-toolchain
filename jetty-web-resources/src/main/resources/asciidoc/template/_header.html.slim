@@ -29,5 +29,6 @@
         - if attr? :revremark
           br
           span#revremark =(attr :revremark)
-  - if (attr? :toc) && (attr? 'toc-placement', 'auto')
-     include _toc.html
+  / taking out the default toc placement mechanism
+  /- if (attr? :toc) && (attr? 'toc-placement', 'auto')
+  /   include _toc.html

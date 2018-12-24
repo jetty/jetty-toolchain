@@ -24,10 +24,15 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
     include _eclipse_header.html
     /include _eclipse_breadcrumb.html
     main id="main-wrapper"
-      - unless noheader
-        include _header.html
-      #content =content
-      - unless nofooter
-        include _footer.html
+      include _toc.html
+      #content-container
+        - unless noheader
+          include _header.html
+        #content =content
+        - unless nofooter
+          include _footer.html
+
     - if (!(document.attr? 'no-eclipse-footer'))
       include _eclipse_footer.html
+
+    a href="#" class="scrollup" Back to the top

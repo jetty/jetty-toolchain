@@ -6,9 +6,11 @@ html body {
 
   font-family: "Open Sans", "Noto Serif", "DejaVu Serif", serif;
 
+  height: 100%;
 
 }
 
+/* The Eclipse Header - page header */
 header {
   position: fixed;
   width: 100%;
@@ -23,7 +25,7 @@ header {
   background-size: cover;
 }
 
-
+/* Eclipse Breadcrumb (when active) */
 section#breadcrumb {
   position:fixed;
   top: 115px;
@@ -31,43 +33,77 @@ section#breadcrumb {
   width: 100%;
 }
 
+/* primary content container */
 main#main-wrapper {
   position:relative;
-  top: 150px;
+  margin-top: 150px;
+  padding-top: 20px;
   left: 0;
-  padding-bottom: 450px;
+  margin-bottom: 450px;
   width: 100%;
-  length: 100%;
-}
-#header {
-  padding-left: 150px;
-}
+  height: auto !important;
+  height: 100%;
+  margin: 115 auto -450px;
 
-#content {
-  padding-left: 150px;
-}
-
-#footer {
-  padding-left: 150px;
 }
 
 div#toc-image {
   padding-bottom: 15px;
 }
 
+/* Table of Contents (left side) */
 div#toc.toc2 {
-  float:left;
+  position: fixed;
   left: 0;
   width: 20%;
   top: 150px;
+  z-index: auto;
 }
 
+/* right side container, #header, #content, #footer */
+div#content-container {
+  float:right
+}
+
+/* content header */
+div#header {
+
+}
+
+/* content */
+div#content {
+
+}
+
+/* content footer */
+div#footer {
+
+}
+
+
+/* Eclipse Footer - page footer */
 footer#solstice-footer {
-  position: relative;
+  overflow:scroll;
   bottom: 0;
   left: 0;
+  height:450px;
   width: 100%;
-  z-index: 1001;
+  padding-top: 25px;
+  padding-bottom: 0;
+  z-index: 10;
+}
+
+
+.scrollup {
+    width: 40px;
+    height: 40px;
+    opacity: .5;
+    position: fixed;
+    bottom: 50px;
+    right: 15px;
+    display: none;
+    text-indent: -9999px;
+    background: url(https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/vendor/eclipsefdn-solstice-components/back-to-top/back-to-top.png?19e6da1…) no-repeat;
 }
 
 a {
