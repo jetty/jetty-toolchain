@@ -23,6 +23,18 @@ header {
   background-color: #f9f9f9;
   background: #404040 100% 0 no-repeat;
   background-size: cover;
+  line-height: 0;
+}
+
+div#yamm-content {
+  tab-size: unset;
+}
+
+/* this seems to fix the More dropdown rendering */
+@media (min-width: 768px) {
+.col-sm-8 {
+    width: 30%;
+}
 }
 
 /* Eclipse Breadcrumb (when active) */
