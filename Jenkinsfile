@@ -17,7 +17,11 @@ pipeline {
                    classPattern: '**/target/classes',
                    sourcePattern: '**/src/main/java'
             warnings consoleParsers: [[parserName: 'Maven'], [parserName: 'Java']]
-            mavenBuild( "jdk8", "deploy" )
+            script {
+              if (env.BRANCH_NAME == 'master') {
+                  mavenBuild( "jdk8", "deploy" )
+              }
+            }
           }
         }
         stage( "Build / Test - JDK11" ) {
