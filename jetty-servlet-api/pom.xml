@@ -5,8 +5,8 @@
     <version>1.6</version>
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
+
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-servlet-api</artifactId>
   <version>4.0.2-SNAPSHOT</version>
   <name>Jetty :: Servlet API and Schemas for JPMS and OSGi</name>
@@ -19,9 +19,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>4.0.2</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
@@ -126,7 +126,7 @@
               <artifactSet>
                 <includes>
                   <include>org.eclipse.jetty.toolchain:jetty-schemas</include>
-                  <include>javax.servlet:javax.servlet-api</include>
+                  <include>jakarta.servlet:jakarta.servlet-api</include>
                 </includes>
               </artifactSet>
               <filters>
@@ -150,8 +150,7 @@
                 <transformer implementation="org.eclipse.jetty.toolchain.shade.MergeFilesTransformer">
                   <resource>META-INF/LICENSE</resource>
                   <files>
-                    <file>${project.build.directory}/sources/META-INF/LICENSE</file>
-                    <file>${project.build.directory}/sources/META-INF/LICENSE.txt</file>
+                    <file>${project.build.directory}/sources/META-INF/LICENSE.md</file>
                   </files>
                 </transformer>
               </transformers>
