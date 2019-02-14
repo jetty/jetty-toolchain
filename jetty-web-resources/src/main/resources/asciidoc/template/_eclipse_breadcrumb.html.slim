@@ -5,6 +5,9 @@
       div class="row"
         div class="col-sm-24"
           ol class="breadcrumb"
-            - breadcrumbs((attr 'docfile').rpartition('asciidoc/')[2]).each do |crumb, link|
+            - breadcrumbs((attr 'breadcrumb')).each do |crumb, link|
               li
-                a href="/jetty/#{link}" #{crumb}
+                - if (link.nil? || link.empty? )
+                  = crumb
+                - else
+                  a href="#{link}" #{crumb}

@@ -537,16 +537,11 @@ module Slim::Helpers
   # @return [Array] of breadcrumb entries.
   def breadcrumbs( path )
     @breadcrumbs = Array.new;
-    @t = '';
-    @i = 0;
-    crumbs = path.split('/');
-
-    @breadcrumbs.push("Home", "/");
+    crumbs = path.split('|');
 
     crumbs.each do |d|
-      @t = @t + d + '/';
-      @breadcrumbs.push([d, @t]);
-      @i = @i + 1;
+      crumb = d.split(':');
+      @breadcrumbs.push([crumb[0], crumb[1]]);
     end
 
     return @breadcrumbs;
