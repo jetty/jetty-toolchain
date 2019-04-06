@@ -15,6 +15,8 @@
   <description>Performance/Benchmark Support for Jetty</description>
 
   <scm>
+    <connection>scm:git:git://github.com/eclipse/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-perf-helper</url>
     <tag>jetty-perf-helper-1.0.6</tag>
   </scm>
