@@ -18,9 +18,9 @@
     <module>jetty-perf-helper</module>
     <module>jetty-schemas</module>
     <module>jetty-setuid</module>
-    <module>jetty-test-helper</module>
     <module>jetty-test-policy</module>
     <module>jetty-xslt-tools</module>
+    <module>jetty-test-helper</module>
   </modules>
   <build>
     <plugins>
