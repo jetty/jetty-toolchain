@@ -6,18 +6,20 @@
   <version>NO_RELEASE</version>
   <packaging>pom</packaging>
   <modules>
-    <module>jetty-toolchain</module>
+    <!--
+    <module>jetty-setuid</module>
     <module>eclipse-signing-maven-plugin</module>
+    <module>jetty-jsp-osgi</module>
+    <module>jetty-orbit-maven-plugin</module>
+    <module>jetty-osgi-servlet-api</module>
+     -->
+    <module>jetty-toolchain</module>
     <module>jetty-artifact-remote-resources</module>
     <module>jetty-assembly-descriptors</module>
     <module>jetty-build-support</module>
     <module>jetty-distribution-remote-resources</module>
-    <module>jetty-jsp-osgi</module>
-    <module>jetty-orbit-maven-plugin</module>
-    <module>jetty-osgi-servlet-api</module>
     <module>jetty-perf-helper</module>
     <module>jetty-schemas</module>
-    <module>jetty-setuid</module>
     <module>jetty-test-policy</module>
     <module>jetty-xslt-tools</module>
     <module>jetty-test-helper</module>
