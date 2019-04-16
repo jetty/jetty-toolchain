@@ -1,6 +1,6 @@
 //
 //  ========================================================================
-//  Copyright (c) 1995-2017 Mort Bay Consulting Pty. Ltd.
+//  Copyright (c) 1995-2019 Mort Bay Consulting Pty. Ltd.
 //  ------------------------------------------------------------------------
 //  All rights reserved. This program and the accompanying materials
 //  are made available under the terms of the Eclipse Public License v1.0
@@ -18,15 +18,15 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import static org.eclipse.jetty.toolchain.test.ExtraMatchers.*;
-import static org.junit.Assert.*;
-
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import static org.eclipse.jetty.toolchain.test.ExtraMatchers.ordered;
+import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("javadoc")
 public class ExtraMatchersTest
