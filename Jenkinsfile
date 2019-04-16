@@ -24,6 +24,7 @@ pipeline {
             }
           }
         }
+        /*
         stage( "Build / Test - JDK11" ) {
           agent { node { label 'linux' } }
           options { timeout( time: 120, unit: 'MINUTES' ) }
@@ -38,6 +39,7 @@ pipeline {
             mavenBuild( "jdk12", "clean install" )
           }
         }
+        */
       }
     }
   }
