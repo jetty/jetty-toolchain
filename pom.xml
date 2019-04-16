@@ -10,6 +10,7 @@
     <module>jetty-artifact-remote-resources</module>
     <module>jetty-distribution-remote-resources</module>
     <module>jetty-assembly-descriptors</module>
+    <module>jetty-test-helper</module>
   </modules>
   <build>
     <plugins>
