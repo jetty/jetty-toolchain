@@ -17,7 +17,11 @@ pipeline {
                    classPattern: '**/target/classes',
                    sourcePattern: '**/src/main/java'
             warnings consoleParsers: [[parserName: 'Maven'], [parserName: 'Java']]
-            mavenBuild( "jdk8", "deploy" )
+            script {
+              if (env.BRANCH_NAME == 'master') {
+                  mavenBuild( "jdk8", "deploy" )
+              }
+            }
           }
         }
         stage( "Build / Test - JDK11" ) {
@@ -25,6 +29,13 @@ pipeline {
           options { timeout( time: 120, unit: 'MINUTES' ) }
           steps {
             mavenBuild( "jdk11", "clean install" )
+          }
+        }
+        stage( "Build / Test - JDK12" ) {
+          agent { node { label 'linux' } }
+          options { timeout( time: 120, unit: 'MINUTES' ) }
+          steps {
+            mavenBuild( "jdk12", "clean install" )
           }
         }
       }

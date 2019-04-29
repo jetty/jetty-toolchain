@@ -23,6 +23,22 @@ header {
   background-color: #f9f9f9;
   background: #404040 100% 0 no-repeat;
   background-size: cover;
+  line-height: 0;
+  /*
+  border-style: solid;
+  border-color: lightgreen;
+  */
+}
+
+div#yamm-content {
+  tab-size: unset;
+}
+
+/* this seems to fix the More dropdown rendering */
+@media (min-width: 768px) {
+  .col-sm-8 {
+    width: 30%;
+  }
 }
 
 /* Eclipse Breadcrumb (when active) */
@@ -31,6 +47,10 @@ section#breadcrumb {
   top: 115px;
   left: 0;
   width: 100%;
+  /*
+  border-style: dotted;
+  border-color: pink;
+  */
 }
 
 /* primary content container */
@@ -44,40 +64,66 @@ main#main-wrapper {
   height: auto !important;
   height: 100%;
   margin: 115 auto -450px;
+  /*
+  border-style: solid;
+  border-color: lightblue;
+  */
 
 }
 
 div#toc-image {
   padding-bottom: 15px;
+  max-width: 200px;
+  /*
+  border-style: solid;
+  border-color: coral;
+  */
 }
 
 /* Table of Contents (left side) */
 div#toc.toc2 {
-  position: fixed;
+  position: relative;
   left: 0;
-  width: 20%;
-  top: 150px;
+  width: 15em;
+  length: 100%;
   z-index: auto;
+  /*
+  border-style: dashed;
+  border-color: magenta;
+  */
 }
 
 /* right side container, #header, #content, #footer */
 div#content-container {
-  float:right
+  float:left;
+  /*
+  border-style: solid;
+  border-color: orange;
+  */
 }
 
 /* content header */
 div#header {
-
+  /*
+  border-style: solid;
+  border-color: red;
+  */
 }
 
 /* content */
 div#content {
-
+  /*
+  border-style: solid;
+  border-color: green;
+  */
 }
 
 /* content footer */
 div#footer {
-
+  /*
+  border-style: solid;
+  border-color: blue;
+  */
 }
 
 
@@ -91,6 +137,10 @@ footer#solstice-footer {
   padding-top: 25px;
   padding-bottom: 0;
   z-index: 10;
+  /*
+  border-style: solid;
+  border-color: yellow;
+  */
 }
 
 
@@ -114,4 +164,56 @@ a {
 
 a:visited {
   color: #2156a5;
+}
+
+#header>h1:only-child, div#toc.toc2 #header>h1:nth-last-child(2) {
+  border-bottom: 1px solid #ddddd8;
+  padding-bottom: 8px
+}
+
+@media only screen and (min-width:768px) {
+
+  div#toc.toc2 {
+    width: 100%;
+    max-width: 62.5em;
+    margin: 0px auto 0px auto;
+    padding: 0px auto 0px auto;
+  }
+
+  div#toc.toc2.toc-right #toc.toc2 {
+    border-right-width: 0;
+    border-left: 1px solid #efefed;
+    left: auto;
+    right: 0
+  }
+
+  div#content-container {
+    float: left;
+    padding-left: 0px;
+    /*
+    border-style: solid;
+    border-color: orange;
+    */
+  }
+
+}
+
+@media only screen and (min-width:1280px) {
+  div#toc.toc2 {
+    position: fixed;
+    top: 150px;
+    width: 15em;
+    max-width: unset;
+    /* padding-left: 20em; goes wonky */
+    padding-right: 0
+  }
+
+  div#content-container {
+    float: left;
+    padding-left: 240px;
+    /*
+    border-style: solid;
+    border-color: orange;
+    */
+  }
 }

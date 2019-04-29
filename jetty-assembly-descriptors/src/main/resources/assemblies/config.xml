@@ -7,7 +7,7 @@
   </formats>
   <fileSets>
     <fileSet>
-      <directory>src/main/config</directory>
+      <directory>${project.build.directory}/config</directory>
       <outputDirectory></outputDirectory>
       <includes>
         <include>**</include>
