@@ -18,31 +18,19 @@
 
 package org.eclipse.jetty.toolchain.test;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.function.Supplier;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
 
-public final class StackUtils
+import org.junit.jupiter.api.Test;
+
+public class NetTest
 {
-    public static String toString(Throwable t)
+    @Test
+    public void testIsInterfaceAvailableFor()
     {
-        try (StringWriter w = new StringWriter())
-        {
-            try (PrintWriter out = new PrintWriter(w))
-            {
-                t.printStackTrace(out);
-                return w.toString();
-            }
-        }
-        catch (IOException e)
-        {
-            return "Unable to get stacktrace for: " + t;
-        }
-    }
-
-    public static Supplier<String> supply(Throwable t)
-    {
-        return () -> toString(t);
+        System.out.println("Net.isInterfaceAvailableFor(InetAddress) = " + Net.isInterfaceAvailableFor(InetAddress.class));
+        System.out.println("Net.isInterfaceAvailableFor(Inet6Address) = " + Net.isInterfaceAvailableFor(Inet6Address.class));
+        System.out.println("Net.isInterfaceAvailableFor(Inet4Address) = " + Net.isInterfaceAvailableFor(Inet4Address.class));
     }
 }

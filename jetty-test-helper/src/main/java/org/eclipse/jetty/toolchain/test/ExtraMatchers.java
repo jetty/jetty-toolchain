@@ -1,6 +1,6 @@
 //
 //  ========================================================================
-//  Copyright (c) 1995-2018 Mort Bay Consulting Pty. Ltd.
+//  Copyright (c) 1995-2019 Mort Bay Consulting Pty. Ltd.
 //  ------------------------------------------------------------------------
 //  All rights reserved. This program and the accompanying materials
 //  are made available under the terms of the Eclipse Public License v1.0
@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.jetty.toolchain.test.matchers.IsOrderedCollectionContaining;
 import org.eclipse.jetty.toolchain.test.matchers.RegexMatcher;
+import org.hamcrest.Matchers;
 
 /**
  * Extra Matchers for the Junit Hamcrest users out there.
@@ -61,7 +62,9 @@ public class ExtraMatchers
      *
      * @param pattern the {@link java.util.regex.Pattern} syntax pattern to match against.
      * @return the Regex Matcher
+     * @deprecated use {@link Matchers#matchesRegex(String)} instead
      */
+    @Deprecated
     public static org.hamcrest.Matcher<java.lang.String> regex(String pattern)
     {
         return new RegexMatcher(pattern);
