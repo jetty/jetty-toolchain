@@ -47,6 +47,7 @@ section#breadcrumb {
   top: 115px;
   left: 0;
   width: 100%;
+  z-index: 10;
   /*
   border-style: dotted;
   border-color: pink;
