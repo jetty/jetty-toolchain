@@ -49,7 +49,6 @@
               <classifier>sources</classifier>
               <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
               <outputDirectory>${project.build.directory}/sources</outputDirectory>
-              <excludes>javax/servlet/jsp/**</excludes>
             </configuration>
           </execution>
         </executions>
@@ -164,7 +163,7 @@
                   <artifact>*:*</artifact>
                   <excludes>
                     <exclude>javax/servlet/jsp/**</exclude>
-                    <exclude>META-INF/MANIFEST.MF</exclude>
+                    <exclude>META-INF/**</exclude>
                   </excludes>
                 </filter>
               </filters>
@@ -173,11 +172,13 @@
                   <resource>META-INF/MANIFEST.MF</resource>
                   <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
                 </transformer>
-                <transformer implementation="org.eclipse.jetty.toolchain.shade.MergeFilesTransformer">
-                  <resource>META-INF/LICENSE</resource>
-                  <files>
-                    <file>${project.build.directory}/sources/META-INF/LICENSE</file>
-                  </files>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>META-INF/LICENSE.md</resource>
+                  <file>src/main/resources/META-INF/LICENSE.md</file>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>META-INF/NOTICE.md</resource>
+                  <file>src/main/resources/META-INF/NOTICE.md</file>
                 </transformer>
               </transformers>
             </configuration>
