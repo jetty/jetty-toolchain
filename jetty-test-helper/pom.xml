@@ -4,7 +4,7 @@
   <parent>
     <artifactId>jetty-toolchain</artifactId>
     <groupId>org.eclipse.jetty.toolchain</groupId>
-    <version>1.6</version>
+    <version>1.7</version>
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <artifactId>jetty-test-helper</artifactId>
@@ -27,6 +27,7 @@
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+          <release>8</release>
         </configuration>
       </plugin>
       <plugin>
@@ -44,7 +45,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.0-M1</version>
+        <version>3.1.1</version>
         <executions>
           <execution>
             <goals>
