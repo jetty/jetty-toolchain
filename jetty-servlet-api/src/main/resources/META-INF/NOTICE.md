@@ -35,128 +35,23 @@ SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
 
 The project maintains the following source code repositories:
 
-* https://github.com/eclipse-ee4j/servlet-api
+ * https://github.com/eclipse-ee4j/servlet-api
+ * https://github.com/eclipse/jetty.toolchain
+
 
 ## Third-party Content
 
-## Cryptography
+## Jakarta
 
-Content may contain encryption software. The country in which you are currently
-may have restrictions on the import, possession, and use, and/or re-export to
-another country, of encryption software. BEFORE using any encryption software,
-please check the country's laws, regulations and policies concerning the import,
-possession, or use, and re-export of encryption software, to see if this is
-permitted.
+The following artifacts are EPL 2.0 + GPLv2 with classpath exception.
+https://projects.eclipse.org/projects/ee4j.servlet
+
+ * jakarta.servlet:jakarta.servlet-api
 
 
-
-# Jetty Web Container
-
-Copyright 1995-2018 Mort Bay Consulting Pty Ltd.
-
-The Jetty Web Container is Copyright Mort Bay Consulting Pty Ltd
-unless otherwise noted.
-
-Jetty is dual licensed under both
-
-  * The Apache 2.0 License
-    http://www.apache.org/licenses/LICENSE-2.0.html
-
-      and
-
-  * The Eclipse Public 1.0 License
-    http://www.eclipse.org/legal/epl-v10.html
-
-Jetty may be distributed under either license.
-
-
-## Eclipse
-
-The following artifacts are EPL.
- * org.eclipse.jetty.orbit:org.eclipse.jdt.core
-
-The following artifacts are EPL and ASL2.
- * org.eclipse.jetty.orbit:javax.security.auth.message
-
-
-The following artifacts are EPL and CDDL 1.0.
- * org.eclipse.jetty.orbit:javax.mail.glassfish
-
-
-## Oracle
+## GlassFish
 
 The following artifacts are CDDL + GPLv2 with classpath exception.
-https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html
-
- * javax.servlet:javax.servlet-api
- * javax.annotation:javax.annotation-api
- * javax.transaction:javax.transaction-api
- * javax.websocket:javax.websocket-api
-
-
-## Oracle OpenJDK
-
-If ALPN is used to negotiate HTTP/2 connections, then the following
-artifacts may be included in the distribution or downloaded when ALPN 
-module is selected. 
-
- * java.sun.security.ssl
-
-These artifacts replace/modify OpenJDK classes.  The modififications
-are hosted at github and both modified and original are under GPL v2 with 
-classpath exceptions.
-http://openjdk.java.net/legal/gplv2+ce.html
-
-
-## OW2
-
-The following artifacts are licensed by the OW2 Foundation according to the
-terms of http://asm.ow2.org/license.html
-
- * org.ow2.asm:asm-commons
- * org.ow2.asm:asm
-
-
-## Apache
-
-The following artifacts are ASL2 licensed.
-
- * org.apache.taglibs:taglibs-standard-spec
- * org.apache.taglibs:taglibs-standard-impl
-
-
-## MortBay
-
-The following artifacts are ASL2 licensed.  Based on selected classes from 
-following Apache Tomcat jars, all ASL2 licensed.
-
- * org.mortbay.jasper:apache-jsp
-   * org.apache.tomcat:tomcat-jasper
-   * org.apache.tomcat:tomcat-juli
-   * org.apache.tomcat:tomcat-jsp-api
-   * org.apache.tomcat:tomcat-el-api
-   * org.apache.tomcat:tomcat-jasper-el
-   * org.apache.tomcat:tomcat-api
-   * org.apache.tomcat:tomcat-util-scan
-   * org.apache.tomcat:tomcat-util
-
- * org.mortbay.jasper:apache-el
-   * org.apache.tomcat:tomcat-jasper-el
-   * org.apache.tomcat:tomcat-el-api
-
-
-The following artifacts are CDDL + GPLv2 with classpath exception.
-
 https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html
 
  * org.eclipse.jetty.toolchain:jetty-schemas
-
-
-## Assorted
-
-The UnixCrypt.java code implements the one way cryptography used by
-Unix systems for simple password protection.  Copyright 1996 Aki Yoshida,
-modified April 2001  by Iris Van den Broeke, Daniel Deville.
-Permission to use, copy, modify and distribute UnixCrypt
-for non-commercial or commercial purposes and without fee is
-granted provided that the copyright notice appears in all copies.
