@@ -110,12 +110,13 @@
         </executions>
         <configuration>
           <instructions>
-            <Automatic-Module-Name>jetty.servlet.api</Automatic-Module-Name>
             <Bundle-SymbolicName>org.eclipse.jetty.servlet-api</Bundle-SymbolicName>
-            <Bundle-Name>Jetty Servlet API and Schemas for JPMS and OSGi</Bundle-Name>
+            <Bundle-Name>Eclipse Jetty Servlet API and Schemas for JPMS and OSGi</Bundle-Name>
             <Bundle-Description>Combined servlet api and schemas for use in JPMS and OSGi environments
             </Bundle-Description>
             <Bundle-RequiredExecutionEnvironment>JavaSE-11</Bundle-RequiredExecutionEnvironment>
+            <Bundle-Vendor>Eclipse</Bundle-Vendor>
+            <Bundle-DocURL>https://eclipse.org/jetty</Bundle-DocURL>
             <_nouses>true</_nouses>
             <Export-Package>
               javax.servlet;uses:="javax.servlet.annotation,javax.servlet.descriptor";version="4.0.0",
@@ -164,6 +165,7 @@
                   <excludes>
                     <exclude>javax/servlet/jsp/**</exclude>
                     <exclude>META-INF/**</exclude>
+                    <exclude>about.html</exclude>
                   </excludes>
                 </filter>
               </filters>
