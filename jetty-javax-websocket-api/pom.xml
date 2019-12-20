@@ -21,41 +21,17 @@
     <dependency>
       <groupId>jakarta.websocket</groupId>
       <artifactId>jakarta.websocket-api</artifactId>
-      <version>1.1.1</version>
+      <version>1.1.2</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <skipMain>true</skipMain>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.scm</groupId>
-            <artifactId>maven-scm-api</artifactId>
-            <version>1.11.1</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.maven.scm</groupId>
-            <artifactId>maven-scm-provider-gitexe</artifactId>
-            <version>1.11.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
+      <!-- Unpack source dependencies in the target/sources/ directory -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
         <executions>
           <execution>
             <id>unpack-source</id>
@@ -72,6 +48,7 @@
         </executions>
       </plugin>
 
+      <!-- Add the target/sources/ directory as a source directory -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
@@ -99,6 +76,53 @@
         </executions>
       </plugin>
 
+      <!-- Compile all the sources -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+          <release>11</release>
+        </configuration>
+      </plugin>
+
+      <!-- Generate the correct OSGi manifest -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>4.1.0</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>org.eclipse.jetty.websocket-api</Bundle-SymbolicName>
+            <Bundle-Name>Eclipse Jetty WebSocket API for JPMS and OSGi</Bundle-Name>
+            <Bundle-Description>WebSocket APIs for use in JPMS and OSGi environments</Bundle-Description>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-11</Bundle-RequiredExecutionEnvironment>
+            <Bundle-Vendor>Eclipse</Bundle-Vendor>
+            <Bundle-DocURL>https://eclipse.org/jetty</Bundle-DocURL>
+            <_nouses>true</_nouses>
+            <Export-Package>
+              javax.websocket;version="1.1",
+              javax.websocket.server;uses:="javax.websocket";version="1.1"
+            </Export-Package>
+            <Require-Capability>
+              osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)",
+              osgi.serviceloader;filter:="(osgi.serviceloader=javax.websocket.ContainerProvider)";resolution:=optional;cardinality:=multiple
+            </Require-Capability>
+          </instructions>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -123,9 +147,7 @@
                 <filter>
                   <artifact>*:*</artifact>
                   <excludes>
-                    <exclude>META-INF/services/**</exclude>
-                    <exclude>META-INF/*.DSA</exclude>
-                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/maven/**</exclude>
                     <exclude>META-INF/MANIFEST.MF</exclude>
                   </excludes>
                 </filter>
@@ -135,11 +157,13 @@
                   <resource>META-INF/MANIFEST.MF</resource>
                   <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
                 </transformer>
-                <transformer implementation="org.eclipse.jetty.toolchain.shade.MergeFilesTransformer">
-                  <resource>META-INF/LICENSE</resource>
-                  <files>
-                    <file>${project.build.directory}/sources/META-INF/LICENSE.md</file>
-                  </files>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>META-INF/LICENSE.md</resource>
+                  <file>src/main/resources/META-INF/LICENSE.md</file>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>META-INF/NOTICE.md</resource>
+                  <file>src/main/resources/META-INF/NOTICE.md</file>
                 </transformer>
               </transformers>
             </configuration>
@@ -154,10 +178,39 @@
         </dependencies>
       </plugin>
 
-      <!-- source maven plugin creates the source bundle and adds manifest -->
+      <!-- Add module-info.class to the shaded jar -->
+      <plugin>
+        <groupId>org.moditect</groupId>
+        <artifactId>moditect-maven-plugin</artifactId>
+        <version>1.0.0.Beta2</version>
+        <executions>
+          <execution>
+            <id>add-module-info</id>
+            <phase>package</phase>
+            <goals>
+              <goal>add-module-info</goal>
+            </goals>
+            <configuration>
+              <module>
+                <moduleInfoSource>
+                  module jetty.websocket.api {
+                  exports javax.websocket;
+                  exports javax.websocket.server;
+                  uses javax.websocket.ContainerProvider;
+                  uses javax.websocket.server.ServerEndpointConfig.Configurator;
+                  }
+                </moduleInfoSource>
+              </module>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Create the source jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
+        <version>3.1.0</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -169,9 +222,11 @@
         </executions>
       </plugin>
 
+      <!-- Create the javadoc jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -183,68 +238,25 @@
         <configuration>
           <source>8</source>
           <doclint>none</doclint>
-          <tags>
-            <tag>
-              <name>apiNote</name>
-              <placement>a</placement>
-              <head>API Note:</head>
-            </tag>
-            <tag>
-              <name>implSpec</name>
-              <placement>a</placement>
-              <head>Implementation Requirements:</head>
-            </tag>
-            <tag>
-              <name>implNote</name>
-              <placement>a</placement>
-              <head>Implementation Note:</head>
-            </tag>
-          </tags>
-        </configuration>
-      </plugin>
-
-      <!-- generate the manifest for the classes jar -->
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>4.1.0</version>
-        <extensions>true</extensions>
-        <executions>
-          <execution>
-            <id>bundle-manifest</id>
-            <goals>
-              <goal>manifest</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <instructions>
-            <Automatic-Module-Name>jetty.websocket.api</Automatic-Module-Name>
-            <Bundle-SymbolicName>org.eclipse.jetty.websocket-api</Bundle-SymbolicName>
-            <Bundle-Name>Jetty WebSocket API for JPMS and OSGi</Bundle-Name>
-            <Bundle-Description>WebSocket APIs for use in JPMS and OSGi environments</Bundle-Description>
-            <Bundle-RequiredExecutionEnvironment>JavaSE-1.8</Bundle-RequiredExecutionEnvironment>
-            <_nouses>true</_nouses>
-            <Export-Package>
-              javax.websocket;version="1.1",
-              javax.websocket.server;uses:="javax.websocket";version="1.1"
-            </Export-Package>
-            <Require-Capability>
-              osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)",
-              osgi.serviceloader;filter:="(osgi.serviceloader=javax.websocket.ContainerProvider)";resolution:=optional;cardinality:=multiple
-            </Require-Capability>
-          </instructions>
         </configuration>
       </plugin>
 
       <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>3.0</version>
-        <configuration>
-          <!-- this module has no source files of its own -->
-          <skip>true</skip>
-        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-api</artifactId>
+            <version>1.11.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>1.11.1</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
