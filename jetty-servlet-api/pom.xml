@@ -207,6 +207,7 @@
               <goal>add-module-info</goal>
             </goals>
             <configuration>
+              <overwriteExistingFiles>true</overwriteExistingFiles>
               <module>
                 <moduleInfoSource>
                   module jetty.servlet.api {
