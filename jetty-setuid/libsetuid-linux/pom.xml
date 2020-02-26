@@ -41,9 +41,11 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>native-maven-plugin</artifactId>
+        <version>1.0-alpha-9</version>
         <extensions>true</extensions>
         <configuration>
           <javahOS>linux</javahOS>
+          <jdkIncludePath>${java.home}/include</jdkIncludePath>
           <compilerStartOptions>
             <compilerStartOption>-fPIC -O</compilerStartOption>
           </compilerStartOptions>

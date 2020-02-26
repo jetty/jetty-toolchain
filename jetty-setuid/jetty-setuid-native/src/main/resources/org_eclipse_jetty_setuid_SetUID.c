@@ -19,6 +19,7 @@
 #include <jni.h>
 #include "org_eclipse_jetty_setuid_SetUID.h"
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <sys/resource.h>
 #include <stdio.h>
@@ -42,26 +43,26 @@ void throwNewJavaSecurityException(JNIEnv *env, const char *msg);
 int getJavaFieldInt(JNIEnv *env, jobject obj, const char *name);
 /* End of Helper functions Declaration */
 
-  
-JNIEXPORT jint JNICALL 
+
+JNIEXPORT jint JNICALL
 Java_org_eclipse_jetty_setuid_SetUID_setuid (JNIEnv * env, jclass j, jint uid)
 {
     return((jint)setuid((uid_t)uid));
 }
 
-JNIEXPORT jint JNICALL 
+JNIEXPORT jint JNICALL
 Java_org_eclipse_jetty_setuid_SetUID_setumask (JNIEnv * env, jclass j, jint mask)
 {
     return((jint)umask((mode_t)mask));
 }
-  
-JNIEXPORT jint JNICALL 
+
+JNIEXPORT jint JNICALL
 Java_org_eclipse_jetty_setuid_SetUID_setgid (JNIEnv * env, jclass j, jint gid)
 {
     return((jint)setgid((gid_t)gid));
 }
 
-JNIEXPORT jint JNICALL 
+JNIEXPORT jint JNICALL
 Java_org_eclipse_jetty_setuid_SetUID_setgroups (JNIEnv * env, jclass j, jintArray groups)
 {
     jsize len = (*env)->GetArrayLength(env, groups);
@@ -73,26 +74,26 @@ Java_org_eclipse_jetty_setuid_SetUID_setgroups (JNIEnv * env, jclass j, jintArra
 
 /* User informaton implementatons */
 
-JNIEXPORT jobject JNICALL 
+JNIEXPORT jobject JNICALL
 Java_org_eclipse_jetty_setuid_SetUID_getpwnam(JNIEnv * env, jclass j, jstring name)
 {
     struct passwd* pw;
     jboolean iscopy;
-    char *pname; 
+    char *pname;
     pname = (char*) (*env)->GetStringUTFChars(env, name, &iscopy);
-    
+
     pw=getpwnam((char *) pname);
-    if (!pw) 
+    if (!pw)
     {
         char strErr[255];
         sprintf(strErr, "User %s is not found!!!", pname);
         throwNewJavaSecurityException(env, strErr);
         return NULL;
     }
-    
+
     // free as in amnesty
-    (*env)->ReleaseStringUTFChars( env, name, pname ); 
-    
+    (*env)->ReleaseStringUTFChars( env, name, pname );
+
 
     // get The java class org.eclipse.jetty.setuid.Passwd
     jclass cls;
@@ -102,10 +103,10 @@ Java_org_eclipse_jetty_setuid_SetUID_getpwnam(JNIEnv * env, jclass j, jstring na
         throwNewJavaSecurityException(env, "Class: org.eclipse.jetty.setuid.Passwd is not found!!!");
         return NULL;
     }
-    
+
     // get the default constructor  of org.eclipse.jetty.setuid.Passwd
     jmethodID constructorMethod = getJavaMethodId(env, cls, "<init>", "()V");
-    
+
     // construct org.eclipse.jetty.setuid.Passwd java object
     jobject retVal = (*env)->NewObject(env, cls,constructorMethod);
     if(!retVal)
@@ -113,15 +114,15 @@ Java_org_eclipse_jetty_setuid_SetUID_getpwnam(JNIEnv * env, jclass j, jstring na
         throwNewJavaSecurityException(env, "Object Construction error of Class: org.eclipse.jetty.setuid.Passwd!!!");
         return NULL;
     }
-    
-    
+
+
     // copy the struct passwd values to java object org.eclipse.jetty.setuid.Passwd
     //char *pw_name;
     setJavaFieldString(env, retVal, "_pwName", pw->pw_name);
 	//char *pw_passwd;
     setJavaFieldString(env, retVal, "_pwPasswd", pw->pw_passwd);
 	//uid_t pw_uid;
-    setJavaFieldInt(env, retVal, "_pwUid", pw->pw_uid);   
+    setJavaFieldInt(env, retVal, "_pwUid", pw->pw_uid);
 	//gid_t pw_gid;
     setJavaFieldInt(env, retVal, "_pwGid", pw->pw_gid);
 	//char *pw_gecos;
@@ -130,7 +131,7 @@ Java_org_eclipse_jetty_setuid_SetUID_getpwnam(JNIEnv * env, jclass j, jstring na
     setJavaFieldString(env, retVal, "_pwDir", pw->pw_dir);
 	//char *pw_shell;
     setJavaFieldString(env, retVal, "_pwShell", pw->pw_shell);
-	
+
     (*env)->DeleteLocalRef(env, cls);
     return retVal;
 
@@ -138,22 +139,22 @@ Java_org_eclipse_jetty_setuid_SetUID_getpwnam(JNIEnv * env, jclass j, jstring na
 }
 
 
-JNIEXPORT jobject JNICALL 
+JNIEXPORT jobject JNICALL
 Java_org_eclipse_jetty_setuid_SetUID_getpwuid(JNIEnv * env, jclass j, jint uid)
 {
     struct passwd* pw;
     pw=getpwuid((uid_t) uid);
-    if (!pw) 
+    if (!pw)
     {
         char strErr[255];
         sprintf(strErr, "User with uid %d is not found!!!", uid);
         throwNewJavaSecurityException(env, strErr);
         return NULL;
     }
-    
+
 
     // get The java class org.eclipse.jetty.setuid.Passwd
-    
+
     jclass cls;
     cls = (*env)->FindClass(env,"org/eclipse/jetty/setuid/Passwd");
     if(!cls)
@@ -161,10 +162,10 @@ Java_org_eclipse_jetty_setuid_SetUID_getpwuid(JNIEnv * env, jclass j, jint uid)
         throwNewJavaSecurityException(env, "Class: org.eclipse.jetty.setuid.Passwd is not found!!!");
         return NULL;
     }
-    
+
     // get the default constructor  of org.eclipse.jetty.setuid.Passwd
     jmethodID constructorMethod = getJavaMethodId(env, cls, "<init>", "()V");
-    
+
     // construct org.eclipse.jetty.setuid.Passwd java object
     jobject retVal = (*env)->NewObject(env, cls,constructorMethod);
     if(!retVal)
@@ -172,15 +173,15 @@ Java_org_eclipse_jetty_setuid_SetUID_getpwuid(JNIEnv * env, jclass j, jint uid)
         throwNewJavaSecurityException(env, "Object Construction error of Class: org.eclipse.jetty.setuid.Passwd!!!");
         return NULL;
     }
-    
-    
+
+
     // copy the struct passwd values to java object org.eclipse.jetty.setuid.Passwd
     //char *pw_name;
     setJavaFieldString(env, retVal, "_pwName", pw->pw_name);
 	//char *pw_passwd;
     setJavaFieldString(env, retVal, "_pwPasswd", pw->pw_passwd);
 	//uid_t pw_uid;
-    setJavaFieldInt(env, retVal, "_pwUid", pw->pw_uid);   
+    setJavaFieldInt(env, retVal, "_pwUid", pw->pw_uid);
 	//gid_t pw_gid;
     setJavaFieldInt(env, retVal, "_pwGid", pw->pw_gid);
 	//char *pw_gecos;
@@ -189,7 +190,7 @@ Java_org_eclipse_jetty_setuid_SetUID_getpwuid(JNIEnv * env, jclass j, jint uid)
     setJavaFieldString(env, retVal, "_pwDir", pw->pw_dir);
 	//char *pw_shell;
     setJavaFieldString(env, retVal, "_pwShell", pw->pw_shell);
-	
+
     (*env)->DeleteLocalRef(env, cls);
     return retVal;
 }
@@ -199,27 +200,27 @@ Java_org_eclipse_jetty_setuid_SetUID_getpwuid(JNIEnv * env, jclass j, jint uid)
 
 /*  Group information implimentations */
 
-JNIEXPORT jobject JNICALL 
+JNIEXPORT jobject JNICALL
 Java_org_eclipse_jetty_setuid_SetUID_getgrnam(JNIEnv * env, jclass j, jstring name)
 {
     struct group* gr;
     jboolean iscopy;
-    char *pname; 
+    char *pname;
     pname = (char*) (*env)->GetStringUTFChars(env, name, &iscopy);
-    
+
     gr=getgrnam((char *) pname);
-    if (!gr) 
+    if (!gr)
     {
         char strErr[255];
         sprintf(strErr, "Group %s is not found!!!", pname);
         throwNewJavaSecurityException(env, strErr);
         return NULL;
     }
-    
+
 
     // free as in amnesty
-    (*env)->ReleaseStringUTFChars( env, name, pname ); 
-    
+    (*env)->ReleaseStringUTFChars( env, name, pname );
+
 
     // get The java class org.eclipse.jetty.setuid.Passwd
     jclass cls;
@@ -229,10 +230,10 @@ Java_org_eclipse_jetty_setuid_SetUID_getgrnam(JNIEnv * env, jclass j, jstring na
         throwNewJavaSecurityException(env, "Class: org.eclipse.jetty.setuid.Group is not found!!!");
         return NULL;
     }
-    
+
     // get the default constructor  of org.eclipse.jetty.setuid.Group
     jmethodID constructorMethod = getJavaMethodId(env, cls, "<init>", "()V");
-    
+
     // construct org.eclipse.jetty.setuid.Group java object
     jobject retVal = (*env)->NewObject(env, cls,constructorMethod);
     if(!retVal)
@@ -240,7 +241,7 @@ Java_org_eclipse_jetty_setuid_SetUID_getgrnam(JNIEnv * env, jclass j, jstring na
         throwNewJavaSecurityException(env, "Object Construction error of Class: org.eclipse.jetty.setuid.Group!!!");
         return NULL;
     }
-    
+
     // copy the struct grpup values to java object org.eclipse.jetty.setuid.Group
     //char *gr_name;
     setJavaFieldString(env, retVal, "_grName", gr->gr_name);
@@ -248,27 +249,27 @@ Java_org_eclipse_jetty_setuid_SetUID_getgrnam(JNIEnv * env, jclass j, jstring na
     setJavaFieldString(env, retVal, "_grPasswd", gr->gr_passwd);
 	//gid_t   gr_gid;
     setJavaFieldInt(env, retVal, "_grGid", gr->gr_gid);
-     
-    if (gr->gr_mem != NULL) 
+
+    if (gr->gr_mem != NULL)
     {
         int array_size, i;
         jobjectArray gr_mems;
-        
-        for(array_size =0; gr->gr_mem[array_size] != NULL; array_size++); 
-        
+
+        for(array_size =0; gr->gr_mem[array_size] != NULL; array_size++);
+
         if(array_size)
         {
-            jobjectArray strArr =  (*env)->NewObjectArray(env, array_size, 
-                                                          (*env)->FindClass(env, "java/lang/String"), 
+            jobjectArray strArr =  (*env)->NewObjectArray(env, array_size,
+                                                          (*env)->FindClass(env, "java/lang/String"),
                                                           (*env)->NewStringUTF(env, ""));
-            
-            for(i=0;i<array_size;i++) 
+
+            for(i=0;i<array_size;i++)
             {
                 (*env)->SetObjectArrayElement(env,strArr,i,
                                               (*env)->NewStringUTF(env, gr->gr_mem[i]));
             }
-            
-            
+
+
             // set string array field;
             // find field
             jfieldID fieldId =  (*env)->GetFieldID(env, cls, "_grMem", "[Ljava/lang/String;");
@@ -276,29 +277,29 @@ Java_org_eclipse_jetty_setuid_SetUID_getgrnam(JNIEnv * env, jclass j, jstring na
             {
                 throwNewJavaSecurityException(env, "Class: Java Object Field is not found: String[] _grMem!!!");
             }
-            
-            (*env)->SetObjectField(env, retVal, fieldId, strArr); 
-        }  
+
+            (*env)->SetObjectField(env, retVal, fieldId, strArr);
+        }
     }
-	
+
     (*env)->DeleteLocalRef(env, cls);
     return retVal;
 }
 
-JNIEXPORT jobject JNICALL 
+JNIEXPORT jobject JNICALL
 Java_org_eclipse_jetty_setuid_SetUID_getgrgid(JNIEnv * env, jclass j, jint gid)
 {
     struct group* gr;
-    
+
     gr=getgrgid(gid);
-    if (!gr) 
+    if (!gr)
     {
         char strErr[255];
         sprintf(strErr, "Group with gid %d is not found!!!", gid);
         throwNewJavaSecurityException(env, strErr);
         return NULL;
     }
-    
+
 
     // get The java class org.eclipse.jetty.setuid.Passwd
     jclass cls;
@@ -308,10 +309,10 @@ Java_org_eclipse_jetty_setuid_SetUID_getgrgid(JNIEnv * env, jclass j, jint gid)
         throwNewJavaSecurityException(env, "Class: org.eclipse.jetty.setuid.Group is not found!!!");
         return NULL;
     }
-    
+
     // get the default constructor  of org.eclipse.jetty.setuid.Group
     jmethodID constructorMethod = getJavaMethodId(env, cls, "<init>", "()V");
-    
+
     // construct org.eclipse.jetty.setuid.Group java object
     jobject retVal = (*env)->NewObject(env, cls,constructorMethod);
     if(!retVal)
@@ -319,9 +320,9 @@ Java_org_eclipse_jetty_setuid_SetUID_getgrgid(JNIEnv * env, jclass j, jint gid)
         throwNewJavaSecurityException(env, "Object Construction Error of Class: org.eclipse.jetty.setuid.Group!!!");
         return NULL;
     }
-    
-    
-    
+
+
+
     // copy the struct grpup values to java object org.eclipse.jetty.setuid.Group
     //char *gr_name;
     setJavaFieldString(env, retVal, "_grName", gr->gr_name);
@@ -329,24 +330,24 @@ Java_org_eclipse_jetty_setuid_SetUID_getgrgid(JNIEnv * env, jclass j, jint gid)
     setJavaFieldString(env, retVal, "_grPasswd", gr->gr_passwd);
 	//gid_t   gr_gid;
     setJavaFieldInt(env, retVal, "_grGid", gr->gr_gid);
-	
-    
-    
-    
-    if (gr->gr_mem != NULL) 
+
+
+
+
+    if (gr->gr_mem != NULL)
     {
         int array_size, i;
         jobjectArray gr_mems;
-        
-        for(array_size =0; gr->gr_mem[array_size] != NULL; array_size++); 
-        
+
+        for(array_size =0; gr->gr_mem[array_size] != NULL; array_size++);
+
         if(array_size)
         {
-            jobjectArray strArr =  (*env)->NewObjectArray(env, array_size, 
-                                                          (*env)->FindClass(env, "java/lang/String"), 
+            jobjectArray strArr =  (*env)->NewObjectArray(env, array_size,
+                                                          (*env)->FindClass(env, "java/lang/String"),
                                                           (*env)->NewStringUTF(env, ""));
-            
-            for(i=0;i<array_size;i++) 
+
+            for(i=0;i<array_size;i++)
             {
                 (*env)->SetObjectArrayElement(env,strArr,i,
                                               (*env)->NewStringUTF(env, gr->gr_mem[i]));
@@ -359,11 +360,11 @@ Java_org_eclipse_jetty_setuid_SetUID_getgrgid(JNIEnv * env, jclass j, jint gid)
             {
                 throwNewJavaSecurityException(env, "Java Object Field is not found: String _grMem!!!");
             }
-            
-            (*env)->SetObjectField(env, retVal, fieldId, strArr); 
+
+            (*env)->SetObjectField(env, retVal, fieldId, strArr);
         }
     }
-    
+
     (*env)->DeleteLocalRef(env, cls);
     return retVal;
 }
@@ -392,10 +393,10 @@ JNIEXPORT jobject JNICALL Java_org_eclipse_jetty_setuid_SetUID_getrlimitnofiles
         throwNewJavaSecurityException(env, "Class: org.eclipse.jetty.setuid.RLimit is not found!!!");
         return NULL;
     }
-    
+
     // get the default constructor  of org.eclipse.jetty.setuid.RLimit
     jmethodID constructorMethod = getJavaMethodId(env, cls, "<init>", "()V");
-    
+
     // construct org.eclipse.jetty.setuid.RLimit java object
     jobject retVal = (*env)->NewObject(env, cls,constructorMethod);
     if(!retVal)
@@ -425,7 +426,7 @@ JNIEXPORT jint JNICALL Java_org_eclipse_jetty_setuid_SetUID_setrlimitnofiles
     rlim.rlim_max=getJavaFieldInt(env,jo, "_hard");
     int success = setrlimit(RLIMIT_NOFILE, &rlim);
     (*env)->DeleteLocalRef(env, cls);
-    return (jint)success;  
+    return (jint)success;
 }
 
 
@@ -444,7 +445,7 @@ jmethodID getJavaMethodId(JNIEnv *env, jclass clazz, const char *name, const cha
         throwNewJavaSecurityException(env, strErr);
         return NULL;
     }
-    
+
     return methodId;
 
 }
@@ -475,7 +476,7 @@ void setJavaFieldInt(JNIEnv *env, jobject obj, const char *name, int value)
         sprintf(strErr, "Java Object Field is not found: int %s !!!", name);
         throwNewJavaSecurityException(env, strErr);
     }
-    
+
     (*env)->SetIntField(env, obj, fieldId, value);
     (*env)->DeleteLocalRef(env, clazz);
 }
@@ -492,10 +493,10 @@ void setJavaFieldLong(JNIEnv *env, jobject obj, const char *name, long value)
         sprintf(strErr, "Java Object Field is not found: long %s !!!", name);
         throwNewJavaSecurityException(env, strErr);
     }
-    
+
     (*env)->SetLongField(env, obj, fieldId, value);
     (*env)->DeleteLocalRef(env, clazz);
-    
+
 }
 
 
@@ -510,10 +511,10 @@ void setJavaFieldString(JNIEnv *env, jobject obj, const char *name, const char *
         sprintf(strErr, "Java Object Field is not found: String %s !!!", name);
         throwNewJavaSecurityException(env, strErr);
     }
-    
+
     jstring jstr = (*env)->NewStringUTF(env, value);
-    
-    
+
+
     (*env)->SetObjectField(env, obj, fieldId, jstr);
     (*env)->DeleteLocalRef(env, clazz);
 }
@@ -523,7 +524,7 @@ void setJavaFieldString(JNIEnv *env, jobject obj, const char *name, const char *
 void throwNewJavaException(JNIEnv *env, const char *name, const char *msg)
 {
     jclass clazz = (*env)->FindClass(env, name);
-    if (clazz) 
+    if (clazz)
     {
         (*env)->ThrowNew(env, clazz, msg);
     }
@@ -538,4 +539,3 @@ void throwNewJavaSecurityException(JNIEnv *env, const char *msg)
 
 
 /*  End of Helper Functions Implimentations */
-
