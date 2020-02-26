@@ -61,7 +61,15 @@ Java_org_eclipse_jetty_setuid_SetUID_setgid (JNIEnv * env, jclass j, jint gid)
     return((jint)setgid((gid_t)gid));
 }
 
-
+JNIEXPORT jint JNICALL 
+Java_org_eclipse_jetty_setuid_SetUID_setgroups (JNIEnv * env, jclass j, jintArray groups)
+{
+    jsize len = (*env)->GetArrayLength(env, groups);
+    jint *groupIds = (*env)->GetIntArrayElements(env, groups, 0);
+    jint retVal = ((jint)setgroups(len, (gid_t *)groupIds));
+    (*env)->ReleaseIntArrayElements(env, groups, groupIds, 0);
+    return retVal;
+}
 
 /* User informaton implementatons */
 
