@@ -139,7 +139,7 @@ public class SetUIDServer extends Server
             if (_gid != 0)
             {
                 LOG.info("Clearing supplemental groups");
-                SetUID.cleargroups();
+                SetUID.setgroups(new int[0]);
                 LOG.info("Setting GID=" + _gid);
                 SetUID.setgid(_gid);
             }
@@ -163,7 +163,7 @@ public class SetUIDServer extends Server
             if (_gid != 0)
             {
                 LOG.info("Clearing supplemental groups");
-                SetUID.cleargroups();
+                SetUID.setgroups(new int[0]);
                 LOG.info("Setting GID=" + _gid);
                 SetUID.setgid(_gid);
             }

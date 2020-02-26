@@ -45,7 +45,7 @@ public class SetUID
 
     public static native int setgid(int gid);
 
-    public static native int cleargroups();
+    public static native int setgroups(int[] gids);
 
     public static native Passwd getpwnam(String name) throws SecurityException;
 

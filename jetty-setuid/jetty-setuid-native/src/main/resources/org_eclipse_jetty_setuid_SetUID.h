@@ -37,11 +37,11 @@ JNIEXPORT jint JNICALL Java_org_eclipse_jetty_setuid_SetUID_setgid
 
 /*
  * Class:     org_eclipse_jetty_setuid_SetUID
- * Method:    cleargroups
+ * Method:    setgroups
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_org_eclipse_jetty_setuid_SetUID_cleargroups
-  (JNIEnv *, jclass);
+JNIEXPORT jint JNICALL Java_org_eclipse_jetty_setuid_SetUID_setgroups
+  (JNIEnv *, jclass, jintArray groups);
 
 /*
  * Class:     org_eclipse_jetty_setuid_SetUID
