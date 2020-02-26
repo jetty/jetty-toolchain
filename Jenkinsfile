@@ -2,6 +2,11 @@
 
 pipeline {
   agent any
+  options {
+    durabilityHint('PERFORMANCE_OPTIMIZED')
+    buildDiscarder(logRotator(numToKeepStr: '7', artifactNumToKeepStr: '2'))
+    timeout(time: 60, unit: 'MINUTES')
+  }
   stages {
     stage( "Parallel Stage" ) {
       parallel {
