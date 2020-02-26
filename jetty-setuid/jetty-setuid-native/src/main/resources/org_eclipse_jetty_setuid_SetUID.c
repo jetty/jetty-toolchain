@@ -58,15 +58,14 @@ Java_org_eclipse_jetty_setuid_SetUID_setumask (JNIEnv * env, jclass j, jint mask
 JNIEXPORT jint JNICALL 
 Java_org_eclipse_jetty_setuid_SetUID_setgid (JNIEnv * env, jclass j, jint gid)
 {
-    int result = setgroups(0, NULL);
-    if (result == 0)
-    {
-        result = setgid((gid_t)gid);
-    }
-    return(jint)result;
+    return(jint)setgid((gid_t)gid);
 }
 
-
+JNIEXPORT jint JNICALL 
+Java_org_eclipse_jetty_setuid_SetUID_cleargroups (JNIEnv * env, jclass j)
+{
+    return(jint)setgroups(0, NULL);
+}
 
 /* User informaton implementatons */
 

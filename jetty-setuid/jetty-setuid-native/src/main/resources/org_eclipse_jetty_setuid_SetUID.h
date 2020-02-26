@@ -37,6 +37,14 @@ JNIEXPORT jint JNICALL Java_org_eclipse_jetty_setuid_SetUID_setgid
 
 /*
  * Class:     org_eclipse_jetty_setuid_SetUID
+ * Method:    cleargroups
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_org_eclipse_jetty_setuid_SetUID_cleargroups
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     org_eclipse_jetty_setuid_SetUID
  * Method:    getpwnam
  * Signature: (Ljava/lang/String;)Lorg/eclipse/jetty/setuid/Passwd;
  */

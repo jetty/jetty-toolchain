@@ -126,6 +126,8 @@ public class SetUIDListener implements LifeCycle.Listener
     {
         if (_gid != 0)
         {
+            LOG.info("Clearing supplemental groups");
+            SetUID.cleargroups();
             LOG.info("Setting GID=" + _gid);
             SetUID.setgid(_gid);
         }
