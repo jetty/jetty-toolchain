@@ -46,6 +46,7 @@ public class SetUIDListener implements LifeCycle.Listener
     private int _gid = 0;
     private int _umask = -1;
     private boolean _startServerAsPrivileged;
+    private boolean _clearSupplementalGroups;
     private RLimit _rlimitNoFiles = null;
 
     public void setUsername(String username)
@@ -122,12 +123,25 @@ public class SetUIDListener implements LifeCycle.Listener
         return _rlimitNoFiles;
     }
 
+    public boolean isClearSupplementalGroups()
+    {
+        return _clearSupplementalGroups;
+    }
+
+    public void setClearSupplementalGroups(boolean clearSupplementalGroups)
+    {
+        _clearSupplementalGroups = clearSupplementalGroups;
+    }
+
     protected void setGidUid()
     {
         if (_gid != 0)
         {
-            LOG.info("Clearing supplemental groups");
-            SetUID.setgroups(new int[0]);
+            if (isClearSupplementalGroups())
+            {
+                LOG.info("Clearing supplemental groups");
+                SetUID.setgroups(new int[0]);
+            }
             LOG.info("Setting GID=" + _gid);
             SetUID.setgid(_gid);
         }

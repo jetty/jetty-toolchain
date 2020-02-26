@@ -35,6 +35,7 @@ public class SetUIDServer extends Server
     private int _gid = 0;
     private int _umask = -1;
     private boolean _startServerAsPrivileged;
+    private boolean _clearSupplementalGroups;
     private RLimit _rlimitNoFiles = null;
 
     public void setUsername(String username)
@@ -111,6 +112,16 @@ public class SetUIDServer extends Server
         return _rlimitNoFiles;
     }
 
+    public boolean isClearSupplementalGroups()
+    {
+        return _clearSupplementalGroups;
+    }
+
+    public void setClearSupplementalGroups(boolean clearSupplementalGroups)
+    {
+        _clearSupplementalGroups = clearSupplementalGroups;
+    }
+
     @Override
     protected void doStart() throws Exception
     {
@@ -138,8 +149,11 @@ public class SetUIDServer extends Server
             super.doStart();
             if (_gid != 0)
             {
-                LOG.info("Clearing supplemental groups");
-                SetUID.setgroups(new int[0]);
+                if (isClearSupplementalGroups())
+                {
+                    LOG.info("Clearing supplemental groups");
+                    SetUID.setgroups(new int[0]);
+                }
                 LOG.info("Setting GID=" + _gid);
                 SetUID.setgid(_gid);
             }
@@ -162,8 +176,11 @@ public class SetUIDServer extends Server
             
             if (_gid != 0)
             {
-                LOG.info("Clearing supplemental groups");
-                SetUID.setgroups(new int[0]);
+                if (isClearSupplementalGroups())
+                {
+                    LOG.info("Clearing supplemental groups");
+                    SetUID.setgroups(new int[0]);
+                }
                 LOG.info("Setting GID=" + _gid);
                 SetUID.setgid(_gid);
             }
@@ -200,5 +217,4 @@ public class SetUIDServer extends Server
     {
         _startServerAsPrivileged = startContextsAsPrivileged;
     }
-
 }
