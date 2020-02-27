@@ -2,6 +2,11 @@
 
 pipeline {
   agent any
+  options {
+    durabilityHint('PERFORMANCE_OPTIMIZED')
+    buildDiscarder(logRotator(numToKeepStr: '7', artifactNumToKeepStr: '2'))
+    timeout(time: 60, unit: 'MINUTES')
+  }
   stages {
     stage( "Parallel Stage" ) {
       parallel {
@@ -9,6 +14,7 @@ pipeline {
           agent { node { label 'linux' } }
           options { timeout( time: 120, unit: 'MINUTES' ) }
           steps {
+            sh "apt --yes update && apt --yes install gcc"
             mavenBuild( "jdk11", "clean install javadoc:javadoc" )
             // Collect up the jacoco execution results
             jacoco inclusionPattern: '**/org/eclipse/jetty/**/*.class',
@@ -28,6 +34,7 @@ pipeline {
           agent { node { label 'linux' } }
           options { timeout( time: 120, unit: 'MINUTES' ) }
           steps {
+            sh "apt --yes update && apt --yes install gcc"
             mavenBuild( "jdk12", "clean install" )
           }
         }
@@ -60,7 +67,7 @@ def mavenBuild(jdk, cmdline) {
           mavenOpts: mavenOpts,
           mavenLocalRepo: localRepo) {
     // Some common Maven command line + provided command line
-    sh "mvn -V -B -DfailIfNoTests=false -Dmaven.test.failure.ignore=true -T3 -Djetty.testtracker.log=true -e $cmdline"
+    sh "mvn -V -B -DfailIfNoTests=false -Dmaven.test.failure.ignore=true -T3 -Djetty.testtracker.log=true -e -Dsetuid=true -Dlinux-build=true $cmdline"
   }
 }
 
