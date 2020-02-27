@@ -14,7 +14,7 @@ pipeline {
           agent { node { label 'linux' } }
           options { timeout( time: 120, unit: 'MINUTES' ) }
           steps {
-            sh "apt install gcc"
+            sh "apt --yes update && apt --yes install gcc"
             mavenBuild( "jdk11", "clean install javadoc:javadoc" )
             // Collect up the jacoco execution results
             jacoco inclusionPattern: '**/org/eclipse/jetty/**/*.class',
