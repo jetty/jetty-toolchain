@@ -34,6 +34,7 @@ pipeline {
           agent { node { label 'linux' } }
           options { timeout( time: 120, unit: 'MINUTES' ) }
           steps {
+            sh "apt --yes update && apt --yes install gcc"
             mavenBuild( "jdk12", "clean install" )
           }
         }
