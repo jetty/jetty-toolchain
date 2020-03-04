@@ -1,0 +1,301 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.eclipse.jetty.toolchain</groupId>
+    <artifactId>jetty-toolchain</artifactId>
+    <version>1.6</version>
+    <relativePath>../jetty-toolchain</relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>jetty-jakarta-servlet-api</artifactId>
+  <version>5.0.0-SNAPSHOT</version>
+  <name>Jetty :: Jakarta Servlet API and Schemas for JPMS and OSGi</name>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.version>3.0</maven.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>5.0.0-M1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty.toolchain</groupId>
+      <artifactId>jetty-schemas</artifactId>
+      <version>4.0.3</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Unpack source dependencies in the target/sources/ directory -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>unpack-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <classifier>sources</classifier>
+              <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
+              <outputDirectory>${project.build.directory}/sources</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Add the target/sources/ directory as a source directory -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>set-osgi-version</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>parse-version</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/sources</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Compile all the sources -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+          <release>11</release>
+        </configuration>
+      </plugin>
+
+      <!-- Generate the correct OSGi manifest -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>4.1.0</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>org.eclipse.jetty.servlet-api</Bundle-SymbolicName>
+            <Bundle-Name>Eclipse Jetty Servlet API and Schemas for JPMS and OSGi</Bundle-Name>
+            <Bundle-Description>Combined servlet api and schemas for use in JPMS and OSGi environments
+            </Bundle-Description>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-11</Bundle-RequiredExecutionEnvironment>
+            <Bundle-Vendor>Eclipse</Bundle-Vendor>
+            <Bundle-DocURL>https://eclipse.org/jetty</Bundle-DocURL>
+            <_nouses>true</_nouses>
+            <Export-Package>
+              jakarta.servlet;uses:="jakarta.servlet.annotation,jakarta.servlet.descriptor";version="5.0.0",
+              jakarta.servlet.resources;version="5.0.0",
+              jakarta.servlet.jsp.resources;version="5.0.0",
+              jakarta.servlet.annotation;uses:="jakarta.servlet";version="5.0.0",
+              jakarta.servlet.http;uses:="jakarta.servlet";version="5.0.0",
+              jakarta.servlet.descriptor;version="5.0.0"
+            </Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+
+      <!-- Shade in the compiled classes and the resources from jetty-schemas -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createSourcesJar>false</createSourcesJar>
+              <shadeSourcesContent>true</shadeSourcesContent>
+              <createDependencyReducedPom>true</createDependencyReducedPom>
+              <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+              <artifactSet>
+                <includes>
+                  <include>jakarta.servlet:jakarta.servlet-api</include>
+                  <include>org.eclipse.jetty.toolchain:jetty-schemas</include>
+                </includes>
+              </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>jakarta.servlet:jakarta.servlet-api</artifact>
+                  <includes>
+                    <include>jakarta/**/*.properties</include>
+                    <include>jakarta/**/package.html</include>
+                  </includes>
+                </filter>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>jakarta/servlet/jsp/**</exclude>
+                    <exclude>META-INF/**</exclude>
+                    <exclude>about.html</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>META-INF/MANIFEST.MF</resource>
+                  <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>META-INF/LICENSE.md</resource>
+                  <file>src/main/resources/META-INF/LICENSE.md</file>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>META-INF/NOTICE.md</resource>
+                  <file>src/main/resources/META-INF/NOTICE.md</file>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.eclipse.jetty.toolchain</groupId>
+            <artifactId>jetty-build-support</artifactId>
+            <version>1.5</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <!-- Add module-info.class to the shaded jar -->
+      <plugin>
+        <groupId>org.moditect</groupId>
+        <artifactId>moditect-maven-plugin</artifactId>
+        <version>1.0.0.Beta2</version>
+        <executions>
+          <execution>
+            <id>add-module-info</id>
+            <phase>package</phase>
+            <goals>
+              <goal>add-module-info</goal>
+            </goals>
+            <configuration>
+              <overwriteExistingFiles>true</overwriteExistingFiles>
+              <module>
+                <moduleInfoSource>
+                  module jetty.servlet.api {
+                  exports jakarta.servlet;
+                  exports jakarta.servlet.annotation;
+                  exports jakarta.servlet.descriptor;
+                  exports jakarta.servlet.http;
+                  exports jakarta.servlet.resources;
+                  }
+                </moduleInfoSource>
+              </module>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Create the source jar -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Create the javadoc jar -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <source>8</source>
+          <doclint>none</doclint>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-api</artifactId>
+            <version>1.11.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>1.11.1</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+  <scm>
+    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-servlet-api</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>jetty.snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/jetty-snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+</project>
