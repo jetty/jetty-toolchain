@@ -265,7 +265,7 @@
   <scm>
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
-    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-websocket-api</url>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-jakarta-websocket-api</url>
     <tag>HEAD</tag>
   </scm>
 
