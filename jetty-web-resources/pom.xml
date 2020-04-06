@@ -8,7 +8,7 @@
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <artifactId>jetty-web-resources</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.2</version>
   <name>Jetty :: Website :: Resources</name>
   <packaging>jar</packaging>
   <scm>
@@ -19,7 +19,7 @@
     <url>
       https://github.com/eclipse/jetty.toolchain/tree/master/jetty-web-resources
     </url>
-    <tag>HEAD</tag>
+    <tag>jetty-web-resources-1.2</tag>
   </scm>
   <properties>
     <maven.version>3.0</maven.version>
