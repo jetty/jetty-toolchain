@@ -42,6 +42,19 @@ div#yamm-content {
 }
 
 /* Eclipse Breadcrumb (when active) */
+section#breadcrumb-thin {
+  position:fixed;
+  top: 89px;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  /*
+  border-style: dotted;
+  border-color: pink;
+  */
+}
+
+/* Eclipse Breadcrumb (when active) */
 section#breadcrumb {
   position:fixed;
   top: 115px;
@@ -174,6 +187,10 @@ a:visited {
 
 @media only screen and (min-width:768px) {
 
+  div#toc.toc {
+    padding-left: 1em;
+  }
+
   div#toc.toc2 {
     width: 100%;
     max-width: 62.5em;
@@ -200,6 +217,11 @@ a:visited {
 }
 
 @media only screen and (min-width:1280px) {
+
+  div#toc.toc {
+    padding-left: 1em;
+  }
+
   div#toc.toc2 {
     position: fixed;
     top: 150px;

@@ -10,7 +10,8 @@ header class="header-wrapper" id="header-wrapper"
     div class="container"
       div class="text-right toolbar-row row hidden-print"
         div class="col-md-24 row-toolbar-col"
-          ul class="list-inline"
+          - if ((attr 'header-style') == 'eclipse')
+           ul class="list-inline"
             li
               | <a class="toolbar-link" href="https://accounts.eclipse.org/user/login/?takemeback=https%3A%2F%2Fwww.eclipse.org%2Feclipse.org-common%2Fthemes%2Fsolstice%2Fhtml_template%2Findex.php"><i class="fa fa-sign-in"> Log in</i></a>
             li
@@ -21,7 +22,8 @@ header class="header-wrapper" id="header-wrapper"
         div class="wrapper-logo-default"
           a href="https://www.eclipse.org/"
             img class="logo-eclipse-default hidden-xs" alt="logo" width="160" src="https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-white-orange.svg"
-      div class="col-sm-19 col-md-20 margin-top-10" id="main-menu-wrapper"
+      - if ((attr 'header-style') == 'eclipse')
+       div class="col-sm-19 col-md-20 margin-top-10" id="main-menu-wrapper"
         div class="float-right hidden-xs" id="btn-call-for-action"
           a href="https://www.eclipse.org/donate/" class="btn btn-huge btn-info"
             i class="fa fa-star" Donate
