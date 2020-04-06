@@ -87,6 +87,10 @@ public final class JAR
         try
         {
             in = jar.getInputStream(entry);
+            if(!destFile.getParentFile().exists())
+            {
+                destFile.getParentFile().mkdirs();
+            }
             out = new FileOutputStream(destFile,false);
             IO.copy(in,out);
         }

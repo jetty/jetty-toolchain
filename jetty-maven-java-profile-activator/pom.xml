@@ -7,18 +7,18 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
-  <artifactId>jetty-schemas</artifactId>
-  <version>5.0-SNAPSHOT</version>
-  <name>Jetty :: Schemas</name>
+  <artifactId>jetty-maven-java-profile-activator</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>Jetty :: Sub Java Version Maven Profile Activator</name>
   <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.engine.version>5.5.1</junit.engine.version>
   </properties>
   <scm>
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
-    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-schemas</url>
-    <tag>HEAD</tag>
+    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-maven-java-profile-activator</url>
   </scm>
   <build>
     <plugins>
@@ -26,8 +26,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>
@@ -55,23 +55,6 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>test-jar</id>
-            <goals>
-              <goal>test-jar</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <archive>
-            <manifestFile>target/classes/META-INF/MANIFEST.MF</manifestFile>
-          </archive>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-remote-resources-plugin</artifactId>
         <version>1.7.0</version>
         <executions>
@@ -89,31 +72,16 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>3.5.1</version>
-        <extensions>true</extensions>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-component-metadata</artifactId>
+        <version>1.7.1</version>
         <executions>
           <execution>
-            <id>bundle-manifest</id>
-            <phase>process-classes</phase>
             <goals>
-              <goal>manifest</goal>
+              <goal>generate-metadata</goal>
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>org.eclipse.jetty.schemas;singleton:=true</Bundle-SymbolicName>
-            <Bundle-Name>Jetty Servlet Schemas</Bundle-Name>
-            <Bundle-RequiredExecutionEnvironment>JavaSE-1.7</Bundle-RequiredExecutionEnvironment>
-            <_nouses>true</_nouses>
-            <Export-Package>
-              javax.servlet.resources;version="4.0",
-              javax.servlet.jsp.resources;version="4.0"
-            </Export-Package>
-          </instructions>
-        </configuration>
       </plugin>
     </plugins>
     <pluginManagement>
@@ -130,19 +98,47 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.6.2</version>
+          <version>3.8.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>3.2.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.0.0-M1</version>
+          <version>3.1.1</version>
         </plugin>
       </plugins>
     </pluginManagement>
   </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-model-builder</artifactId>
+      <version>3.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-core</artifactId>
+      <version>3.6.0</version>
+    </dependency>
+    <!-- dependency for plexus annotation -->
+    <dependency>
+      <groupId>org.codehaus.plexus</groupId>
+      <artifactId>plexus-component-annotations</artifactId>
+      <version>1.7.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.engine.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest</artifactId>
+      <version>2.1</version>
+    </dependency>
+  </dependencies>
 </project>
