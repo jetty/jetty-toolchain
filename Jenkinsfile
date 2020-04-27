@@ -14,18 +14,20 @@ pipeline {
           agent { node { label 'linux' } }
           options { timeout( time: 120, unit: 'MINUTES' ) }
           steps {
-            sh "apt --yes update && apt --yes install gcc"
-            mavenBuild( "jdk11", "clean install javadoc:javadoc" )
-            // Collect up the jacoco execution results
-            jacoco inclusionPattern: '**/org/eclipse/jetty/**/*.class',
-                   exclusionPattern: '',
-                   execPattern: '**/target/jacoco.exec',
-                   classPattern: '**/target/classes',
-                   sourcePattern: '**/src/main/java'
-            warnings consoleParsers: [[parserName: 'Maven'], [parserName: 'Java']]
-            script {
-              if (env.BRANCH_NAME == 'master') {
+            container('jetty-build') {
+              mavenBuild( "jdk11", "clean install javadoc:javadoc" )
+              // Collect up the jacoco execution results
+              jacoco inclusionPattern: '**/org/eclipse/jetty/**/*.class',
+                     exclusionPattern: '',
+                     execPattern: '**/target/jacoco.exec',
+                     classPattern: '**/target/classes',
+                     sourcePattern: '**/src/main/java'
+              warnings consoleParsers: [[parserName: 'Maven'], [parserName: 'Java']]
+              script {
+                if ( env.BRANCH_NAME == 'master' )
+                {
                   mavenBuild( "jdk11", "deploy" )
+                }
               }
             }
           }
