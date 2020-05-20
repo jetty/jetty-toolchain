@@ -8,7 +8,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jetty-jakarta-websocket-api</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.1-SNAPSHOT</version>
   <name>Jetty :: Jakarta WebSocket API for JPMS and OSGi</name>
   <packaging>jar</packaging>
 
@@ -266,7 +266,7 @@
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-jakarta-websocket-api</url>
-    <tag>jetty-jakarta-websocket-api-2.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <repositories>
