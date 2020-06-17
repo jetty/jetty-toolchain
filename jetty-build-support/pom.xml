@@ -4,7 +4,7 @@
   <parent>
     <artifactId>jetty-toolchain</artifactId>
     <groupId>org.eclipse.jetty.toolchain</groupId>
-    <version>1.6</version>
+    <version>1.7</version>
     <relativePath>../jetty-toolchain</relativePath>
   </parent>
   <artifactId>jetty-build-support</artifactId>
@@ -23,7 +23,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.8.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -44,7 +44,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.0</version>
+        <version>3.0.0-M4</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
