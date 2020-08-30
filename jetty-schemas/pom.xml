@@ -21,6 +21,16 @@
     <tag>HEAD</tag>
   </scm>
   <build>
+    <resources>
+      <!-- schemas must be on both path to be able to use for 9.4/10 and 11 -->
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources/jakarta/servlet</directory>
+        <targetPath>javax/servlet</targetPath>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
