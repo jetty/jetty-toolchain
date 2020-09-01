@@ -120,7 +120,9 @@
             <_nouses>true</_nouses>
             <Export-Package>
               javax.servlet.resources;version="4.0",
-              javax.servlet.jsp.resources;version="4.0"
+              javax.servlet.jsp.resources;version="4.0",
+              jakarta.servlet.resources;version="5.0",
+              jakarta.servlet.jsp.resources;version="5.0",
             </Export-Package>
           </instructions>
         </configuration>
