@@ -8,7 +8,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jetty-servlet-api</artifactId>
-  <version>4.0.4-SNAPSHOT</version>
+  <version>4.0.5-SNAPSHOT</version>
   <name>Jetty :: Servlet API and Schemas for JPMS and OSGi</name>
   <packaging>jar</packaging>
 
@@ -26,7 +26,7 @@
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
       <artifactId>jetty-schemas</artifactId>
-      <version>4.0.3</version>
+      <version>5.2</version>
     </dependency>
   </dependencies>
 

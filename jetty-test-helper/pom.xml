@@ -84,7 +84,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>2.5</version>
+        <version>3.13.0</version>
         <configuration>
           <targetJdk>1.5</targetJdk>
           <rulesets>
@@ -109,7 +109,7 @@
           <aggregate>true</aggregate>
           <strictCheck>true</strictCheck>
           <properties>
-             <copyright-range>${project.inceptionYear}-2019</copyright-range>
+             <copyright-range>${project.inceptionYear}-2020</copyright-range>
           </properties>
           <mapping>
             <java>DOUBLESLASH_STYLE</java>
