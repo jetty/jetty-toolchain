@@ -34,7 +34,7 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
     {
         private final String id;
         private final List<T> entries;
-        
+
         public MismatchDescription(String id, List<T> entries)
         {
             this.id = id;
@@ -53,13 +53,13 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
             }
         }
     }
-    
+
     private final List<T> expectedList;
     private String failureReason;
     private List<Integer> badEntries = new ArrayList<>();
     private IsOrderedCollectionContaining<T>.MismatchDescription actualFailureDescription;
     private IsOrderedCollectionContaining<T>.MismatchDescription expectedFailureDescription;
-    
+
     /**
      * @param expectedList the expected list
      */
@@ -67,7 +67,7 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
     {
         this.expectedList = expectedList;
     }
-    
+
     @Override
     public boolean matches(Object collection)
     {
@@ -76,16 +76,16 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
             failureReason = "is <null>";
             return false;
         }
-        
+
         if(!(collection instanceof List))
         {
             failureReason = "is not an instance of " + List.class.getName();
             return false;
         }
-        
+
         @SuppressWarnings("unchecked")
         List<T> actualList = (List<T>)collection;
-        
+
         // same size?
         boolean sizeMismatch = expectedList.size() != actualList.size();
 
@@ -104,11 +104,11 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
         {
             badEntries.add(i);
         }
-        
+
         if (sizeMismatch || badEntries.size() > 0)
         {
             // build up detailed error message
-            
+
             // The core failure reason
             if (sizeMismatch)
             {
@@ -120,10 +120,10 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
                 this.actualFailureDescription = new MismatchDescription("Actual",actualList);
                 this.expectedFailureDescription = new MismatchDescription("Expected",expectedList);
             }
-            
+
             return false;
         }
-        
+
         return true;
     }
 
@@ -131,9 +131,12 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
     @Override
     public void describeTo(Description description)
     {
-        description.appendDescriptionOf(this.expectedFailureDescription);
+        if (this.expectedFailureDescription != null)
+        {
+            description.appendDescriptionOf(this.expectedFailureDescription);
+        }
     }
-    
+
     // Describe Actual (entries)
     @Override
     public void describeMismatch(Object item, Description description)
