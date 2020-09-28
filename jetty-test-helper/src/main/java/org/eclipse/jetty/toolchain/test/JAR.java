@@ -34,24 +34,22 @@ import java.util.jar.JarOutputStream;
  */
 public final class JAR
 {
-    private JAR() {
+    private JAR()
+    {
         /* prevent instantiation */
     }
-    
+
     /**
      * Unpack JAR file into destination directory.
-     * 
-     * @param jarFile
-     *            the jar file to unpack
-     * @param destDir
-     *            the destination directory to unpack into
-     * @throws IOException
-     *             if unable to unpack jar file.
+     *
+     * @param jarFile the jar file to unpack
+     * @param destDir the destination directory to unpack into
+     * @throws IOException if unable to unpack jar file.
      */
     public static void unpack(File jarFile, File destDir) throws IOException
     {
-        PathAssert.assertFileExists("Jar File",jarFile);
-        PathAssert.assertDirExists("Destination Path",destDir);
+        PathAssert.assertFileExists("Jar File", jarFile);
+        PathAssert.assertDirExists("Destination Path", destDir);
 
         JarFile jar = null;
         try
@@ -63,14 +61,14 @@ public final class JAR
             while (entries.hasMoreElements())
             {
                 JarEntry entry = entries.nextElement();
-                destFile = new File(destDir,FS.separators(entry.getName()));
+                destFile = new File(destDir, FS.separators(entry.getName()));
                 if (entry.isDirectory())
                 {
                     FS.ensureDirExists(destFile);
                 }
                 else
                 {
-                    unpack(jar,entry,destFile);
+                    unpack(jar, entry, destFile);
                 }
             }
         }
@@ -87,12 +85,12 @@ public final class JAR
         try
         {
             in = jar.getInputStream(entry);
-            if(!destFile.getParentFile().exists())
+            if (!destFile.getParentFile().exists())
             {
                 destFile.getParentFile().mkdirs();
             }
-            out = new FileOutputStream(destFile,false);
-            IO.copy(in,out);
+            out = new FileOutputStream(destFile, false);
+            IO.copy(in, out);
         }
         finally
         {
@@ -103,7 +101,7 @@ public final class JAR
 
     /**
      * Close a JAR file.
-     * 
+     *
      * @param jar the JarFile to close
      */
     public static void close(JarFile jar)
@@ -125,7 +123,7 @@ public final class JAR
 
     /**
      * Create a JAR file out of the contents of a specific directory (recursively)
-     * 
+     *
      * @param srcDir the source directory
      * @param jarFile the destination jar file to create
      * @throws IOException if unable to create the jar file, or read the source directory
@@ -139,7 +137,7 @@ public final class JAR
             fileout = new FileOutputStream(jarFile);
             jarout = new JarOutputStream(fileout);
 
-            packDir(srcDir,srcDir,jarout);
+            packDir(srcDir, srcDir, jarout);
         }
         finally
         {
@@ -156,7 +154,7 @@ public final class JAR
         {
             if (file.isDirectory())
             {
-                packDir(baseDir,file,jarout);
+                packDir(baseDir, file, jarout);
             }
             else
             {
@@ -168,7 +166,7 @@ public final class JAR
                 {
                     in = new FileInputStream(file);
                     jarout.putNextEntry(entry);
-                    IO.copy(in,jarout);
+                    IO.copy(in, jarout);
                 }
                 finally
                 {

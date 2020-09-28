@@ -83,9 +83,9 @@ public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
                 dirName.append(methodname);
             }
 
-            if(!context.getDisplayName().startsWith(methodname))
+            if (!context.getDisplayName().startsWith(methodname))
             {
-                dirName.append(URLEncoder.encode(context.getDisplayName().trim(),UTF_8.toString()));
+                dirName.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
             }
         }
         else
@@ -99,7 +99,7 @@ public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
     {
-        return parameterContext.getParameter().getType() .isAssignableFrom(WorkDir.class);
+        return parameterContext.getParameter().getType().isAssignableFrom(WorkDir.class);
     }
 
     @Override

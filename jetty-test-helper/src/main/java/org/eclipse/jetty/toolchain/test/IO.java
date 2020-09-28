@@ -46,13 +46,10 @@ public final class IO
 
     /**
      * Copy Reader to Writer out until EOF or exception.
-     * 
-     * @param in
-     *            the Reader to read from
-     * @param out
-     *            the Writer to write to
-     * @throws IOException
-     *             if unable to copy the contents
+     *
+     * @param in the Reader to read from
+     * @param out the Writer to write to
+     * @throws IOException if unable to copy the contents
      */
     public static void copy(Reader in, Writer out) throws IOException
     {
@@ -61,23 +58,21 @@ public final class IO
 
         while (true)
         {
-            len = in.read(buffer,0,BUFFER_SIZE);
+            len = in.read(buffer, 0, BUFFER_SIZE);
             if (len == -1)
             {
                 break;
             }
-            out.write(buffer,0,len);
+            out.write(buffer, 0, len);
         }
     }
 
     /**
      * Read the contents of a file into a String and return it.
-     * 
-     * @param file
-     *            the file to read.
+     *
+     * @param file the file to read.
      * @return the contents of the file.
-     * @throws IOException
-     *             if unable to read the file.
+     * @throws IOException if unable to read the file.
      */
     public static String readToString(File file) throws IOException
     {
@@ -86,7 +81,7 @@ public final class IO
         {
             reader = new FileReader(file);
             StringWriter writer = new StringWriter();
-            copy(reader,writer);
+            copy(reader, writer);
             return writer.toString();
         }
         finally
@@ -97,9 +92,8 @@ public final class IO
 
     /**
      * closes an {@link Closeable}, and silently ignores exceptions
-     * 
-     * @param c
-     *            the closeable to close
+     *
+     * @param c the closeable to close
      */
     public static void close(Closeable c)
     {
@@ -120,35 +114,29 @@ public final class IO
 
     /**
      * Copy files or directories.
-     * 
-     * @param from
-     *            the from path
-     * @param to
-     *            the destination path
-     * @throws IOException
-     *             if unable to copy the file
+     *
+     * @param from the from path
+     * @param to the destination path
+     * @throws IOException if unable to copy the file
      */
     public static void copy(File from, File to) throws IOException
     {
         if (from.isDirectory())
         {
-            copyDir(from,to);
+            copyDir(from, to);
         }
         else
         {
-            copyFile(from,to);
+            copyFile(from, to);
         }
     }
 
     /**
      * Copy the contents of a directory from one directory to another.
-     * 
-     * @param from
-     *            the from directory
-     * @param to
-     *            the destination directory
-     * @throws IOException
-     *             if unable to copy the file
+     *
+     * @param from the from directory
+     * @param to the destination directory
+     * @throws IOException if unable to copy the file
      */
     public static void copyDir(File from, File to) throws IOException
     {
@@ -156,7 +144,7 @@ public final class IO
 
         for (File file : from.listFiles(IO.SafeFileFilter.INSTANCE))
         {
-            copy(file,new File(to,file.getName()));
+            copy(file, new File(to, file.getName()));
         }
     }
 
@@ -182,13 +170,10 @@ public final class IO
 
     /**
      * Copy the entire {@link InputStream} to the {@link OutputStream}
-     * 
-     * @param in
-     *            the input stream to read from
-     * @param out
-     *            the output stream to write to
-     * @throws IOException
-     *             if unable to copy the stream
+     *
+     * @param in the input stream to read from
+     * @param out the output stream to write to
+     * @throws IOException if unable to copy the stream
      */
     public static void copy(InputStream in, OutputStream out) throws IOException
     {
@@ -197,22 +182,20 @@ public final class IO
 
         while (true)
         {
-            len = in.read(buffer,0,BUFFER_SIZE);
+            len = in.read(buffer, 0, BUFFER_SIZE);
             if (len < 0)
             {
                 break;
             }
-            out.write(buffer,0,len);
+            out.write(buffer, 0, len);
         }
     }
 
     /**
      * Copy a file from one place to another
-     * 
-     * @param from
-     *            the file to copy
-     * @param to
-     *            the destination file to create
+     *
+     * @param from the file to copy
+     * @param to the destination file to create
      * @throws IOException if unable to copy the file
      */
     public static void copyFile(File from, File to) throws IOException
@@ -223,7 +206,7 @@ public final class IO
         {
             in = new FileInputStream(from);
             out = new FileOutputStream(to);
-            copy(in,out);
+            copy(in, out);
         }
         finally
         {

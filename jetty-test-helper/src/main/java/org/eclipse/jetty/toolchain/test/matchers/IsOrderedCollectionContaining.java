@@ -44,12 +44,12 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
         @Override
         public void describeTo(Description description)
         {
-            description.appendText(String.format("%s Entries (size: %d)",id,entries.size()));
+            description.appendText(String.format("%s Entries (size: %d)", id, entries.size()));
             for (int i = 0; i < entries.size(); i++)
             {
                 Object actualObj = entries.get(i);
-                char indicator = badEntries.contains(i)?'>':' ';
-                description.appendText(String.format("%n%s[%d] %s",indicator,i,actualObj==null?"<null>":actualObj.toString()));
+                char indicator = badEntries.contains(i) ? '>' : ' ';
+                description.appendText(String.format("%n%s[%d] %s", indicator, i, actualObj == null ? "<null>" : actualObj.toString()));
             }
         }
     }
@@ -77,7 +77,7 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
             return false;
         }
 
-        if(!(collection instanceof List))
+        if (!(collection instanceof List))
         {
             failureReason = "is not an instance of " + List.class.getName();
             return false;
@@ -91,8 +91,8 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
 
         // test content
         this.badEntries = new ArrayList<>();
-        int min = Math.min(expectedList.size(),actualList.size());
-        int max = Math.max(expectedList.size(),actualList.size());
+        int min = Math.min(expectedList.size(), actualList.size());
+        int max = Math.max(expectedList.size(), actualList.size());
         for (int i = 0; i < min; i++)
         {
             if (!expectedList.get(i).equals(actualList.get(i)))
@@ -112,13 +112,13 @@ public class IsOrderedCollectionContaining<T> extends BaseMatcher<List<? super T
             // The core failure reason
             if (sizeMismatch)
             {
-                this.failureReason = String.format("size mismatch: expected <%d> entries, but got <%d> entries instead",expectedList.size(),actualList.size());
+                this.failureReason = String.format("size mismatch: expected <%d> entries, but got <%d> entries instead", expectedList.size(), actualList.size());
             }
             else if (badEntries.size() > 0)
             {
-                this.failureReason = String.format("<%d> entr%s not matched",badEntries.size(),badEntries.size()>1?"ies":"y");
-                this.actualFailureDescription = new MismatchDescription("Actual",actualList);
-                this.expectedFailureDescription = new MismatchDescription("Expected",expectedList);
+                this.failureReason = String.format("<%d> entr%s not matched", badEntries.size(), badEntries.size() > 1 ? "ies" : "y");
+                this.actualFailureDescription = new MismatchDescription("Actual", actualList);
+                this.expectedFailureDescription = new MismatchDescription("Expected", expectedList);
             }
 
             return false;

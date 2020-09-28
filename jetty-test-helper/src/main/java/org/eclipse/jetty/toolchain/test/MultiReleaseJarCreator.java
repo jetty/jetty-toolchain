@@ -36,54 +36,54 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class MultiReleaseJarCreator
 {
     public static final String CODE_HELLO = "" +
-            "package hello;\n" +
-            "public class Hello {\n" +
-            "  public static void main(String args[]) {\n" +
-            "    Greetings greetings = new Greetings();\n" +
-            "    System.out.println(greetings.get());\n" +
-            "  }\n" +
-            "}\n";
+        "package hello;\n" +
+        "public class Hello {\n" +
+        "  public static void main(String args[]) {\n" +
+        "    Greetings greetings = new Greetings();\n" +
+        "    System.out.println(greetings.get());\n" +
+        "  }\n" +
+        "}\n";
 
     public static final String CODE_GREETINGS_BASE = "" +
-            "package hello;\n" +
-            "public class Greetings {\n" +
-            "  public String get() {\n" +
-            "    return \"Hello from zipfs base.\";\n" +
-            "  }\n" +
-            "}\n";
+        "package hello;\n" +
+        "public class Greetings {\n" +
+        "  public String get() {\n" +
+        "    return \"Hello from zipfs base.\";\n" +
+        "  }\n" +
+        "}\n";
 
     public static final String CODE_GREETINGS_VER9 = "" +
-            "package hello;\n" +
-            "public class Greetings {\n" +
-            "  public String get() {\n" +
-            "    return \"Hello from versions/9.\";\n" +
-            "  }\n" +
-            "}\n";
+        "package hello;\n" +
+        "public class Greetings {\n" +
+        "  public String get() {\n" +
+        "    return \"Hello from versions/9.\";\n" +
+        "  }\n" +
+        "}\n";
 
     public static final String CODE_GREETINGS_VER10 = "" +
-            "package hello;\n" +
-            "public class Greetings {\n" +
-            "  public String get() {\n" +
-            "    DetailedVer ver = new DetailedVer();\n" +
-            "    return \"Hello from versions/\" + ver.get();\n" +
-            "  }\n" +
-            "}\n";
+        "package hello;\n" +
+        "public class Greetings {\n" +
+        "  public String get() {\n" +
+        "    DetailedVer ver = new DetailedVer();\n" +
+        "    return \"Hello from versions/\" + ver.get();\n" +
+        "  }\n" +
+        "}\n";
 
     public static final String CODE_DETAILED_VER10 = "" +
-            "package hello;\n" +
-            "public class DetailedVer {\n" +
-            "  public int get() {\n" +
-            "    return 10;\n" +
-            "  }\n" +
-            "}\n";
+        "package hello;\n" +
+        "public class DetailedVer {\n" +
+        "  public int get() {\n" +
+        "    return 10;\n" +
+        "  }\n" +
+        "}\n";
 
     public static final String CODE_DETAILED_VER11 = "" +
-            "package hello;\n" +
-            "public class DetailedVer {\n" +
-            "  public int get() {\n" +
-            "    return Integer.parseInt(\"1\" + \"1\");\n" +
-            "  }\n" +
-            "}\n";
+        "package hello;\n" +
+        "public class DetailedVer {\n" +
+        "  public int get() {\n" +
+        "    return Integer.parseInt(\"1\" + \"1\");\n" +
+        "  }\n" +
+        "}\n";
 
     public static final String README_ROOT = "Hello README (from root)";
     public static final String README_VER9 = "README Hello (from versions/9)";
@@ -221,7 +221,8 @@ public class MultiReleaseJarCreator
         try (OutputStream outputStream = Files.newOutputStream(jarpath);
              JarOutputStream jarOutputStream = new JarOutputStream(outputStream, manifest))
         {
-            entries.forEach((entry) -> {
+            entries.forEach((entry) ->
+            {
                 JarEntry je = new JarEntry(entry.name);
                 try
                 {
@@ -245,7 +246,9 @@ public class MultiReleaseJarCreator
         byte[] contents;
 
         public Entry() {}
-        public Entry(String name, String contents) {
+
+        public Entry(String name, String contents)
+        {
             this.name = name;
             this.contents = contents.getBytes(UTF_8);
         }

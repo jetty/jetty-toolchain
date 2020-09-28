@@ -48,9 +48,8 @@ public final class FS
      * Delete a file or a directory.
      * <p>
      * Note: safety mechanism only allows delete within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param path
-     *            the file or directory to delete.
+     *
+     * @param path the file or directory to delete.
      */
     public static void delete(Path path)
     {
@@ -77,9 +76,8 @@ public final class FS
      * Delete a file or a directory.
      * <p>
      * Note: safety mechanism only allows delete within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param path
-     *            the file or directory to delete.
+     *
+     * @param path the file or directory to delete.
      */
     public static void delete(File path)
     {
@@ -90,9 +88,8 @@ public final class FS
      * Delete a directory and all contents under it.
      * <p>
      * Note: safety mechanism only allows delete directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param dir
-     *            the directory to delete.
+     *
+     * @param dir the directory to delete.
      */
     public static void deleteDirectory(File dir)
     {
@@ -103,9 +100,8 @@ public final class FS
      * Delete a directory and all contents under it.
      * <p>
      * Note: safety mechanism only allows delete directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param dir
-     *            the directory to delete.
+     *
+     * @param dir the directory to delete.
      */
     public static void deleteDirectory(Path dir)
     {
@@ -116,9 +112,8 @@ public final class FS
      * Delete a file.
      * <p>
      * Note: safety mechanism only allows delete file within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param path
-     *            the path to delete.
+     *
+     * @param path the path to delete.
      */
     public static void deleteFile(File path)
     {
@@ -132,15 +127,14 @@ public final class FS
      * Delete a file.
      * <p>
      * Note: safety mechanism only allows delete file within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param path
-     *            the path to delete.
+     *
+     * @param path the path to delete.
      */
     public static void deleteFile(Path path)
     {
         String location = path.toAbsolutePath().toString();
 
-        if (Files.exists(path,LinkOption.NOFOLLOW_LINKS))
+        if (Files.exists(path, LinkOption.NOFOLLOW_LINKS))
         {
             assertTrue(Files.isRegularFile(path) || Files.isSymbolicLink(path), "Path must be a file or link: " + location);
             assertTrue(FS.isTestingDir(path.getParent()), "Can only delete content within the /target/tests/ directory: " + location);
@@ -150,7 +144,7 @@ public final class FS
             }
             catch (IOException e)
             {
-                fail("Unable to delete file: " + location,e);
+                fail("Unable to delete file: " + location, e);
             }
         }
     }
@@ -159,9 +153,8 @@ public final class FS
      * Delete a directory. (only if it is empty)
      * <p>
      * Note: safety mechanism only allows delete file within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param path
-     *            the path to delete.
+     *
+     * @param path the path to delete.
      */
     public static void deleteDir(Path path)
     {
@@ -170,14 +163,14 @@ public final class FS
         if (Files.exists(path))
         {
             assertTrue(Files.isDirectory(path), "Path must be a file: " + location);
-            assertTrue(FS.isTestingDir(path.getParent()),"Can only delete content within the /target/tests/ directory: " + location);
+            assertTrue(FS.isTestingDir(path.getParent()), "Can only delete content within the /target/tests/ directory: " + location);
             try
             {
-                assertTrue(Files.deleteIfExists(path),"Failed to delete directory: " + location);
+                assertTrue(Files.deleteIfExists(path), "Failed to delete directory: " + location);
             }
             catch (IOException e)
             {
-                fail("Unable to delete directory: " + location,e);
+                fail("Unable to delete directory: " + location, e);
             }
         }
     }
@@ -185,7 +178,7 @@ public final class FS
     private static void recursiveDeleteDir(Path path)
     {
         String location = path.toAbsolutePath().toString();
-        assertTrue(FS.isTestingDir(path),"Can only delete content within the /target/tests/ directory: " + location);
+        assertTrue(FS.isTestingDir(path), "Can only delete content within the /target/tests/ directory: " + location);
 
         // Get entries in this path
         try (DirectoryStream<Path> dir = Files.newDirectoryStream(path))
@@ -195,7 +188,7 @@ public final class FS
                 if (Files.isDirectory(entry))
                 {
                     recursiveDeleteDir(entry);
-                } 
+                }
                 else
                 {
                     deleteFile(entry);
@@ -219,9 +212,8 @@ public final class FS
      * Delete the contents of a directory and all contents under it, leaving the directory itself still in existance.
      * <p>
      * Note: safety mechanism only allows clean directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param dir
-     *            the directory to delete.
+     *
+     * @param dir the directory to delete.
      */
     public static void cleanDirectory(File dir)
     {
@@ -232,9 +224,8 @@ public final class FS
      * Delete the contents of a directory and all contents under it, leaving the directory itself still in existance.
      * <p>
      * Note: safety mechanism only allows clean directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
-     * 
-     * @param dir
-     *            the directory to delete.
+     *
+     * @param dir the directory to delete.
      */
     public static void cleanDirectory(Path dir)
     {
@@ -244,9 +235,8 @@ public final class FS
 
     /**
      * Ensure the provided directory exists, and contains no content (empty)
-     * 
-     * @param dir
-     *            the dir to check.
+     *
+     * @param dir the dir to check.
      */
     public static void ensureEmpty(File dir)
     {
@@ -255,9 +245,8 @@ public final class FS
 
     /**
      * Ensure the provided directory exists, and contains no content (empty)
-     * 
-     * @param dir
-     *            the dir to check.
+     *
+     * @param dir the dir to check.
      */
     public static void ensureEmpty(Path dir)
     {
@@ -273,9 +262,8 @@ public final class FS
 
     /**
      * Ensure the provided directory does not exist, delete it if present
-     * 
-     * @param dir
-     *            the dir to check
+     *
+     * @param dir the dir to check
      */
     public static void ensureDeleted(File dir)
     {
@@ -284,9 +272,8 @@ public final class FS
 
     /**
      * Ensure the provided directory does not exist, delete it if present
-     * 
-     * @param dir
-     *            the dir to check
+     *
+     * @param dir the dir to check
      */
     public static void ensureDeleted(Path dir)
     {
@@ -298,44 +285,42 @@ public final class FS
 
     /**
      * Ensure that directory exists, create it if not present. Leave it alone if already there.
-     * 
-     * @param dir
-     *            the dir to check.
+     *
+     * @param dir the dir to check.
      */
     public static void ensureDirExists(File dir)
     {
         if (dir.exists())
         {
-            assertTrue(dir.isDirectory(),"Path exists, but should be a Dir : " + dir.getAbsolutePath());
+            assertTrue(dir.isDirectory(), "Path exists, but should be a Dir : " + dir.getAbsolutePath());
         }
         else
         {
-            assertTrue(dir.mkdirs(),"Creating dir: " + dir);
+            assertTrue(dir.mkdirs(), "Creating dir: " + dir);
         }
     }
 
     /**
      * Ensure that directory exists, create it if not present. Leave it alone if already there.
-     * 
-     * @param dir
-     *            the dir to check.
+     *
+     * @param dir the dir to check.
      */
     public static void ensureDirExists(Path dir)
     {
         if (Files.exists(dir))
         {
-            assertTrue(Files.isDirectory(dir),"Path exists, but should be a Dir : " + dir.toAbsolutePath());
+            assertTrue(Files.isDirectory(dir), "Path exists, but should be a Dir : " + dir.toAbsolutePath());
         }
         else
         {
             try
             {
                 Files.createDirectories(dir);
-                assertTrue(Files.exists(dir),"Failed to create dir: " + dir);
+                assertTrue(Files.exists(dir), "Failed to create dir: " + dir);
             }
             catch (IOException e)
             {
-                fail("Failed to create directory: " + dir,e);
+                fail("Failed to create directory: " + dir, e);
             }
         }
     }
@@ -344,9 +329,8 @@ public final class FS
      * Internal class used to detect if the directory is a valid testing directory.
      * <p>
      * Used as part of the validation on what directories are safe to delete from.
-     * 
-     * @param dir
-     *            the dir to check
+     *
+     * @param dir the dir to check
      * @return true if provided directory is a testing directory
      */
     protected static boolean isTestingDir(File dir)
@@ -358,9 +342,8 @@ public final class FS
      * Internal class used to detect if the directory is a valid testing directory.
      * <p>
      * Used as part of the validation on what directories are safe to delete from.
-     * 
-     * @param dir
-     *            the dir to check
+     *
+     * @param dir the dir to check
      * @return true if provided directory is a testing directory
      */
     protected static boolean isTestingDir(Path dir)
@@ -378,46 +361,42 @@ public final class FS
 
     /**
      * Create an empty file at the location. If the file exists, just update the last modified timestamp.
-     * 
-     * @param file
-     *            the file to create or update the timestamp of.
-     * @throws IOException
-     *             if unable to create the new file.
+     *
+     * @param file the file to create or update the timestamp of.
+     * @throws IOException if unable to create the new file.
      */
     public static void touch(File file) throws IOException
     {
         if (file.exists())
         {
-            assertTrue(file.setLastModified(System.currentTimeMillis()),"Updating last modified timestamp");
+            assertTrue(file.setLastModified(System.currentTimeMillis()), "Updating last modified timestamp");
         }
         else
         {
-            assertTrue(file.createNewFile(),"Creating file: " + file);
+            assertTrue(file.createNewFile(), "Creating file: " + file);
         }
     }
 
     /**
      * Create an empty file at the location. If the file exists, just update the last modified timestamp.
-     * 
-     * @param file
-     *            the file to create or update the timestamp of.
-     * @throws IOException
-     *             if unable to create the new file.
+     *
+     * @param file the file to create or update the timestamp of.
+     * @throws IOException if unable to create the new file.
      */
     public static void touch(Path file) throws IOException
     {
         if (Files.exists(file))
         {
             FileTime timeOrig = Files.getLastModifiedTime(file);
-            Files.setLastModifiedTime(file,FileTime.from(System.currentTimeMillis(), TimeUnit.MILLISECONDS));
+            Files.setLastModifiedTime(file, FileTime.from(System.currentTimeMillis(), TimeUnit.MILLISECONDS));
             FileTime timeNow = Files.getLastModifiedTime(file);
             // Verify that timestamp was actually updated.
-            assertThat("Timestamp updated",timeOrig,not(equalTo(timeNow)));
+            assertThat("Timestamp updated", timeOrig, not(equalTo(timeNow)));
         }
         else
         {
             Files.createFile(file);
-            assertTrue(Files.exists(file),"Created new file?: " + file);
+            assertTrue(Files.exists(file), "Created new file?: " + file);
         }
     }
 
@@ -426,8 +405,7 @@ public final class FS
      * <p>
      * This helps ensure that the paths provided in the unit tests work equally as well on unix / osx / windows.
      *
-     * @param path
-     *            the raw path to convert
+     * @param path the raw path to convert
      * @return the converted path
      */
     public static String separators(String path)

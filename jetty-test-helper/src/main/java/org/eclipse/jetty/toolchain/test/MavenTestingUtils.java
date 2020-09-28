@@ -48,7 +48,7 @@ public final class MavenTestingUtils
      * Obtain a {@link File} reference to the maven ${basedir} for the module.
      * <p>
      * Convenience method for <code>MavenTestingUtils.getBasePath().toFile()</code>
-     * 
+     *
      * @return the equivalent to the maven ${basedir} property.
      * @see #getBasePath()
      */
@@ -63,7 +63,7 @@ public final class MavenTestingUtils
      * Note: while running in maven, the ${basedir} is populated by maven and used by the surefire-plugin. <br>
      * While running in eclipse, the ${basedir} property is unset, resulting in this method falling back to ${user.dir}
      * equivalent use.
-     * 
+     *
      * @return the equivalent to the maven ${basedir} property.
      */
     public static Path getBasePath()
@@ -93,7 +93,7 @@ public final class MavenTestingUtils
 
     /**
      * Get the Basedir for the project as a URI
-     * 
+     *
      * @return the URI for the project basedir
      */
     public static URI getBaseURI()
@@ -105,7 +105,7 @@ public final class MavenTestingUtils
      * Get the {@link File} reference to the <code>/target</code> directory for this project.
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetPath().toFile()</code>
-     * 
+     *
      * @return the directory path to the target directory.
      * @see #getTargetPath()
      */
@@ -120,8 +120,8 @@ public final class MavenTestingUtils
      * This is roughly equivalent to the <code>${project.build.directory}</code> property.
      * <p>
      * Note: this implementation does not inspect the <code>pom.xml</code> for non-standard locations
-     * of the <code>${project.build.directory}</code> property. (it always assumes <code>/target</code>) 
-     * 
+     * of the <code>${project.build.directory}</code> property. (it always assumes <code>/target</code>)
+     *
      * @return the directory path to the <code>/target</code> directory.
      */
     public static Path getTargetPath()
@@ -129,7 +129,7 @@ public final class MavenTestingUtils
         if (targetPath == null)
         {
             targetPath = getBasePath().resolve("target");
-            PathAssert.assertDirExists("Target Dir",targetPath);
+            PathAssert.assertDirExists("Target Dir", targetPath);
         }
         return targetPath;
     }
@@ -138,9 +138,8 @@ public final class MavenTestingUtils
      * Create a {@link File} object for a path in the /target directory.
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetPath("foo").toFile()</code>
-     * 
-     * @param path
-     *            the path desired, no validation of existence is performed.
+     *
+     * @param path the path desired, no validation of existence is performed.
      * @return the File to the path.
      * @see #getTargetPath(String)
      */
@@ -151,25 +150,24 @@ public final class MavenTestingUtils
 
     /**
      * Create a {@link Path} object for a path in the /target directory.
-     * 
-     * @param path
-     *            the path desired, no validation of existence is performed.
+     *
+     * @param path the path desired, no validation of existence is performed.
      * @return the File to the path.
      */
     public static Path getTargetPath(String path)
     {
         Path targetPath = getTargetPath();
         FileSystem fs = targetPath.getFileSystem();
-        return fs.getPath(targetPath.toString(),path);
+        return fs.getPath(targetPath.toString(), path);
     }
-    
+
     /**
      * Get a {@link File} reference to the maven <code>${basedir}/target/tests/</code> directory.
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetTestingPath().toFile()</code>
-     * 
+     *
      * @return the maven <code>${basedir}/target/tests/</code> directory.
-     *         Note: will not validate that the directory exists, or create the directory)
+     * Note: will not validate that the directory exists, or create the directory)
      */
     public static File getTargetTestingDir()
     {
@@ -178,9 +176,9 @@ public final class MavenTestingUtils
 
     /**
      * Get a {@link Path} reference to the maven <code>${basedir}/target/tests/</code> path.
-     * 
+     *
      * @return the maven <code>${basedir}/target/tests/</code> directory.
-     *         Note: will not validate that the directory exists, or create the directory)
+     * Note: will not validate that the directory exists, or create the directory)
      */
     public static Path getTargetTestingPath()
     {
@@ -192,9 +190,8 @@ public final class MavenTestingUtils
      * the supplied testname
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetTestingPath(testname).toFile()</code>
-     * 
-     * @param testname
-     *            the testname to create directory against.
+     *
+     * @param testname the testname to create directory against.
      * @return the maven <code>${basedir}/target/tests/test-${testname}</code> directory
      */
     public static File getTargetTestingDir(String testname)
@@ -205,9 +202,8 @@ public final class MavenTestingUtils
     /**
      * Get a {@link Path} reference to the maven <code>${basedir}/target/tests/test-${testname}</code> using
      * the supplied testname
-     * 
-     * @param testname
-     *            the testname to create directory against.
+     *
+     * @param testname the testname to create directory against.
      * @return the maven <code>${basedir}/target/tests/test-${testname}</code> directory
      */
     public static Path getTargetTestingPath(String testname)
@@ -221,8 +217,7 @@ public final class MavenTestingUtils
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetTestingPath(TestCase.getName()).toFile()</code>
      *
-     * @param testInfo
-     *            the junit 5.x testcase to base this new directory on.
+     * @param testInfo the junit 5.x testcase to base this new directory on.
      * @return the maven <code>${basedir}/target/tests/test-${testname}</code> directory.
      */
     public static File getTargetTestingDir(TestInfo testInfo)
@@ -236,8 +231,7 @@ public final class MavenTestingUtils
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetTestingPath(TestCase.getName())</code>
      *
-     * @param testInfo
-     *            the junit 5.x testcase to base this new directory on.
+     * @param testInfo the junit 5.x testcase to base this new directory on.
      * @return the maven <code>${basedir}/target/tests/test-${testname}</code> directory.
      * @see #getTargetTestingPath(String)
      */
@@ -250,9 +244,8 @@ public final class MavenTestingUtils
      * Get a URI reference to a path (File or Dir) within the maven "${basedir}/target" directory.
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetPath(path).toUri()</code>
-     * 
-     * @param path
-     *            the relative path to use
+     *
+     * @param path the relative path to use
      * @return the URI reference to the target path
      */
     public static URI getTargetURI(String path)
@@ -264,12 +257,10 @@ public final class MavenTestingUtils
      * Get a URL reference to a path (File or Dir) within the maven "${basedir}/target" directory.
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTargetURI(path).toURL()</code>
-     * 
-     * @param path
-     *            the relative path to use
+     *
+     * @param path the relative path to use
      * @return the URL reference to the target path
-     * @throws MalformedURLException
-     *             if unable to create a new target url due to URL error.
+     * @throws MalformedURLException if unable to create a new target url due to URL error.
      */
     public static URL getTargetURL(String path) throws MalformedURLException
     {
@@ -281,12 +272,10 @@ public final class MavenTestingUtils
      * <code>${basedir}/target/tests/${condensed-classname}/${methodname}</code> path that uses an condensed directory
      * name based on the testclass and subdirectory based on the testmethod being run.
      *
-     * @param testclass
-     *            the class for the test case
-     * @param testmethodname
-     *            the test method name
+     * @param testclass the class for the test case
+     * @param testmethodname the test method name
      * @return the File path to the testname specific testing directory underneath the
-     *         <code>${basedir}/target/tests/</code> sub directory
+     * <code>${basedir}/target/tests/</code> sub directory
      * @see FS
      */
     public static Path getTargetTestingPath(final Class<?> testclass, final String testmethodname)
@@ -295,10 +284,10 @@ public final class MavenTestingUtils
 
         if (org.junit.jupiter.api.condition.OS.WINDOWS.isCurrentOs())
         {
-            /* Condense the directory names to make them more friendly for the 
+            /* Condense the directory names to make them more friendly for the
              * 255 character pathname limitations that exist on windows.
              */
-            methodname = StringMangler.maxStringLength(30,methodname);
+            methodname = StringMangler.maxStringLength(30, methodname);
         }
 
         Path testdir = getTargetTestingPath().resolve(methodname);
@@ -319,9 +308,8 @@ public final class MavenTestingUtils
      * Note: will throw assertion error if path does point to an existing file
      * <p>
      * Convenience method for <code>MavenTestingUtils.getProjectFilePath(path).toFile()</code>
-     * 
-     * @param path
-     *            the relative path to reference
+     *
+     * @param path the relative path to reference
      * @return the file reference (must exist)
      */
     public static File getProjectFile(String path)
@@ -334,15 +322,14 @@ public final class MavenTestingUtils
      * path references from maven ${basedir}.
      * <p>
      * Note: will throw assertion error if path does point to an existing file
-     * 
-     * @param path
-     *            the relative path to reference
+     *
+     * @param path the relative path to reference
      * @return the file reference (must exist)
      */
     public static Path getProjectFilePath(String path)
     {
         Path file = getBasePath().resolve(path);
-        PathAssert.assertFileExists("Project File",file);
+        PathAssert.assertFileExists("Project File", file);
         return file;
     }
 
@@ -353,9 +340,8 @@ public final class MavenTestingUtils
      * Note: will throw assertion error if path does point to an existing directory
      * <p>
      * Convenience method for <code>MavenTestingUtils.getProjectDirPath(path).toFile()</code>
-     * 
-     * @param path
-     *            the relative path to reference
+     *
+     * @param path the relative path to reference
      * @return the directory reference (must exist)
      */
     public static File getProjectDir(String path)
@@ -368,22 +354,21 @@ public final class MavenTestingUtils
      * path references from maven ${basedir}.
      * <p>
      * Note: will throw assertion error if path does point to an existing directory
-     * 
-     * @param path
-     *            the relative path to reference
+     *
+     * @param path the relative path to reference
      * @return the directory reference (must exist)
      */
     public static Path getProjectDirPath(String path)
     {
         Path dir = getBasePath().resolve(path);
-        PathAssert.assertDirExists("Project Dir",dir);
+        PathAssert.assertDirExists("Project Dir", dir);
         return dir;
     }
 
     /**
      * Using junit 3.x naming standards for unit tests and test method names, attempt to discover the unit test name
      * from the execution stack.
-     * 
+     *
      * @return the unit test id found via execution stack and junit 3.8 naming conventions.
      */
     private static TestID getTestID()
@@ -425,7 +410,7 @@ public final class MavenTestingUtils
      * Get the {@link File} reference to the maven <code>${basedir}/src/test/resources</code> directory
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTestResourcesPath().toFile()</code>
-     * 
+     *
      * @return the directory {@link File} to the maven <code>${basedir}/src/test/resources</code> directory
      */
     public static File getTestResourcesDir()
@@ -435,7 +420,7 @@ public final class MavenTestingUtils
 
     /**
      * Get the {@link Path} reference to the maven <code>${basedir}/src/test/resources</code> directory
-     * 
+     *
      * @return the directory {@link Path} to the maven <code>${basedir}/src/test/resources</code> directory
      */
     public static Path getTestResourcesPath()
@@ -443,7 +428,7 @@ public final class MavenTestingUtils
         if (testResourcesPath == null)
         {
             testResourcesPath = getBasePath().resolve("src/test/resources");
-            PathAssert.assertDirExists("Test Resources Dir",testResourcesPath);
+            PathAssert.assertDirExists("Test Resources Dir", testResourcesPath);
         }
         return testResourcesPath;
     }
@@ -454,9 +439,8 @@ public final class MavenTestingUtils
      * Note: will throw assertion error if path does point to an existing directory
      * <p>
      * Convenience method for <code>MavenTestingUtils.getTestResourcesPathDir(name).toFile()</code>
-     * 
-     * @param name
-     *            the name of the path to get (it must exist as a dir)
+     *
+     * @param name the name of the path to get (it must exist as a dir)
      * @return the dir in the maven <code>${basedir}/src/test/resource</code> path
      */
     public static File getTestResourceDir(String name)
@@ -468,15 +452,14 @@ public final class MavenTestingUtils
      * Get a dir from the maven <code>${basedir}/src/test/resource</code> directory.
      * <p>
      * Note: will throw assertion error if path does point to an existing directory
-     * 
-     * @param name
-     *            the name of the path to get (it must exist as a dir)
+     *
+     * @param name the name of the path to get (it must exist as a dir)
      * @return the dir in the maven <code>${basedir}/src/test/resource</code> path
      */
     public static Path getTestResourcePathDir(String name)
     {
         Path dir = getTestResourcesPath().resolve(name);
-        PathAssert.assertDirExists("Test Resource Dir",dir);
+        PathAssert.assertDirExists("Test Resource Dir", dir);
         return dir;
     }
 
@@ -484,15 +467,14 @@ public final class MavenTestingUtils
      * Get a file from the maven <code>${basedir}/src/test/resource</code> directory.
      * <p>
      * Note: will throw assertion error if path does point to an existing file
-     * 
-     * @param name
-     *            the name of the path to get (it must exist as a file)
+     *
+     * @param name the name of the path to get (it must exist as a file)
      * @return the file in maven <code>${basedir}/src/test/resource</code>
      */
     public static File getTestResourceFile(String name)
     {
-        File file = new File(getTestResourcesDir(),FS.separators(name));
-        PathAssert.assertFileExists("Test Resource File",file);
+        File file = new File(getTestResourcesDir(), FS.separators(name));
+        PathAssert.assertFileExists("Test Resource File", file);
         return file;
     }
 
@@ -500,29 +482,27 @@ public final class MavenTestingUtils
      * Get a file from the maven <code>${basedir}/src/test/resource</code> directory.
      * <p>
      * Note: will throw assertion error if path does point to an existing file
-     * 
-     * @param name
-     *            the name of the path to get (it must exist as a file)
+     *
+     * @param name the name of the path to get (it must exist as a file)
      * @return the file in maven <code>${basedir}/src/test/resource</code>
      */
     public static Path getTestResourcePathFile(String name)
     {
         Path file = getTestResourcesPath().resolve(name);
-        PathAssert.assertFileExists("Test Resource File",file);
+        PathAssert.assertFileExists("Test Resource File", file);
         return file;
     }
 
     /**
      * Get a path resource (File or Dir) from the maven <code>${basedir}/src/test/resource</code> directory.
-     * 
-     * @param name
-     *            the name of the path to get (it must exist)
+     *
+     * @param name the name of the path to get (it must exist)
      * @return the path in maven <code>${basedir}/src/test/resource</code>
      */
     public static Path getTestResourcePath(String name)
     {
         Path path = getTestResourcesPath().resolve(name);
-        PathAssert.assertPathExists("Test Resource Path",path);
+        PathAssert.assertPathExists("Test Resource Path", path);
         return path;
     }
 }

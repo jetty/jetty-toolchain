@@ -63,8 +63,7 @@ public class WorkDir
      * <p>
      * Note: No assertions are made if the file exists or not.
      *
-     * @param name
-     *            the path name of the file (supports deep paths)
+     * @param name the path name of the file (supports deep paths)
      * @return the file reference.
      */
     public Path getPathFile(String name)

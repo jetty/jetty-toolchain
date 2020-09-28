@@ -51,7 +51,8 @@ public class RegexMatcher extends TypeSafeMatcher
     @Override
     protected boolean matchesSafely(Object item)
     {
-        if(item == null) return false;
+        if (item == null)
+            return false;
         return pattern.matcher(item.toString()).matches();
     }
 }

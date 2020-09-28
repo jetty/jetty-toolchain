@@ -35,7 +35,7 @@ public class ByteBufferAssert
             assertThat(message + " byte[" + i + "]", actual[i], is(expected[i]));
         }
     }
-    
+
     public static void assertEquals(String message, ByteBuffer expectedBuffer, ByteBuffer actualBuffer)
     {
         if (expectedBuffer == null)
@@ -49,13 +49,13 @@ public class ByteBufferAssert
             assertEquals(message, expectedBytes, actualBytes);
         }
     }
-    
+
     public static void assertEquals(String message, String expectedString, ByteBuffer actualBuffer)
     {
         String actualString = ByteBufferUtils.toString(actualBuffer);
         assertThat(message, actualString, is(expectedString));
     }
-    
+
     public static void assertSize(String message, int expectedSize, ByteBuffer buffer)
     {
         if ((expectedSize == 0) && (buffer == null))

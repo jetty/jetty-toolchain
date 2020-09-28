@@ -36,18 +36,16 @@ public class ExtraMatchers
      * the examined {@link Iterable} will stop as soon as a matching item is found.
      * <p>
      * For example:
-     * 
+     *
      * <pre>
      * assertThat(Arrays.asList(&quot;foo&quot;,&quot;bar&quot;,&quot;baz&quot;),hasItems(endsWith(&quot;z&quot;),endsWith(&quot;o&quot;)))
      * </pre>
-     * 
-     * @param itemMatchers
-     *            the matchers to apply to items provided by the examined {@link Iterable}
-     * @param <T>
-     *            the type
+     *
+     * @param itemMatchers the matchers to apply to items provided by the examined {@link Iterable}
+     * @param <T> the type
      * @return the matcher
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public static <T> org.hamcrest.Matcher<java.lang.Iterable<? super T>> ordered(List<T> itemMatchers)
     {
         return new IsOrderedCollectionContaining(itemMatchers);
@@ -57,7 +55,7 @@ public class ExtraMatchers
      * Create a matcher for {@link String} that matches against a regex pattern.
      *
      * <p>
-     *     Returns success based on {@code java.util.regex.Pattern.matcher(input).matches();}
+     * Returns success based on {@code java.util.regex.Pattern.matcher(input).matches();}
      * </p>
      *
      * @param pattern the {@link java.util.regex.Pattern} syntax pattern to match against.

@@ -77,7 +77,8 @@ public class InMemoryCompiler
         Map<String, OutputFileObject> outputs = new HashMap<>();
         List<UnitFileObject> sources = new ArrayList<>();
 
-        units.forEach((unit) -> {
+        units.forEach((unit) ->
+        {
             outputs.put(unit.classname, new OutputFileObject(unit.classname));
             sources.add(new UnitFileObject(unit));
         });
@@ -90,7 +91,8 @@ public class InMemoryCompiler
         }
 
         List<Unit> ret = new ArrayList<>();
-        units.forEach((unit) -> {
+        units.forEach((unit) ->
+        {
             unit.bytecode = outputs.get(unit.classname).getBytes();
             ret.add(unit);
         });

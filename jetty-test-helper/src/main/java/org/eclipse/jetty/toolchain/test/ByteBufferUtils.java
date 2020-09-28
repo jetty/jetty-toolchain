@@ -30,7 +30,7 @@ public class ByteBufferUtils
      * @param buffer the buffer to get the array from
      * @return the byte buffer array
      */
-    
+
     public static byte[] toArray(ByteBuffer buffer)
     {
         if (buffer.hasArray())
@@ -46,7 +46,7 @@ public class ByteBufferUtils
             return to;
         }
     }
-    
+
     /**
      * Convert the ByteBuffer to a UTF-8 String.
      *
