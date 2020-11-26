@@ -26,7 +26,8 @@
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
       <artifactId>jetty-schemas</artifactId>
-      <version>5.2</version>
+      <!-- Keep this version at 4.x, since 5.x is JakartaEE. -->
+      <version>4.0.3</version>
     </dependency>
   </dependencies>
 
