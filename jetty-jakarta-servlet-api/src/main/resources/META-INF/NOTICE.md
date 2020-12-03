@@ -48,10 +48,3 @@ https://projects.eclipse.org/projects/ee4j.servlet
 
  * jakarta.servlet:jakarta.servlet-api
 
-
-## GlassFish
-
-The following artifacts are CDDL + GPLv2 with classpath exception.
-https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html
-
- * org.eclipse.jetty.toolchain:jetty-schemas
