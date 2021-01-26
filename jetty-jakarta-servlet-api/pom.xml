@@ -216,6 +216,8 @@
                   exports jakarta.servlet.descriptor;
                   exports jakarta.servlet.http;
                   exports jakarta.servlet.resources;
+                  //open resources so Class.getResource() can access them
+                  opens jakarta.servlet.resources;
                   }
                 </moduleInfoSource>
               </module>
