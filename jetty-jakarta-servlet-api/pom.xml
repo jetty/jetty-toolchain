@@ -8,7 +8,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jetty-jakarta-servlet-api</artifactId>
-  <version>5.0.2</version>
+  <version>5.0.3-SNAPSHOT</version>
   <name>Jetty :: Jakarta Servlet API and Schemas for JPMS and OSGi</name>
   <packaging>jar</packaging>
 
@@ -300,7 +300,7 @@
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-jakarta-servlet-api</url>
-    <tag>jetty-jakarta-servlet-api-5.0.2</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <repositories>
