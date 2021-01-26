@@ -218,6 +218,8 @@
                   exports javax.servlet.descriptor;
                   exports javax.servlet.http;
                   exports javax.servlet.resources;
+                  //open resources so Class.getResource() can access them
+                  opens javax.servlet.resources;
                   }
                 </moduleInfoSource>
               </module>
