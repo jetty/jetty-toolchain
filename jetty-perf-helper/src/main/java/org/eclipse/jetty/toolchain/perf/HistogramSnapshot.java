@@ -19,7 +19,6 @@
 package org.eclipse.jetty.toolchain.perf;
 
 import java.util.concurrent.TimeUnit;
-
 import org.HdrHistogram.Histogram;
 import org.HdrHistogram.HistogramIterationValue;
 
@@ -61,7 +60,7 @@ public class HistogramSnapshot implements MeasureConverter
     {
         StringBuilder builder = new StringBuilder();
 
-        long range = histogram.getMaxValue() - histogram.getMinValue();
+        long range = histogram.getMaxValue();
 
         long maxBucketCount = 0;
         for (HistogramIterationValue value : histogram.linearBucketValues(range / buckets))
