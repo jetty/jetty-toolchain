@@ -18,7 +18,6 @@
     <connection>scm:git:git://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-perf-helper</url>
-    <tag>HEAD</tag>
   </scm>
 
   <dependencies>
