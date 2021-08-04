@@ -117,7 +117,8 @@
             </Export-Package>
             <Require-Capability>
               osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)",
-              osgi.serviceloader;filter:="(osgi.serviceloader=javax.websocket.ContainerProvider)";resolution:=optional;cardinality:=multiple
+              osgi.serviceloader;filter:="(osgi.serviceloader=javax.websocket.ContainerProvider)";resolution:=optional;cardinality:=multiple,
+              osgi.serviceloader;filter:="(osgi.serviceloader=javax.websocket.server.ServerEndpointConfig$Configurator)";resolution:=optional;cardinality:=multiple
             </Require-Capability>
           </instructions>
         </configuration>
