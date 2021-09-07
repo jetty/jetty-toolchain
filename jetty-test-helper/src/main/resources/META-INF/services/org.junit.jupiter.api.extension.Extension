@@ -1,1 +1,2 @@
 org.eclipse.jetty.toolchain.test.jupiter.TestTrackerExtension
+org.eclipse.jetty.toolchain.test.jupiter.WorkDirExtension

@@ -23,43 +23,91 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.nio.file.Path;
+import java.util.function.Predicate;
 
 import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
 import org.eclipse.jetty.toolchain.test.StringMangler;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionConfigurationException;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
+import org.junit.platform.commons.util.ExceptionUtils;
+import org.junit.platform.commons.util.ReflectionUtils;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.platform.commons.util.ReflectionUtils.isPrivate;
+import static org.junit.platform.commons.util.ReflectionUtils.makeAccessible;
 
-public class WorkDirExtension implements BeforeEachCallback, ParameterResolver
+public class WorkDirExtension implements BeforeAllCallback, BeforeEachCallback, ParameterResolver
 {
     @Override
-    public void beforeEach(ExtensionContext context) throws IOException
+    public void beforeAll(ExtensionContext context)
+    {
+        injectStaticFields(context, context.getRequiredTestClass());
+    }
+
+    @Override
+    public void beforeEach(ExtensionContext context)
+    {
+        context.getRequiredTestInstances().getAllInstances()
+            .forEach(instance -> injectInstanceFields(context, instance));
+    }
+
+    private void injectStaticFields(ExtensionContext context, Class<?> testClass)
+    {
+        injectFields(context, null, testClass, ReflectionUtils::isStatic);
+    }
+
+    private void injectInstanceFields(ExtensionContext context, Object instance)
+    {
+        injectFields(context, instance, instance.getClass(), ReflectionUtils::isNotStatic);
+    }
+
+    private void injectFields(ExtensionContext context, Object testInstance, Class<?> testClass,
+                              Predicate<Field> fieldPredicate)
     {
         if (!context.getTestInstance().isPresent())
-            throw new RuntimeException("Unable to use @" + WorkDir.class.getSimpleName() + " on this type of test");
+            return;
 
-        Object obj = context.getTestInstance().get();
-
-        Path testPath = toPath(obj.getClass(), context);
-
-        for (Field field : obj.getClass().getDeclaredFields())
+        try
         {
-            if (!field.getType().isAssignableFrom(WorkDir.class))
-                continue; // skip
+            Object obj = context.getTestInstance().get();
+            Path testPath = toPath(obj.getClass(), context);
+            WorkDir workdir = new WorkDir(testPath);
 
-            try
-            {
-                field.set(obj, new WorkDir(testPath));
-            }
-            catch (IllegalAccessException iae)
-            {
-                throw new RuntimeException(iae);
-            }
+            Predicate<Field> isWorkDirAssignable = (f)-> f.getType().isAssignableFrom(WorkDir.class);
+
+            ReflectionUtils.findFields(testClass,
+                fieldPredicate.and(isWorkDirAssignable),
+                ReflectionUtils.HierarchyTraversalMode.TOP_DOWN)
+                .forEach(field ->
+                {
+                    assertValidFieldCandidate(field);
+                    try
+                    {
+                        makeAccessible(field).set(testInstance, workdir);
+                    }
+                    catch (Throwable t)
+                    {
+                        ExceptionUtils.throwAsUncheckedException(t);
+                    }
+                });
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException("Unable to establish WorkDir path", e);
+        }
+    }
+
+    private void assertValidFieldCandidate(Field field)
+    {
+        if (isPrivate(field))
+        {
+            throw new ExtensionConfigurationException("WorkDir field [" + field + "] must not be private.");
         }
     }
 
