@@ -43,6 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class WorkDirExtensionTest
 {
     public WorkDir fieldDir;
+    private Object objA;
 
     @Test
     public void testWorkDir_AsField()

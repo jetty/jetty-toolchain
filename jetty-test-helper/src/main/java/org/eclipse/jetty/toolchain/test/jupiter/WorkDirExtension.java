@@ -79,7 +79,7 @@ public class WorkDirExtension implements BeforeAllCallback, BeforeEachCallback, 
             Path testPath = toPath(obj.getClass(), context);
             WorkDir workdir = new WorkDir(testPath);
 
-            Predicate<Field> isWorkDirAssignable = (f)-> f.getType().isAssignableFrom(WorkDir.class);
+            Predicate<Field> isWorkDirAssignable = (f)-> WorkDir.class.isAssignableFrom(f.getType());
 
             ReflectionUtils.findFields(testClass,
                 fieldPredicate.and(isWorkDirAssignable),
