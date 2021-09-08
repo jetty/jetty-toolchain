@@ -147,7 +147,7 @@ public class WorkDirExtension implements BeforeAllCallback, BeforeEachCallback, 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
     {
-        return parameterContext.getParameter().getType().isAssignableFrom(WorkDir.class);
+        return WorkDir.class.isAssignableFrom(parameterContext.getParameter().getType());
     }
 
     @Override

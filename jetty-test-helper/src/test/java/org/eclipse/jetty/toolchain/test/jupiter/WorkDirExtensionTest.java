@@ -18,6 +18,9 @@
 
 package org.eclipse.jetty.toolchain.test.jupiter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -31,6 +34,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Testing Junit Jupiter behavior with {@link WorkDir} and {@link WorkDirExtension}
@@ -81,6 +85,28 @@ public class WorkDirExtensionTest
     public void testWorkDir_WithParameterizedMethodSource(String a, String b, String c)
     {
         fieldDir.getPath();
+    }
+
+    private static List<Object[]> objValues()
+    {
+        List<Object[]> ret = new ArrayList<>();
+
+        HashMap<String,Object> map1 = new HashMap<>();
+        ret.add(new Object[] { "{}",  map1});
+
+        HashMap<String,Object> map2 = new HashMap<>();
+        map2.put("a", "foo");
+        ret.add(new Object[] { "{'a': 'foo'}", map2 });
+
+        return ret;
+    }
+
+    @ParameterizedTest
+    @MethodSource("objValues")
+    public void testWorkDir_ObjectParameters(Object obj1, Object obj2)
+    {
+        assertNotNull(obj1);
+        assertNotNull(obj2);
     }
 }
 
