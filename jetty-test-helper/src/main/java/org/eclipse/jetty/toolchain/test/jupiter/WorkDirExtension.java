@@ -18,25 +18,19 @@
 
 package org.eclipse.jetty.toolchain.test.jupiter;
 
+import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
+import org.eclipse.jetty.toolchain.test.StringMangler;
+import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.extension.*;
+import org.junit.platform.commons.util.ExceptionUtils;
+import org.junit.platform.commons.util.ReflectionUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.util.function.Predicate;
-
-import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
-import org.eclipse.jetty.toolchain.test.StringMangler;
-import org.junit.jupiter.api.condition.OS;
-import org.junit.jupiter.api.extension.BeforeAllCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionConfigurationException;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.ParameterContext;
-import org.junit.jupiter.api.extension.ParameterResolutionException;
-import org.junit.jupiter.api.extension.ParameterResolver;
-import org.junit.platform.commons.util.ExceptionUtils;
-import org.junit.platform.commons.util.ReflectionUtils;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.platform.commons.util.ReflectionUtils.isPrivate;
@@ -113,35 +107,38 @@ public class WorkDirExtension implements BeforeAllCallback, BeforeEachCallback, 
 
     private Path toPath(Class<?> classContext, ExtensionContext context) throws IOException
     {
-        StringBuilder dirName = new StringBuilder();
+        StringBuilder dirNameBuilder = new StringBuilder();
 
         Class<?> clazz = context.getTestClass().orElse(classContext);
-        dirName.append(StringMangler.condensePackageString(clazz.getName()));
-        dirName.append(File.separatorChar);
+        dirNameBuilder.append(StringMangler.condensePackageString(clazz.getName()));
+        dirNameBuilder.append(File.separatorChar);
 
         if (context.getTestMethod().isPresent())
         {
             String methodname = context.getTestMethod().get().getName();
             if (OS.WINDOWS.isCurrentOs())
             {
-                dirName.append(StringMangler.maxStringLength(30, methodname));
+                dirNameBuilder.append(StringMangler.maxStringLength(30, methodname));
             }
             else
             {
-                dirName.append(methodname);
+                dirNameBuilder.append(methodname);
             }
 
             if (!context.getDisplayName().startsWith(methodname))
             {
-                dirName.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
+                dirNameBuilder.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
             }
         }
         else
         {
-            dirName.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
+            dirNameBuilder.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
         }
 
-        return MavenTestingUtils.getTargetTestingPath().resolve(dirName.toString());
+        String dirName = OS.WINDOWS.isCurrentOs() ?
+                dirNameBuilder.toString().replaceAll("[^a-zA-Z0-9-]", "_") :
+                dirNameBuilder.toString();
+        return MavenTestingUtils.getTargetTestingPath().resolve(dirName);
     }
 
     @Override
