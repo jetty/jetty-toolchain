@@ -18,6 +18,8 @@
 
 package org.eclipse.jetty.toolchain.test.jupiter;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Testing Junit Jupiter behavior with {@link WorkDir} and {@link WorkDirExtension}
@@ -88,16 +91,17 @@ public class WorkDirExtensionTest
         fieldDir.getPath();
     }
 
+    // Leave this declared as List<Object[]> as this triggers a different codepath in junit5
     private static List<Object[]> objValues()
     {
         List<Object[]> ret = new ArrayList<>();
 
-        HashMap<String,Object> map1 = new HashMap<>();
-        ret.add(new Object[] { "{}",  map1});
+        HashMap<String, Object> map1 = new HashMap<>();
+        ret.add(new Object[]{"{}", map1});
 
-        HashMap<String,Object> map2 = new HashMap<>();
+        HashMap<String, Object> map2 = new HashMap<>();
         map2.put("a", "foo");
-        ret.add(new Object[] { "{'a': 'foo'}", map2 });
+        ret.add(new Object[]{"{'a': 'foo'}", map2});
 
         return ret;
     }
@@ -108,6 +112,25 @@ public class WorkDirExtensionTest
     {
         assertNotNull(obj1);
         assertNotNull(obj2);
+    }
+
+    private static Stream<Arguments> wholeCharSpace()
+    {
+        List<Arguments> cases = new ArrayList<>();
+        for (int i = 0; i < 128; i++)
+        {
+            cases.add(Arguments.of("dir-" + (char)i));
+        }
+        return cases.stream();
+    }
+
+    @ParameterizedTest(name="[{index}] {arguments}")
+    @MethodSource("wholeCharSpace")
+    public void testWorkDir_WholeCharspace(String path)
+    {
+        Path dir = fieldDir.getEmptyPathDir();
+        assertTrue(Files.exists(dir), "Does [" + path + "] exist: " + dir);
+        assertTrue(Files.isDirectory(dir), "Is [" + path + "] a directory: " + dir);
     }
 }
 

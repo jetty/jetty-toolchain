@@ -18,25 +18,19 @@
 
 package org.eclipse.jetty.toolchain.test.jupiter;
 
+import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
+import org.eclipse.jetty.toolchain.test.StringMangler;
+import org.eclipse.jetty.toolchain.test.URLEncode;
+import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.extension.*;
+import org.junit.platform.commons.util.ExceptionUtils;
+import org.junit.platform.commons.util.ReflectionUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.util.function.Predicate;
-
-import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
-import org.eclipse.jetty.toolchain.test.StringMangler;
-import org.junit.jupiter.api.condition.OS;
-import org.junit.jupiter.api.extension.BeforeAllCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionConfigurationException;
-import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.ParameterContext;
-import org.junit.jupiter.api.extension.ParameterResolutionException;
-import org.junit.jupiter.api.extension.ParameterResolver;
-import org.junit.platform.commons.util.ExceptionUtils;
-import org.junit.platform.commons.util.ReflectionUtils;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.platform.commons.util.ReflectionUtils.isPrivate;
@@ -133,12 +127,12 @@ public class WorkDirExtension implements BeforeAllCallback, BeforeEachCallback, 
 
             if (!context.getDisplayName().startsWith(methodname))
             {
-                dirName.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
+                dirName.append(URLEncode.encode(context.getDisplayName().trim(), UTF_8.toString()));
             }
         }
         else
         {
-            dirName.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
+            dirName.append(URLEncode.encode(context.getDisplayName().trim(), UTF_8.toString()));
         }
 
         return MavenTestingUtils.getTargetTestingPath().resolve(dirName.toString());
