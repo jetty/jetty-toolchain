@@ -20,6 +20,7 @@ package org.eclipse.jetty.toolchain.test.jupiter;
 
 import org.eclipse.jetty.toolchain.test.MavenTestingUtils;
 import org.eclipse.jetty.toolchain.test.StringMangler;
+import org.eclipse.jetty.toolchain.test.URLEncode;
 import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.extension.*;
 import org.junit.platform.commons.util.ExceptionUtils;
@@ -28,7 +29,6 @@ import org.junit.platform.commons.util.ReflectionUtils;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
@@ -107,38 +107,35 @@ public class WorkDirExtension implements BeforeAllCallback, BeforeEachCallback, 
 
     private Path toPath(Class<?> classContext, ExtensionContext context) throws IOException
     {
-        StringBuilder dirNameBuilder = new StringBuilder();
+        StringBuilder dirName = new StringBuilder();
 
         Class<?> clazz = context.getTestClass().orElse(classContext);
-        dirNameBuilder.append(StringMangler.condensePackageString(clazz.getName()));
-        dirNameBuilder.append(File.separatorChar);
+        dirName.append(StringMangler.condensePackageString(clazz.getName()));
+        dirName.append(File.separatorChar);
 
         if (context.getTestMethod().isPresent())
         {
             String methodname = context.getTestMethod().get().getName();
             if (OS.WINDOWS.isCurrentOs())
             {
-                dirNameBuilder.append(StringMangler.maxStringLength(30, methodname));
+                dirName.append(StringMangler.maxStringLength(30, methodname));
             }
             else
             {
-                dirNameBuilder.append(methodname);
+                dirName.append(methodname);
             }
 
             if (!context.getDisplayName().startsWith(methodname))
             {
-                dirNameBuilder.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
+                dirName.append(URLEncode.encode(context.getDisplayName().trim(), UTF_8.toString()));
             }
         }
         else
         {
-            dirNameBuilder.append(URLEncoder.encode(context.getDisplayName().trim(), UTF_8.toString()));
+            dirName.append(URLEncode.encode(context.getDisplayName().trim(), UTF_8.toString()));
         }
 
-        String dirName = OS.WINDOWS.isCurrentOs() ?
-                dirNameBuilder.toString().replaceAll("[^a-zA-Z0-9-]", "_") :
-                dirNameBuilder.toString();
-        return MavenTestingUtils.getTargetTestingPath().resolve(dirName);
+        return MavenTestingUtils.getTargetTestingPath().resolve(dirName.toString());
     }
 
     @Override
