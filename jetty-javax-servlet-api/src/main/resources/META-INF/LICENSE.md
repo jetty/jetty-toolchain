@@ -841,3 +841,5 @@ http://www.eclipse.org/legal/epl-2.0, or the Apache Software License
     exception to your version of the library, but you are not obligated to
     do so.  If you do not wish to do so, delete this exception statement
     from your version.
+
+SPDX-License-Identifier: (EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0) AND Apache-2.0
