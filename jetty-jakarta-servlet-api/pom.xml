@@ -40,6 +40,7 @@
         <executions>
           <execution>
             <!-- Since we are working with a staged servlet 6.0.0, make sure we get a fresh one each time. -->
+            <!-- TODO: Remove this execution once final servlet 6.0.0 is released -->
             <id>purge-local-dependencies</id>
             <phase>install</phase>
             <goals>
@@ -327,6 +328,7 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    <!-- TODO: Remove this staging repository once final servlet 6.0.0 is released -->
     <repository>
       <id>jakarta.staging</id>
       <url>https://jakarta.oss.sonatype.org/content/groups/staging</url>
