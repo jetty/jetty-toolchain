@@ -39,11 +39,9 @@
         <version>3.3.0</version>
         <executions>
           <execution>
-            <!-- Since we are working with a staged servlet 6.0.0, make sure we get a fresh
-                 one each time.
-                 -->
+            <!-- Since we are working with a staged servlet 6.0.0, make sure we get a fresh one each time. -->
             <id>purge-local-dependencies</id>
-            <phase>process-resources</phase>
+            <phase>install</phase>
             <goals>
               <goal>purge-local-repository</goal>
             </goals>
