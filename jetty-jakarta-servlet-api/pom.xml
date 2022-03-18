@@ -8,7 +8,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jetty-jakarta-servlet-api</artifactId>
-  <version>5.0.3-SNAPSHOT</version>
+  <version>6.0.0-SNAPSHOT</version>
   <name>Jetty :: Jakarta Servlet API and Schemas for JPMS and OSGi</name>
   <packaging>jar</packaging>
 
@@ -21,12 +21,12 @@
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
-      <version>5.0.0</version>
+      <version>6.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
       <artifactId>jetty-schemas</artifactId>
-      <version>5.2</version>
+      <version>6.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
@@ -38,6 +38,21 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <version>3.3.0</version>
         <executions>
+          <execution>
+            <!-- Since we are working with a staged servlet 6.0.0, make sure we get a fresh
+                 one each time.
+                 -->
+            <id>purge-local-dependencies</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>purge-local-repository</goal>
+            </goals>
+            <configuration>
+              <excludes>
+                <exclude>jakarta.servlet:jakarta.servlet-api</exclude>
+              </excludes>
+            </configuration>
+          </execution>
           <execution>
             <id>unpack-source</id>
             <phase>generate-sources</phase>
@@ -118,12 +133,12 @@
             <Bundle-DocURL>https://eclipse.org/jetty</Bundle-DocURL>
             <_nouses>true</_nouses>
             <Export-Package>
-              jakarta.servlet;uses:="jakarta.servlet.annotation,jakarta.servlet.descriptor";version="5.0.0",
-              jakarta.servlet.resources;version="5.0.0",
-              jakarta.servlet.jsp.resources;version="5.0.0",
-              jakarta.servlet.annotation;uses:="jakarta.servlet";version="5.0.0",
-              jakarta.servlet.http;uses:="jakarta.servlet";version="5.0.0",
-              jakarta.servlet.descriptor;version="5.0.0"
+              jakarta.servlet;uses:="jakarta.servlet.annotation,jakarta.servlet.descriptor";version="6.0.0",
+              jakarta.servlet.resources;version="6.0.0",
+              jakarta.servlet.jsp.resources;version="6.0.0",
+              jakarta.servlet.annotation;uses:="jakarta.servlet";version="6.0.0",
+              jakarta.servlet.http;uses:="jakarta.servlet";version="6.0.0",
+              jakarta.servlet.descriptor;version="6.0.0"
             </Export-Package>
           </instructions>
         </configuration>
@@ -312,6 +327,16 @@
       </releases>
       <snapshots>
         <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>jakarta.staging</id>
+      <url>https://jakarta.oss.sonatype.org/content/groups/staging</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
       </snapshots>
     </repository>
   </repositories>
