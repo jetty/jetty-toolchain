@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <mavenPluginToolsVersion>3.5.2</mavenPluginToolsVersion>
     <mavenVersion>3.5.0</mavenVersion>
-    <surefireVersion>3.0.0-M5</surefireVersion>
+    <surefireVersion>3.0.0-M6</surefireVersion>
   </properties>
 
   <licenses>
