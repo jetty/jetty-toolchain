@@ -329,6 +329,7 @@
       </snapshots>
     </repository>
     <!-- TODO: Remove this staging repository once final servlet 6.0.0 is released -->
+    <!--
     <repository>
       <id>jakarta.staging</id>
       <url>https://jakarta.oss.sonatype.org/content/groups/staging</url>
@@ -339,5 +340,6 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
+     -->
   </repositories>
 </project>
