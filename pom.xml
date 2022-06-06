@@ -20,7 +20,6 @@
     <module>jetty-test-helper</module>
     <module>jetty-test-policy</module>
     <module>jetty-xslt-tools</module>
-    <module>jetty-maven-java-profile-activator</module>
   </modules>
   <build>
     <plugins>
