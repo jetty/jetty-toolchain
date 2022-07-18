@@ -17,7 +17,15 @@
 
 name: GitHub CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - 'master'
+      - 'main'
+      - 'jakarta-**'
+      - 'jakarta.**'
+      - 'jetty-**'
+  pull_request:
 
 jobs:
   build:
