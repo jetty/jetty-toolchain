@@ -14,15 +14,16 @@
 package org.eclipse.jetty.toolchain.test;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 
 /**
  * Assertions of various FileSytem Paths
+ * @deprecated use {@link PathMatchers} with {@code assertThat()}
  */
+@Deprecated(forRemoval = true, since = "6.0")
 public final class PathAssert
 {
     private PathAssert()
@@ -35,11 +36,12 @@ public final class PathAssert
      *
      * @param msg message about the test (used in case of assertion failure)
      * @param path the path that should exist, and be a directory
+     * @deprecated use {@code assertThat(msg, path.toPath(), PathMatchers.isDirectory());} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void assertDirExists(String msg, File path)
     {
-        assertPathExists(msg, path);
-        assertTrue(path.isDirectory(), msg + " path should be a Dir : " + path.getAbsolutePath());
+        assertThat(msg, path.toPath(), PathMatchers.isDirectory());
     }
 
     /**
@@ -47,11 +49,12 @@ public final class PathAssert
      *
      * @param msg message about the test (used in case of assertion failure)
      * @param path the path that should exist, and be a directory
+     * @deprecated use {@code assertThat(msg, path, PathMatchers.isDirectory());} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void assertDirExists(String msg, Path path)
     {
-        assertPathExists(msg, path);
-        assertTrue(Files.isDirectory(path), msg + " path should be a Dir : " + path);
+        assertThat(msg, path, PathMatchers.isDirectory());
     }
 
     /**
@@ -59,11 +62,12 @@ public final class PathAssert
      *
      * @param msg message about the test (used in case of assertion failure)
      * @param path the path that should exist, and be a file
+     * @deprecated use {@code assertThat(msg, path.toPath(), PathMatchers.isRegularFile());} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void assertFileExists(String msg, File path)
     {
-        assertPathExists(msg, path);
-        assertTrue(path.isFile(), msg + " path should be a File : " + path.getAbsolutePath());
+        assertThat(msg, path.toPath(), PathMatchers.isRegularFile());
     }
 
     /**
@@ -71,11 +75,12 @@ public final class PathAssert
      *
      * @param msg message about the test (used in case of assertion failure)
      * @param path the path that should exist, and be a file
+     * @deprecated use {@code assertThat(msg, path, PathMatchers.isRegularFile());} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void assertFileExists(String msg, Path path)
     {
-        assertPathExists(msg, path);
-        assertTrue(Files.isRegularFile(path), msg + " path should be a File : " + path);
+        assertThat(msg, path, PathMatchers.isRegularFile());
     }
 
     /**
@@ -83,10 +88,12 @@ public final class PathAssert
      *
      * @param msg message about the test (used in case of assertion failure)
      * @param path the path that should exist
+     * @deprecated use {@code assertThat(msg, path.toPath(), PathMatchers.exists());} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void assertPathExists(String msg, File path)
     {
-        assertTrue(path.exists(), msg + " path should exist: " + path.getAbsolutePath());
+        assertThat(msg, path.toPath(), PathMatchers.exists());
     }
 
     /**
@@ -94,10 +101,12 @@ public final class PathAssert
      *
      * @param msg message about the test (used in case of assertion failure)
      * @param path the path that should exist
+     * @deprecated use {@code assertThat(msg, path, PathMatchers.exists());} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void assertPathExists(String msg, Path path)
     {
-        assertTrue(Files.exists(path), msg + " path should exist: " + path);
+        assertThat(msg, path, PathMatchers.exists());
     }
 
     /**
@@ -105,10 +114,12 @@ public final class PathAssert
      *
      * @param msg message about the test (used in case of assertion failure)
      * @param path the path that should not exist
+     * @deprecated use {@code assertThat(msg, path.toPath(), not(PathMatchers.exists()));} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void assertNotPathExists(String msg, File path)
     {
-        assertFalse(path.exists(), msg + " path should not exist: " + path.getAbsolutePath());
+        assertThat(msg, path.toPath(), not(PathMatchers.exists()));
     }
 
     /**
@@ -116,9 +127,11 @@ public final class PathAssert
      *
      * @param msg message about the test (used in case of assertion failure)
      * @param path the path that should not exist
+     * @deprecated use {@code assertThat(msg, path, not(PathMatchers.exists()));} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void assertNotPathExists(String msg, Path path)
     {
-        assertFalse(Files.exists(path), msg + " path should not exist: " + path);
+        assertThat(msg, path, not(PathMatchers.exists()));
     }
 }
