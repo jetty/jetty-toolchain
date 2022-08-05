@@ -70,10 +70,12 @@ public final class FS
     /**
      * Delete a file or a directory.
      * <p>
-     * Note: safety mechanism only allows delete within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows a delete within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
      *
      * @param path the file or directory to delete.
+     * @deprecated use Path version {@link #delete(Path)}
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void delete(File path)
     {
         delete(path.toPath());
@@ -85,7 +87,9 @@ public final class FS
      * Note: safety mechanism only allows delete directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
      *
      * @param dir the directory to delete.
+     * @deprecated use Path version {@link #deleteDirectory(Path)}
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void deleteDirectory(File dir)
     {
         deleteDirectory(dir.toPath());
@@ -109,7 +113,9 @@ public final class FS
      * Note: safety mechanism only allows delete file within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
      *
      * @param path the path to delete.
+     * @deprecated use Path version {@link #deleteFile(Path)}
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void deleteFile(File path)
     {
         assertTrue(path.isFile(), "Path must be a file: " + path.getAbsolutePath());
@@ -209,7 +215,9 @@ public final class FS
      * Note: safety mechanism only allows clean directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
      *
      * @param dir the directory to delete.
+     * @deprecated use Path version {@link #cleanDirectory(Path)}
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void cleanDirectory(File dir)
     {
         cleanDirectory(dir.toPath());
@@ -232,7 +240,9 @@ public final class FS
      * Ensure the provided directory exists, and contains no content (empty)
      *
      * @param dir the dir to check.
+     * @deprecated use Path version {@link #ensureEmpty(Path)}
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void ensureEmpty(File dir)
     {
         ensureEmpty(dir.toPath());
@@ -259,7 +269,9 @@ public final class FS
      * Ensure the provided directory does not exist, delete it if present
      *
      * @param dir the dir to check
+     * @deprecated use Path version {@link #ensureDeleted(Path)}
      */
+    @Deprecated(forRemoval = false)
     public static void ensureDeleted(File dir)
     {
         ensureDeleted(dir.toPath());
@@ -282,7 +294,9 @@ public final class FS
      * Ensure that directory exists, create it if not present. Leave it alone if already there.
      *
      * @param dir the dir to check.
+     * @deprecated use Path version {@link #ensureDirExists(Path)}
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void ensureDirExists(File dir)
     {
         if (dir.exists())
@@ -327,8 +341,10 @@ public final class FS
      *
      * @param dir the dir to check
      * @return true if provided directory is a testing directory
+     * @deprecated use Path version {@link #isTestingDir(Path)}
      */
-    protected static boolean isTestingDir(File dir)
+    @Deprecated(forRemoval = true, since = "6.0")
+    static boolean isTestingDir(File dir)
     {
         return isTestingDir(dir.toPath());
     }
@@ -341,7 +357,7 @@ public final class FS
      * @param dir the dir to check
      * @return true if provided directory is a testing directory
      */
-    protected static boolean isTestingDir(Path dir)
+    static boolean isTestingDir(Path dir)
     {
         try
         {
@@ -359,7 +375,9 @@ public final class FS
      *
      * @param file the file to create or update the timestamp of.
      * @throws IOException if unable to create the new file.
+     * @deprecated use Path version {@link #touch(Path)}
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void touch(File file) throws IOException
     {
         if (file.exists())
