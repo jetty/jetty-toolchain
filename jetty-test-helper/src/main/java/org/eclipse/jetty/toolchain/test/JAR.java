@@ -28,7 +28,7 @@ import java.util.jar.JarOutputStream;
  * Basic functions for working with JAR files in test cases.
  * @deprecated use ZipFS
  */
-@Deprecated(forRemoval = true)
+@Deprecated(forRemoval = true, since = "6.0")
 public final class JAR
 {
     private JAR()
