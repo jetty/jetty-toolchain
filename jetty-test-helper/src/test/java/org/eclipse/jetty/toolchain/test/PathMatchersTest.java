@@ -24,7 +24,9 @@ import static org.eclipse.jetty.toolchain.test.PathMatchers.exists;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isDirectory;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isEmptyDirectory;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isRegularFile;
+import static org.eclipse.jetty.toolchain.test.PathMatchers.isSame;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 public class PathMatchersTest
@@ -89,5 +91,18 @@ public class PathMatchersTest
         Path content = dir.resolve("foo.dat");
         FS.touch(content);
         assertThat("Is an empty directory", dir, not(isEmptyDirectory()));
+    }
+
+    @Test
+    public void testIsSame(WorkDir workDir) throws IOException
+    {
+        Path pathA = workDir.getEmptyPathDir().resolve("test.txt");
+        FS.touch(pathA);
+        Path dir = workDir.getPath().resolve("dir");
+        Files.createDirectory(dir);
+        Path relativeRef = workDir.getPath().resolve("dir/../test.txt");
+        assertThat("toString should not match", pathA.toString(), not(is(relativeRef.toString())));
+
+        assertThat("Is the same file", relativeRef, isSame(pathA));
     }
 }

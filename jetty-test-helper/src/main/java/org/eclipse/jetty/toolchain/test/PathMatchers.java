@@ -150,4 +150,28 @@ public class PathMatchers
                 }
             });
     }
+
+    /**
+     * Test for {@link Path} that uses {@link Files#isDirectory(Path, LinkOption...)} with clear description of Path if it fails
+     *
+     * @return the isDirectory matcher
+     */
+    public static org.hamcrest.Matcher<Path> isSame(final Path expected)
+    {
+        return new PathPredicate(
+            (p) ->
+            {
+                try
+                {
+                    return Files.isSameFile(p, expected);
+                }
+                catch (IOException e)
+                {
+                    // unable to verify
+                    return false;
+                }
+            }, "path is same",
+            (p) ->
+                String.format(" is not same as <%s>", expected.toString()));
+    }
 }
