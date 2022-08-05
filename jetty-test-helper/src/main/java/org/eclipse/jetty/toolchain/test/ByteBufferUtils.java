@@ -17,7 +17,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class ByteBufferUtils
+class ByteBufferUtils
 {
     /**
      * Get the byte array out of a ByteBuffer.
