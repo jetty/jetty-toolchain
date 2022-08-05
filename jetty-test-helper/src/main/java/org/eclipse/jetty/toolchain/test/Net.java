@@ -22,7 +22,7 @@ import java.util.Enumeration;
 
 public final class Net
 {
-    public static boolean isInterfaceAvailableFor(Class<? extends InetAddress> addrClass)
+    protected static boolean isInterfaceAvailableFor(Class<? extends InetAddress> addrClass)
     {
         try
         {
