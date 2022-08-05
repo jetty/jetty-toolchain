@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -35,20 +34,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Testing Junit Jupiter behavior with {@link WorkDir} and {@link WorkDirExtension}
+ * Testing Junit Jupiter behavior with {@link WorkDir} as test param
  */
-@ExtendWith({WorkDirExtension.class})
-public class WorkDirExtensionTest
+public class WorkDirAsParamTest
 {
-    public WorkDir fieldDir;
     private Object objA;
-
-    @Test
-    public void testWorkDir_AsField()
-    {
-        assertThat("testingDir", fieldDir, is(notNullValue()));
-        assertThat("testingDir.getPath()", fieldDir.getPath(), is(notNullValue()));
-    }
 
     @Test
     public void testWorkDir_AsParam(WorkDir dir)
@@ -59,15 +49,15 @@ public class WorkDirExtensionTest
 
     @ParameterizedTest
     @ValueSource(strings = {"foo", "bar", "a longer\nstring\r\bwith\tcontrol\0characters"})
-    public void testWorkDir_WithParameterized(String val)
+    public void testWorkDir_WithParameterized(String val, WorkDir workDir)
     {
-        fieldDir.getPath();
+        workDir.getPath();
     }
 
     @Test
-    public void testWorkDir_TestInfo(TestInfo testInfo)
+    public void testWorkDir_TestInfo(WorkDir workDir, TestInfo testInfo)
     {
-        fieldDir.getPath();
+        workDir.getPath();
     }
 
     private static Stream<Arguments> testValues()
@@ -81,9 +71,9 @@ public class WorkDirExtensionTest
 
     @ParameterizedTest
     @MethodSource("testValues")
-    public void testWorkDir_WithParameterizedMethodSource(String a, String b, String c)
+    public void testWorkDir_WithParameterizedMethodSource(String a, String b, String c, WorkDir workDir)
     {
-        fieldDir.getPath();
+        workDir.getPath();
     }
 
     // Leave this declared as List<Object[]> as this triggers a different codepath in junit5
@@ -103,8 +93,9 @@ public class WorkDirExtensionTest
 
     @ParameterizedTest
     @MethodSource("objValues")
-    public void testWorkDir_ObjectParameters(Object obj1, Object obj2)
+    public void testWorkDir_ObjectParameters(Object obj1, Object obj2, WorkDir workDir)
     {
+        workDir.getPath();
         assertNotNull(obj1);
         assertNotNull(obj2);
     }
@@ -121,9 +112,9 @@ public class WorkDirExtensionTest
 
     @ParameterizedTest(name="[{index}] {arguments}")
     @MethodSource("wholeCharSpace")
-    public void testWorkDir_WholeCharspace(String path)
+    public void testWorkDir_WholeCharspace(String path, WorkDir workDir)
     {
-        Path dir = fieldDir.getEmptyPathDir();
+        Path dir = workDir.getEmptyPathDir();
         assertTrue(Files.exists(dir), "Does [" + path + "] exist: " + dir);
         assertTrue(Files.isDirectory(dir), "Is [" + path + "] a directory: " + dir);
     }
