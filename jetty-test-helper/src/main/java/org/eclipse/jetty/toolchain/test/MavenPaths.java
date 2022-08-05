@@ -222,11 +222,11 @@ public final class MavenPaths
      * </p>
      * <p>
      * Search order:
-     *   <ol>
-     *       <li><code>src/main/resources/${name}</code></li>
-     *       <li><code>target/classes/${name}</code></li>
-     *   </ol>
      * </p>
+     *   <ol>
+     *     <li><code>src/main/resources/${name}</code></li>
+     *     <li><code>target/classes/${name}</code></li>
+     *   </ol>
      * <p>
      *     If name exists anywhere in the search tree, but is not a File, this
      *     results in an {@link AssertionError}
@@ -250,11 +250,11 @@ public final class MavenPaths
      * </p>
      * <p>
      * Search order:
+     * </p>
      *   <ol>
      *       <li><code>src/main/resources/${name}</code></li>
      *       <li><code>target/classes/${name}</code></li>
      *   </ol>
-     * </p>
      * <p>
      *     If name exists anywhere in the search tree, but is not a Directory, this
      *     results in an {@link AssertionError}
@@ -278,12 +278,12 @@ public final class MavenPaths
      * </p>
      * <p>
      * Search order:
+     * </p>
      *   <ol>
      *       <li><code>src/test/resources/${name}</code></li>
      *       <li><code>target/test-classes/${name}</code></li>
      *       <li><code>ClassLoader.getResource(${name})</code></li>
      *   </ol>
-     * </p>
      * <p>
      *     If name exists anywhere in the search tree, but is not a File, this
      *     results in an {@link AssertionError}
@@ -307,12 +307,12 @@ public final class MavenPaths
      * </p>
      * <p>
      * Search order:
+     * </p>
      *   <ol>
      *       <li><code>src/main/resources/${name}</code></li>
      *       <li><code>target/classes/${name}</code></li>
      *       <li><code>ClassLoader.getResource(${name})</code></li>
      *   </ol>
-     * </p>
      * <p>
      *     If name exists anywhere in the search tree, but is not a Directory, this
      *     results in an {@link AssertionError}
