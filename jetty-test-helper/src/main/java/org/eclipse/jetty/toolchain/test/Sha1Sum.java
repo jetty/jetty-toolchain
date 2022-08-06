@@ -32,7 +32,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class Sha1Sum
 {
-
+    /**
+     * @deprecated use {@link #calculate(Path)} instead
+     */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static String calculate(File file) throws NoSuchAlgorithmException, IOException
     {
         return calculate(file.toPath());
@@ -64,12 +67,21 @@ public class Sha1Sum
         return Hex.asHex(digest.digest());
     }
 
-    public static String loadSha1(File sha1File) throws IOException
+    public static String loadSha1(Path sha1File) throws IOException
     {
-        String contents = IO.readToString(sha1File);
+        String contents = Files.readString(sha1File);
         Pattern pat = Pattern.compile("^[0-9A-Fa-f]*");
         Matcher mat = pat.matcher(contents);
         assertTrue(mat.find(), "Should have found HEX code in SHA1 file: " + sha1File);
         return mat.group();
+    }
+
+    /**
+     * @deprecated use {@link #loadSha1(Path)} instead
+     */
+    @Deprecated(forRemoval = true, since = "6.0")
+    public static String loadSha1(File sha1File) throws IOException
+    {
+        return loadSha1(sha1File.toPath());
     }
 }
