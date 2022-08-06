@@ -397,13 +397,13 @@ public final class MavenPaths
 
     static String safename(String name)
     {
-        final String reserved = "<>:\"|?*";
+        final String reserved = "<>/:\"|\\?*\177";
         StringBuilder result = new StringBuilder();
         for (char c : name.toCharArray())
         {
             if (Character.isISOControl(c) || reserved.indexOf(c) >= 0)
             {
-                result.append(String.format("%02X", (byte)(c & 0xFF))); // replacement char
+                result.append(String.format("%%%02X", (byte)(c & 0xFF))); // replacement char
             }
             else
             {

@@ -16,13 +16,18 @@ package org.eclipse.jetty.toolchain.test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isDirectory;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isRegularFile;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isSame;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MavenPathsTest
@@ -119,5 +124,31 @@ public class MavenPathsTest
 
         Path file = MavenPaths.findMainResourceFile("META-INF/ignored/info.txt");
         assertThat("Main resource file", file, isRegularFile());
+    }
+
+    public static Stream<Arguments> safeNameCases()
+    {
+        return Stream.of(
+            Arguments.of("", ""),
+            Arguments.of("<", "%3C"),
+            Arguments.of(">", "%3E"),
+            Arguments.of(":", "%3A"),
+            Arguments.of("\"", "%22"),
+            Arguments.of("/", "%2F"),
+            Arguments.of("\\", "%5C"),
+            Arguments.of("|", "%7C"),
+            Arguments.of("?", "%3F"),
+            Arguments.of("*", "%2A"),
+            Arguments.of("\000", "%00"),
+            Arguments.of("\032", "%1A"),
+            Arguments.of("\177", "%7F")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("safeNameCases")
+    public void testSafename(String input, String expected)
+    {
+        assertThat(MavenPaths.safename(input), is(expected));
     }
 }
