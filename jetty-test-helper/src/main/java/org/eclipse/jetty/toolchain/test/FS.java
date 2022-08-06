@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.util.concurrent.TimeUnit;
 
+import static org.eclipse.jetty.toolchain.test.PathMatchers.isDirectory;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -42,7 +43,8 @@ public final class FS
     /**
      * Delete a file or a directory.
      * <p>
-     * Note: safety mechanism only allows delete within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows content to be deleted within the {@link MavenPaths#targetTests()} directory.
+     * </p>
      *
      * @param path the file or directory to delete.
      */
@@ -70,7 +72,8 @@ public final class FS
     /**
      * Delete a file or a directory.
      * <p>
-     * Note: safety mechanism only allows a delete within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows content to be deleted within the {@link MavenPaths#targetTests()} directory.
+     * </p>
      *
      * @param path the file or directory to delete.
      * @deprecated use Path version {@link #delete(Path)}
@@ -84,7 +87,8 @@ public final class FS
     /**
      * Delete a directory and all contents under it.
      * <p>
-     * Note: safety mechanism only allows delete directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows content to be deleted within the {@link MavenPaths#targetTests()} directory.
+     * </p>
      *
      * @param dir the directory to delete.
      * @deprecated use Path version {@link #deleteDirectory(Path)}
@@ -98,7 +102,8 @@ public final class FS
     /**
      * Delete a directory and all contents under it.
      * <p>
-     * Note: safety mechanism only allows delete directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows content to be deleted within the {@link MavenPaths#targetTests()} directory.
+     * </p>
      *
      * @param dir the directory to delete.
      */
@@ -110,7 +115,8 @@ public final class FS
     /**
      * Delete a file.
      * <p>
-     * Note: safety mechanism only allows delete file within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows content to be deleted within the {@link MavenPaths#targetTests()} directory.
+     * </p>
      *
      * @param path the path to delete.
      * @deprecated use Path version {@link #deleteFile(Path)}
@@ -118,16 +124,14 @@ public final class FS
     @Deprecated(forRemoval = true, since = "6.0")
     public static void deleteFile(File path)
     {
-        assertTrue(path.isFile(), "Path must be a file: " + path.getAbsolutePath());
-        assertTrue(FS.isTestingDir(path.getParentFile()), "Can only delete content within the /target/tests/ directory: " + path.getAbsolutePath());
-
-        assertTrue(path.delete(), "Failed to delete file: " + path.getAbsolutePath());
+        deleteFile(path.toPath());
     }
 
     /**
      * Delete a file.
      * <p>
-     * Note: safety mechanism only allows delete file within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows content to be deleted within the {@link MavenPaths#targetTests()} directory.
+     * </p>
      *
      * @param path the path to delete.
      */
@@ -153,7 +157,7 @@ public final class FS
     /**
      * Delete a directory. (only if it is empty)
      * <p>
-     * Note: safety mechanism only allows delete file within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows delete file within the {@link MavenPaths#targetTests()} directory.
      *
      * @param path the path to delete.
      */
@@ -163,7 +167,7 @@ public final class FS
 
         if (Files.exists(path))
         {
-            assertTrue(Files.isDirectory(path), "Path must be a file: " + location);
+            assertThat(path, isDirectory());
             assertTrue(FS.isTestingDir(path.getParent()), "Can only delete content within the /target/tests/ directory: " + location);
             try
             {
@@ -196,11 +200,7 @@ public final class FS
                 }
             }
         }
-        catch (DirectoryIteratorException e)
-        {
-            fail("Unable to (recursively) delete path: " + location, e);
-        }
-        catch (IOException e)
+        catch (DirectoryIteratorException | IOException e)
         {
             fail("Unable to (recursively) delete path: " + location, e);
         }
@@ -212,7 +212,7 @@ public final class FS
     /**
      * Delete the contents of a directory and all contents under it, leaving the directory itself still in existance.
      * <p>
-     * Note: safety mechanism only allows clean directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows clean directory within the {@link MavenPaths#targetTests()} directory.
      *
      * @param dir the directory to delete.
      * @deprecated use Path version {@link #cleanDirectory(Path)}
@@ -226,7 +226,7 @@ public final class FS
     /**
      * Delete the contents of a directory and all contents under it, leaving the directory itself still in existance.
      * <p>
-     * Note: safety mechanism only allows clean directory within the {@link MavenTestingUtils#getTargetTestingDir()} directory.
+     * Note: safety mechanism only allows clean directory within the {@link MavenPaths#targetTests()} directory.
      *
      * @param dir the directory to delete.
      */
@@ -271,7 +271,7 @@ public final class FS
      * @param dir the dir to check
      * @deprecated use Path version {@link #ensureDeleted(Path)}
      */
-    @Deprecated(forRemoval = false)
+    @Deprecated(forRemoval = true)
     public static void ensureDeleted(File dir)
     {
         ensureDeleted(dir.toPath());
@@ -299,14 +299,7 @@ public final class FS
     @Deprecated(forRemoval = true, since = "6.0")
     public static void ensureDirExists(File dir)
     {
-        if (dir.exists())
-        {
-            assertTrue(dir.isDirectory(), "Path exists, but should be a Dir : " + dir.getAbsolutePath());
-        }
-        else
-        {
-            assertTrue(dir.mkdirs(), "Creating dir: " + dir);
-        }
+        ensureDirExists(dir.toPath());
     }
 
     /**
@@ -318,7 +311,7 @@ public final class FS
     {
         if (Files.exists(dir))
         {
-            assertTrue(Files.isDirectory(dir), "Path exists, but should be a Dir : " + dir.toAbsolutePath());
+            assertThat("Path exists, but should be a dir", dir, isDirectory());
         }
         else
         {
@@ -361,12 +354,12 @@ public final class FS
     {
         try
         {
-            return dir.toRealPath().startsWith(MavenTestingUtils.getTargetTestingPath());
+            return dir.toRealPath().startsWith(MavenPaths.targetTests());
         }
         catch (IOException e)
         {
             // Fallback when toRealPath() fails (on some filesystems)
-            return dir.toAbsolutePath().startsWith(MavenTestingUtils.getTargetTestingPath());
+            return dir.toAbsolutePath().startsWith(MavenPaths.targetTests());
         }
     }
 
@@ -380,14 +373,7 @@ public final class FS
     @Deprecated(forRemoval = true, since = "6.0")
     public static void touch(File file) throws IOException
     {
-        if (file.exists())
-        {
-            assertTrue(file.setLastModified(System.currentTimeMillis()), "Updating last modified timestamp");
-        }
-        else
-        {
-            assertTrue(file.createNewFile(), "Creating file: " + file);
-        }
+        touch(file.toPath());
     }
 
     /**
