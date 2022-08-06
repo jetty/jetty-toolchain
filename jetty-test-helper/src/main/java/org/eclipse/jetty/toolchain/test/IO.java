@@ -16,15 +16,23 @@ package org.eclipse.jetty.toolchain.test;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
-import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import static org.eclipse.jetty.toolchain.test.PathMatchers.isDirectory;
+import static org.eclipse.jetty.toolchain.test.PathMatchers.isRegularFile;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * IO Utilities.
@@ -63,25 +71,25 @@ public final class IO
     }
 
     /**
-     * Read the contents of a file into a String and return it.
+     * Copy the entire {@link InputStream} to the {@link OutputStream}
      *
-     * @param file the file to read.
-     * @return the contents of the file.
-     * @throws IOException if unable to read the file.
+     * @param in the input stream to read from
+     * @param out the output stream to write to
+     * @throws IOException if unable to copy the stream
      */
-    public static String readToString(File file) throws IOException
+    public static void copy(InputStream in, OutputStream out) throws IOException
     {
-        FileReader reader = null;
-        try
+        byte buffer[] = new byte[BUFFER_SIZE];
+        int len = BUFFER_SIZE;
+
+        while (true)
         {
-            reader = new FileReader(file);
-            StringWriter writer = new StringWriter();
-            copy(reader, writer);
-            return writer.toString();
-        }
-        finally
-        {
-            close(reader);
+            len = in.read(buffer, 0, BUFFER_SIZE);
+            if (len < 0)
+            {
+                break;
+            }
+            out.write(buffer, 0, len);
         }
     }
 
@@ -110,10 +118,102 @@ public final class IO
     /**
      * Copy files or directories.
      *
+     * @param src the from path
+     * @param dest the destination path
+     * @throws IOException if unable to copy the file
+     */
+    public static void copy(Path src, Path dest) throws IOException
+    {
+        if (Files.isDirectory(src))
+        {
+            copyDir(src, dest);
+        }
+        else
+        {
+            copyFile(src, dest);
+        }
+    }
+
+    /**
+     * Copy the contents of a directory from one directory to another.
+     *
+     * @param srcDir the from directory
+     * @param destDir the destination directory
+     * @throws IOException if unable to copy the file
+     */
+    public static void copyDir(Path srcDir, Path destDir) throws IOException
+    {
+        Objects.requireNonNull(srcDir);
+        Objects.requireNonNull(destDir);
+        assertThat("Source Dir", srcDir, isDirectory());
+        assertThat("Destination Dir", destDir, isDirectory());
+        assertThat("Destination Dir", destDir, PathMatchers.isEmptyDirectory());
+
+        System.out.printf("CopyDir %s to %s%n", srcDir, destDir);
+
+        try (Stream<Path> sourceStream = Files.walk(srcDir, 20))
+        {
+            Iterator<Path> iterFiles = sourceStream
+                .filter(Files::isRegularFile)
+                .iterator();
+            while (iterFiles.hasNext())
+            {
+                Path sourceFile = iterFiles.next();
+                Path destFile = destDir.resolve(srcDir.relativize(sourceFile));
+                if (!Files.exists(destFile.getParent()))
+                    Files.createDirectories(destFile.getParent());
+                Files.copy(sourceFile, destFile);
+            }
+        }
+    }
+
+    /**
+     * Copy a file from one place to another using {@link Files#copy(Path, Path, CopyOption...)}
+     *
+     * @param srcFile the file to copy
+     * @param destFile the destination file to create
+     * @throws IOException if unable to copy the file
+     */
+    public static void copyFile(Path srcFile, Path destFile) throws IOException
+    {
+        assertThat("Source File", srcFile, isRegularFile());
+        Files.copy(srcFile, destFile);
+    }
+
+    // --- EVERYTHING BELOW THIS LINE IS DEPRECATED ---
+
+    /**
+     * @deprecated use {@link Files#readString(Path, Charset)} instead
+     */
+    @Deprecated(forRemoval = true, since = "6.0")
+    public static String readToString(Path path) throws IOException
+    {
+        return Files.readString(path, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Read the contents of a file into a String and return it.
+     *
+     * @param file the file to read.
+     * @return the contents of the file.
+     * @throws IOException if unable to read the file.
+     * @deprecated use {@link Files#readString(Path, Charset)} instead
+     */
+    @Deprecated(forRemoval = true, since = "6.0")
+    public static String readToString(File file) throws IOException
+    {
+        return Files.readString(file.toPath(), StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Copy files or directories.
+     *
      * @param from the from path
      * @param to the destination path
      * @throws IOException if unable to copy the file
+     * @deprecated use {@link #copy(Path, Path)} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void copy(File from, File to) throws IOException
     {
         if (from.isDirectory())
@@ -132,10 +232,14 @@ public final class IO
      * @param from the from directory
      * @param to the destination directory
      * @throws IOException if unable to copy the file
+     * @deprecated use {@link #copyDir(Path, Path)} instead
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static void copyDir(File from, File to) throws IOException
     {
-        FS.ensureDirExists(to);
+        Objects.requireNonNull(from);
+        Objects.requireNonNull(to);
+        assertThat(to.toPath(), isDirectory());
 
         for (File file : from.listFiles(IO.SafeFileFilter.INSTANCE))
         {
@@ -147,6 +251,7 @@ public final class IO
      * A {@link FileFilter} for obtaining a list of contents that does not contain the special
      * <code>.</code> and <code>..</code> entries that some JVM environments report.
      */
+    @Deprecated(forRemoval = true, since = "6.0")
     public static class SafeFileFilter implements FileFilter
     {
         @SuppressWarnings("javadoc")
@@ -164,49 +269,16 @@ public final class IO
     }
 
     /**
-     * Copy the entire {@link InputStream} to the {@link OutputStream}
-     *
-     * @param in the input stream to read from
-     * @param out the output stream to write to
-     * @throws IOException if unable to copy the stream
-     */
-    public static void copy(InputStream in, OutputStream out) throws IOException
-    {
-        byte buffer[] = new byte[BUFFER_SIZE];
-        int len = BUFFER_SIZE;
-
-        while (true)
-        {
-            len = in.read(buffer, 0, BUFFER_SIZE);
-            if (len < 0)
-            {
-                break;
-            }
-            out.write(buffer, 0, len);
-        }
-    }
-
-    /**
      * Copy a file from one place to another
      *
      * @param from the file to copy
      * @param to the destination file to create
      * @throws IOException if unable to copy the file
+     * @deprecated use {@link Files#copy(Path, Path, CopyOption...)} instead
      */
+    @Deprecated
     public static void copyFile(File from, File to) throws IOException
     {
-        FileInputStream in = null;
-        FileOutputStream out = null;
-        try
-        {
-            in = new FileInputStream(from);
-            out = new FileOutputStream(to);
-            copy(in, out);
-        }
-        finally
-        {
-            close(out);
-            close(in);
-        }
+        Files.copy(from.toPath(), to.toPath());
     }
 }
