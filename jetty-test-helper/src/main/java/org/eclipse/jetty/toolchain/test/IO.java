@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import static org.eclipse.jetty.toolchain.test.PathMatchers.exists;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isDirectory;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isRegularFile;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -124,8 +125,11 @@ public final class IO
      */
     public static void copy(Path src, Path dest) throws IOException
     {
+        assertThat(src, exists());
         if (Files.isDirectory(src))
         {
+            if (!Files.exists(dest))
+                Files.createDirectory(dest);
             copyDir(src, dest);
         }
         else
