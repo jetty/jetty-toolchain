@@ -32,6 +32,7 @@ import java.util.stream.Stream;
 
 import static org.eclipse.jetty.toolchain.test.PathMatchers.exists;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isDirectory;
+import static org.eclipse.jetty.toolchain.test.PathMatchers.isEmptyDirectory;
 import static org.eclipse.jetty.toolchain.test.PathMatchers.isRegularFile;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -151,9 +152,7 @@ public final class IO
         Objects.requireNonNull(destDir);
         assertThat("Source Dir", srcDir, isDirectory());
         assertThat("Destination Dir", destDir, isDirectory());
-        assertThat("Destination Dir", destDir, PathMatchers.isEmptyDirectory());
-
-        System.out.printf("CopyDir %s to %s%n", srcDir, destDir);
+        assertThat("Destination Dir", destDir, isEmptyDirectory());
 
         try (Stream<Path> sourceStream = Files.walk(srcDir, 20))
         {
@@ -212,43 +211,33 @@ public final class IO
     /**
      * Copy files or directories.
      *
-     * @param from the from path
-     * @param to the destination path
+     * @param src the from path
+     * @param dest the destination path
      * @throws IOException if unable to copy the file
      * @deprecated use {@link #copy(Path, Path)} instead
      */
     @Deprecated(forRemoval = true, since = "6.0")
-    public static void copy(File from, File to) throws IOException
+    public static void copy(File src, File dest) throws IOException
     {
-        if (from.isDirectory())
-        {
-            copyDir(from, to);
-        }
-        else
-        {
-            copyFile(from, to);
-        }
+        Objects.requireNonNull(src, "Source Path");
+        Objects.requireNonNull(dest, "Destination Path");
+        copy(src.toPath(), dest.toPath());
     }
 
     /**
      * Copy the contents of a directory from one directory to another.
      *
-     * @param from the from directory
-     * @param to the destination directory
+     * @param srcDir the from directory
+     * @param destDir the destination directory
      * @throws IOException if unable to copy the file
      * @deprecated use {@link #copyDir(Path, Path)} instead
      */
     @Deprecated(forRemoval = true, since = "6.0")
-    public static void copyDir(File from, File to) throws IOException
+    public static void copyDir(File srcDir, File destDir) throws IOException
     {
-        Objects.requireNonNull(from);
-        Objects.requireNonNull(to);
-        assertThat(to.toPath(), isDirectory());
-
-        for (File file : from.listFiles(IO.SafeFileFilter.INSTANCE))
-        {
-            copy(file, new File(to, file.getName()));
-        }
+        Objects.requireNonNull(srcDir, "Source Dir");
+        Objects.requireNonNull(destDir, "Destination Dir");
+        copyDir(srcDir.toPath(), destDir.toPath());
     }
 
     /**
@@ -275,14 +264,16 @@ public final class IO
     /**
      * Copy a file from one place to another
      *
-     * @param from the file to copy
-     * @param to the destination file to create
+     * @param srcFile the file to copy
+     * @param destFile the destination file to create
      * @throws IOException if unable to copy the file
      * @deprecated use {@link Files#copy(Path, Path, CopyOption...)} instead
      */
     @Deprecated
-    public static void copyFile(File from, File to) throws IOException
+    public static void copyFile(File srcFile, File destFile) throws IOException
     {
-        Files.copy(from.toPath(), to.toPath());
+        Objects.requireNonNull(srcFile, "Source File");
+        Objects.requireNonNull(destFile, "Destination File");
+        Files.copy(srcFile.toPath(), destFile.toPath());
     }
 }
