@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <properties>
         <!-- The jetty-version here only needs to be api compatible -->
-        <jetty-version>9.4.48.v20220622</jetty-version>
+        <jetty-version>9.4.49.v20220914</jetty-version>
         <jetty-test-helper-version>2.0</jetty-test-helper-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
