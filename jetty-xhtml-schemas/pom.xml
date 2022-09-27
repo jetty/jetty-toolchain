@@ -9,7 +9,7 @@
   </parent>
   <artifactId>jetty-xhtml-schemas</artifactId>
   <packaging>jar</packaging>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
   <name>Jetty Toolchain :: XHTML Schemas</name>
   <description>XHTML Schemas and utilities</description>
   <properties>
@@ -178,7 +178,7 @@
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-xhtml-schemas</url>
-    <tag>jetty-xhtml-schemas-1.1</tag>
+    <tag>HEAD</tag>
   </scm>
 </project>
 
