@@ -19,6 +19,7 @@
     <module>jetty-schemas</module>
     <module>jetty-test-helper</module>
     <module>jetty-test-policy</module>
+    <module>jetty-xhtml-schemas</module>
     <module>jetty-xslt-tools</module>
   </modules>
   <build>

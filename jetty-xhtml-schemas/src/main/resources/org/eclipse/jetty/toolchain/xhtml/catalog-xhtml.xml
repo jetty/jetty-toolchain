@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+
+  <public publicId="-//W3C//DTD XHTML 1.1//EN" uri="xhtml11.dtd" />
+  <system systemId="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" uri="xhtml11.dtd" />
+
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-inlstyle-1.mod" uri="xhtml-inlstyle-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-model-1.mod" uri="xhtml-model-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-framework-1.mod" uri="xhtml-framework-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-datatypes-1.mod" uri="xhtml-datatypes-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-text-1.mod" uri="xhtml-text-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-hypertext-1.mod" uri="xhtml-hypertext-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-list-1.mod" uri="xhtml-list-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-edit-1.mod" uri="xhtml-edit-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-bdo-1.mod" uri="xhtml-bdo-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-ruby-1.mod" uri="xhtml-ruby-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-pres-1.mod" uri="xhtml-pres-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-link-1.mod" uri="xhtml-link-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-meta-1.mod" uri="xhtml-meta-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-base-1.mod" uri="xhtml-base-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-script-1.mod" uri="xhtml-script-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-style-1.mod" uri="xhtml-style-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-image-1.mod" uri="xhtml-image-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-csismap-1.mod" uri="xhtml-csismap-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-ssismap-1.mod" uri="xhtml-ssismap-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-param-1.mod" uri="xhtml-param-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-legacy-1.mod" uri="xhtml-legacy-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-struct-1.mod" uri="xhtml-struct-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-qname-1.mod" uri="xhtml-qname-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-events-1.mod" uri="xhtml-events-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-attribs-1.mod" uri="xhtml-attribs-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-charent-1.mod" uri="xhtml-charent-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-inlstruct-1.mod" uri="xhtml-inlstruct-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-inlphras-1.mod" uri="xhtml-inlphras-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-blkstruct-1.mod" uri="xhtml-blkstruct-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-blkphras-1.mod" uri="xhtml-blkphras-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-inkpres-1.mod" uri="xhtml-inkpres-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-blkpres-1.mod" uri="xhtml-blkpres-1.mod" />
+
+</catalog>
