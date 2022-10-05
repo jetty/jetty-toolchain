@@ -51,4 +51,4 @@ jobs:
           cache: 'maven'
 
       - name: Build with Maven
-        run: mvn install javadoc:javadoc -e -B -V
+        run: mvn install javadoc:javadoc -e -B -V -Psetuid
