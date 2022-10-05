@@ -16,7 +16,7 @@
     <enforcer.version>3.1.0</enforcer.version>
     <shade.version>3.4.0</shade.version>
     <maven.version>2.2.1</maven.version>
-    <junit.engine.version>5.9.0</junit.engine.version>
+    <junit.engine.version>5.9.1</junit.engine.version>
   </properties>
   <build>
     <plugins>
