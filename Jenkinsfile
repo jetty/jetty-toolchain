@@ -14,20 +14,18 @@ pipeline {
           agent { node { label 'linux' } }
           options { timeout( time: 120, unit: 'MINUTES' ) }
           steps {
-            container('jetty-build') {
-              mavenBuild( "jdk17", "clean install javadoc:javadoc" )
-              // Collect up the jacoco execution results
-              jacoco inclusionPattern: '**/org/eclipse/jetty/**/*.class',
-                     exclusionPattern: '',
-                     execPattern: '**/target/jacoco.exec',
-                     classPattern: '**/target/classes',
-                     sourcePattern: '**/src/main/java'
-              warnings consoleParsers: [[parserName: 'Maven'], [parserName: 'Java']]
-              script {
-                if ( env.BRANCH_NAME == 'master' )
-                {
-                  mavenBuild( "jdk17", "deploy" )
-                }
+            mavenBuild( "jdk17", "clean install javadoc:javadoc" )
+            // Collect up the jacoco execution results
+            jacoco inclusionPattern: '**/org/eclipse/jetty/**/*.class',
+                   exclusionPattern: '',
+                   execPattern: '**/target/jacoco.exec',
+                   classPattern: '**/target/classes',
+                   sourcePattern: '**/src/main/java'
+            warnings consoleParsers: [[parserName: 'Maven'], [parserName: 'Java']]
+            script {
+              if ( env.BRANCH_NAME == 'master' )
+              {
+                mavenBuild( "jdk17", "deploy" )
               }
             }
           }
