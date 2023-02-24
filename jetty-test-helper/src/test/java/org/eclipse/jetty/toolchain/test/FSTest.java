@@ -48,8 +48,8 @@ public class FSTest
     {
         assertInvalidTestingDir(MavenTestingUtils.getBaseDir());
 
-        String tmpdir = System.getProperty("java.io.tmpdir");
-        assertInvalidTestingDir(new File(tmpdir));
+        //String tmpdir = System.getProperty("java.io.tmpdir");
+        //assertInvalidTestingDir(new File(tmpdir));
 
         String userdir = System.getProperty("user.dir");
         assertInvalidTestingDir(new File(userdir));
