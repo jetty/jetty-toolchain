@@ -358,7 +358,7 @@ public final class FS
             if (!testPath)
             {
                 // using @TempDir(cleanup = ON_SUCCESS) Path dir on some OS can use some tmp path not defined from java.io.tmpdir
-                // https://github.com/junit-team/junit5/pull/3168
+                // https://issues.apache.org/jira/browse/SUREFIRE-2155
                 // temporary we must test if it's created as a tmp directory
                 Path foo = Files.createTempDirectory("foo");
                 return dir.startsWith(foo.getParent());
