@@ -20,6 +20,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
 import java.util.concurrent.TimeUnit;
 
@@ -355,6 +356,10 @@ public final class FS
         try
         {
             boolean testPath = dir.toRealPath().startsWith(MavenPaths.targetTests());
+            if(!testPath && System.getProperty("java.io.tmpdir")!=null)
+            {
+                testPath = dir.toRealPath().startsWith(Paths.get(System.getProperty("java.io.tmpdir")));
+            }
             return testPath;
         }
         catch (IOException e)
