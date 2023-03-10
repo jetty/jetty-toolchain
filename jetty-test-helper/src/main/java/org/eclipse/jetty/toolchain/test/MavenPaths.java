@@ -397,7 +397,7 @@ public final class MavenPaths
 
     static String safename(String name)
     {
-        final String reserved = "<>/:\"|\\?*\177";
+        final String reserved = " []<>/:\"|\\?*\177";
         StringBuilder result = new StringBuilder();
         for (char c : name.toCharArray())
         {
