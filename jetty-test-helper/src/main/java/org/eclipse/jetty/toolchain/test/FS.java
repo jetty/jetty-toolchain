@@ -355,13 +355,7 @@ public final class FS
     {
         try
         {
-            boolean testPath = dir.toRealPath().startsWith(MavenPaths.targetTests());
-            if(!testPath && System.getProperty("java.io.tmpdir")!=null)
-            {
-                testPath = dir.toRealPath().startsWith(Paths.get(System.getProperty("java.io.tmpdir")))
-                        || dir.startsWith(Paths.get(System.getProperty("java.io.tmpdir")));
-            }
-            return testPath;
+            return dir.toRealPath().startsWith(MavenPaths.targetTests());
         }
         catch (IOException e)
         {
