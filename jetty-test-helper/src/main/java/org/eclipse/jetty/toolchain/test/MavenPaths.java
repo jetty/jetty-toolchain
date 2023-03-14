@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -101,6 +102,10 @@ public final class MavenPaths
             try
             {
                 Files.createDirectory(testsDir);
+            }
+            catch (FileAlreadyExistsException e)
+            {
+                // ignore it as can happen with parallel tests
             }
             catch (IOException e)
             {
@@ -397,7 +402,7 @@ public final class MavenPaths
 
     static String safename(String name)
     {
-        final String reserved = "<>/:\"|\\?*\177";
+        final String reserved = " []<>/:\"|\\?*\177";
         StringBuilder result = new StringBuilder();
         for (char c : name.toCharArray())
         {
