@@ -21,7 +21,7 @@
     <junit.engine.version>5.9.2</junit.engine.version>
     <hamcrest.version>2.2</hamcrest.version>
     <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-    <license-maven-plugin.version>4.1</license-maven-plugin.version>
+    <license-maven-plugin.version>4.2</license-maven-plugin.version>
     <maven-enforcer-plugin.version>3.2.1</maven-enforcer-plugin.version>
     <maven-remote-resources-plugin.version>3.0.0</maven-remote-resources-plugin.version>
     <maven-release-plugin.version>3.0.0</maven-release-plugin.version>
