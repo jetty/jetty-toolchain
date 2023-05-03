@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain</groupId>
   <artifactId>jetty-schemas</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>4.0.3</version>
   <name>Jetty :: Schemas</name>
   <packaging>jar</packaging>
   <properties>
@@ -18,32 +18,22 @@
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-schemas</url>
-    <tag>HEAD</tag>
+    <tag>jetty-schemas-4.0.3</tag>
   </scm>
   <build>
-    <resources>
-      <!-- schemas must be on both path to be able to use for 9.4/10 and 11 -->
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-      <resource>
-        <directory>src/main/resources/jakarta/servlet</directory>
-        <targetPath>javax/servlet</targetPath>
-      </resource>
-    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>1.7</source>
+          <target>1.7</target>
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <goals>
@@ -83,7 +73,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-remote-resources-plugin</artifactId>
-        <version>3.0.0</version>
         <executions>
           <execution>
             <phase>generate-resources</phase>
@@ -101,7 +90,7 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>5.1.8</version>
+        <version>3.5.1</version>
         <extensions>true</extensions>
         <executions>
           <execution>
@@ -120,9 +109,7 @@
             <_nouses>true</_nouses>
             <Export-Package>
               javax.servlet.resources;version="4.0",
-              javax.servlet.jsp.resources;version="4.0",
-              jakarta.servlet.resources;version="5.0",
-              jakarta.servlet.jsp.resources;version="5.0",
+              javax.servlet.jsp.resources;version="4.0"
             </Export-Package>
           </instructions>
         </configuration>
@@ -133,7 +120,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>2.5.3</version>
           <configuration>
             <useReleaseProfile>true</useReleaseProfile>
             <releaseProfiles>eclipse-release</releaseProfiles>
@@ -142,32 +129,17 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.11.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-gpg-plugin</artifactId>
-          <version>3.0.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.2.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.3.1</version>
+          <version>3.6.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>3.0.2</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>3.0.0-M1</version>
         </plugin>
       </plugins>
     </pluginManagement>
