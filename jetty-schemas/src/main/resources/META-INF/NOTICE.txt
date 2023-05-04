@@ -1,0 +1,3 @@
+The artifacts in this jar are licensed under EPL 2.0 and may also be made available under the following Secondary
+Licenses when the conditions for such availability set forth in the Eclipse Public License v. 2.0 are satisfied:
+GNU General Public License, version 2 with the GNU Classpath Exception
