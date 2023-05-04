@@ -1,0 +1,1 @@
+The artifacts in this jar are licensed under EPL 2.0, or GPL-2.0 with Classpath-exception-2.0.
