@@ -14,7 +14,7 @@
   <description>Build Support for Jetty (Contains Enforcer Rules, PMD Rulesets, etc ...)</description>
   <properties>
     <enforcer.version>3.3.0</enforcer.version>
-    <shade.version>3.4.1</shade.version>
+    <shade.version>3.5.0</shade.version>
     <maven.version>2.2.1</maven.version>
     <junit.engine.version>5.9.3</junit.engine.version>
   </properties>
