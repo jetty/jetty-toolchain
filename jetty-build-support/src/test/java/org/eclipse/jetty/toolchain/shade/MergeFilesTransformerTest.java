@@ -20,7 +20,7 @@
 package org.eclipse.jetty.toolchain.shade;
 
 
-import org.apache.maven.shared.utils.io.IOUtil;
+import org.codehaus.plexus.util.IOUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
