@@ -20,7 +20,7 @@
 
     <maven.version>3.0</maven.version>
 
-    <junit.engine.version>5.9.3</junit.engine.version>
+    <junit.engine.version>5.10.0</junit.engine.version>
     <jetty.testtracker.log>true</jetty.testtracker.log>
   </properties>
   <build>
