@@ -18,7 +18,7 @@
     <compiler.target>17</compiler.target>
     <compiler.release>17</compiler.release>
 
-    <junit.engine.version>5.9.3</junit.engine.version>
+    <junit.engine.version>5.10.0</junit.engine.version>
     <hamcrest.version>2.2</hamcrest.version>
     <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
     <license-maven-plugin.version>4.2</license-maven-plugin.version>
