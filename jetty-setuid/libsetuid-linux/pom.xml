@@ -69,12 +69,6 @@
           <execution>
             <id>javah</id>
             <phase>generate-sources</phase>
-            <configuration>
-              <classNames>
-                <className>org.eclipse.jetty.setuid.SetUID</className>
-              </classNames>
-              <outputDirectory>target/generated</outputDirectory>
-            </configuration>
             <goals>
               <goal>javah</goal>
             </goals>
@@ -94,7 +88,7 @@
     <dependency>
       <groupId>org.eclipse.jetty.toolchain</groupId>
       <artifactId>jetty-test-helper</artifactId>
-      <version>${jetty-test-helper-version}</version>
+      <version>${jetty-test-helper.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

@@ -16,7 +16,7 @@
     <compiler.target>17</compiler.target>
     <compiler.release>17</compiler.release>
     <jetty.version>12.0.0</jetty.version>
-    <jetty-test-helper-version>6.1</jetty-test-helper-version>
+    <jetty-test-helper.version>6.1</jetty-test-helper.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <licenses>
@@ -75,8 +75,8 @@
                   <message>[ERROR] OLD MAVEN [${maven.version}] in use, Jetty ${project.version} requires Maven 3.8.4 or newer</message>
                 </requireMavenVersion>
                 <requireJavaVersion>
-                  <version>[11,)</version>
-                  <message>[ERROR] OLD JDK [${java.version}] in use. Jetty ${project.version} requires JDK 11 or newer</message>
+                  <version>[17,)</version>
+                  <message>[ERROR] OLD JDK [${java.version}] in use. Jetty ${project.version} requires JDK 17 or newer</message>
                 </requireJavaVersion>
                 <requireUpperBoundDeps />
               </rules>
@@ -89,16 +89,20 @@
         <artifactId>license-maven-plugin</artifactId>
         <version>4.2</version>
         <configuration>
-          <header>header-template.txt</header>
+          <licenseSets>
+            <licenseSet>
+              <header>header-template.txt</header>
+              <includes>
+                <include>**/*.java</include>
+              </includes>
+            </licenseSet>
+          </licenseSets>
           <failIfMissing>true</failIfMissing>
           <aggregate>true</aggregate>
           <strictCheck>true</strictCheck>
           <mapping>
             <java>DOUBLESLASH_STYLE</java>
           </mapping>
-          <includes>
-            <include>**/*.java</include>
-          </includes>
         </configuration>
         <executions>
           <execution>
