@@ -22,8 +22,8 @@ import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.component.LifeCycle;
-import org.eclipse.jetty.util.log.Log;
-import org.eclipse.jetty.util.log.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>This LifeCycleListener may be added to a {@link Server} to make a JNI call to set the unix UID.</p>
@@ -40,7 +40,7 @@ import org.eclipse.jetty.util.log.Logger;
  */
 public class SetUIDListener implements LifeCycle.Listener
 {
-    private static final Logger LOG = Log.getLogger(SetUIDListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SetUIDListener.class);
 
     private int _uid = 0;
     private int _gid = 0;
@@ -142,12 +142,12 @@ public class SetUIDListener implements LifeCycle.Listener
                 LOG.info("Clearing supplemental groups");
                 SetUID.setgroups(new int[0]);
             }
-            LOG.info("Setting GID=" + _gid);
+            LOG.info("Setting GID={}", _gid);
             SetUID.setgid(_gid);
         }
         if (_uid != 0)
         {
-            LOG.info("Setting UID=" + _uid);
+            LOG.info("Setting UID={}", _uid);
             SetUID.setuid(_uid);
             Passwd pw = SetUID.getpwuid(_uid);
             System.setProperty("user.name",pw.getPwName());
@@ -156,12 +156,12 @@ public class SetUIDListener implements LifeCycle.Listener
     }
     
     
-    public void lifeCycleFailure(LifeCycle server, Throwable cause)
+    public void lifeCycleFailure(LifeCycle lifecycle, Throwable cause)
     {
       
     }
 
-    public void lifeCycleStarted(LifeCycle server)
+    public void lifeCycleStarted(LifeCycle lifecycle)
     {
         if (_startServerAsPrivileged)
             setGidUid();
@@ -175,17 +175,17 @@ public class SetUIDListener implements LifeCycle.Listener
                     "jetty-setuid to switch user won't work!!!", jettyUserEnvVariable);
         if (_umask > -1)
         {
-            LOG.info("Setting umask=0" + Integer.toString(_umask,8));
+            LOG.info("Setting umask=0{}", Integer.toString(_umask,8));
             SetUID.setumask(_umask);
         }
 
         if (_rlimitNoFiles != null)
         {
-            LOG.info("Current " + SetUID.getrlimitnofiles());
+            LOG.info("Current {}", SetUID.getrlimitnofiles());
             int success = SetUID.setrlimitnofiles(_rlimitNoFiles);
             if (success < 0)
-                LOG.warn("Failed to set rlimit_nofiles, returned status " + success);
-            LOG.info("Set " + SetUID.getrlimitnofiles());
+                LOG.warn("Failed to set rlimit_nofiles, returned status {}", success);
+            LOG.info("Set {}", SetUID.getrlimitnofiles());
         }
 
         // If we are starting the server privileged, delay the setuid until started.
@@ -198,14 +198,16 @@ public class SetUIDListener implements LifeCycle.Listener
             Server server = (Server)lifecycle;
             if (server.getThreadPool() instanceof LifeCycle)
             {
-                LifeCycle tplc=(LifeCycle)server.getThreadPool();
+                LifeCycle tplc = (LifeCycle)server.getThreadPool();
                 if (!tplc.isRunning())
                 {
                     // Start the Threadpool early, but make the server manage it
+                    // Threadpool is responsible for processing the opening of the Connectors
                     server.manage(tplc);
                     tplc.start();
                 }
             }
+
             Connector[] connectors = server.getConnectors();
             if (connectors!=null)
             {
@@ -213,11 +215,13 @@ public class SetUIDListener implements LifeCycle.Listener
                 {
                     if (connector instanceof NetworkConnector)
                     {
+                        // Open with Setuid permissions (eg: port 80)
                         ((NetworkConnector)connector).open();
-                        LOG.info("Opened " +connector);
+                        LOG.info("Opened {}", connector);
                     }
                     else if (!connector.isRunning())
                     {
+                        // Start with Setuid permissions (eg: port 80 or unixsocket)
                         server.manage(connector);
                         connector.start();
                     }
@@ -231,17 +235,16 @@ public class SetUIDListener implements LifeCycle.Listener
         setGidUid();
     }
 
-    public void lifeCycleStopped(LifeCycle arg0)
+    public void lifeCycleStopped(LifeCycle ignore)
     {
-        
+        // ignore
     }
 
-    public void lifeCycleStopping(LifeCycle arg0)
+    public void lifeCycleStopping(LifeCycle ignore)
     {
-        
+        // ignore
     }
     
-    /* ------------------------------------------------------------ */
     /**
      * @return the startServerAsPrivileged
      */
@@ -250,7 +253,6 @@ public class SetUIDListener implements LifeCycle.Listener
         return _startServerAsPrivileged;
     }
 
-    /* ------------------------------------------------------------ */
     /**
      * @param startContextsAsPrivileged
      *            if true, the server is started and then the process UID is switched. If false, the connectors are opened, the UID is switched and then the

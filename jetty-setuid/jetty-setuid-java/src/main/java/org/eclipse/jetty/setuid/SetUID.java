@@ -21,9 +21,8 @@ package org.eclipse.jetty.setuid;
 import java.io.File;
 import java.io.FilenameFilter;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.util.log.Log;
-import org.eclipse.jetty.util.log.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class is for changing user and groupId, it can also be use to retrieve user information by using getpwuid(uid) or getpwnam(username) of both linux and unix
@@ -32,7 +31,7 @@ import org.eclipse.jetty.util.log.Logger;
 
 public class SetUID
 {
-    private static final Logger LOG = Log.getLogger(SetUID.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SetUID.class);
 
     public static final String __FILENAME = "libsetuid";
 
@@ -91,7 +90,7 @@ public class SetUID
         catch (Throwable e)
         {
             // Ignorable if there is another way to find the lib
-            LOG.debug(e);
+            LOG.debug("Unable to find lib", e);
         }
 
         // try loading using the platform native library name mapping
@@ -104,7 +103,7 @@ public class SetUID
         catch (Throwable e)
         {
             // Ignorable if there is another way to find the lib
-            LOG.debug(e);
+            LOG.debug("Unable to find lib", e);
         }
 
         // try loading using well-known path
@@ -126,7 +125,7 @@ public class SetUID
         }
         catch (Throwable e)
         {
-            LOG.debug(e);
+            LOG.debug("Unable to find lib", e);
         }
 
         // try to load from jetty.lib where rpm puts this file
@@ -148,7 +147,7 @@ public class SetUID
         }
         catch (Throwable e)
         {
-            LOG.debug(e);
+            LOG.debug("Unable to find lib", e);
         }
 
         LOG.warn("Error: libsetuid.so could not be found");
@@ -165,12 +164,6 @@ public class SetUID
 
         for (File f : files)
         {
-            if (f.getName().endsWith(Server.getVersion() + ".so"))
-            {
-                file = f;
-                break;
-            }
-
             if (f.getName().endsWith(osName + ".so"))
             {
                 LOG.debug("OS specific file found: {}",f.getName());
