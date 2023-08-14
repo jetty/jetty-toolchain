@@ -13,6 +13,8 @@
 
 package org.eclipse.jetty.setuid;
 
+import com.sun.jna.Structure;
+
 /**
  * Class is the equivalent java class used for holding values from native c code structure passwd. for more information please see man pages for getpwuid and getpwnam
  *   struct passwd {
@@ -26,56 +28,35 @@ package org.eclipse.jetty.setuid;
  *    };
  *
  */
-
-public class Passwd
+@Structure.FieldOrder({"_pwName", "_pwPasswd", "_pwUid", "_pwGid", "_pwGecos", "_pwDir", "_pwShell"})
+public class Passwd extends Structure
 {
-    private String _pwName; /* user name */
-    private String _pwPasswd; /* user password */
-    private int _pwUid; /* user id */
-    private int _pwGid; /* group id */
-    private String _pwGecos; /* real name */
-    private String _pwDir; /* home directory */
-    private String _pwShell; /* shell program */
-    
+    public String _pwName; /* user name */
+    public String _pwPasswd; /* user password */
+    public int _pwUid; /* user id */
+    public int _pwGid; /* group id */
+    public String _pwGecos; /* real name */
+    public String _pwDir; /* home directory */
+    public String _pwShell; /* shell program */
 
     public String getPwName()
     {
         return _pwName;
     }
     
-    public void setPwName(String pwName)
-    {
-        _pwName = pwName;
-    }    
-
     public String getPwPasswd()
     {
         return _pwPasswd;
     }
     
-    public void setPwPasswd(String pwPasswd)
-    {
-        _pwPasswd = pwPasswd;
-    }
-
     public int getPwUid()
     {
         return _pwUid;
     }
     
-    public void setPwUid(int pwUid)
-    {
-        _pwUid = pwUid;
-    }
-
     public int getPwGid()
     {
         return _pwGid;
-    }
-    
-    public void setPwGid(int pwGid)
-    {
-        _pwGid = pwGid;
     }
     
     public String getPwGecos()
@@ -83,29 +64,13 @@ public class Passwd
         return _pwGecos;
     }
     
-    public void setPwGid(String pwGecos)
-    {
-        _pwGecos = pwGecos;
-    }
-    
     public String getPwDir()
     {
         return _pwDir;
-    }
-    
-    public void setPwDir(String pwDir)
-    {
-        _pwDir = pwDir;
     }
     
     public String getPwShell()
     {
         return _pwShell;
     }
-    
-    public void setPwShell(String pwShell)
-    {
-        _pwShell = pwShell;
-    }
-    
 }

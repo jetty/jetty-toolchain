@@ -30,9 +30,7 @@
     </license>
   </licenses>
   <modules>
-    <module>jetty-setuid-java</module>
-    <module>jetty-setuid-native</module>
-    <module>jetty-setuid-test</module>
+    <module>jetty-setuid-jna</module>
   </modules>
   <build>
     <plugins>
@@ -129,39 +127,9 @@
             </dependency>
           </dependencies>
         </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>native-maven-plugin</artifactId>
-          <version>1.0-alpha-11</version>
-        </plugin>
       </plugins>
     </pluginManagement>
   </build>
-  <profiles>
-    <profile>
-      <id>env-linux</id>
-      <activation>
-        <os>
-          <name>linux</name>
-        </os>
-      </activation>
-      <modules>
-        <module>libsetuid-linux</module>
-      </modules>
-    </profile>
-
-    <profile>
-      <id>env-mac</id>
-      <activation>
-        <os>
-          <name>osx</name>
-        </os>
-      </activation>
-      <modules>
-        <module>libsetuid-osx</module>
-      </modules>
-    </profile>
-  </profiles>
 
   <scm>
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>

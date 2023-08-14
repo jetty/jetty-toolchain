@@ -13,34 +13,23 @@
 
 package org.eclipse.jetty.setuid;
 
-import java.nio.file.Path;
-
-import org.eclipse.jetty.toolchain.test.MavenPaths;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class TestSetuid
+public class TestLibC
 {
     @Test
     public void testSetuid() throws Exception
     {
-        /*
-         * This is a test of the -VERSION based loading mechanism, the jetty.lib logic in SetUID looks in a directory of jetty.lib and tries to load the
-         * file ending in the VERSION.so which is the mechanism used by default in jetty-distro now
-         */
-        Path lib = MavenPaths.targetDir().resolve("distro");
-        String libPath = lib.toAbsolutePath().toString();
-        System.setProperty("jetty.lib", libPath);
-
-        assertThrows(SecurityException.class, () -> SetUID.getpwnam("TheQuickBrownFoxJumpsOverToTheLazyDog"));
-        assertThrows(SecurityException.class, () -> SetUID.getpwuid(-9999));
+        assertNull(LibC.INSTANCE.getpwnam("TheQuickBrownFoxJumpsOverToTheLazyDog"));
+        assertNull(LibC.INSTANCE.getpwuid(-9999));
 
         // get the passwd info of root
-        Passwd passwd1 = SetUID.getpwnam("root");
+        Passwd passwd1 = LibC.INSTANCE.getpwnam("root");
         // get the roots passwd info using the acquired uid
-        Passwd passwd2 = SetUID.getpwuid(passwd1.getPwUid());
+        Passwd passwd2 = LibC.INSTANCE.getpwuid(passwd1.getPwUid());
 
         assertEquals(passwd1.getPwName(), passwd2.getPwName());
         assertEquals(passwd1.getPwPasswd(), passwd2.getPwPasswd());
@@ -50,13 +39,13 @@ public class TestSetuid
         assertEquals(passwd1.getPwDir(), passwd2.getPwDir());
         assertEquals(passwd1.getPwShell(), passwd2.getPwShell());
 
-        assertThrows(SecurityException.class, () -> SetUID.getgrnam("TheQuickBrownFoxJumpsOverToTheLazyDog"));
-        assertThrows(SecurityException.class, () -> SetUID.getgrgid(-9999));
+        assertNull(LibC.INSTANCE.getgrnam("TheQuickBrownFoxJumpsOverToTheLazyDog"));
+        assertNull(LibC.INSTANCE.getgrgid(-9999));
 
         // get the group using the roots groupid
-        Group gr1 = SetUID.getgrgid(passwd1.getPwGid());
+        Group gr1 = LibC.INSTANCE.getgrgid(passwd1.getPwGid());
         // get the group name using the aquired name
-        Group gr2 = SetUID.getgrnam(gr1.getGrName());
+        Group gr2 = LibC.INSTANCE.getgrnam(gr1.getGrName());
 
         assertEquals(gr1.getGrName(), gr2.getGrName());
         assertEquals(gr1.getGrPasswd(), gr2.getGrPasswd());
@@ -71,5 +60,15 @@ public class TestSetuid
                 assertEquals(gr1.getGrMem()[i], gr2.getGrMem()[i]);
             }
         }
+
+        long oldSoftLimit;
+        RLimit limit = new RLimit();
+        assertEquals(0, LibC.INSTANCE.getrlimit(LibC.Constants.RLIMIT_NOFILE, limit));
+        oldSoftLimit = limit._soft;
+        limit._soft--;
+        assertEquals(0, LibC.INSTANCE.setrlimit(LibC.Constants.RLIMIT_NOFILE, limit));
+        assertEquals(0, LibC.INSTANCE.getrlimit(LibC.Constants.RLIMIT_NOFILE, limit));
+        System.out.println(limit);
+        assertEquals(oldSoftLimit - 1, limit._soft);
     }
 }
