@@ -48,8 +48,8 @@ public interface LibC extends Library
     /**
      * Compile and run the following C program to get the <code>RLIMIT_NOFILE</code> value of you OS of choice.
      * <pre>
-     * #include <stdio.h>
-     * #include <sys/resource.h>
+     * #include &lt;stdio.h&gt;
+     * #include &lt;sys/resource.h&gt;
      *
      * int main()
      * {
