@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty.toolchain.setuid</groupId>
   <artifactId>jetty-setuid-parent</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.0</version>
   <name>Jetty :: SetUID Parent</name>
   <packaging>pom</packaging>
   <properties>
@@ -135,5 +135,6 @@
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-setuid</url>
+    <tag>jetty-setuid-parent-2.0.0</tag>
   </scm>
 </project>
