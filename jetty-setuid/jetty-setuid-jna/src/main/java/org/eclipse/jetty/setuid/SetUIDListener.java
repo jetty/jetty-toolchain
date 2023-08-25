@@ -46,25 +46,25 @@ public class SetUIDListener implements LifeCycle.Listener
 
     public void setUsername(String username)
     {
-        Passwd passwd = SetUID.getpwnam(username);
+        Passwd passwd = LibC.INSTANCE.getpwnam(username);
         _uid = passwd.getPwUid();
     }
 
     public String getUsername()
     {
-        Passwd passwd = SetUID.getpwuid(_uid);
+        Passwd passwd = LibC.INSTANCE.getpwuid(_uid);
         return passwd.getPwName();
     }
 
     public void setGroupname(String groupname)
     {
-        Group group = SetUID.getgrnam(groupname);
+        Group group = LibC.INSTANCE.getgrnam(groupname);
         _gid = group.getGrGid();
     }
 
     public String getGroupname()
     {
-        Group group = SetUID.getgrgid(_gid);
+        Group group = LibC.INSTANCE.getgrgid(_gid);
         return group.getGrName();
     }
 
@@ -135,25 +135,25 @@ public class SetUIDListener implements LifeCycle.Listener
             if (isClearSupplementalGroups())
             {
                 LOG.info("Clearing supplemental groups");
-                SetUID.setgroups(new int[0]);
+                LibC.INSTANCE.setgroups(new int[0]);
             }
             LOG.info("Setting GID={}", _gid);
-            SetUID.setgid(_gid);
+            LibC.INSTANCE.setgid(_gid);
         }
         if (_uid != 0)
         {
             LOG.info("Setting UID={}", _uid);
-            SetUID.setuid(_uid);
-            Passwd pw = SetUID.getpwuid(_uid);
+            LibC.INSTANCE.setuid(_uid);
+            Passwd pw = LibC.INSTANCE.getpwuid(_uid);
             System.setProperty("user.name",pw.getPwName());
             System.setProperty("user.home",pw.getPwDir());
         }
     }
-    
-    
+
+
     public void lifeCycleFailure(LifeCycle lifecycle, Throwable cause)
     {
-      
+
     }
 
     public void lifeCycleStarted(LifeCycle lifecycle)
@@ -171,22 +171,32 @@ public class SetUIDListener implements LifeCycle.Listener
         if (_umask > -1)
         {
             LOG.info("Setting umask=0{}", Integer.toString(_umask,8));
-            SetUID.setumask(_umask);
+            LibC.INSTANCE.setumask(_umask);
         }
 
         if (_rlimitNoFiles != null)
         {
-            LOG.info("Current {}", SetUID.getrlimitnofiles());
-            int success = SetUID.setrlimitnofiles(_rlimitNoFiles);
-            if (success < 0)
-                LOG.warn("Failed to set rlimit_nofiles, returned status {}", success);
-            LOG.info("Set {}", SetUID.getrlimitnofiles());
+            if (LibC.Constants.RLIMIT_NOFILE == Integer.MIN_VALUE)
+            {
+                LOG.warn("rlimitNoFiles cannot be set on unsupported platform, ignoring configured values: " + _rlimitNoFiles);
+            }
+            else
+            {
+                RLimit temp = new RLimit();
+                LibC.INSTANCE.getrlimit(LibC.Constants.RLIMIT_NOFILE, temp);
+                LOG.info("Current {}", temp);
+                int success = LibC.INSTANCE.setrlimit(LibC.Constants.RLIMIT_NOFILE, _rlimitNoFiles);
+                if (success < 0)
+                    LOG.warn("Failed to set rlimit_nofiles, returned status {}", success);
+                LibC.INSTANCE.getrlimit(LibC.Constants.RLIMIT_NOFILE, temp);
+                LOG.info("Set {}", temp);
+            }
         }
 
         // If we are starting the server privileged, delay the setuid until started.
         if (_startServerAsPrivileged)
             return;
-        
+
         // Start the thread pool and connectors
         try
         {

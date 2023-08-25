@@ -13,6 +13,9 @@
 
 package org.eclipse.jetty.setuid;
 
+import com.sun.jna.Pointer;
+import com.sun.jna.Structure;
+
 /**
  * Class is the equivalent java class used for holding values from native c code structure group. for more information please see man pages for getgrnam and getgrgid
  * struct group {
@@ -23,54 +26,32 @@ package org.eclipse.jetty.setuid;
  *         };
  *
  */
-
-public class Group
+@Structure.FieldOrder({"_grName", "_grPasswd", "_grGid", "_grMem"})
+public class Group extends Structure
 {
-    private String _grName; /* group name */
-    private String _grPasswd; /* group password */
-    private int _grGid; /* group id */
-    private String[] _grMem; /* group members */
-    
-    
+    public String _grName; /* group name */
+    public String _grPasswd; /* group password */
+    public int _grGid; /* group id */
+    public Pointer _grMem; /* group members */
+
 
     public String getGrName()
     {
         return _grName;
     }
-    
-    public void setGrName(String grName)
-    {
-        _grName = grName;
-    }    
 
     public String getGrPasswd()
     {
         return _grPasswd;
-    }
-    
-    public void setGrPasswd(String grPasswd)
-    {
-        _grPasswd = grPasswd;
     }
 
     public int getGrGid()
     {
         return _grGid;
     }
-    
-    public void setGrGid(int grGid)
-    {
-        _grGid = grGid;
-    }
-    
+
     public String[] getGrMem()
     {
-        return _grMem;
+        return _grMem.getStringArray(0);
     }
-    
-    public void setGrMem(String[] grMem)
-    {
-        _grMem = grMem;
-    }
-    
 }

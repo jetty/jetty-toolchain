@@ -13,35 +13,38 @@
 
 package org.eclipse.jetty.setuid;
 
-public class RLimit
-{
-    int _soft;
-    int _hard;
+import com.sun.jna.Structure;
 
-    
-    public int getSoft ()
+@Structure.FieldOrder({"_soft", "_hard"})
+public class RLimit extends Structure
+{
+    public long _soft;
+    public long _hard;
+
+
+    public long getSoft ()
     {
         return _soft;
     }
-    
-    public void setSoft (int soft)
+
+    public void setSoft (long soft)
     {
         _soft = soft;
     }
-    
-    public int getHard ()
+
+    public long getHard ()
     {
         return _hard;
     }
-    
-    public void setHard (int hard)
+
+    public void setHard (long hard)
     {
         _hard = hard;
     }
-    
+
     public String toString()
     {
         return "rlimit_nofiles (soft="+_soft+", hard="+_hard+")";
     }
-    
+
 }
