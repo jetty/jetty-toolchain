@@ -45,6 +45,19 @@ public interface LibC extends Library
 
     int setrlimit(int resource, RLimit rlimit);
 
+    /**
+     * Compile and run the following C program to get the <code>RLIMIT_NOFILE</code> value of you OS of choice.
+     * <pre>
+     * #include <stdio.h>
+     * #include <sys/resource.h>
+     *
+     * int main()
+     * {
+     *   printf("RLIMIT_NOFILE = %d\n", RLIMIT_NOFILE);
+     *   return 0;
+     * }
+     * </pre>
+     */
     class Constants
     {
         public static final int RLIMIT_NOFILE;
