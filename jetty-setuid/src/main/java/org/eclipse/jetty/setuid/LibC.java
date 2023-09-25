@@ -25,7 +25,7 @@ public interface LibC extends Library
 {
     LibC INSTANCE = Native.load("c", LibC.class);
 
-    int setumask(int mask);
+    int umask(int mask);
 
     int setuid(int uid);
 

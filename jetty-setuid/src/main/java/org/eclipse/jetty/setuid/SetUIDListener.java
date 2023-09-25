@@ -171,7 +171,7 @@ public class SetUIDListener implements LifeCycle.Listener
         if (_umask > -1)
         {
             LOG.info("Setting umask=0{}", Integer.toString(_umask,8));
-            LibC.INSTANCE.setumask(_umask);
+            LibC.INSTANCE.umask(_umask);
         }
 
         if (_rlimitNoFiles != null)
