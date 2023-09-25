@@ -13,10 +13,16 @@
 
 package org.eclipse.jetty.setuid;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestLibC
 {
@@ -25,6 +31,11 @@ public class TestLibC
     {
         assertNull(LibC.INSTANCE.getpwnam("TheQuickBrownFoxJumpsOverToTheLazyDog"));
         assertNull(LibC.INSTANCE.getpwuid(-9999));
+
+        LibC.INSTANCE.umask(0777);
+        Path path = Files.createTempFile(getClass().getSimpleName(), ".tmp");
+        Set<PosixFilePermission> posixFilePermissions = Files.getPosixFilePermissions(path);
+        assertTrue(posixFilePermissions.isEmpty());
 
         // get the passwd info of root
         Passwd passwd1 = LibC.INSTANCE.getpwnam("root");
