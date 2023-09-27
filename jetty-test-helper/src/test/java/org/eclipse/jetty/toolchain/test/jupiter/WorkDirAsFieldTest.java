@@ -37,7 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Testing Junit Jupiter behavior with {@link WorkDir} and {@link WorkDirExtension}
  */
-@ExtendWith({WorkDirExtension.class})
+@ExtendWith(WorkDirExtension.class)
 public class WorkDirAsFieldTest
 {
     public WorkDir fieldDir;

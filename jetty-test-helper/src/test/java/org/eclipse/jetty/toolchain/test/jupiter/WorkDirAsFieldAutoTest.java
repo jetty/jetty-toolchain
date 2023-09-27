@@ -22,6 +22,7 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -36,6 +37,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Testing Junit Jupiter behavior with {@link WorkDir} without declaring {@link WorkDirExtension}
  */
+@ExtendWith(WorkDirExtension.class)
 public class WorkDirAsFieldAutoTest
 {
     public WorkDir fieldDir;
