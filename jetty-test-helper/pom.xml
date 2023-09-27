@@ -9,7 +9,7 @@
   </parent>
   <artifactId>jetty-test-helper</artifactId>
   <packaging>jar</packaging>
-  <version>6.2-SNAPSHOT</version>
+  <version>6.2</version>
   <name>Jetty Toolchain :: Test Helper</name>
   <description>Unit Testing Support for Jetty (common classes for some unit tests)</description>
   <properties>
@@ -146,7 +146,7 @@
     <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
     <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-test-helper</url>
-    <tag>jetty-test-helper-6.0</tag>
+    <tag>jetty-test-helper-6.2</tag>
   </scm>
 
   <repositories>
