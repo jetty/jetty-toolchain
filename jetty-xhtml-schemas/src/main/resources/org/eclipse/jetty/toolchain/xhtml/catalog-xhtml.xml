@@ -5,6 +5,7 @@
   <system systemId="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" uri="xhtml11.dtd" />
 
   <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-inlstyle-1.mod" uri="xhtml-inlstyle-1.mod" />
+  <system systemId="http://www.w3.org/MarkUp/DTD/xhtml11-model-1.mod" uri="xhtml11-model-1.mod" />
   <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-model-1.mod" uri="xhtml-model-1.mod" />
   <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-framework-1.mod" uri="xhtml-framework-1.mod" />
   <system systemId="http://www.w3.org/MarkUp/DTD/xhtml-datatypes-1.mod" uri="xhtml-datatypes-1.mod" />
