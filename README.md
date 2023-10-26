@@ -1,3 +1,11 @@
+# This repository is scheduled to be ARCHIVED.
+
+### Currently Migrated
+* jetty-setuid -> /jetty/jetty.setuid
+* jetty-schemas -> /jetty/jetty.schemas
+* jetty-xhtml-schemas -> /jetty/jetty.schemas.xhtml
+
+
 Build Toolchain for the Eclipse Jetty Project build
 ===================================================
 
