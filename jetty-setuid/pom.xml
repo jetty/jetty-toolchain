@@ -17,7 +17,7 @@
     <compiler.release>17</compiler.release>
     <jetty.version>12.0.2</jetty.version>
     <jna.version>5.13.0</jna.version>
-    <jetty-test-helper.version>6.1</jetty-test-helper.version>
+    <jetty-test-helper.version>6.2</jetty-test-helper.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <licenses>
