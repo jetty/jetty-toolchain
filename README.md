@@ -11,6 +11,9 @@
 * jetty-jakarta-websocket-api -> [/jetty/jetty.websocket.api](https://github.com/jetty/jetty.websocket.api)
 * jetty-javax-servlet-api -> [/jetty/jetty.servlet.api/tree/javax-servlet-api](https://github.com/jetty/jetty.servlet.api/tree/javax-servlet-api)
 * jetty-jakarta-servlet-api -> [/jetty/jetty.servlet.api](https://github.com/jetty/jetty.servlet.api)
+* jetty-perf-helper -> [/jetty/jetty.perf.helper](https://github.com/jetty/jetty.perf.helper)
+* jetty-artifact-resources -> [/jetty/jetty.artifact.resources](https://github.com/jetty/jetty.artifact.resources)
+* jetty-assembly-descriptors -> [/jetty/jetty.assembly.descriptors](https://github.com/jetty/jetty.assembly.descriptors)
 
 
 
