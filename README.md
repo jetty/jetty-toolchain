@@ -7,6 +7,11 @@
 * jetty-test-helper -> [/jetty/jetty.test.helper](https://github.com/jetty/jetty.test.helper)
 * jetty-test-policy -> [/jetty/jetty.test.helper](https://github.com/jetty/jetty.test.policy)
 * jetty-build-support -> [/jetty/jetty.test.helper](https://github.com/jetty/jetty.build.support)
+* jetty-javax-websocket-api -> [/jetty/jetty.websocket.api](https://github.com/jetty/jetty.websocket.api/tree/javax-websocket-api)
+* jetty-jakarta-websocket-api -> [/jetty/jetty.websocket.api](https://github.com/jetty/jetty.websocket.api)
+* jetty-javax-servlet-api -> [/jetty/jetty.servlet.api](https://github.com/jetty/jetty.servlet.api/tree/javax-servlet-api)
+* jetty-jakarta-servlet-api -> [/jetty/jetty.servlet.api](https://github.com/jetty/jetty.servlet.api)
+
 
 
 Build Toolchain for the Eclipse Jetty Project build
