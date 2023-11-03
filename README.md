@@ -5,6 +5,8 @@
 * jetty-schemas -> [/jetty/jetty.schemas](https://github.com/jetty/jetty.schemas)
 * jetty-xhtml-schemas -> [/jetty/jetty.schemas.xhtml](https://github.com/jetty/jetty.schemas.xhtml)
 * jetty-test-helper -> [/jetty/jetty.test.helper](https://github.com/jetty/jetty.test.helper)
+* jetty-test-policy -> [/jetty/jetty.test.helper](https://github.com/jetty/jetty.test.policy)
+* jetty-build-support -> [/jetty/jetty.test.helper](https://github.com/jetty/jetty.build.support)
 
 
 Build Toolchain for the Eclipse Jetty Project build
