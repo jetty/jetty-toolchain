@@ -21,34 +21,11 @@ on:
   push:
     branches:
       - 'master'
-      - 'main'
-      - 'jakarta-**'
-      - 'jakarta.**'
-      - 'jetty-**'
   pull_request:
 
 jobs:
   build:
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        java: [17]
-        jdk: [temurin]
-      fail-fast: false
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: ${{ matrix.jdk }}
-          java-version: ${{ matrix.java }}
-          cache: 'maven'
-
-      - name: Build with Maven
-        run: mvn install javadoc:javadoc -e -B -V
+    name: Maven Build CI
+    uses: jetty/.github/.github/workflows/maven-ci.yml@main
+    with:
+      jdk-matrix: '[ "11" ]'
