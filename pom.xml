@@ -47,7 +47,7 @@
       <id>jules</id>
       <name>Jules Gosnell</name>
       <email>jules@apache.org</email>
-      <organization></organization>
+      <organization />
     </developer>
     <developer>
       <id>jstrachan</id>
@@ -65,13 +65,13 @@
       <id>tvernum</id>
       <name>Tim Vernum</name>
       <email>tim@adjective.org</email>
-      <organization></organization>
+      <organization />
     </developer>
     <developer>
       <id>ngonzalez</id>
       <name>Nik Gonzalez</name>
       <email>ngonzalez@exist.com</email>
-      <organization></organization>
+      <organization />
     </developer>
     <developer>
       <id>jfarcand</id>
@@ -337,6 +337,7 @@
               <include>pom.xml</include>
             </includes>
             <sortPom>
+              <expandEmptyElements>false</expandEmptyElements>
               <nrOfIndentSpace>2</nrOfIndentSpace>
               <!-- default see https://github.com/Ekryd/sortpom/wiki/PredefinedSortOrderProfiles -->
               <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
@@ -352,6 +353,7 @@
               <sortDependencyExclusions>groupId,artifactId</sortDependencyExclusions>
               <!-- Sort plugins: https://github.com/Ekryd/sortpom/wiki/SortPlugins -->
               <sortPlugins>groupId,artifactId</sortPlugins>
+              <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
             </sortPom>
           </pom>
           <upToDateChecking>
