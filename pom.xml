@@ -161,15 +161,15 @@
   </mailingLists>
 
   <scm>
-    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
-    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
+    <connection>scm:git:https://github.com/jetty/${jetty.git.repo}.git</connection>
+    <developerConnection>scm:git:git@github.com:eclipse/${jetty.git.repo}.git</developerConnection>
     <tag>HEAD</tag>
-    <url>https://github.com/eclipse/jetty.project</url>
+    <url>https://github.com/jetty/${jetty.git.repo}</url>
   </scm>
 
   <issueManagement>
     <system>github</system>
-    <url>https://github.com/eclipse/jetty.toolchain</url>
+    <url>https://github.com/jetty/${jetty.git.repo}</url>
   </issueManagement>
 
   <distributionManagement>
@@ -186,11 +186,29 @@
   </distributionManagement>
 
   <properties>
+    <failIfNoTests>false</failIfNoTests>
+    <forkCount>1</forkCount>
+    <jetty.git.repo>jetty.toolchain</jetty.git.repo>
     <jetty.url>http://www.eclipse.org/jetty</jetty.url>
+    <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <maven.dependency.plugin.version>3.6.1</maven.dependency.plugin.version>
+    <maven.deploy.plugin.retryFailedDeploymentCount>10</maven.deploy.plugin.retryFailedDeploymentCount>
+    <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
+    <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
+    <maven.install.plugin.version>3.1.1</maven.install.plugin.version>
+    <maven.invoker.plugin.version>3.6.0</maven.invoker.plugin.version>
+    <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
+    <maven.javadoc.plugin.version>3.6.0</maven.javadoc.plugin.version>
+    <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
+    <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
+    <maven.surefire.argLine>-Dfile.encoding=UTF-8 -Duser.language=en -Duser.region=US -showversion -Xmx1g -Xms1g -XX:+PrintGCDetails -Djava.io.tmpdir=${project.build.directory}</maven.surefire.argLine>
+    <maven.surefire.plugin.version>3.2.1</maven.surefire.plugin.version>
     <mavenPluginToolsVersion>3.5.2</mavenPluginToolsVersion>
     <mavenVersion>3.5.0</mavenVersion>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <surefireVersion>3.2.1</surefireVersion>
+    <surefire.timeout>3600</surefire.timeout>
   </properties>
 
   <build>
@@ -200,49 +218,45 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.11.0</version>
-          <configuration>
-            <source>8</source>
-            <target>8</target>
-          </configuration>
+          <version>${maven.compiler.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.6.1</version>
+          <version>${maven.dependency.plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>${maven.deploy.plugin.version}</version>
           <configuration>
-            <retryFailedDeploymentCount>10</retryFailedDeploymentCount>
+            <retryFailedDeploymentCount>${maven.deploy.plugin.retryFailedDeploymentCount}</retryFailedDeploymentCount>
           </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
-          <version>${surefireVersion}</version>
+          <version>${maven.surefire.plugin.version</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>${maven.gpg.plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>${maven.install.plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-invoker-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>${maven.invoker.plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>${maven.jar.plugin.version}</version>
           <configuration>
             <archive>
               <!-- Only needed if bundle/OSGi built out a manifest first
@@ -259,7 +273,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>${maven.javadoc.plugin.version}</version>
           <configuration>
             <failOnError>false</failOnError>
             <charset>UTF-8</charset>
@@ -270,79 +284,12 @@
             <detectJavaApiLink>false</detectJavaApiLink>
             <show>protected</show>
             <excludePackageNames>com.acme.*;org.slf4j.*;org.mortbay.*</excludePackageNames>
-            <tags>
-              <tag>
-                <name>org.apache.xbean.XBean</name>
-                <placement>X</placement>
-                <head></head>
-              </tag>
-              <tag>
-                <name>phase</name>
-                <placement>t</placement>
-                <head>Phase:</head>
-              </tag>
-              <tag>
-                <name>goal</name>
-                <placement>t</placement>
-                <head>Goal:</head>
-              </tag>
-              <tag>
-                <name>description</name>
-                <placement>a</placement>
-                <head>Description:</head>
-              </tag>
-              <tag>
-                <name>parameter</name>
-                <placement>f</placement>
-                <head>Parameter:</head>
-              </tag>
-              <tag>
-                <name>required</name>
-                <placement>f</placement>
-                <head>Required:</head>
-              </tag>
-              <tag>
-                <name>readonly</name>
-                <placement>f</placement>
-                <head>Read-Only:</head>
-              </tag>
-              <tag>
-                <name>execute</name>
-                <placement>X</placement>
-                <head></head>
-              </tag>
-              <tag>
-                <name>requiresDependencyResolution</name>
-                <placement>X</placement>
-                <head></head>
-              </tag>
-              <tag>
-                <name>requiresProject</name>
-                <placement>X</placement>
-                <head></head>
-              </tag>
-              <tag>
-                <name>threadSafe</name>
-                <placement>X</placement>
-                <head></head>
-              </tag>
-              <tag>
-                <name>component</name>
-                <placement>f</placement>
-                <head></head>
-              </tag>
-              <tag>
-                <name>implSpec</name>
-                <placement>m</placement>
-                <head></head>
-              </tag>
-            </tags>
           </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
-          <version>3.0.1</version>
+          <version>${maven.release.plugin.version}</version>
           <configuration>
             <useReleaseProfile>false</useReleaseProfile>
             <goals>deploy</goals>
@@ -354,20 +301,14 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>${maven.source.plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>${surefireVersion}</version>
+          <version>${maven.surefire.plugin.version}</version>
           <configuration>
-            <forkedProcessTimeoutInSeconds>3600</forkedProcessTimeoutInSeconds>
-            <argLine>-Dfile.encoding=UTF-8 -Duser.language=en -Duser.region=US -showversion -Xmx1g -Xms1g -XX:+PrintGCDetails</argLine>
-            <failIfNoTests>false</failIfNoTests>
-            <forkCount>1</forkCount>
-            <systemPropertyVariables>
-              <java.io.tmpdir>${project.build.directory}</java.io.tmpdir>
-            </systemPropertyVariables>
+            <argLine>${maven.surefire.argLine}</argLine>
           </configuration>
         </plugin>
       </plugins>
@@ -422,14 +363,11 @@
       <activation>
         <jdk>[9,)</jdk>
       </activation>
+      <properties>
+        <maven.compiler.release>8</maven.compiler.release>
+      </properties>
       <build>
         <plugins>
-          <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-              <release>8</release>
-            </configuration>
-          </plugin>
           <plugin>
             <artifactId>maven-javadoc-plugin</artifactId>
             <configuration>
@@ -446,11 +384,6 @@
       <id>eclipse-release</id>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <inherited>true</inherited>
-          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
@@ -492,42 +425,6 @@
       </build>
     </profile>
 
-    <profile>
-      <id>errorprone</id>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
-                <showWarnings>true</showWarnings>
-                <compilerId>javac-with-errorprone</compilerId>
-                <forceJavacCompilerUse>true</forceJavacCompilerUse>
-                <compilerArgs>
-                  <arg>-XepAllErrorsAsWarnings</arg>
-                  <arg>-Xep:OperatorPrecedence:OFF</arg>
-                </compilerArgs>
-              </configuration>
-              <dependencies>
-                <!-- override plexus-compiler-javac-errorprone's dependency on
-                     Error Prone with the latest version -->
-                <dependency>
-                  <groupId>com.google.errorprone</groupId>
-                  <artifactId>error_prone_core</artifactId>
-                  <version>2.23.0</version>
-                </dependency>
-                <dependency>
-                  <groupId>org.codehaus.plexus</groupId>
-                  <artifactId>plexus-compiler-javac-errorprone</artifactId>
-                  <version>2.13.0</version>
-                </dependency>
-              </dependencies>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
   </profiles>
 
 </project>
