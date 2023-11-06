@@ -207,6 +207,9 @@
     <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
     <maven.javadoc.plugin.version>3.6.0</maven.javadoc.plugin.version>
     <maven.license.plugin.version>4.3</maven.license.plugin.version>
+    <maven.release.plugin.arguments />
+    <maven.release.plugin.goals>deploy</maven.release.plugin.goals>
+    <maven.release.plugin.preparationGoals>clean install</maven.release.plugin.preparationGoals>
     <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
     <maven.remote.resources.bundle>org.eclipse.jetty.toolchain:jetty-artifact-remote-resources:1.2</maven.remote.resources.bundle>
     <maven.remote.resources.plugin.version>3.1.0</maven.remote.resources.plugin.version>
@@ -319,9 +322,9 @@
           <version>${maven.release.plugin.version}</version>
           <configuration>
             <useReleaseProfile>false</useReleaseProfile>
-            <goals>deploy</goals>
-            <arguments>-Peclipse-release</arguments>
-            <preparationGoals>clean install</preparationGoals>
+            <goals>${maven.release.plugin.goals}</goals>
+            <arguments>-Peclipse-release ${maven.release.plugin.arguments}</arguments>
+            <preparationGoals>${maven.release.plugin.preparationGoals}</preparationGoals>
             <mavenExecutorId>forked-path</mavenExecutorId>
           </configuration>
         </plugin>
