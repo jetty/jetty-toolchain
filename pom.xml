@@ -188,6 +188,7 @@
   <properties>
     <failIfNoTests>false</failIfNoTests>
     <forkCount>1</forkCount>
+    <jdk.version.minimum>8</jdk.version.minimum>
     <jetty.git.repo>jetty.toolchain</jetty.git.repo>
     <jetty.url>http://www.eclipse.org/jetty</jetty.url>
     <maven.clean.plugin.version>3.3.1</maven.clean.plugin.version>
@@ -195,9 +196,9 @@
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
     <maven.dependency.plugin.version>3.6.1</maven.dependency.plugin.version>
-    <maven.dependency.plugin.version>3.6.1</maven.dependency.plugin.version>
     <maven.deploy.plugin.retryFailedDeploymentCount>10</maven.deploy.plugin.retryFailedDeploymentCount>
     <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
+    <maven.enforcer.plugin.version>3.4.1</maven.enforcer.plugin.version>
     <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
     <maven.install.plugin.version>3.1.1</maven.install.plugin.version>
     <maven.invoker.plugin.version>3.6.0</maven.invoker.plugin.version>
@@ -206,8 +207,11 @@
     <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
     <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
     <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
+    <!-- as we are still java 8 we cannot bump higher than this but 11 profile have an higher version -->
+    <maven.spotless.plugin.version>2.30.0</maven.spotless.plugin.version>
     <maven.surefire.argLine>-Dfile.encoding=UTF-8 -Duser.language=en -Duser.region=US -showversion -Xmx1g -Xms1g -XX:+PrintGCDetails -Djava.io.tmpdir=${project.build.directory}</maven.surefire.argLine>
     <maven.surefire.plugin.version>3.2.1</maven.surefire.plugin.version>
+    <maven.version.minimum>3.9</maven.version.minimum>
     <mavenPluginToolsVersion>3.5.2</mavenPluginToolsVersion>
     <mavenVersion>3.5.0</mavenVersion>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -218,6 +222,11 @@
 
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>${maven.spotless.plugin.version}</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
@@ -240,6 +249,11 @@
           <configuration>
             <retryFailedDeploymentCount>${maven.deploy.plugin.retryFailedDeploymentCount}</retryFailedDeploymentCount>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven.enforcer.plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -330,7 +344,6 @@
       <plugin>
         <groupId>com.diffplug.spotless</groupId>
         <artifactId>spotless-maven-plugin</artifactId>
-        <version>2.39.0</version>
         <configuration>
           <pom>
             <includes>
@@ -362,10 +375,37 @@
         </configuration>
         <executions>
           <execution>
+            <id>spotless-check</id>
             <goals>
               <goal>check</goal>
             </goals>
             <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-build-env</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>[${maven.version.minimum},)</version>
+                  <message>[ERROR] OLD MAVEN [${maven.version.minimum}] in use, ${project.artifactId} ${project.version} requires Maven ${maven.version.minimum} or newer</message>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>[${jdk.version.minimum},)</version>
+                  <message>[ERROR] OLD JDK [${java.version}] in use. ${project.artifactId} ${project.version}  requires JDK ${jdk.version.minimum} or newer</message>
+                </requireJavaVersion>
+                <requireUpperBoundDeps />
+              </rules>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -382,17 +422,29 @@
         <maven.compiler.release>8</maven.compiler.release>
       </properties>
       <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <configuration>
-              <additionalOptions>
-                <additionalOption>-html5</additionalOption>
-              </additionalOptions>
-            </configuration>
-          </plugin>
-        </plugins>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <configuration>
+                <additionalOptions>
+                  <additionalOption>-html5</additionalOption>
+                </additionalOptions>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
       </build>
+    </profile>
+    <profile>
+      <id>jdk11</id>
+      <activation>
+        <jdk>[11,)</jdk>
+      </activation>
+      <properties>
+        <maven.spotless.plugin.version>2.39.0</maven.spotless.plugin.version>
+      </properties>
     </profile>
 
     <profile>
