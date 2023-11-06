@@ -193,6 +193,7 @@
     <jetty.url>http://www.eclipse.org/jetty</jetty.url>
     <!-- classpath resource coming from jetty-header-templates artifact -->
     <license.header.resource>jetty-header-template.txt</license.header.resource>
+    <maven.assembly.plugin.version>3.6.0</maven.assembly.plugin.version>
     <maven.clean.plugin.version>3.3.1</maven.clean.plugin.version>
     <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
     <maven.compiler.source>${jdk.version.minimum}</maven.compiler.source>
@@ -235,6 +236,11 @@
           <groupId>com.diffplug.spotless</groupId>
           <artifactId>spotless-maven-plugin</artifactId>
           <version>${maven.spotless.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven.assembly.plugin.version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
