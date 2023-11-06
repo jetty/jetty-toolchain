@@ -191,10 +191,12 @@
     <jdk.version.minimum>8</jdk.version.minimum>
     <jetty.git.repo>jetty.toolchain</jetty.git.repo>
     <jetty.url>http://www.eclipse.org/jetty</jetty.url>
+    <!-- classpath resource coming from jetty-header-templates artifact -->
+    <license.header.resource>jetty-header-template.txt</license.header.resource>
     <maven.clean.plugin.version>3.3.1</maven.clean.plugin.version>
     <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
+    <maven.compiler.source>${jdk.version.minimum}</maven.compiler.source>
+    <maven.compiler.target>${jdk.version.minimum}</maven.compiler.target>
     <maven.dependency.plugin.version>3.6.1</maven.dependency.plugin.version>
     <maven.deploy.plugin.retryFailedDeploymentCount>10</maven.deploy.plugin.retryFailedDeploymentCount>
     <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
@@ -204,7 +206,10 @@
     <maven.invoker.plugin.version>3.6.0</maven.invoker.plugin.version>
     <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
     <maven.javadoc.plugin.version>3.6.0</maven.javadoc.plugin.version>
+    <maven.license.plugin.version>4.3</maven.license.plugin.version>
     <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
+    <maven.remote.resources.bundle>org.eclipse.jetty.toolchain:jetty-artifact-remote-resources:1.2</maven.remote.resources.bundle>
+    <maven.remote.resources.plugin.version>3.1.0</maven.remote.resources.plugin.version>
     <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
     <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
     <!-- as we are still java 8 we cannot bump higher than this but 11 profile have an higher version -->
@@ -322,6 +327,11 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-remote-resources-plugin</artifactId>
+          <version>${maven.remote.resources.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
           <version>${maven.resources.plugin.version}</version>
         </plugin>
@@ -384,6 +394,43 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>${maven.license.plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.eclipse.jetty.toolchain</groupId>
+            <artifactId>jetty-header-templates</artifactId>
+            <version>1.0-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>check-headers</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <licenseSets>
+                <licenseSet>
+                  <header>${license.header.resource}</header>
+                  <includes>
+                    <include>**/*.java</include>
+                  </includes>
+                </licenseSet>
+              </licenseSets>
+              <failIfMissing>true</failIfMissing>
+              <aggregate>true</aggregate>
+              <strictCheck>true</strictCheck>
+              <mapping>
+                <java>DOUBLESLASH_STYLE</java>
+              </mapping>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
@@ -409,6 +456,23 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-remote-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <resourceBundles>
+                <resourceBundle>${maven.remote.resources.bundle}</resourceBundle>
+              </resourceBundles>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -419,7 +483,7 @@
         <jdk>[9,)</jdk>
       </activation>
       <properties>
-        <maven.compiler.release>8</maven.compiler.release>
+        <maven.compiler.release>${jdk.version.minimum}</maven.compiler.release>
       </properties>
       <build>
         <pluginManagement>
