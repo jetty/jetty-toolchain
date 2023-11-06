@@ -218,7 +218,7 @@
     <maven.shade.plugin.version>3.5.1</maven.shade.plugin.version>
     <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
     <!-- as we are still java 8 we cannot bump higher than this but 11 profile have an higher version -->
-    <maven.spotless.plugin.version>2.30.0</maven.spotless.plugin.version>
+    <maven.spotless.plugin.version>2.40.0</maven.spotless.plugin.version>
     <maven.surefire.argLine>-Dfile.encoding=UTF-8 -Duser.language=en -Duser.region=US -showversion -Xmx1g -Xms1g -XX:+PrintGCDetails -Djava.io.tmpdir=${project.build.directory}</maven.surefire.argLine>
     <maven.surefire.plugin.version>3.2.1</maven.surefire.plugin.version>
     <maven.version.minimum>3.9</maven.version.minimum>
