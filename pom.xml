@@ -192,7 +192,7 @@
     <jetty.git.repo>jetty.toolchain</jetty.git.repo>
     <jetty.url>http://www.eclipse.org/jetty</jetty.url>
     <!-- classpath resource coming from jetty-header-templates artifact -->
-    <license.header.resource>jetty-header-template.txt</license.header.resource>
+    <license.header.resource>jetty-header-epl2.0-apache2.0-template.txt</license.header.resource>
     <maven.assembly.plugin.version>3.6.0</maven.assembly.plugin.version>
     <maven.clean.plugin.version>3.3.1</maven.clean.plugin.version>
     <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
@@ -411,6 +411,22 @@
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
         <version>${maven.license.plugin.version}</version>
+        <configuration>
+          <licenseSets>
+            <licenseSet>
+              <header>${license.header.resource}</header>
+              <includes>
+                <include>**/*.java</include>
+              </includes>
+            </licenseSet>
+          </licenseSets>
+          <failIfMissing>true</failIfMissing>
+          <aggregate>true</aggregate>
+          <strictCheck>true</strictCheck>
+          <mapping>
+            <java>DOUBLESLASH_STYLE</java>
+          </mapping>
+        </configuration>
         <dependencies>
           <dependency>
             <groupId>org.eclipse.jetty.toolchain</groupId>
@@ -425,22 +441,6 @@
               <goal>check</goal>
             </goals>
             <phase>validate</phase>
-            <configuration>
-              <licenseSets>
-                <licenseSet>
-                  <header>${license.header.resource}</header>
-                  <includes>
-                    <include>**/*.java</include>
-                  </includes>
-                </licenseSet>
-              </licenseSets>
-              <failIfMissing>true</failIfMissing>
-              <aggregate>true</aggregate>
-              <strictCheck>true</strictCheck>
-              <mapping>
-                <java>DOUBLESLASH_STYLE</java>
-              </mapping>
-            </configuration>
           </execution>
         </executions>
       </plugin>
