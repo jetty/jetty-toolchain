@@ -160,7 +160,7 @@
     </mailingList>
   </mailingLists>
 
-  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
+  <scm>
     <connection>scm:git:https://github.com/jetty/${jetty.git.repo}.git</connection>
     <developerConnection>scm:git:git@github.com:eclipse/${jetty.git.repo}.git</developerConnection>
     <tag>HEAD</tag>
