@@ -217,7 +217,7 @@
     <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
     <maven.shade.plugin.version>3.5.1</maven.shade.plugin.version>
     <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
-    <maven.spotless.plugin.version>2.39.0</maven.spotless.plugin.version>
+    <maven.spotless.plugin.version>2.41.1</maven.spotless.plugin.version>
     <maven.surefire.argLine>-Dfile.encoding=UTF-8 -Duser.language=en -Duser.region=US -showversion -Xmx1g -Xms1g -XX:+PrintGCDetails -Djava.io.tmpdir=${project.build.directory}</maven.surefire.argLine>
     <maven.surefire.plugin.version>3.2.1</maven.surefire.plugin.version>
     <maven.version.minimum>3.9</maven.version.minimum>
