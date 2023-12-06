@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.jetty</groupId>
+  <artifactId>jetty-parent</artifactId>
+  <version>26-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Jetty :: Parent</name>
+  <description>The Eclipse Jetty Parent</description>
+  <url>https://eclipse.org/jetty</url>
+  <inceptionYear>1995</inceptionYear>
+
+  <organization>
+    <name>Mort Bay Consulting</name>
+    <url>http://www.mortbay.com</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Apache Software License - Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+    <license>
+      <name>Eclipse Public License - Version 2.0</name>
+      <url>https://www.eclipse.org/legal/epl-2.0/</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>gregw</id>
+      <name>Greg Wilkins</name>
+      <email>gregw@apache.org</email>
+      <url>http://www.mortbay.com/mortbay/people/gregw</url>
+      <organization>Mort Bay Consulting</organization>
+      <organizationUrl>http://www.mortbay.com</organizationUrl>
+      <timezone>Australia/Sydney</timezone>
+    </developer>
+    <developer>
+      <id>janb</id>
+      <name>Jan Bartel</name>
+      <email>janb@apache.org</email>
+      <url>http://www.mortbay.com/people/janb</url>
+      <organization>Mort Bay Consulting</organization>
+      <organizationUrl>http://www.mortbay.com</organizationUrl>
+      <timezone>Australia/Sydney</timezone>
+    </developer>
+    <developer>
+      <id>sbordet</id>
+      <name>Simone Bordet</name>
+      <email>simone.bordet@gmail.com</email>
+      <organization>Webtide, LLC</organization>
+      <organizationUrl>https://webtide.com</organizationUrl>
+      <timezone>Europe/Rome</timezone>
+    </developer>
+    <developer>
+      <id>lorban</id>
+      <name>Ludovic Orban</name>
+      <email>lorban@bitronix.be</email>
+      <organization>Webtide, LLC</organization>
+      <organizationUrl>https://webtide.com</organizationUrl>
+      <timezone>Europe/Brussels</timezone>
+    </developer>
+    <developer>
+      <id>olamy</id>
+      <name>Olivier Lamy</name>
+      <email>oliver.lamy@gmail.com</email>
+      <organization>Webtide, LLC</organization>
+      <organizationUrl>https://webtide.com</organizationUrl>
+      <timezone>Australia/Brisbane</timezone>
+    </developer>
+    <developer>
+      <id>jesse</id>
+      <name>Jesse McConnell</name>
+      <email>jesse@webtide.org</email>
+      <organization>Webtide, LLC</organization>
+      <organizationUrl>https://webtide.com</organizationUrl>
+      <timezone>America/Chicago</timezone>
+    </developer>
+    <developer>
+      <id>joakime</id>
+      <name>Joakim Erdfelt</name>
+      <email>joakim@webtide.com</email>
+      <organization>Webtide, LLC</organization>
+      <organizationUrl>https://webtide.com</organizationUrl>
+      <timezone>America/Chicago</timezone>
+    </developer>
+  </developers>
+
+  <mailingLists>
+    <mailingList>
+      <name>Jetty Developer Mailing List</name>
+      <subscribe>https://dev.eclipse.org/mailman/listinfo/jetty-dev</subscribe>
+      <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jetty-dev</unsubscribe>
+      <archive>http://dev.eclipse.org/mhonarc/lists/jetty-dev/maillist.html</archive>
+    </mailingList>
+    <mailingList>
+      <name>Jetty Commit Mailing List</name>
+      <subscribe>https://dev.eclipse.org/mailman/listinfo/jetty-commit</subscribe>
+      <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jetty-commit</unsubscribe>
+      <archive>http://dev.eclipse.org/mhonarc/lists/jetty-commit/maillist.html</archive>
+    </mailingList>
+    <mailingList>
+      <name>Jetty Users Mailing List</name>
+      <subscribe>https://dev.eclipse.org/mailman/listinfo/jetty-users</subscribe>
+      <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jetty-users</unsubscribe>
+      <archive>http://dev.eclipse.org/mhonarc/lists/jetty-users/maillist.html</archive>
+    </mailingList>
+    <mailingList>
+      <name>Jetty Announce Mailing List</name>
+      <subscribe>https://dev.eclipse.org/mailman/listinfo/jetty-announce</subscribe>
+      <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jetty-announce</unsubscribe>
+      <archive>http://dev.eclipse.org/mhonarc/lists/jetty-announce/maillist.html</archive>
+    </mailingList>
+  </mailingLists>
+
+  <scm>
+    <connection>scm:git:https://github.com/jetty/${jetty.git.repo}.git</connection>
+    <developerConnection>scm:git:git@github.com:jetty/${jetty.git.repo}.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/jetty/${jetty.git.repo}</url>
+  </scm>
+
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/jetty/${jetty.git.repo}</url>
+  </issueManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>oss.sonatype.org</id>
+      <name>Jetty Staging Repository</name>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>oss.sonatype.org</id>
+      <name>Jetty Snapshot Repository</name>
+      <url>https://oss.sonatype.org/content/repositories/jetty-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <properties>
+    <failIfNoTests>false</failIfNoTests>
+    <forkCount>1</forkCount>
+    <jdk.version.minimum>8</jdk.version.minimum>
+    <jetty.git.repo>jetty.parent</jetty.git.repo>
+    <jetty.url>http://www.eclipse.org/jetty</jetty.url>
+    <!-- classpath resource coming from jetty-header-templates artifact -->
+    <license.header.resource>jetty-header-epl2.0-apache2.0-template.txt</license.header.resource>
+    <maven.assembly.plugin.version>3.6.0</maven.assembly.plugin.version>
+    <maven.clean.plugin.version>3.3.1</maven.clean.plugin.version>
+    <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+    <maven.compiler.source>${jdk.version.minimum}</maven.compiler.source>
+    <maven.compiler.target>${jdk.version.minimum}</maven.compiler.target>
+    <maven.dependency.plugin.version>3.6.1</maven.dependency.plugin.version>
+    <maven.deploy.plugin.retryFailedDeploymentCount>10</maven.deploy.plugin.retryFailedDeploymentCount>
+    <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
+    <maven.enforcer.plugin.version>3.4.1</maven.enforcer.plugin.version>
+    <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
+    <maven.install.plugin.version>3.1.1</maven.install.plugin.version>
+    <maven.invoker.plugin.version>3.6.0</maven.invoker.plugin.version>
+    <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
+    <maven.javadoc.plugin.version>3.6.0</maven.javadoc.plugin.version>
+    <maven.license.plugin.version>4.3</maven.license.plugin.version>
+    <maven.release.plugin.arguments />
+    <maven.release.plugin.goals>deploy</maven.release.plugin.goals>
+    <maven.release.plugin.preparationGoals>clean install</maven.release.plugin.preparationGoals>
+    <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
+    <maven.remote.resources.bundle>org.eclipse.jetty.toolchain:jetty-artifact-remote-resources:1.2</maven.remote.resources.bundle>
+    <maven.remote.resources.plugin.version>3.1.0</maven.remote.resources.plugin.version>
+    <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
+    <maven.shade.plugin.version>3.5.1</maven.shade.plugin.version>
+    <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
+    <maven.spotless.plugin.version>2.39.0</maven.spotless.plugin.version>
+    <maven.surefire.argLine>-Dfile.encoding=UTF-8 -Duser.language=en -Duser.region=US -showversion -Xmx1g -Xms1g -XX:+PrintGCDetails -Djava.io.tmpdir=${project.build.directory}</maven.surefire.argLine>
+    <maven.surefire.plugin.version>3.2.1</maven.surefire.plugin.version>
+    <maven.version.minimum>3.9</maven.version.minimum>
+    <mavenPluginToolsVersion>3.5.2</mavenPluginToolsVersion>
+    <mavenVersion>3.5.0</mavenVersion>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <surefire.timeout>3600</surefire.timeout>
+  </properties>
+
+  <build>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>${maven.spotless.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven.assembly.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${maven.clean.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${maven.dependency.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven.deploy.plugin.version}</version>
+          <configuration>
+            <retryFailedDeploymentCount>${maven.deploy.plugin.retryFailedDeploymentCount}</retryFailedDeploymentCount>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven.enforcer.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${maven.surefire.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${maven.gpg.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven.install.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>${maven.invoker.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven.jar.plugin.version}</version>
+          <configuration>
+            <archive>
+              <!-- Only needed if bundle/OSGi built out a manifest first
+              <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                -->
+              <manifestEntries>
+                <Implementation-Version>${project.version}</Implementation-Version>
+                <Implementation-Vendor>Eclipse.org - Jetty</Implementation-Vendor>
+                <url>${jetty.url}</url>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${maven.javadoc.plugin.version}</version>
+          <configuration>
+            <failOnError>false</failOnError>
+            <charset>UTF-8</charset>
+            <docencoding>UTF-8</docencoding>
+            <encoding>UTF-8</encoding>
+            <docfilessubdirs>true</docfilessubdirs>
+            <detectLinks>false</detectLinks>
+            <detectJavaApiLink>false</detectJavaApiLink>
+            <show>protected</show>
+            <excludePackageNames>com.acme.*;org.slf4j.*;org.mortbay.*</excludePackageNames>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven.release.plugin.version}</version>
+          <configuration>
+            <useReleaseProfile>false</useReleaseProfile>
+            <goals>${maven.release.plugin.goals}</goals>
+            <arguments>-Peclipse-release ${maven.release.plugin.arguments}</arguments>
+            <preparationGoals>${maven.release.plugin.preparationGoals}</preparationGoals>
+            <mavenExecutorId>forked-path</mavenExecutorId>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-remote-resources-plugin</artifactId>
+          <version>${maven.remote.resources.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven.resources.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>${maven.shade.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven.source.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven.surefire.plugin.version}</version>
+          <configuration>
+            <argLine>${maven.surefire.argLine}</argLine>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <configuration>
+          <pom>
+            <includes>
+              <include>pom.xml</include>
+            </includes>
+            <sortPom>
+              <expandEmptyElements>false</expandEmptyElements>
+              <nrOfIndentSpace>2</nrOfIndentSpace>
+              <!-- default see https://github.com/Ekryd/sortpom/wiki/PredefinedSortOrderProfiles -->
+              <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
+              <!-- Sort properties -->
+              <sortProperties>true</sortProperties>
+              <!-- Sort modules -->
+              <!--              <sortModules>true</sortModules>-->
+              <!-- Sort plugin executions -->
+              <sortExecutions>true</sortExecutions>
+              <!-- Sort dependencies see https://github.com/Ekryd/sortpom/wiki/SortDependencies -->
+              <sortDependencies>scope,groupId,artifactId</sortDependencies>
+              <!-- Sort dependency exclusions -->
+              <sortDependencyExclusions>groupId,artifactId</sortDependencyExclusions>
+              <!-- Sort plugins: https://github.com/Ekryd/sortpom/wiki/SortPlugins -->
+              <sortPlugins>groupId,artifactId</sortPlugins>
+              <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
+            </sortPom>
+          </pom>
+          <upToDateChecking>
+            <enabled>true</enabled>
+          </upToDateChecking>
+        </configuration>
+        <executions>
+          <execution>
+            <id>spotless-check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>${maven.license.plugin.version}</version>
+        <configuration>
+          <licenseSets>
+            <licenseSet>
+              <header>${license.header.resource}</header>
+              <includes>
+                <include>**/*.java</include>
+              </includes>
+            </licenseSet>
+          </licenseSets>
+          <failIfMissing>true</failIfMissing>
+          <aggregate>true</aggregate>
+          <strictCheck>true</strictCheck>
+          <mapping>
+            <java>DOUBLESLASH_STYLE</java>
+          </mapping>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.eclipse.jetty.toolchain</groupId>
+            <artifactId>jetty-header-templates</artifactId>
+            <version>1.0-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>check-headers</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-build-env</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>[${maven.version.minimum},)</version>
+                  <message>[ERROR] OLD MAVEN [${maven.version.minimum}] in use, ${project.artifactId} ${project.version} requires Maven ${maven.version.minimum} or newer</message>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>[${jdk.version.minimum},)</version>
+                  <message>[ERROR] OLD JDK [${java.version}] in use. ${project.artifactId} ${project.version}  requires JDK ${jdk.version.minimum} or newer</message>
+                </requireJavaVersion>
+                <requireUpperBoundDeps />
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-remote-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <resourceBundles>
+                <resourceBundle>${maven.remote.resources.bundle}</resourceBundle>
+              </resourceBundles>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>jdk8</id>
+      <activation>
+        <jdk>1.8</jdk>
+      </activation>
+      <properties>
+        <maven.spotless.plugin.version>2.30.0</maven.spotless.plugin.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>jdk9</id>
+      <activation>
+        <jdk>[9,)</jdk>
+      </activation>
+      <properties>
+        <maven.compiler.release>${jdk.version.minimum}</maven.compiler.release>
+      </properties>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <configuration>
+                <additionalOptions>
+                  <additionalOption>-html5</additionalOption>
+                </additionalOptions>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+
+    <profile>
+      <id>eclipse-release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
+
+</project>
