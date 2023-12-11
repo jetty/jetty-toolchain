@@ -29,7 +29,7 @@
       <groupId>org.eclipse.jetty.toolchain</groupId>
       <artifactId>jetty-schemas</artifactId>
       <!-- Keep this version at 4.x, since 5.x is JakartaEE. -->
-      <version>4.0.3</version>
+      <version>5.2</version>
     </dependency>
   </dependencies>
 
