@@ -431,7 +431,7 @@
           <dependency>
             <groupId>org.eclipse.jetty.toolchain</groupId>
             <artifactId>jetty-header-templates</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
           </dependency>
         </dependencies>
         <executions>
