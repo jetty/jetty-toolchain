@@ -17,6 +17,7 @@
   <properties>
     <maven.version>3.0</maven.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <deps.sources.directory>${project.build.directory}/sources/</deps.sources.directory>
   </properties>
 
   <dependencies>
@@ -50,7 +51,12 @@
             <configuration>
               <classifier>sources</classifier>
               <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
-              <outputDirectory>${project.build.directory}/sources</outputDirectory>
+              <outputDirectory>${deps.sources.directory}</outputDirectory>
+              <excludes>
+                META-INF/**,
+                pom.xml,
+                about.html
+              </excludes>
             </configuration>
           </execution>
         </executions>
@@ -77,8 +83,42 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.build.directory}/sources</source>
+                <source>${deps.sources.directory}</source>
               </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>copy-servlet-jsp-resources</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <!-- Move all resources into place first.
+                     This will handle XSDs, DTDs, XMLs, LocalStrings_xx.properties, package.html, etc..
+                  -->
+                <move todir="${project.build.outputDirectory}">
+                  <fileset dir="${deps.sources.directory}">
+                    <exclude name="javax/**/*.class"/>
+                    <exclude name="javax/**/*.java"/>
+                    <exclude name="META-INF/**" />
+                  </fileset>
+                </move>
+                <!-- Copy javax/servlet/jsp/resources/ into javax/servlet/resources/ to satisfy XML validation rules.
+                     Leave the original location alone to satisfy JSP implementation requirements. -->
+                <copy todir="${project.build.outputDirectory}/javax/servlet/resources/">
+                  <fileset dir="${project.build.outputDirectory}/javax/servlet/jsp/resources/"/>
+                </copy>
+              </target>
             </configuration>
           </execution>
         </executions>
@@ -127,6 +167,18 @@
               javax.servlet.http;uses:="javax.servlet";version="4.0.0",
               javax.servlet.descriptor;version="4.0.0"
             </Export-Package>
+            <Import-Package>
+              java.io,
+              java.lang,
+              java.lang.annotation,
+              java.lang.invoke,
+              java.lang.reflect,
+              java.net,
+              java.security,
+              java.text,
+              java.util,
+              java.util.function
+            </Import-Package>
           </instructions>
         </configuration>
       </plugin>
@@ -143,30 +195,30 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <createSourcesJar>false</createSourcesJar>
+              <createSourcesJar>true</createSourcesJar>
               <shadeSourcesContent>true</shadeSourcesContent>
               <createDependencyReducedPom>true</createDependencyReducedPom>
               <dependencyReducedPomLocation>${project.build.directory}/dependency-reduced-pom.xml</dependencyReducedPomLocation>
-              <artifactSet>
-                <includes>
-                  <include>jakarta.servlet:jakarta.servlet-api</include>
-                  <include>org.eclipse.jetty.toolchain:jetty-schemas</include>
-                </includes>
-              </artifactSet>
               <filters>
                 <filter>
-                  <artifact>jakarta.servlet:jakarta.servlet-api</artifact>
+                  <artifact>${project.groupId}:${project.artifactId}</artifact>
                   <includes>
-                    <include>javax/**/*.properties</include>
-                    <include>javax/**/package.html</include>
+                    <include>**/*</include>
                   </includes>
+                  <excludes>
+                    <exclude>META-INF/MANIFEST.MF</exclude>
+                  </excludes>
                 </filter>
                 <filter>
-                  <artifact>*:*</artifact>
+                  <artifact>jakarta.servlet:*</artifact>
                   <excludes>
-                    <exclude>javax/servlet/jsp/**</exclude>
-                    <exclude>META-INF/**</exclude>
-                    <exclude>about.html</exclude>
+                    <exclude>**/*</exclude>
+                  </excludes>
+                </filter>
+                <filter>
+                  <artifact>*:jetty-schemas</artifact>
+                  <excludes>
+                    <exclude>**/*</exclude>
                   </excludes>
                 </filter>
               </filters>
@@ -175,25 +227,10 @@
                   <resource>META-INF/MANIFEST.MF</resource>
                   <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
                 </transformer>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
-                  <resource>META-INF/LICENSE.md</resource>
-                  <file>src/main/resources/META-INF/LICENSE.md</file>
-                </transformer>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
-                  <resource>META-INF/NOTICE.md</resource>
-                  <file>src/main/resources/META-INF/NOTICE.md</file>
-                </transformer>
               </transformers>
             </configuration>
           </execution>
         </executions>
-        <dependencies>
-          <dependency>
-            <groupId>org.eclipse.jetty.toolchain</groupId>
-            <artifactId>jetty-build-support</artifactId>
-            <version>1.5</version>
-          </dependency>
-        </dependencies>
       </plugin>
 
       <!-- Add module-info.class to the shaded jar -->
@@ -229,7 +266,7 @@
       </plugin>
 
       <!-- Create the source jar -->
-      <plugin>
+      <!-- plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
         <version>3.3.0</version>
@@ -242,7 +279,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin -->
 
       <!-- Create the javadoc jar -->
       <plugin>
@@ -284,22 +321,8 @@
   </build>
 
   <scm>
-    <connection>scm:git:https://github.com/eclipse/jetty.toolchain.git</connection>
-    <developerConnection>scm:git:git@github.com:eclipse/jetty.toolchain.git</developerConnection>
-    <url>https://github.com/eclipse/jetty.toolchain/tree/master/jetty-servlet-api</url>
-    <tag>HEAD</tag>
+    <connection>scm:git:https://github.com/jetty/jetty.toolchain.git</connection>
+    <developerConnection>scm:git:git@github.com:jetty/jetty.toolchain.git</developerConnection>
+    <url>https://github.com/jetty/jetty.toolchain/tree/master/jetty-servlet-api</url>
   </scm>
-
-  <repositories>
-    <repository>
-      <id>jetty.snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/jetty-snapshots</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
 </project>
