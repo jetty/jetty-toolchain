@@ -167,6 +167,18 @@
               javax.servlet.http;uses:="javax.servlet";version="4.0.0",
               javax.servlet.descriptor;version="4.0.0"
             </Export-Package>
+            <Import-Package>
+              java.io,
+              java.lang,
+              java.lang.annotation,
+              java.lang.invoke,
+              java.lang.reflect,
+              java.net,
+              java.security,
+              java.text,
+              java.util,
+              java.util.function
+            </Import-Package>
           </instructions>
         </configuration>
       </plugin>
@@ -193,6 +205,9 @@
                   <includes>
                     <include>**/*</include>
                   </includes>
+                  <excludes>
+                    <exclude>META-INF/MANIFEST.MF</exclude>
+                  </excludes>
                 </filter>
                 <filter>
                   <artifact>jakarta.servlet:*</artifact>
@@ -207,6 +222,12 @@
                   </excludes>
                 </filter>
               </filters>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                  <resource>META-INF/MANIFEST.MF</resource>
+                  <file>${project.build.outputDirectory}/META-INF/MANIFEST.MF</file>
+                </transformer>
+              </transformers>
             </configuration>
           </execution>
         </executions>
