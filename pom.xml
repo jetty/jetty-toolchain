@@ -11,8 +11,6 @@
     <module>jetty-assembly-descriptors</module>
     <!--module>jetty-build-support</module-->
     <module>jetty-distribution-remote-resources</module>
-    <module>jetty-javax-servlet-api</module>
-    <module>jetty-jakarta-servlet-api</module>
     <module>jetty-javax-websocket-api</module>
     <module>jetty-jakarta-websocket-api</module>
     <module>jetty-perf-helper</module>
